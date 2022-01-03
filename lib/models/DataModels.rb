@@ -7,7 +7,7 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @copyright  2021-2021 Lockstep, Inc.
+# @copyright  2021-2022 Lockstep, Inc.
 # @version    2021.39
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
@@ -583,6 +583,9 @@ module LockstepSdk
         :externalEmailId        # The id of the email in an external system if imported.
         :externalThreadId       # The id of the email thread in an external system if imported.
         :emailBcc               # The email address(es) for the BCC recipient(s) of this email
+        :sendType               # The type message being sent (New, Reply, Forward) or null for messages not being sent.
+        :responseOriginId       # If the message being sent is a reply or a forward, the id of the the email being replied to or forwarded. Otherwise null.
+        :responseOrigin         # The email object associated with the response origin id.
         :notes                  # All notes attached to this email. To retrieve this collection, specify `Notes` in the "Include" parameter for your query.
         :attachments            # All attachments attached to this email. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
         :customFieldDefinitions # All definitions attached to this email. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
