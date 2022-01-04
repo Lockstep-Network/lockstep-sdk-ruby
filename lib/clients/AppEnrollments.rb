@@ -32,7 +32,9 @@ module LockstepSdk
 
             #  Updates an existing App Enrollment with the information supplied to this PATCH call.
             #  
-            #  The PATCH method allows you to change specific values on the object while leaving other values alone.  As input you should supply a list of field names and new values.  For example, you can provide the field name "IsActive" and specify the new value "False"; this API will then change the value of IsActive to false.   An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
+            #  The PATCH method allows you to change specific values on the object while leaving other values alone.  As input you should supply a list of field names and new values.  For example, you can provide the field name "IsActive" and specify the new value "False"; this API will then change the value of IsActive to false.
+            #  
+            #  An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
             #  
             #  See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
             #  
@@ -43,14 +45,15 @@ module LockstepSdk
                 send_request(:patch, path, body, nil)
             end
 
-            #  Deletes the App Enrollment referred to by this unique identifier.  An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
+            #  Deletes the App Enrollment referred to by this unique identifier. An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
             #  
             #  See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
             #  
             #  @param id [uuid] The unique ID number of the App Enrollment to delete
-            def delete_app_enrollment()
+            #  @param removeEnrollmentData [boolean] Option to remove all associated app enrollment data when deleting app enrollment (default false)
+            def delete_app_enrollment(removeEnrollmentData)
                 path = "/api/v1/AppEnrollments/#{id}"
-                send_request(:delete, path, nil, nil)
+                send_request(:delete, path, nil, {removeEnrollmentData})
             end
 
             #  Creates one or more App Enrollments within this account and returns the records as created.
@@ -67,7 +70,9 @@ module LockstepSdk
 
             #  Queries App Enrollments for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
             #  
-            #  More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.  An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
+            #  More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.
+            #  
+            #  An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
             #  
             #  See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
             #  
@@ -83,7 +88,9 @@ module LockstepSdk
 
             #  Queries custom fields settings for app enrollment within the Lockstep platform using the specified filtering, sorting, nested fetch, and pagination rules requested.
             #  
-            #  More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.  An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
+            #  More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.
+            #  
+            #  An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
             #  
             #  See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
             #  

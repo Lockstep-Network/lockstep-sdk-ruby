@@ -1,3 +1,17 @@
+#
+# Lockstep Software Development Kit for Ruby
+#
+# (c) 2021-2022 Lockstep, Inc.
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+#
+# @author     Ted Spence <tspence@lockstep.io>
+# @copyright  2021-2022 Lockstep, Inc.
+# @version    2021.39
+# @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
+#
+
 require 'net/http'
 require 'openssl'
 require 'uri'
@@ -9,7 +23,7 @@ module LockstepSdk
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def self.new(env)
-            @version = "2021.39.690"
+            @version = "2021.39"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -18,6 +32,35 @@ module LockstepSdk
                 else
                     env
                 end
+                
+            # Construct all the clients
+            @activities = Activities.new(self)
+            @apikeys = ApiKeys.new(self)
+            @appenrollments = AppEnrollments.new(self)
+            @applications = Applications.new(self)
+            @attachments = Attachments.new(self)
+            @codedefinitions = CodeDefinitions.new(self)
+            @companies = Companies.new(self)
+            @contacts = Contacts.new(self)
+            @creditmemoapplied = CreditMemoApplied.new(self)
+            @currencies = Currencies.new(self)
+            @customfielddefinitions = CustomFieldDefinitions.new(self)
+            @customfieldvalues = CustomFieldValues.new(self)
+            @definitions = Definitions.new(self)
+            @emails = Emails.new(self)
+            @invoicehistory = InvoiceHistory.new(self)
+            @invoices = Invoices.new(self)
+            @leads = Leads.new(self)
+            @migration = Migration.new(self)
+            @notes = Notes.new(self)
+            @paymentapplications = PaymentApplications.new(self)
+            @payments = Payments.new(self)
+            @provisioning = Provisioning.new(self)
+            @reports = Reports.new(self)
+            @status = Status.new(self)
+            @sync = Sync.new(self)
+            @useraccounts = UserAccounts.new(self)
+            @userroles = UserRoles.new(self)
         end
 
         # Configure this API client to use API key authentication
