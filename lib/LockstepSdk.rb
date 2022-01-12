@@ -15,20 +15,23 @@
 require 'net/http'
 require 'openssl'
 require 'uri'
+Dir["./lib/clients/*.rb"].each {|file| require file }
 
 module LockstepSdk
+    
     class LockstepApi
-
-        # Construct a new Lockstep API client targeting the specified server.
-        #
-        # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
-        def self.new(env)
+    # Construct a new Lockstep API client targeting the specified server.
+    #
+    # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
+        def initialize(env)
             @version = "2021.39"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
                 when "prd"
                     "https://api.lockstep.io/"
+                when "dev"
+                    "https://api.dev.lockstep.io/"
                 else
                     env
                 end
@@ -67,8 +70,8 @@ module LockstepSdk
         #
         # @param api_key [string] The [Lockstep Platform API key](https://developer.lockstep.io/docs/api-keys) to use for authentication
         def with_api_key(api_key)
-            @api_key = api_key
             @bearer_token = nil
+            @api_key = api_key
         end
 
         # Configure this API client to use JWT Bearer Token authentication
@@ -82,9 +85,12 @@ module LockstepSdk
         # Send a request to the API and return the results
         #
         # Sends a request to the 
-        def request(method, path, body, options={})
-            
+        def request(method, path, body, params)
+
             url = URI(@env + path)
+            if !params.nil?  
+                url.query = URI.encode_www_form(params)
+            end
             http = Net::HTTP.new(url.host, url.port)
             http.use_ssl = true
 
@@ -106,13 +112,18 @@ module LockstepSdk
             if @api_key != nil 
                 request["Api-Key"] = @api_key
             end
-            if @api_key != nil 
+            if @bearer_token != nil 
                 request["Authorization"] = 'Bearer ' + @bearer_token
             end
 
             # Send the request
             response = http.request(request)
-            puts response.read_body
+            response.read_body
         end
-    end
+
+        attr_accessor :version, :env, :activities, :apikeys, :appenrollments, :applications, :attachments, :codedefinitions, :companies, \
+                      :contacts, :creditmemoapplied, :currencies, :customfielddefinitions, :customfieldvalues, :definitions, :emails, \
+                      :invoicehistory, :invoices, :leads, :migration, :notes, :paymentapplications, :payments, :provisioning, :reports, \
+                      :status, :sync, :useraccounts, :userroles
+    end   
 end  

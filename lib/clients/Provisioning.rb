@@ -13,25 +13,25 @@
 #
 
 
-module LockstepSdk
-    class Client
-        module Provisioning
+class Provisioning
 
-            #  Creates a new User or updates an Invited user based on metadata provided by the User during the onboarding process
-            #  
-            #  @param body [ProvisioningModel] Represents a User and their related metadata
-            def provision_user_account()
-                path = "/api/v1/Provisioning"
-                send_request(:post, path, body, nil)
-            end
+    def initialize(lockstepsdk)
+        @lockstepsdk = lockstepsdk
+    end
 
-            #  Updates user, company and group metadata for a User of status 'Onboarding' and finalizes a user's onboarding process by changing the user status to 'Active'
-            #  
-            #  @param body [ProvisioningFinalizeRequestModel] Represents a User and their related metadata
-            def finalize_user_account_provisioning()
-                path = "/api/v1/Provisioning/finalize"
-                send_request(:post, path, body, nil)
-            end
-        end
+    #  Creates a new User or updates an Invited user based on metadata provided by the User during the onboarding process
+    #  
+    #  @param body [ProvisioningModel] Represents a User and their related metadata
+    def provision_user_account()
+        path = "/api/v1/Provisioning"
+        @lockstepsdk.request(:post, path, body, nil)
+    end
+
+    #  Updates user, company and group metadata for a User of status 'Onboarding' and finalizes a user's onboarding process by changing the user status to 'Active'
+    #  
+    #  @param body [ProvisioningFinalizeRequestModel] Represents a User and their related metadata
+    def finalize_user_account_provisioning()
+        path = "/api/v1/Provisioning/finalize"
+        @lockstepsdk.request(:post, path, body, nil)
     end
 end

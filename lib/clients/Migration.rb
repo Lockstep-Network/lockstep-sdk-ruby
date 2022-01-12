@@ -12,24 +12,23 @@
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+class Migration
 
-module LockstepSdk
-    class Client
-        module Migration
+    def initialize(lockstepsdk)
+        @lockstepsdk = lockstepsdk
+    end
+    
+    #  Migrates all customer data from the Lockstep Collect system to the API, including all stored data for contacts, companies, payments, and invoices.
+    #  
+    def migrate_data()
+        path = "/api/v1/Migration"
+        @lockstepsdk.request(:post, path, nil, nil)
+    end
 
-            #  Migrates all customer data from the Lockstep Collect system to the API, including all stored data for contacts, companies, payments, and invoices.
-            #  
-            def migrate_data()
-                path = "/api/v1/Migration"
-                send_request(:post, path, nil, nil)
-            end
-
-            #  Lists all of the customer, contact, payment, and invoice data currently available for Migration.
-            #  
-            def list_migrations()
-                path = "/api/v1/Migration/list"
-                send_request(:get, path, nil, nil)
-            end
-        end
+    #  Lists all of the customer, contact, payment, and invoice data currently available for Migration.
+    #  
+    def list_migrations()
+        path = "/api/v1/Migration/list"
+        @lockstepsdk.request(:get, path, nil, nil)
     end
 end
