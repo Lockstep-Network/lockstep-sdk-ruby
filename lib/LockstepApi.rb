@@ -8,7 +8,7 @@
 #
 # @author     Ted Spence <tspence@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2021.39
+# @version    2022.2.103.0
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -23,7 +23,7 @@ module LockstepSdk
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def self.new(env)
-            @version = "2021.39"
+            @version = "2022.2.103.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -51,7 +51,6 @@ module LockstepSdk
             @invoicehistory = InvoiceHistory.new(self)
             @invoices = Invoices.new(self)
             @leads = Leads.new(self)
-            @migration = Migration.new(self)
             @notes = Notes.new(self)
             @paymentapplications = PaymentApplications.new(self)
             @payments = Payments.new(self)
