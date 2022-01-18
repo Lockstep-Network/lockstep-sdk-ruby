@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
     s.files = ['lib/**/*.rb']
     s.homepage = 'https://developer.lockstep.io'
     s.license = 'MIT'
+    s.add_runtime_dependency "awrence"
 end

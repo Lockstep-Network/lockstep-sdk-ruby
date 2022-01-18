@@ -15,6 +15,8 @@
 
 class Activities
 
+    require 'awrence'
+
     def initialize(lockstepsdk) # Initialize the Activities class with a lockstepsdk instance.
         @lockstepsdk = lockstepsdk
     end
@@ -40,7 +42,7 @@ class Activities
     #  @param body [object] A list of changes to apply to this Activity
     def update_activity(body:, id:)
         path = "/api/v1/Activities/#{id}"
-        @lockstepsdk.request(:patch, path, body, nil)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     #  Delete the Activity referred to by this unique identifier.

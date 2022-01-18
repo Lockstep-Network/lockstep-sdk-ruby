@@ -15,6 +15,8 @@
 
 class Emails
 
+    require 'awrence'
+
     def initialize(lockstepsdk) # Initialize the Activities class with a lockstepsdk instance.
         @lockstepsdk = lockstepsdk
     end
@@ -25,7 +27,7 @@ class Emails
     #  
     #  @param id [uuid] The unique ID number of the Email to retrieve.
     #  @param include [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collections: Attachments, CustomFields, Notes, ResponseOrigin
-    def retrieve_email(include_param)
+    def retrieve_email(include_param = nil, id:)
         path = "/api/v1/Emails/#{id}"
         params = {:include => include_param}
         @lockstepsdk.request(:get, path, nil, params)
@@ -39,9 +41,9 @@ class Emails
     #  
     #  @param id [uuid] The unique Lockstep Platform ID number of the email to update
     #  @param body [object] A list of changes to apply to this Email
-    def update_email()
+    def update_email(body:, id:)
         path = "/api/v1/Emails/#{id}"
-        @lockstepsdk.request(:patch, path, body, nil)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     #  Deletes the Email referred to by this unique identifier.
@@ -49,7 +51,7 @@ class Emails
     #  An Email represents a communication sent from one company to another.  The creator of the email is identified by the `CompanyId` field, recipient(s) by the `EmailTo` field, and cc recipient(s) by the 'EmailCC' field. The Email Model represents an email and a number of different metadata attributes related to the creation, storage, and ownership of the email.
     #  
     #  @param id [uuid] The unique Lockstep Platform ID number of the Email to delete
-    def delete_email()
+    def delete_email(id:)
         path = "/api/v1/Emails/#{id}"
         @lockstepsdk.request(:delete, path, nil, nil)
     end
@@ -59,8 +61,8 @@ class Emails
     #  An Email represents a communication sent from one company to another.  The creator of the email is identified by the `CompanyId` field, recipient(s) by the `EmailTo` field, and cc recipient(s) by the 'EmailCC' field. The Email Model represents an email and a number of different metadata attributes related to the creation, storage, and ownership of the email.
     #  @param emailId [uuid] The unique ID number of the Email to retrieve.
     #  @param nonce [uuid] The random nonce applied at time of url creation.
-    def retrieve_email_logo()
-        path = "/api/v1/Emails/#{emailId}/logo/#{nonce}"
+    def retrieve_email_logo(id:, nonce:)
+        path = "/api/v1/Emails/#{id}/logo/#{nonce}"
         @lockstepsdk.request(:get, path, nil, nil)
     end
 
@@ -69,7 +71,7 @@ class Emails
     #  An Email represents a communication sent from one company to another.  The creator of the email is identified by the `CompanyId` field, recipient(s) by the `EmailTo` field, and cc recipient(s) by the 'EmailCC' field. The Email Model represents an email and a number of different metadata attributes related to the creation, storage, and ownership of the email.
     #  
     #  @param body [EmailModel] The array of emails to be created
-    def create_emails()
+    def create_emails(body:)
         path = "/api/v1/Emails"
         @lockstepsdk.request(:post, path, body, nil)
     end
@@ -85,7 +87,7 @@ class Emails
     #  @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
     #  @param pageSize [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     #  @param pageNumber [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_emails(filter, include_param, order, pageSize, pageNumber)
+    def query_emails(pageSize = 200, pageNumber = 0, filter:, include_param:, order:)
         path = "/api/v1/Emails/query"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => pageSize, :pageNumber => pageNumber}
         @lockstepsdk.request(:get, path, nil, params)
