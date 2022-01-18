@@ -8,7 +8,7 @@
 #
 # @author     Ted Spence <tspence@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.2.103.0
+# @version    2022.3.14.0
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -16,14 +16,46 @@ require 'net/http'
 require 'openssl'
 require 'uri'
 
+project_root = File.dirname(File.absolute_path(__FILE__))
+Dir.glob(project_root + '/clients/*') {|file| require file}
+
 module LockstepSdk
     class LockstepApi
+    
+        attr_accessor :version, \ 
+                      :env, \
+            @activities, \
+            @api_keys, \
+            @app_enrollments, \
+            @applications, \
+            @attachments, \
+            @code_definitions, \
+            @companies, \
+            @contacts, \
+            @credit_memo_applied, \
+            @currencies, \
+            @custom_field_definitions, \
+            @custom_field_values, \
+            @definitions, \
+            @emails, \
+            @invoice_history, \
+            @invoices, \
+            @leads, \
+            @notes, \
+            @payment_applications, \
+            @payments, \
+            @provisioning, \
+            @reports, \
+            @status, \
+            @sync, \
+            @user_accounts, \
+            @user_roles, \
 
         # Construct a new Lockstep API client targeting the specified server.
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def self.new(env)
-            @version = "2022.2.103.0"
+            @version = "2022.3.14.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -34,32 +66,32 @@ module LockstepSdk
                 end
                 
             # Construct all the clients
-            @activities = Activities.new(self)
-            @apikeys = ApiKeys.new(self)
-            @appenrollments = AppEnrollments.new(self)
-            @applications = Applications.new(self)
-            @attachments = Attachments.new(self)
-            @codedefinitions = CodeDefinitions.new(self)
-            @companies = Companies.new(self)
-            @contacts = Contacts.new(self)
-            @creditmemoapplied = CreditMemoApplied.new(self)
-            @currencies = Currencies.new(self)
-            @customfielddefinitions = CustomFieldDefinitions.new(self)
-            @customfieldvalues = CustomFieldValues.new(self)
-            @definitions = Definitions.new(self)
-            @emails = Emails.new(self)
-            @invoicehistory = InvoiceHistory.new(self)
-            @invoices = Invoices.new(self)
-            @leads = Leads.new(self)
-            @notes = Notes.new(self)
-            @paymentapplications = PaymentApplications.new(self)
-            @payments = Payments.new(self)
-            @provisioning = Provisioning.new(self)
-            @reports = Reports.new(self)
-            @status = Status.new(self)
-            @sync = Sync.new(self)
-            @useraccounts = UserAccounts.new(self)
-            @userroles = UserRoles.new(self)
+            @activities = activities_client.new(self)
+            @api_keys = api_keys_client.new(self)
+            @app_enrollments = app_enrollments_client.new(self)
+            @applications = applications_client.new(self)
+            @attachments = attachments_client.new(self)
+            @code_definitions = code_definitions_client.new(self)
+            @companies = companies_client.new(self)
+            @contacts = contacts_client.new(self)
+            @credit_memo_applied = credit_memo_applied_client.new(self)
+            @currencies = currencies_client.new(self)
+            @custom_field_definitions = custom_field_definitions_client.new(self)
+            @custom_field_values = custom_field_values_client.new(self)
+            @definitions = definitions_client.new(self)
+            @emails = emails_client.new(self)
+            @invoice_history = invoice_history_client.new(self)
+            @invoices = invoices_client.new(self)
+            @leads = leads_client.new(self)
+            @notes = notes_client.new(self)
+            @payment_applications = payment_applications_client.new(self)
+            @payments = payments_client.new(self)
+            @provisioning = provisioning_client.new(self)
+            @reports = reports_client.new(self)
+            @status = status_client.new(self)
+            @sync = sync_client.new(self)
+            @user_accounts = user_accounts_client.new(self)
+            @user_roles = user_roles_client.new(self)
         end
 
         # Configure this API client to use API key authentication
@@ -84,9 +116,13 @@ module LockstepSdk
         def request(method, path, body, options={})
             
             url = URI(@env + path)
+            if !params.nil?  
+                url.query = URI.encode_www_form(params)
+            end
+            
             http = Net::HTTP.new(url.host, url.port)
             http.use_ssl = true
-
+            
             request = case method
                 when :get
                     Net::HTTP::Get.new(url)
@@ -100,6 +136,8 @@ module LockstepSdk
                     Net::HTTP::Delete.new(url)
                 end
             request["Accept"] = 'application/json'
+            request["Content-Type"] = 'application/*+json'
+            request.body = body
 
             # Which authentication are we using?
             if @api_key != nil 

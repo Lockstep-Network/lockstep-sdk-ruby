@@ -8,7 +8,7 @@
 #
 # @author     Ted Spence <tspence@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.2
+# @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,7 +19,7 @@ module LockstepSdk
     # You can use Activities to track information about who has been assigned a specific task,
     # the current status of the task, the name and description given for the particular task,
     # the priority of the task, and any amounts collected, paid, or credited for the task.
-    ActivityModel = Struct.new(
+    activity_model = Struct.new(
         :activityId             # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :groupKey               # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :companyId              # The ID of the company to which this activity belongs.
@@ -43,6 +43,7 @@ module LockstepSdk
         :isUnread               # True if this activity is to be shown in an "unread" state. When an activity is read by a person it is assigned to, this flag is set to false.
         :isArchived             # Activities may be archived when they should be hidden from the user. When this flag is true, this activity should be hidden.
         :company                # The company associated with the activity To retrieve this collection, specify `Company` in the "Include" parameter for your query.
+        :userAssignedToName     # The name of the user the activity is assigned to
         :attachments            # All attachments attached to applied activity. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
         :notes                  # All notes attached to this applied activity. To retrieve this collection, specify `Notes` in the "Include" parameter for your query.
         :customFieldDefinitions # All definitions attached to this applied activity. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
@@ -51,7 +52,7 @@ module LockstepSdk
     )
 
     # Represents an item belonging to the activity stream.
-    ActivityStreamItemModel = Struct.new(
+    activity_stream_item_model = Struct.new(
         :objectKey          # The object key of the activity stream item.
         :activityStreamType # The type code of the activity stream item.
         :textValue          # The text body description for this Activity Stream Item.
@@ -64,7 +65,7 @@ module LockstepSdk
         :toContactName      # The name of the contact sending the activity otherwise null.
     )
 
-    ActivityXRefModel = Struct.new(
+    activity_xref_model = Struct.new(
         :activityXRefId # The unique ID of this record, automatically assigned by Lockstep when this is added to the Lockstep platform.
         :activityId     # The ID of the activity to which this reference belongs.
         :groupKey       # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -73,7 +74,7 @@ module LockstepSdk
     )
 
     # Represents an aging record
-    AgingModel = Struct.new(
+    aging_model = Struct.new(
         :bucket             # Aging bucket of outstanding balance data (days past due date of invoice)
         :currencyCode       # Currency code of aging bucket
         :outstandingBalance # Outstanding balance for the given aging bucket
@@ -86,7 +87,7 @@ module LockstepSdk
     # retrieve an API Key once it is created.
     # 
     # For more information, see [API Keys](https://developer.lockstep.io/docs/api-keys).
-    ApiKeyModel = Struct.new(
+    api_key_model = Struct.new(
         :apiKeyId      # The unique identifier for the API key.
         :groupKey      # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :name          # The name of the API key.
@@ -100,7 +101,7 @@ module LockstepSdk
     )
 
     # App enrollment and custom field merged into one
-    AppEnrollmentCustomFieldModel = Struct.new(
+    app_enrollment_custom_field_model = Struct.new(
         :appEnrollmentId         # Unique id for the app enrollment
         :appId                   # Id of enrolled app
         :name                    # The name of the application
@@ -120,7 +121,7 @@ module LockstepSdk
     # configuration, and settings.
     # 
     # See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
-    AppEnrollmentModel = Struct.new(
+    app_enrollment_model = Struct.new(
         :appEnrollmentId        # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :appId                  # The ID number of the Application that this enrollment represents. You can fetch information about this Application object by specifying `App` in the "Include" parameter for your request.
         :groupKey               # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -135,6 +136,7 @@ module LockstepSdk
         :customFieldDefinitions # All definitions attached to this app. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
         :customFieldValues      # All values attached to this app. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
         :lastSync               # Data about the last sync attached to this app enrollment To retrieve this collection, specify `LastSync` in the "Include" parameter for your query.
+        :lastSuccessfulSync     # Data about the last successful sync associated with this enrollment
         :erpInfo                # Use `ConnectorInfo` instead.
         :connectorInfo          # Optional data necessary to create an app enrollment for a supported connector. Only enter relevant fields for the given connector.
     )
@@ -148,7 +150,7 @@ module LockstepSdk
     # 
     # See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
     # --swaggerCategory:Platform
-    ApplicationModel = Struct.new(
+    application_model = Struct.new(
         :appId                  # A unique code identifying this application
         :name                   # The name of this application
         :description            # Brief summary of this application shown as a subtitle
@@ -171,7 +173,7 @@ module LockstepSdk
     )
 
     # Aggregated Accounts Receivable Aging information.
-    ArAgingHeaderInfoModel = Struct.new(
+    ar_aging_header_info_model = Struct.new(
         :groupKey                 # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :reportBucket             # The aging bucket this data belongs to.
         :totalCustomers           # The total number of customers.
@@ -182,7 +184,7 @@ module LockstepSdk
     )
 
     # Aggregated Accounts Receivable information.
-    ArHeaderInfoModel = Struct.new(
+    ar_header_info_model = Struct.new(
         :groupKey                         # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :reportPeriod                     # The date of the report
         :totalCustomers                   # The total number of customers.
@@ -207,7 +209,7 @@ module LockstepSdk
     )
 
     # Contains summarized data for an invoice
-    AtRiskInvoiceSummaryModel = Struct.new(
+    at_risk_invoice_summary_model = Struct.new(
         :reportDate         # The date of the report
         :groupKey           # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :customerId         # The ID number of the counterparty for the invoice, for example, a customer or vendor.
@@ -227,7 +229,7 @@ module LockstepSdk
     )
 
     # Aggregated Attachment status information.
-    AttachmentHeaderInfoModel = Struct.new(
+    attachment_header_info_model = Struct.new(
         :groupKey         # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :companyId        # The CompanyId associated with the attachment status report. Providing a null value will return an attachment summary for all attachments associated to the provided GroupKey
         :totalAttachments # The total number of attachments associated with the provided GroupKey and CompanyId.
@@ -236,7 +238,7 @@ module LockstepSdk
     )
 
     # Represents a user uploaded attachment
-    AttachmentModel = Struct.new(
+    attachment_model = Struct.new(
         :attachmentId       # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :groupKey           # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :tableKey           # The name of the table the attachment is associated with
@@ -253,13 +255,13 @@ module LockstepSdk
     )
 
     # Input format used for bulk conversion route
-    BulkCurrencyConversionModel = Struct.new(
+    bulk_currency_conversion_model = Struct.new(
         :date           # The date for the currency rate
         :sourceCurrency # The currency code This will be validated by the /api/v1/currencies data set
     )
 
     # Represents the cashflow report based on a timeframe
-    CashflowReportModel = Struct.new(
+    cashflow_report_model = Struct.new(
         :timeframe              # Timeframe in days the cashflow report is generated on
         :paymentsCollected      # Amount of payments collected based in the timeframe
         :paymentsCollectedCount # Number of payments collected based in the timeframe
@@ -269,7 +271,7 @@ module LockstepSdk
 
     # Represents a Code Definition.  Codes can be used as shortened, human readable strings.
     # Additionally, this table can be used to store lists of system values for Lockstep objects.
-    CodeDefinitionModel = Struct.new(
+    code_definition_model = Struct.new(
         :codeDefinitionId # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :groupKey         # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :codeType         # The type of the Code Definition
@@ -286,7 +288,7 @@ module LockstepSdk
     # You can use Companies to track projects and financial data under this Company label.
     # 
     # See [Vendors, Customers, and Companies](https://developer.lockstep.io/docs/companies-customers-and-vendors) for more information.
-    CompanyModel = Struct.new(
+    company_model = Struct.new(
         :companyId                           # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
         :companyName                         # The short name of the company.
         :erpKey                              # The unique ID of this record as it was known in its originating financial system. If this company record was imported from a financial system, it will have the value `ErpKey` set to the original primary key number of the record as it was known in the originating financial system. If this record was not imported, this value will be `null`. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
@@ -339,7 +341,7 @@ module LockstepSdk
 
     # Represents all possible data required to set up an app enrollment for a connector.
     # Only send required fields for the given connector.
-    ConnectorInfoModel = Struct.new(
+    connector_info_model = Struct.new(
         :authCode    # The authorization code returned from the first step of the OAuth2 flow https://oauth.net/2/grant-types/authorization-code/
         :realmId     # The realm id of the account being granted permissions to access
         :redirectUri # The redirect uri used for step one of the OAuth2.0 flow.
@@ -350,7 +352,7 @@ module LockstepSdk
     # You can use Contacts to track information about who is responsible for a specific project,
     # who handles invoices, or information about which role at a particular customer or
     # vendor you should speak with about invoices.
-    ContactModel = Struct.new(
+    contact_model = Struct.new(
         :contactId              # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
         :companyId              # The ID of the company to which this contact belongs.
         :groupKey               # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -384,7 +386,7 @@ module LockstepSdk
     )
 
     # Country model for ISO-3166
-    CountryModel = Struct.new(
+    country_model = Struct.new(
         :name                   # Name of the country
         :alpha2                 # 2 letter alphabetic code for the given country
         :alpha3                 # 3 letter alphabetic code for the given country
@@ -404,7 +406,7 @@ module LockstepSdk
     # Lockstep creates a Credit Memo Application record to track the amount from the Credit Memo that was applied
     # as payment to the Invoice. You can examine Credit Memo Application records to track which Invoices were paid
     # using this Credit.
-    CreditMemoAppliedModel = Struct.new(
+    credit_memo_applied_model = Struct.new(
         :creditMemoAppliedId     # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
         :groupKey                # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :invoiceId               # The id of the invoice
@@ -425,7 +427,7 @@ module LockstepSdk
     )
 
     # Contains information about a credit memo invoice
-    CreditMemoInvoiceModel = Struct.new(
+    credit_memo_invoice_model = Struct.new(
         :groupKey                 # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :creditMemoAppliedId      # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :invoiceId                # The id of the invoice
@@ -441,7 +443,7 @@ module LockstepSdk
     )
 
     # Represents an ISO-4217 currency code definition
-    CurrencyModel = Struct.new(
+    currency_model = Struct.new(
         :alphaCode    # Alphabetic code for the given currency
         :numericCode  # Numeric code for the given currency
         :currencyName # Name of currency
@@ -450,7 +452,7 @@ module LockstepSdk
     )
 
     # Represents a currency rate for specific currencies and date
-    CurrencyRateModel = Struct.new(
+    currency_rate_model = Struct.new(
         :sourceCurrency      # The source currency
         :destinationCurrency # The destination currency
         :date                # The date for the currency rate
@@ -458,7 +460,7 @@ module LockstepSdk
     )
 
     # Contains customer details data
-    CustomerDetailsModel = Struct.new(
+    customer_details_model = Struct.new(
         :groupKey            # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :customerId          # The unique ID of this customer
         :name                # The unique ID of this customer
@@ -482,7 +484,7 @@ module LockstepSdk
     )
 
     # Customer payment collected information
-    CustomerDetailsPaymentModel = Struct.new(
+    customer_details_payment_model = Struct.new(
         :groupKey             # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :paymentId            # Unique identifier for payment
         :paymentAppliedId     # Unique identifier for payment applied
@@ -496,7 +498,7 @@ module LockstepSdk
     )
 
     # Contains summarized data for a customer
-    CustomerSummaryModel = Struct.new(
+    customer_summary_model = Struct.new(
         :groupKey             # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :companyId            # The unique ID of this company.
         :companyName          # The name of the company.
@@ -520,7 +522,7 @@ module LockstepSdk
     # information beyond this core definition, you can use Custom Fields to represent this information.
     # 
     # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
-    CustomFieldDefinitionModel = Struct.new(
+    custom_field_definition_model = Struct.new(
         :groupKey                # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :customFieldDefinitionId # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :tableKey                # Table to which this definition belongs
@@ -541,7 +543,7 @@ module LockstepSdk
     # information beyond this core definition, you can use Custom Fields to represent this information.
     # 
     # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
-    CustomFieldValueModel = Struct.new(
+    custom_field_value_model = Struct.new(
         :groupKey                # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :customFieldDefinitionId # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :recordKey               # Additional key if source table doesn't have a unique id
@@ -556,7 +558,7 @@ module LockstepSdk
     )
 
     # Represents the daily sales outstanding report
-    DailySalesOutstandingReportModel = Struct.new(
+    daily_sales_outstanding_report_model = Struct.new(
         :timeframe             # Timeframe (month) the daily sales outstanding values are associated with
         :invoiceCount          # Number of invoices the average daily sales outstanding is calculated on
         :dailySalesOutstanding # Time (in days) between an invoice was completed paid off and when the invoice was issued
@@ -566,7 +568,7 @@ module LockstepSdk
     # by the `CompanyId` field, recipient(s) by the `EmailTo` field, and cc recipient(s) by the 'EmailCC' field.
     # The Email Model represents an email and a number of different metadata attributes related to the creation,
     # storage, and ownership of the email.
-    EmailModel = Struct.new(
+    email_model = Struct.new(
         :emailId                # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :threadId               # The unique ID number of this email's conversation thread.
         :groupKey               # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -604,33 +606,33 @@ module LockstepSdk
 
     # Represents all the possible data sent as a part of the provisioning post.
     # Only send required fields for the given connector.
-    ErpInfoDataModel = Struct.new(
+    erp_info_data_model = Struct.new(
         :authCode    # The authorization code returned from the first step of the OAuth2 flow https://oauth.net/2/grant-types/authorization-code/
         :realmId     # The realm id of the account being granted permissions to access
         :redirectUri # The redirect uri used for step one of the OAuth2.0 flow.
     )
 
     # Represents the ERP object sent in a provisioning request
-    ErpInfoModel = Struct.new(
+    erp_info_model = Struct.new(
         :appId # The id of the ERP's App
         :data  # The data required to store for connector access
     )
 
     # Represents unsupported ERP systems
-    ErpModel = Struct.new(
+    erp_model = Struct.new(
         :erpSystemId # Unique ID for this ERP
         :name        # Name of ERP
         :isSupported # Flag to indicate if ERP is supported
     )
 
     # Model containing information about a user for the invite/onboarding process.
-    InviteDataModel = Struct.new(
+    invite_data_model = Struct.new(
         :email      # The email address of the invited user.
         :userStatus # The status of the user.
     )
 
     # Model from the User invite process
-    InviteModel = Struct.new(
+    invite_model = Struct.new(
         :email        # The invited email address
         :success      # True if the invite was sent successfully
         :invitedUser  # The invited user, may be null if the user could not be invited
@@ -638,12 +640,12 @@ module LockstepSdk
     )
 
     # Model to invite a new user to your accounting group
-    InviteSubmitModel = Struct.new(
+    invite_submit_model = Struct.new(
         :email # The email address of the user to invite
     )
 
     # Represents a single address for an invoice
-    InvoiceAddressModel = Struct.new(
+    invoice_address_model = Struct.new(
         :invoiceAddressId # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :groupKey         # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :invoiceId        # The ID number of the invoice this address belongs to
@@ -665,7 +667,7 @@ module LockstepSdk
     # An Invoice represents a bill sent from one company to another.  The Lockstep Platform tracks changes to
     # each Invoice so that you can observe the changes over time.  You can view the InvoiceHistory list to
     # monitor and observe the changes of this Invoice and track the dates when changes occurred.
-    InvoiceHistoryModel = Struct.new(
+    invoice_history_model = Struct.new(
         :groupKey                 # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :invoiceHistoryId         # The unique ID number of this invoice history entry.
         :invoiceId                # The unique ID of the Invoice represented by this history entry. This ID was automatically assigned by Lockstep to the Invoice record when it was added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
@@ -701,7 +703,7 @@ module LockstepSdk
     )
 
     # Represents a line in an invoice
-    InvoiceLineModel = Struct.new(
+    invoice_line_model = Struct.new(
         :invoiceLineId           # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
         :groupKey                # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :invoiceId               # The ID number of the invoice this line belongs to.
@@ -735,7 +737,7 @@ module LockstepSdk
     # generated by the system that originated the invoice.  Invoices have a total amount and a due date, and when
     # some payments have been made on the Invoice the `TotalAmount` and the `OutstandingBalanceAmount` may be
     # different.
-    InvoiceModel = Struct.new(
+    invoice_model = Struct.new(
         :groupKey                 # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :invoiceId                # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
         :companyId                # The ID number of the company that created this invoice.
@@ -785,7 +787,7 @@ module LockstepSdk
     )
 
     # View to return Payment Detail information for a given Invoice record.
-    InvoicePaymentDetailModel = Struct.new(
+    invoice_payment_detail_model = Struct.new(
         :groupKey             # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :paymentAppliedId     # The unique identifier of this PaymentApplied record.
         :invoiceId            # The database id of the invoice
@@ -799,7 +801,7 @@ module LockstepSdk
     )
 
     # Contains summarized data for an invoice
-    InvoiceSummaryModel = Struct.new(
+    invoice_summary_model = Struct.new(
         :groupKey           # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :customerId         # The ID number of the counterparty for the invoice, for example, a customer or vendor.
         :invoiceId          # The unique ID number of this invoice.
@@ -818,7 +820,7 @@ module LockstepSdk
     )
 
     # Represents leads for creating new ERP connectors
-    LeadModel = Struct.new(
+    lead_model = Struct.new(
         :leadId    # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :name      # Name of lead
         :company   # Name of company of lead
@@ -832,7 +834,7 @@ module LockstepSdk
     # different metadata attributes related to the creation, storage, and ownership of the note.
     # 
     # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
-    NoteModel = Struct.new(
+    note_model = Struct.new(
         :noteId          # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :groupKey        # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :tableKey        # The name of the table the note is associated with
@@ -851,7 +853,7 @@ module LockstepSdk
     # a single Payment to match an Invoice exactly, a partial Payment for an Invoice, or a single Payment may be
     # made for multiple smaller Invoices.  The Payment Application contains information about which Invoices are connected
     # to which Payments and for which amounts.
-    PaymentAppliedModel = Struct.new(
+    payment_applied_model = Struct.new(
         :groupKey             # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :paymentAppliedId     # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
         :invoiceId            # The Invoice this payment is applied to.
@@ -869,7 +871,7 @@ module LockstepSdk
     )
 
     # Contains group level payment data.
-    PaymentDetailHeaderModel = Struct.new(
+    payment_detail_header_model = Struct.new(
         :groupKey         # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :customerCount    # The total number of Customers.
         :amountCollected  # The total amount collected.
@@ -879,7 +881,7 @@ module LockstepSdk
     )
 
     # Contains detailed information about a Payment.
-    PaymentDetailModel = Struct.new(
+    payment_detail_model = Struct.new(
         :groupKey        # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :paymentId       # The unique ID of this Payment.
         :customerId      # The ID of the customer to which this Payment belongs.
@@ -911,7 +913,7 @@ module LockstepSdk
     # Lockstep Platform ID number and a customer ERP "key" that was generated by the system that originated
     # the Payment.  Payments that have not been fully applied have a nonzero `UnappliedAmount` value, which
     # represents a deposit that has been paid and not yet applied to an Invoice.
-    PaymentModel = Struct.new(
+    payment_model = Struct.new(
         :groupKey               # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :paymentId              # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
         :companyId              # The ID of the company to which this payment belongs.
@@ -941,7 +943,7 @@ module LockstepSdk
     )
 
     # Contains summary information for a Payment
-    PaymentSummaryModel = Struct.new(
+    payment_summary_model = Struct.new(
         :groupKey             # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :paymentId            # The id of the payment
         :memoText             # Memo or reference text (ex. memo field on a check).
@@ -959,7 +961,7 @@ module LockstepSdk
     )
 
     # Represents the data to finalize onboarding for a user
-    ProvisioningFinalizeRequestModel = Struct.new(
+    provisioning_finalize_request_model = Struct.new(
         :fullName        # The full name of the user
         :timeZone        # The time zone of the user
         :defaultCurrency # The default currency of the user
@@ -968,7 +970,7 @@ module LockstepSdk
     )
 
     # Represents the data sent during the onboarding flow
-    ProvisioningModel = Struct.new(
+    provisioning_model = Struct.new(
         :fullName        # The full name of the new user
         :timeZone        # The time zone of the new user
         :defaultCurrency # The default currency of the new user
@@ -977,7 +979,7 @@ module LockstepSdk
     )
 
     # Represents the response to either a successful or failed account provisioning
-    ProvisioningResponseModel = Struct.new(
+    provisioning_response_model = Struct.new(
         :userName        # If provisioning is successful, contains the username of the created user.
         :accountName     # If provisioning is successful, contains subscription account name of created user.
         :userId          # If provisioning is successful, contains the unique identifier of the created user.
@@ -988,7 +990,7 @@ module LockstepSdk
     )
 
     # Represents a risk rate calculation for a single month
-    RiskRateModel = Struct.new(
+    risk_rate_model = Struct.new(
         :groupKey              # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :reportPeriod          # The month the risk rate was calculated for
         :invoiceMonthName      # The string name of the month the risk rate was calculated for
@@ -1001,14 +1003,14 @@ module LockstepSdk
     )
 
     # State model for ISO-3166-2
-    StateModel = Struct.new(
+    state_model = Struct.new(
         :name    # Name of the state
         :alpha2  # 2 letter alphabetic code for the given state
         :aliases # A different name for a state
     )
 
     # Represents the status of a user's credentials
-    StatusModel = Struct.new(
+    status_model = Struct.new(
         :userName         # If authentication is successful, contains the username of the logged-in user.
         :accountName      # If authentication is successful, contains subscription account name of logged-in user.
         :accountCompanyId # If authentication is successful, contains subscription account company id of logged-in user.
@@ -1026,7 +1028,7 @@ module LockstepSdk
     )
 
     # Contains information about a sync process for an entity.
-    SyncEntityResultModel = Struct.new(
+    sync_entity_result_model = Struct.new(
         :insertCount # The number of entities inserted
         :updateCount # The number of entities updated
         :skipCount   # The number of entities skipped
@@ -1035,7 +1037,7 @@ module LockstepSdk
     )
 
     # Represents a user request to sync data
-    SyncRequestModel = Struct.new(
+    sync_request_model = Struct.new(
         :syncRequestId        # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :groupKey             # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :statusCode           # Potential values = Cancelled, Ready, In Progress, Success, Failed
@@ -1048,18 +1050,18 @@ module LockstepSdk
     )
 
     # Model representing information for a sync request
-    SyncSubmitModel = Struct.new(
+    sync_submit_model = Struct.new(
         :appEnrollmentId # The identifier of the app enrollment
     )
 
     # Model from the transfer ownership process.
-    TransferOwnerModel = Struct.new(
+    transfer_owner_model = Struct.new(
         :previousOwner # The previous owner of the account.
         :newOwner      # The new owner of the account.
     )
 
     # Model used to submit a transfer ownership request
-    TransferOwnerSubmitModel = Struct.new(
+    transfer_owner_submit_model = Struct.new(
         :targetUserId # The ID of the user to transfer ownership to.
     )
 
@@ -1068,7 +1070,7 @@ module LockstepSdk
     # have an email address defined within their account.  All Users must validate their email to make use of
     # Lockstep platform services.  Users may have different privileges and access control rights within the
     # Lockstep Platform.
-    UserAccountModel = Struct.new(
+    user_account_model = Struct.new(
         :userId                       # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. This record provides a link to the user's Azure AD B2C OID.
         :groupKey                     # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :userName                     # The full name of the user
@@ -1104,7 +1106,7 @@ module LockstepSdk
     )
 
     # Represents a role for a user
-    UserRoleModel = Struct.new(
+    user_role_model = Struct.new(
         :userRoleId     # The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         :groupKey       # The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         :userRoleName   # The name of the user role
