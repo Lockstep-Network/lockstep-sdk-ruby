@@ -16,18 +16,29 @@
 module LockstepSdk
 
     # Contains group level payment data.
-    class paymentDetailHeaderModel
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+    class PaymentDetailHeaderModel
+
+        # Initialize the PaymentDetailHeaderModel using the provided prototype
+        def initialize(params = {})
+            @group_key = params.fetch(:group_key)
+            @customer_count = params.fetch(:customer_count)
+            @amount_collected = params.fetch(:amount_collected)
+            @unapplied_amount = params.fetch(:unapplied_amount)
+            @paid_invoice_count = params.fetch(:paid_invoice_count)
+            @open_invoice_count = params.fetch(:open_invoice_count)
+        end
+
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [int32] The total number of Customers.
+        # @return [Int32] The total number of Customers.
         attr_accessor :customer_count
-        # @return [double] The total amount collected.
+        # @return [Double] The total amount collected.
         attr_accessor :amount_collected
-        # @return [double] The total unapplied amount.
+        # @return [Double] The total unapplied amount.
         attr_accessor :unapplied_amount
-        # @return [int32] The number of paid invoices.
+        # @return [Int32] The number of paid invoices.
         attr_accessor :paid_invoice_count
-        # @return [int32] The number of open invoices.
+        # @return [Int32] The number of open invoices.
         attr_accessor :open_invoice_count
     end
 end

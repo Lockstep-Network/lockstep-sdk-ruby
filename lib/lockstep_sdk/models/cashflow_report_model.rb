@@ -16,16 +16,26 @@
 module LockstepSdk
 
     # Represents the cashflow report based on a timeframe
-    class cashflowReportModel
-        # @return [int32] Timeframe in days the cashflow report is generated on
+    class CashflowReportModel
+
+        # Initialize the CashflowReportModel using the provided prototype
+        def initialize(params = {})
+            @timeframe = params.fetch(:timeframe)
+            @payments_collected = params.fetch(:payments_collected)
+            @payments_collected_count = params.fetch(:payments_collected_count)
+            @invoices_billed = params.fetch(:invoices_billed)
+            @invoices_billed_count = params.fetch(:invoices_billed_count)
+        end
+
+        # @return [Int32] Timeframe in days the cashflow report is generated on
         attr_accessor :timeframe
-        # @return [double] Amount of payments collected based in the timeframe
+        # @return [Double] Amount of payments collected based in the timeframe
         attr_accessor :payments_collected
-        # @return [int32] Number of payments collected based in the timeframe
+        # @return [Int32] Number of payments collected based in the timeframe
         attr_accessor :payments_collected_count
-        # @return [double] Amount of invoices billed based in the timeframe
+        # @return [Double] Amount of invoices billed based in the timeframe
         attr_accessor :invoices_billed
-        # @return [int32] Number of invoices billed in the timeframe
+        # @return [Int32] Number of invoices billed in the timeframe
         attr_accessor :invoices_billed_count
     end
 end

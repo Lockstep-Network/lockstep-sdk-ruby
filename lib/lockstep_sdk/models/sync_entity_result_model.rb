@@ -16,16 +16,26 @@
 module LockstepSdk
 
     # Contains information about a sync process for an entity.
-    class syncEntityResultModel
-        # @return [int32] The number of entities inserted
+    class SyncEntityResultModel
+
+        # Initialize the SyncEntityResultModel using the provided prototype
+        def initialize(params = {})
+            @insert_count = params.fetch(:insert_count)
+            @update_count = params.fetch(:update_count)
+            @skip_count = params.fetch(:skip_count)
+            @error_count = params.fetch(:error_count)
+            @errors = params.fetch(:errors)
+        end
+
+        # @return [Int32] The number of entities inserted
         attr_accessor :insert_count
-        # @return [int32] The number of entities updated
+        # @return [Int32] The number of entities updated
         attr_accessor :update_count
-        # @return [int32] The number of entities skipped
+        # @return [Int32] The number of entities skipped
         attr_accessor :skip_count
-        # @return [int32] The number of errors encountered during sync
+        # @return [Int32] The number of errors encountered during sync
         attr_accessor :error_count
-        # @return [object] The errors encountered during sync keyed by ERP key
+        # @return [Object] The errors encountered during sync keyed by ERP key
         attr_accessor :errors
     end
 end

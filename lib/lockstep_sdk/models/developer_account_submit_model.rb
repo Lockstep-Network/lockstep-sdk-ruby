@@ -16,12 +16,20 @@
 module LockstepSdk
 
     # Model containing information to create a new developer account.
-    class developerAccountSubmitModel
-        # @return [string] The name of the developer.
+    class DeveloperAccountSubmitModel
+
+        # Initialize the DeveloperAccountSubmitModel using the provided prototype
+        def initialize(params = {})
+            @name = params.fetch(:name)
+            @email = params.fetch(:email)
+            @company_name = params.fetch(:company_name)
+        end
+
+        # @return [String] The name of the developer.
         attr_accessor :name
-        # @return [email] The email address of the developer.
+        # @return [Email] The email address of the developer.
         attr_accessor :email
-        # @return [string] The company name of the developer.
+        # @return [String] The company name of the developer.
         attr_accessor :company_name
     end
 end

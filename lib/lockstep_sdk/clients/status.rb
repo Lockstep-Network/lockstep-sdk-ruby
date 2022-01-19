@@ -18,6 +18,7 @@ class status_client
     require 'awrence'
 
     # Initialize the status_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end

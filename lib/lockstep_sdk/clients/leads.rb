@@ -18,6 +18,7 @@ class leads_client
     require 'awrence'
 
     # Initialize the leads_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -26,7 +27,7 @@ class leads_client
     # Creates one or more Leads within the Lockstep platform and returns the records as created.
     # 
     # A Lead is a person who is interested in the Lockstep platform but needs certain new features in order to use it. If you are interested in the Lockstep platform, you can create a lead with your information and our team will prioritize the feature you need.
-    # @param body [lead_model] The Leads to create
+    # @param body [LeadModel] The Leads to create
     def create_leads()
         path = "/api/v1/Leads"
         @lockstepsdk.request(:post, path, body, nil)

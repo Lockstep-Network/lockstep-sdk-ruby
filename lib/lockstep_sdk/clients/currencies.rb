@@ -18,6 +18,7 @@ class currencies_client
     require 'awrence'
 
     # Initialize the currencies_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -40,7 +41,7 @@ class currencies_client
     # Receives an array of dates and currencies and a destination currency and returns an array of the corresponding currency rates to the given destination currency (Limit X).
     # 
     # @param destinationCurrency [string] The currency to convert to.
-    # @param body [bulk_currency_conversion_model] A list of dates and source currencies.
+    # @param body [BulkCurrencyConversionModel] A list of dates and source currencies.
     def bulk_currency_data(destinationCurrency:)
         path = "/api/v1/Currencies/bulk"
         params = {:destinationCurrency => destinationCurrency}

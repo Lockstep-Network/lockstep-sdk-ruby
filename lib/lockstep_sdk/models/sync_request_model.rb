@@ -16,24 +16,38 @@
 module LockstepSdk
 
     # Represents a user request to sync data
-    class syncRequestModel
-        # @return [uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
+    class SyncRequestModel
+
+        # Initialize the SyncRequestModel using the provided prototype
+        def initialize(params = {})
+            @sync_request_id = params.fetch(:sync_request_id)
+            @group_key = params.fetch(:group_key)
+            @status_code = params.fetch(:status_code)
+            @process_result_message = params.fetch(:process_result_message)
+            @app_enrollment_id = params.fetch(:app_enrollment_id)
+            @created = params.fetch(:created)
+            @modified = params.fetch(:modified)
+            @modified_user_id = params.fetch(:modified_user_id)
+            @details = params.fetch(:details)
+        end
+
+        # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         attr_accessor :sync_request_id
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [string] Potential values = Cancelled, Ready, In Progress, Success, Failed
+        # @return [String] Potential values = Cancelled, Ready, In Progress, Success, Failed
         attr_accessor :status_code
-        # @return [string] Message containing information about the sync request results
+        # @return [String] Message containing information about the sync request results
         attr_accessor :process_result_message
-        # @return [uuid] App enrollment sync request is for
+        # @return [Uuid] App enrollment sync request is for
         attr_accessor :app_enrollment_id
-        # @return [date-time] The date this sync request was created
+        # @return [Date-time] The date this sync request was created
         attr_accessor :created
-        # @return [date-time] The date this sync request was last modified
+        # @return [Date-time] The date this sync request was last modified
         attr_accessor :modified
-        # @return [uuid] The ID number of the user who most recently modified this sync request.
+        # @return [Uuid] The ID number of the user who most recently modified this sync request.
         attr_accessor :modified_user_id
-        # @return [object] The detailed results from the sync. To retrieve this collection, set `includeDetails` to true in your GET requests.
+        # @return [Object] The detailed results from the sync. To retrieve this collection, set `includeDetails` to true in your GET requests.
         attr_accessor :details
     end
 end

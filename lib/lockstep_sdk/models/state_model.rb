@@ -16,12 +16,20 @@
 module LockstepSdk
 
     # State model for ISO-3166-2
-    class stateModel
-        # @return [string] Name of the state
+    class StateModel
+
+        # Initialize the StateModel using the provided prototype
+        def initialize(params = {})
+            @name = params.fetch(:name)
+            @alpha2 = params.fetch(:alpha2)
+            @aliases = params.fetch(:aliases)
+        end
+
+        # @return [String] Name of the state
         attr_accessor :name
-        # @return [string] 2 letter alphabetic code for the given state
+        # @return [String] 2 letter alphabetic code for the given state
         attr_accessor :alpha2
-        # @return [string] A different name for a state
+        # @return [String] A different name for a state
         attr_accessor :aliases
     end
 end

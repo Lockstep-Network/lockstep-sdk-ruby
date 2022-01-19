@@ -24,44 +24,68 @@ module LockstepSdk
     # 
     # See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
     # --swaggerCategory:Platform
-    class applicationModel
-        # @return [uuid] A unique code identifying this application
+    class ApplicationModel
+
+        # Initialize the ApplicationModel using the provided prototype
+        def initialize(params = {})
+            @app_id = params.fetch(:app_id)
+            @name = params.fetch(:name)
+            @description = params.fetch(:description)
+            @app_type = params.fetch(:app_type)
+            @owner_id = params.fetch(:owner_id)
+            @project_url = params.fetch(:project_url)
+            @icon_url = params.fetch(:icon_url)
+            @price_terms = params.fetch(:price_terms)
+            @created_user_id = params.fetch(:created_user_id)
+            @modified_user_id = params.fetch(:modified_user_id)
+            @created = params.fetch(:created)
+            @modified = params.fetch(:modified)
+            @is_active = params.fetch(:is_active)
+            @wiki_url = params.fetch(:wiki_url)
+            @group_key = params.fetch(:group_key)
+            @notes = params.fetch(:notes)
+            @attachments = params.fetch(:attachments)
+            @custom_field_definitions = params.fetch(:custom_field_definitions)
+            @custom_field_values = params.fetch(:custom_field_values)
+        end
+
+        # @return [Uuid] A unique code identifying this application
         attr_accessor :app_id
-        # @return [string] The name of this application
+        # @return [String] The name of this application
         attr_accessor :name
-        # @return [string] Brief summary of this application shown as a subtitle
+        # @return [String] Brief summary of this application shown as a subtitle
         attr_accessor :description
-        # @return [string] Tag for what type of app this is
+        # @return [String] Tag for what type of app this is
         attr_accessor :app_type
-        # @return [uuid] The ID of the owner
+        # @return [Uuid] The ID of the owner
         attr_accessor :owner_id
-        # @return [uri] The URL to visit for more information about this application
+        # @return [Uri] The URL to visit for more information about this application
         attr_accessor :project_url
-        # @return [uri] The URL for the icon for this application
+        # @return [Uri] The URL for the icon for this application
         attr_accessor :icon_url
-        # @return [string] The description of the price for this application
+        # @return [String] The description of the price for this application
         attr_accessor :price_terms
-        # @return [uuid] The ID of the user who created this application
+        # @return [Uuid] The ID of the user who created this application
         attr_accessor :created_user_id
-        # @return [uuid] The ID of the user who last modified this application
+        # @return [Uuid] The ID of the user who last modified this application
         attr_accessor :modified_user_id
-        # @return [date-time] The date this application was created
+        # @return [Date-time] The date this application was created
         attr_accessor :created
-        # @return [date-time] The date this application was last modified
+        # @return [Date-time] The date this application was last modified
         attr_accessor :modified
-        # @return [boolean] Flag indicating if the application is active.
+        # @return [Boolean] Flag indicating if the application is active.
         attr_accessor :is_active
-        # @return [uri] URL to the Wiki for the Application
+        # @return [Uri] URL to the Wiki for the Application
         attr_accessor :wiki_url
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [noteModel] All notes attached to this app. To retrieve this collection, specify `Notes` in the "Include" parameter for your query.
+        # @return [NoteModel] All notes attached to this app. To retrieve this collection, specify `Notes` in the "Include" parameter for your query.
         attr_accessor :notes
-        # @return [attachmentModel] All attachments attached to this app. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
+        # @return [AttachmentModel] All attachments attached to this app. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
         attr_accessor :attachments
-        # @return [customFieldDefinitionModel] All definitions attached to the application. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
+        # @return [CustomFieldDefinitionModel] All definitions attached to the application. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
         attr_accessor :custom_field_definitions
-        # @return [customFieldValueModel] All values attached to the application. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
+        # @return [CustomFieldValueModel] All values attached to the application. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
     end
 end

@@ -21,30 +21,47 @@ module LockstepSdk
     # information beyond this core definition, you can use Custom Fields to represent this information.
     # 
     # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
-    class customFieldDefinitionModel
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+    class CustomFieldDefinitionModel
+
+        # Initialize the CustomFieldDefinitionModel using the provided prototype
+        def initialize(params = {})
+            @group_key = params.fetch(:group_key)
+            @custom_field_definition_id = params.fetch(:custom_field_definition_id)
+            @table_key = params.fetch(:table_key)
+            @app_id = params.fetch(:app_id)
+            @custom_field_label = params.fetch(:custom_field_label)
+            @data_type = params.fetch(:data_type)
+            @sort_order = params.fetch(:sort_order)
+            @created = params.fetch(:created)
+            @created_user_id = params.fetch(:created_user_id)
+            @modified = params.fetch(:modified)
+            @modified_user_id = params.fetch(:modified_user_id)
+            @app_enrollment_id = params.fetch(:app_enrollment_id)
+        end
+
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
+        # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         attr_accessor :custom_field_definition_id
-        # @return [string] Table to which this definition belongs
+        # @return [String] Table to which this definition belongs
         attr_accessor :table_key
-        # @return [uuid] Id of app this definition belongs to
+        # @return [Uuid] Id of app this definition belongs to
         attr_accessor :app_id
-        # @return [string] Text to display in-application for custom field
+        # @return [String] Text to display in-application for custom field
         attr_accessor :custom_field_label
-        # @return [string] Data type of this definition
+        # @return [String] Data type of this definition
         attr_accessor :data_type
-        # @return [int32] Used for display logic when multiple custom fields exist
+        # @return [Int32] Used for display logic when multiple custom fields exist
         attr_accessor :sort_order
-        # @return [date-time] Date created
+        # @return [Date-time] Date created
         attr_accessor :created
-        # @return [uuid] Id of user who created this definition
+        # @return [Uuid] Id of user who created this definition
         attr_accessor :created_user_id
-        # @return [date-time] Date modified
+        # @return [Date-time] Date modified
         attr_accessor :modified
-        # @return [uuid] Id of user who modified this definition
+        # @return [Uuid] Id of user who modified this definition
         attr_accessor :modified_user_id
-        # @return [uuid] AppEnrollmentId for this record; used for mapping purposes.
+        # @return [Uuid] AppEnrollmentId for this record; used for mapping purposes.
         attr_accessor :app_enrollment_id
     end
 end

@@ -16,14 +16,23 @@
 module LockstepSdk
 
     # Represents a currency rate for specific currencies and date
-    class currencyRateModel
-        # @return [string] The source currency
+    class CurrencyRateModel
+
+        # Initialize the CurrencyRateModel using the provided prototype
+        def initialize(params = {})
+            @source_currency = params.fetch(:source_currency)
+            @destination_currency = params.fetch(:destination_currency)
+            @date = params.fetch(:date)
+            @currency_rate = params.fetch(:currency_rate)
+        end
+
+        # @return [String] The source currency
         attr_accessor :source_currency
-        # @return [string] The destination currency
+        # @return [String] The destination currency
         attr_accessor :destination_currency
-        # @return [date] The date for the currency rate
+        # @return [Date] The date for the currency rate
         attr_accessor :date
-        # @return [double] The currency rate value
+        # @return [Double] The currency rate value
         attr_accessor :currency_rate
     end
 end

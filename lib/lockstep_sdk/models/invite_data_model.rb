@@ -16,10 +16,17 @@
 module LockstepSdk
 
     # Model containing information about a user for the invite/onboarding process.
-    class inviteDataModel
-        # @return [string] The email address of the invited user.
+    class InviteDataModel
+
+        # Initialize the InviteDataModel using the provided prototype
+        def initialize(params = {})
+            @email = params.fetch(:email)
+            @user_status = params.fetch(:user_status)
+        end
+
+        # @return [String] The email address of the invited user.
         attr_accessor :email
-        # @return [string] The status of the user.
+        # @return [String] The status of the user.
         attr_accessor :user_status
     end
 end

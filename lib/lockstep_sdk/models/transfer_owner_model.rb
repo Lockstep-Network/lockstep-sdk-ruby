@@ -16,10 +16,17 @@
 module LockstepSdk
 
     # Model from the transfer ownership process.
-    class transferOwnerModel
-        # @return [userAccountModel] The previous owner of the account.
+    class TransferOwnerModel
+
+        # Initialize the TransferOwnerModel using the provided prototype
+        def initialize(params = {})
+            @previous_owner = params.fetch(:previous_owner)
+            @new_owner = params.fetch(:new_owner)
+        end
+
+        # @return [UserAccountModel] The previous owner of the account.
         attr_accessor :previous_owner
-        # @return [userAccountModel] The new owner of the account.
+        # @return [UserAccountModel] The new owner of the account.
         attr_accessor :new_owner
     end
 end

@@ -18,6 +18,7 @@ class companies_client
     require 'awrence'
 
     # Initialize the companies_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -66,7 +67,7 @@ class companies_client
     # 
     # See [Vendors, Customers, and Companies](https://developer.lockstep.io/docs/companies-customers-and-vendors) for more information.
     # 
-    # @param body [company_model] The Companies to create
+    # @param body [CompanyModel] The Companies to create
     def create_companies()
         path = "/api/v1/Companies"
         @lockstepsdk.request(:post, path, body, nil)

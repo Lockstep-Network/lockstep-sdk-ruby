@@ -16,50 +16,77 @@
 module LockstepSdk
 
     # Contains detailed information about a Payment.
-    class paymentDetailModel
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+    class PaymentDetailModel
+
+        # Initialize the PaymentDetailModel using the provided prototype
+        def initialize(params = {})
+            @group_key = params.fetch(:group_key)
+            @payment_id = params.fetch(:payment_id)
+            @customer_id = params.fetch(:customer_id)
+            @customer_name = params.fetch(:customer_name)
+            @memo_text = params.fetch(:memo_text)
+            @reference_code = params.fetch(:reference_code)
+            @primary_contact = params.fetch(:primary_contact)
+            @email = params.fetch(:email)
+            @payment_amount = params.fetch(:payment_amount)
+            @unapplied_amount = params.fetch(:unapplied_amount)
+            @payment_type = params.fetch(:payment_type)
+            @payment_date = params.fetch(:payment_date)
+            @post_date = params.fetch(:post_date)
+            @phone = params.fetch(:phone)
+            @fax = params.fetch(:fax)
+            @address1 = params.fetch(:address1)
+            @address2 = params.fetch(:address2)
+            @address3 = params.fetch(:address3)
+            @city = params.fetch(:city)
+            @state_region = params.fetch(:state_region)
+            @postal_code = params.fetch(:postal_code)
+            @country_code = params.fetch(:country_code)
+        end
+
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [uuid] The unique ID of this Payment.
+        # @return [Uuid] The unique ID of this Payment.
         attr_accessor :payment_id
-        # @return [uuid] The ID of the customer to which this Payment belongs.
+        # @return [Uuid] The ID of the customer to which this Payment belongs.
         attr_accessor :customer_id
-        # @return [string] The name of the customer to which this Payment belongs.
+        # @return [String] The name of the customer to which this Payment belongs.
         attr_accessor :customer_name
-        # @return [string] Memo or reference text (ex. memo field on a check).
+        # @return [String] Memo or reference text (ex. memo field on a check).
         attr_accessor :memo_text
-        # @return [string] Reference code for the payment for the given Erp system.
+        # @return [String] Reference code for the payment for the given Erp system.
         attr_accessor :reference_code
-        # @return [string] The name of the Primary Contact for the Customer.
+        # @return [String] The name of the Primary Contact for the Customer.
         attr_accessor :primary_contact
-        # @return [string] The Email address of the Customer.
+        # @return [String] The Email address of the Customer.
         attr_accessor :email
-        # @return [double] Total amount of this Payment.
+        # @return [Double] Total amount of this Payment.
         attr_accessor :payment_amount
-        # @return [double] Unapplied balance of this Payment.
+        # @return [Double] Unapplied balance of this Payment.
         attr_accessor :unapplied_amount
-        # @return [string] The type of payment, Payment or AP Payment.
+        # @return [String] The type of payment, Payment or AP Payment.
         attr_accessor :payment_type
-        # @return [date] The date of this Payment.
+        # @return [Date] The date of this Payment.
         attr_accessor :payment_date
-        # @return [date] Payment post date.
+        # @return [Date] Payment post date.
         attr_accessor :post_date
-        # @return [string] The phone number of the Customer's Primary Contact.
+        # @return [String] The phone number of the Customer's Primary Contact.
         attr_accessor :phone
-        # @return [string] The fax number of the Customer's Primary Contact.
+        # @return [String] The fax number of the Customer's Primary Contact.
         attr_accessor :fax
-        # @return [string] The first line of the address for the Customer's Primary Contact.
+        # @return [String] The first line of the address for the Customer's Primary Contact.
         attr_accessor :address1
-        # @return [string] The second line of the address for the Customer's Primary Contact.
+        # @return [String] The second line of the address for the Customer's Primary Contact.
         attr_accessor :address2
-        # @return [string] The third line of the address for the Customer's Primary Contact.
+        # @return [String] The third line of the address for the Customer's Primary Contact.
         attr_accessor :address3
-        # @return [string] The city of the address for the Customer's Primary Contact.
+        # @return [String] The city of the address for the Customer's Primary Contact.
         attr_accessor :city
-        # @return [string] The state/region of the address for the Customer's Primary Contact.
+        # @return [String] The state/region of the address for the Customer's Primary Contact.
         attr_accessor :state_region
-        # @return [string] The postal/zip code of the address for the Customer's Primary Contact.
+        # @return [String] The postal/zip code of the address for the Customer's Primary Contact.
         attr_accessor :postal_code
-        # @return [string] The 2 character country code of the address for the Customer's Primary Contact.
+        # @return [String] The 2 character country code of the address for the Customer's Primary Contact.
         attr_accessor :country_code
     end
 end

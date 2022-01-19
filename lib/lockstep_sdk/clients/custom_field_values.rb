@@ -18,6 +18,7 @@ class custom_field_values_client
     require 'awrence'
 
     # Initialize the custom_field_values_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -65,7 +66,7 @@ class custom_field_values_client
 
     # Creates one or more Custom Fields and returns the records as created.  A Custom Field represents metadata added to an object within the Lockstep Platform.  Lockstep provides a core definition for each object.  The core definition is intended to represent a level of compatibility that provides support across most accounting systems and products.  When a user or developer requires information beyond this core definition, you can use Custom Fields to represent this information.  See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
     # 
-    # @param body [custom_field_value_model] The Custom Fields to create
+    # @param body [CustomFieldValueModel] The Custom Fields to create
     def create_fields()
         path = "/api/v1/CustomFieldValues"
         @lockstepsdk.request(:post, path, body, nil)

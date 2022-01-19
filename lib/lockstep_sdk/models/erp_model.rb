@@ -16,12 +16,20 @@
 module LockstepSdk
 
     # Represents unsupported ERP systems
-    class erpModel
-        # @return [uuid] Unique ID for this ERP
+    class ErpModel
+
+        # Initialize the ErpModel using the provided prototype
+        def initialize(params = {})
+            @erp_system_id = params.fetch(:erp_system_id)
+            @name = params.fetch(:name)
+            @is_supported = params.fetch(:is_supported)
+        end
+
+        # @return [Uuid] Unique ID for this ERP
         attr_accessor :erp_system_id
-        # @return [string] Name of ERP
+        # @return [String] Name of ERP
         attr_accessor :name
-        # @return [boolean] Flag to indicate if ERP is supported
+        # @return [Boolean] Flag to indicate if ERP is supported
         attr_accessor :is_supported
     end
 end

@@ -18,6 +18,7 @@ class contacts_client
     require 'awrence'
 
     # Initialize the contacts_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -60,7 +61,7 @@ class contacts_client
     # 
     # A Contact contains information about a person or role within a Company. You can use Contacts to track information about who is responsible for a specific project, who handles invoices, or information about which role at a particular customer or vendor you should speak with about invoices.
     # 
-    # @param body [contact_model] The Contacts to create
+    # @param body [ContactModel] The Contacts to create
     def create_contacts()
         path = "/api/v1/Contacts"
         @lockstepsdk.request(:post, path, body, nil)

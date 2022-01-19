@@ -16,8 +16,14 @@
 module LockstepSdk
 
     # Model used to submit a transfer ownership request
-    class transferOwnerSubmitModel
-        # @return [uuid] The ID of the user to transfer ownership to.
+    class TransferOwnerSubmitModel
+
+        # Initialize the TransferOwnerSubmitModel using the provided prototype
+        def initialize(params = {})
+            @target_user_id = params.fetch(:target_user_id)
+        end
+
+        # @return [Uuid] The ID of the user to transfer ownership to.
         attr_accessor :target_user_id
     end
 end

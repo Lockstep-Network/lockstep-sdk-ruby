@@ -18,6 +18,7 @@ class payment_applications_client
     require 'awrence'
 
     # Initialize the payment_applications_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -62,7 +63,7 @@ class payment_applications_client
     # 
     # A Payment Application is created by a business who receives a Payment from a customer.  A customer may make a single Payment to match an Invoice exactly, a partial Payment for an Invoice, or a single Payment may be made for multiple smaller Invoices.  The Payment Application contains information about which Invoices are connected to which Payments and for which amounts.
     # 
-    # @param body [payment_applied_model] The Payment Applications to create
+    # @param body [PaymentAppliedModel] The Payment Applications to create
     def create_payment_applications()
         path = "/api/v1/PaymentApplications"
         @lockstepsdk.request(:post, path, body, nil)

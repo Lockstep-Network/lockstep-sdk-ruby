@@ -16,16 +16,26 @@
 module LockstepSdk
 
     # Represents an ISO-4217 currency code definition
-    class currencyModel
-        # @return [string] Alphabetic code for the given currency
+    class CurrencyModel
+
+        # Initialize the CurrencyModel using the provided prototype
+        def initialize(params = {})
+            @alpha_code = params.fetch(:alpha_code)
+            @numeric_code = params.fetch(:numeric_code)
+            @currency_name = params.fetch(:currency_name)
+            @minor_unit = params.fetch(:minor_unit)
+            @symbol = params.fetch(:symbol)
+        end
+
+        # @return [String] Alphabetic code for the given currency
         attr_accessor :alpha_code
-        # @return [string] Numeric code for the given currency
+        # @return [String] Numeric code for the given currency
         attr_accessor :numeric_code
-        # @return [string] Name of currency
+        # @return [String] Name of currency
         attr_accessor :currency_name
-        # @return [int32] Number of places after the decimal for this currency
+        # @return [Int32] Number of places after the decimal for this currency
         attr_accessor :minor_unit
-        # @return [string] Symbol for the given currency
+        # @return [String] Symbol for the given currency
         attr_accessor :symbol
     end
 end

@@ -18,6 +18,7 @@ class app_enrollments_client
     require 'awrence'
 
     # Initialize the app_enrollments_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -71,7 +72,7 @@ class app_enrollments_client
     # 
     # See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
     # 
-    # @param body [app_enrollment_model] The App Enrollments to create
+    # @param body [AppEnrollmentModel] The App Enrollments to create
     def create_app_enrollments()
         path = "/api/v1/AppEnrollments"
         @lockstepsdk.request(:post, path, body, nil)

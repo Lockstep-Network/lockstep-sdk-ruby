@@ -16,10 +16,17 @@
 module LockstepSdk
 
     # Input format used for bulk conversion route
-    class bulkCurrencyConversionModel
-        # @return [date] The date for the currency rate
+    class BulkCurrencyConversionModel
+
+        # Initialize the BulkCurrencyConversionModel using the provided prototype
+        def initialize(params = {})
+            @date = params.fetch(:date)
+            @source_currency = params.fetch(:source_currency)
+        end
+
+        # @return [Date] The date for the currency rate
         attr_accessor :date
-        # @return [string] The currency code This will be validated by the /api/v1/currencies data set
+        # @return [String] The currency code This will be validated by the /api/v1/currencies data set
         attr_accessor :source_currency
     end
 end

@@ -16,8 +16,14 @@
 module LockstepSdk
 
     # Model representing information for a sync request
-    class syncSubmitModel
-        # @return [uuid] The identifier of the app enrollment
+    class SyncSubmitModel
+
+        # Initialize the SyncSubmitModel using the provided prototype
+        def initialize(params = {})
+            @app_enrollment_id = params.fetch(:app_enrollment_id)
+        end
+
+        # @return [Uuid] The identifier of the app enrollment
         attr_accessor :app_enrollment_id
     end
 end

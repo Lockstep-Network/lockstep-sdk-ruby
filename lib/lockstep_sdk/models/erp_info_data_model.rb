@@ -17,12 +17,20 @@ module LockstepSdk
 
     # Represents all the possible data sent as a part of the provisioning post.
     # Only send required fields for the given connector.
-    class erpInfoDataModel
-        # @return [string] The authorization code returned from the first step of the OAuth2 flow https://oauth.net/2/grant-types/authorization-code/
+    class ErpInfoDataModel
+
+        # Initialize the ErpInfoDataModel using the provided prototype
+        def initialize(params = {})
+            @auth_code = params.fetch(:auth_code)
+            @realm_id = params.fetch(:realm_id)
+            @redirect_uri = params.fetch(:redirect_uri)
+        end
+
+        # @return [String] The authorization code returned from the first step of the OAuth2 flow https://oauth.net/2/grant-types/authorization-code/
         attr_accessor :auth_code
-        # @return [string] The realm id of the account being granted permissions to access
+        # @return [String] The realm id of the account being granted permissions to access
         attr_accessor :realm_id
-        # @return [string] The redirect uri used for step one of the OAuth2.0 flow.
+        # @return [String] The redirect uri used for step one of the OAuth2.0 flow.
         attr_accessor :redirect_uri
     end
 end

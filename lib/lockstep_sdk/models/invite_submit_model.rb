@@ -16,8 +16,14 @@
 module LockstepSdk
 
     # Model to invite a new user to your accounting group
-    class inviteSubmitModel
-        # @return [email] The email address of the user to invite
+    class InviteSubmitModel
+
+        # Initialize the InviteSubmitModel using the provided prototype
+        def initialize(params = {})
+            @email = params.fetch(:email)
+        end
+
+        # @return [Email] The email address of the user to invite
         attr_accessor :email
     end
 end

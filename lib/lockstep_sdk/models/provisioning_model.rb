@@ -16,16 +16,26 @@
 module LockstepSdk
 
     # Represents the data sent during the onboarding flow
-    class provisioningModel
-        # @return [string] The full name of the new user
+    class ProvisioningModel
+
+        # Initialize the ProvisioningModel using the provided prototype
+        def initialize(params = {})
+            @full_name = params.fetch(:full_name)
+            @time_zone = params.fetch(:time_zone)
+            @default_currency = params.fetch(:default_currency)
+            @erp = params.fetch(:erp)
+            @company = params.fetch(:company)
+        end
+
+        # @return [String] The full name of the new user
         attr_accessor :full_name
-        # @return [string] The time zone of the new user
+        # @return [String] The time zone of the new user
         attr_accessor :time_zone
-        # @return [string] The default currency of the new user
+        # @return [String] The default currency of the new user
         attr_accessor :default_currency
-        # @return [erpInfoModel] The information necessary to enroll the user in their ERP
+        # @return [ErpInfoModel] The information necessary to enroll the user in their ERP
         attr_accessor :erp
-        # @return [companyModel] The company information for the new user and group
+        # @return [CompanyModel] The company information for the new user and group
         attr_accessor :company
     end
 end

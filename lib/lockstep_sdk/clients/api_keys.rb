@@ -18,6 +18,7 @@ class api_keys_client
     require 'awrence'
 
     # Initialize the api_keys_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -50,7 +51,7 @@ class api_keys_client
     # 
     # An API Key is an authentication token that you may use with the Lockstep API.  Because API Keys do not have an expiration date, they are well suited for unattended processes.  Each API Key is associated with a user, and may be revoked to prevent it from accessing the Lockstep API. When you create an API Key, make sure to save the value in a secure location.  Lockstep cannot retrieve an API Key once it is created.  For more information, see [API Keys](https://developer.lockstep.io/docs/api-keys).
     # 
-    # @param body [api_key_model] Metadata about the API Key to create.
+    # @param body [ApiKeyModel] Metadata about the API Key to create.
     def create_api_key()
         path = "/api/v1/ApiKeys"
         @lockstepsdk.request(:post, path, body, nil)

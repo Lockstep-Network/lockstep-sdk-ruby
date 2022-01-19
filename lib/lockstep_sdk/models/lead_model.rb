@@ -16,16 +16,26 @@
 module LockstepSdk
 
     # Represents leads for creating new ERP connectors
-    class leadModel
-        # @return [uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
+    class LeadModel
+
+        # Initialize the LeadModel using the provided prototype
+        def initialize(params = {})
+            @lead_id = params.fetch(:lead_id)
+            @name = params.fetch(:name)
+            @company = params.fetch(:company)
+            @email = params.fetch(:email)
+            @erp_system = params.fetch(:erp_system)
+        end
+
+        # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         attr_accessor :lead_id
-        # @return [string] Name of lead
+        # @return [String] Name of lead
         attr_accessor :name
-        # @return [string] Name of company of lead
+        # @return [String] Name of company of lead
         attr_accessor :company
-        # @return [string] Email of lead
+        # @return [String] Email of lead
         attr_accessor :email
-        # @return [string] Requested ERP of lead
+        # @return [String] Requested ERP of lead
         attr_accessor :erp_system
     end
 end

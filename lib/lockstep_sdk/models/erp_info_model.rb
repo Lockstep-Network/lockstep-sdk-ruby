@@ -16,10 +16,17 @@
 module LockstepSdk
 
     # Represents the ERP object sent in a provisioning request
-    class erpInfoModel
-        # @return [uuid] The id of the ERP's App
+    class ErpInfoModel
+
+        # Initialize the ErpInfoModel using the provided prototype
+        def initialize(params = {})
+            @app_id = params.fetch(:app_id)
+            @data = params.fetch(:data)
+        end
+
+        # @return [Uuid] The id of the ERP's App
         attr_accessor :app_id
-        # @return [connectorInfoModel] The data required to store for connector access
+        # @return [ConnectorInfoModel] The data required to store for connector access
         attr_accessor :data
     end
 end

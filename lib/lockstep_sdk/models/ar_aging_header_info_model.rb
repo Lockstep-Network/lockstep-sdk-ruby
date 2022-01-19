@@ -16,20 +16,32 @@
 module LockstepSdk
 
     # Aggregated Accounts Receivable Aging information.
-    class arAgingHeaderInfoModel
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+    class ArAgingHeaderInfoModel
+
+        # Initialize the ArAgingHeaderInfoModel using the provided prototype
+        def initialize(params = {})
+            @group_key = params.fetch(:group_key)
+            @report_bucket = params.fetch(:report_bucket)
+            @total_customers = params.fetch(:total_customers)
+            @total_invoices_outstanding = params.fetch(:total_invoices_outstanding)
+            @total_outstanding_amount = params.fetch(:total_outstanding_amount)
+            @total_ar_amount = params.fetch(:total_ar_amount)
+            @percentage_of_total_ar = params.fetch(:percentage_of_total_ar)
+        end
+
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [string] The aging bucket this data belongs to.
+        # @return [String] The aging bucket this data belongs to.
         attr_accessor :report_bucket
-        # @return [int32] The total number of customers.
+        # @return [Int32] The total number of customers.
         attr_accessor :total_customers
-        # @return [int32] The total number of invoices outstanding.
+        # @return [Int32] The total number of invoices outstanding.
         attr_accessor :total_invoices_outstanding
-        # @return [double] The total amount outstanding.
+        # @return [Double] The total amount outstanding.
         attr_accessor :total_outstanding_amount
-        # @return [double] The total amount for AR.
+        # @return [Double] The total amount for AR.
         attr_accessor :total_ar_amount
-        # @return [double] Portion of Total AR this data represents.
+        # @return [Double] Portion of Total AR this data represents.
         attr_accessor :percentage_of_total_ar
     end
 end

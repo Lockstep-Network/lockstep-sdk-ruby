@@ -16,14 +16,23 @@
 module LockstepSdk
 
     # Model from the User invite process
-    class inviteModel
-        # @return [string] The invited email address
+    class InviteModel
+
+        # Initialize the InviteModel using the provided prototype
+        def initialize(params = {})
+            @email = params.fetch(:email)
+            @success = params.fetch(:success)
+            @invited_user = params.fetch(:invited_user)
+            @error_message = params.fetch(:error_message)
+        end
+
+        # @return [String] The invited email address
         attr_accessor :email
-        # @return [boolean] True if the invite was sent successfully
+        # @return [Boolean] True if the invite was sent successfully
         attr_accessor :success
-        # @return [userAccountModel] The invited user, may be null if the user could not be invited
+        # @return [UserAccountModel] The invited user, may be null if the user could not be invited
         attr_accessor :invited_user
-        # @return [string] The error message if the invite was not successful
+        # @return [String] The error message if the invite was not successful
         attr_accessor :error_message
     end
 end

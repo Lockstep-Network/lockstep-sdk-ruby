@@ -18,6 +18,7 @@ class sync_client
     require 'awrence'
 
     # Initialize the sync_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -27,7 +28,7 @@ class sync_client
     # 
     # A Sync task represents an action performed by an Application for a particular account.  An Application can provide many different tasks as part of their capabilities.  Sync tasks are executed in the background and will continue running after they are created.  Use one of the creation APIs to request execution of a task. To check on the progress of the task, call GetSync or QuerySync.
     # 
-    # @param body [sync_submit_model] Information about the Sync to execute
+    # @param body [SyncSubmitModel] Information about the Sync to execute
     def create_sync()
         path = "/api/v1/Sync"
         @lockstepsdk.request(:post, path, body, nil)

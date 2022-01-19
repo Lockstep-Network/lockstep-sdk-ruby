@@ -18,6 +18,7 @@ class user_accounts_client
     require 'awrence'
 
     # Initialize the user_accounts_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -75,7 +76,7 @@ class user_accounts_client
     # 
     # A User represents a person who has the ability to authenticate against the Lockstep Platform and use services such as Lockstep Inbox.  A User is uniquely identified by an Azure identity, and each user must have an email address defined within their account.  All Users must validate their email to make use of Lockstep platform services.  Users may have different privileges and access control rights within the Lockstep Platform.
     # 
-    # @param body [invite_submit_model] The user to invite
+    # @param body [InviteSubmitModel] The user to invite
     def invite_user()
         path = "/api/v1/UserAccounts/invite"
         @lockstepsdk.request(:post, path, body, nil)
@@ -95,7 +96,7 @@ class user_accounts_client
     # 
     # A User represents a person who has the ability to authenticate against the Lockstep Platform and use services such as Lockstep Inbox.  A User is uniquely identified by an Azure identity, and each user must have an email address defined within their account.  All Users must validate their email to make use of Lockstep platform services.  Users may have different privileges and access control rights within the Lockstep Platform.
     # 
-    # @param body [transfer_owner_submit_model] 
+    # @param body [TransferOwnerSubmitModel] 
     def transfer_owner()
         path = "/api/v1/UserAccounts/transfer-owner"
         @lockstepsdk.request(:post, path, body, nil)

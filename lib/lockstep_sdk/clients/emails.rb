@@ -18,6 +18,7 @@ class emails_client
     require 'awrence'
 
     # Initialize the emails_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -75,7 +76,7 @@ class emails_client
     # 
     # An Email represents a communication sent from one company to another.  The creator of the email is identified by the `CompanyId` field, recipient(s) by the `EmailTo` field, and cc recipient(s) by the 'EmailCC' field. The Email Model represents an email and a number of different metadata attributes related to the creation, storage, and ownership of the email.
     # 
-    # @param body [email_model] The array of emails to be created
+    # @param body [EmailModel] The array of emails to be created
     def create_emails()
         path = "/api/v1/Emails"
         @lockstepsdk.request(:post, path, body, nil)

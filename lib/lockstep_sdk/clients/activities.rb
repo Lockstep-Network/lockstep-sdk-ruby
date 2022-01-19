@@ -18,6 +18,7 @@ class activities_client
     require 'awrence'
 
     # Initialize the activities_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -64,7 +65,7 @@ class activities_client
     # 
     # An Activity contains information about work being done on a specific accounting task. You can use Activities to track information about who has been assigned a specific task, the current status of the task, the name and description given for the particular task, the priority of the task, and any amounts collected, paid, or credited for the task.
     # 
-    # @param body [activity_model] The Activities to create
+    # @param body [ActivityModel] The Activities to create
     def create_activities()
         path = "/api/v1/Activities"
         @lockstepsdk.request(:post, path, body, nil)

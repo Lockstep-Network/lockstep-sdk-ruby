@@ -16,32 +16,50 @@
 module LockstepSdk
 
     # Represents a user uploaded attachment
-    class attachmentModel
-        # @return [uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
+    class AttachmentModel
+
+        # Initialize the AttachmentModel using the provided prototype
+        def initialize(params = {})
+            @attachment_id = params.fetch(:attachment_id)
+            @group_key = params.fetch(:group_key)
+            @table_key = params.fetch(:table_key)
+            @object_key = params.fetch(:object_key)
+            @file_name = params.fetch(:file_name)
+            @file_ext = params.fetch(:file_ext)
+            @attachment_type_id = params.fetch(:attachment_type_id)
+            @is_archived = params.fetch(:is_archived)
+            @origin_attachment_id = params.fetch(:origin_attachment_id)
+            @view_internal = params.fetch(:view_internal)
+            @view_external = params.fetch(:view_external)
+            @created = params.fetch(:created)
+            @created_user_id = params.fetch(:created_user_id)
+        end
+
+        # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         attr_accessor :attachment_id
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [string] The name of the table the attachment is associated with
+        # @return [String] The name of the table the attachment is associated with
         attr_accessor :table_key
-        # @return [uuid] The ID of the object the attachment is associated with
+        # @return [Uuid] The ID of the object the attachment is associated with
         attr_accessor :object_key
-        # @return [string] Name of the file
+        # @return [String] Name of the file
         attr_accessor :file_name
-        # @return [string] Extension type of the file
+        # @return [String] Extension type of the file
         attr_accessor :file_ext
-        # @return [uuid] Corresponding AttachmentType object to describe this attachment
+        # @return [Uuid] Corresponding AttachmentType object to describe this attachment
         attr_accessor :attachment_type_id
-        # @return [boolean] Flag indicating the attachment was archived
+        # @return [Boolean] Flag indicating the attachment was archived
         attr_accessor :is_archived
-        # @return [uuid] 
+        # @return [Uuid] 
         attr_accessor :origin_attachment_id
-        # @return [boolean] Flag for if LS clients can see this file
+        # @return [Boolean] Flag for if LS clients can see this file
         attr_accessor :view_internal
-        # @return [boolean] Flag for if Vendors and customers can see this file
+        # @return [Boolean] Flag for if Vendors and customers can see this file
         attr_accessor :view_external
-        # @return [date-time] The date the attachment was created
+        # @return [Date-time] The date the attachment was created
         attr_accessor :created
-        # @return [uuid] Id of the user who made the file
+        # @return [Uuid] Id of the user who made the file
         attr_accessor :created_user_id
     end
 end

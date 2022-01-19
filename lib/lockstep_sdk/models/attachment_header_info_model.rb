@@ -16,16 +16,26 @@
 module LockstepSdk
 
     # Aggregated Attachment status information.
-    class attachmentHeaderInfoModel
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+    class AttachmentHeaderInfoModel
+
+        # Initialize the AttachmentHeaderInfoModel using the provided prototype
+        def initialize(params = {})
+            @group_key = params.fetch(:group_key)
+            @company_id = params.fetch(:company_id)
+            @total_attachments = params.fetch(:total_attachments)
+            @total_archived = params.fetch(:total_archived)
+            @total_active = params.fetch(:total_active)
+        end
+
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [uuid] The CompanyId associated with the attachment status report. Providing a null value will return an attachment summary for all attachments associated to the provided GroupKey
+        # @return [Uuid] The CompanyId associated with the attachment status report. Providing a null value will return an attachment summary for all attachments associated to the provided GroupKey
         attr_accessor :company_id
-        # @return [int32] The total number of attachments associated with the provided GroupKey and CompanyId.
+        # @return [Int32] The total number of attachments associated with the provided GroupKey and CompanyId.
         attr_accessor :total_attachments
-        # @return [int32] The total number of archived attachments associated with the provided GroupKey and CompanyId.
+        # @return [Int32] The total number of archived attachments associated with the provided GroupKey and CompanyId.
         attr_accessor :total_archived
-        # @return [int32] The total number of active attachments associated with the provided GroupKey and CompanyId.
+        # @return [Int32] The total number of active attachments associated with the provided GroupKey and CompanyId.
         attr_accessor :total_active
     end
 end

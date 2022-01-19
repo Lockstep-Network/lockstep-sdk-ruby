@@ -16,12 +16,20 @@
 module LockstepSdk
 
     # Represents an aging record
-    class agingModel
-        # @return [int32] Aging bucket of outstanding balance data (days past due date of invoice)
+    class AgingModel
+
+        # Initialize the AgingModel using the provided prototype
+        def initialize(params = {})
+            @bucket = params.fetch(:bucket)
+            @currency_code = params.fetch(:currency_code)
+            @outstanding_balance = params.fetch(:outstanding_balance)
+        end
+
+        # @return [Int32] Aging bucket of outstanding balance data (days past due date of invoice)
         attr_accessor :bucket
-        # @return [string] Currency code of aging bucket
+        # @return [String] Currency code of aging bucket
         attr_accessor :currency_code
-        # @return [double] Outstanding balance for the given aging bucket
+        # @return [Double] Outstanding balance for the given aging bucket
         attr_accessor :outstanding_balance
     end
 end

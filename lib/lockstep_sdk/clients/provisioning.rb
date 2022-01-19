@@ -18,6 +18,7 @@ class provisioning_client
     require 'awrence'
 
     # Initialize the provisioning_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -25,7 +26,7 @@ class provisioning_client
 
     # Creates a new User or updates an Invited user based on metadata provided by the User during the onboarding process
     # 
-    # @param body [provisioning_model] Represents a User and their related metadata
+    # @param body [ProvisioningModel] Represents a User and their related metadata
     def provision_user_account()
         path = "/api/v1/Provisioning"
         @lockstepsdk.request(:post, path, body, nil)
@@ -33,7 +34,7 @@ class provisioning_client
 
     # Updates user, company and group metadata for a User of status 'Onboarding' and finalizes a user's onboarding process by changing the user status to 'Active'
     # 
-    # @param body [provisioning_finalize_request_model] Represents a User and their related metadata
+    # @param body [ProvisioningFinalizeRequestModel] Represents a User and their related metadata
     def finalize_user_account_provisioning()
         path = "/api/v1/Provisioning/finalize"
         @lockstepsdk.request(:post, path, body, nil)

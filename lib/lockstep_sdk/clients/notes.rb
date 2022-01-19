@@ -18,6 +18,7 @@ class notes_client
     require 'awrence'
 
     # Initialize the notes_client class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
@@ -52,7 +53,7 @@ class notes_client
     # 
     # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
     # 
-    # @param body [note_model] The array of notes to be created
+    # @param body [NoteModel] The array of notes to be created
     def create_notes()
         path = "/api/v1/Notes"
         @lockstepsdk.request(:post, path, body, nil)

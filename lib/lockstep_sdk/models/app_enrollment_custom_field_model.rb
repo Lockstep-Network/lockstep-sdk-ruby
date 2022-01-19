@@ -16,28 +16,44 @@
 module LockstepSdk
 
     # App enrollment and custom field merged into one
-    class appEnrollmentCustomFieldModel
-        # @return [uuid] Unique id for the app enrollment
+    class AppEnrollmentCustomFieldModel
+
+        # Initialize the AppEnrollmentCustomFieldModel using the provided prototype
+        def initialize(params = {})
+            @app_enrollment_id = params.fetch(:app_enrollment_id)
+            @app_id = params.fetch(:app_id)
+            @name = params.fetch(:name)
+            @app_type = params.fetch(:app_type)
+            @group_key = params.fetch(:group_key)
+            @custom_field_definition_id = params.fetch(:custom_field_definition_id)
+            @custom_field_label = params.fetch(:custom_field_label)
+            @data_type = params.fetch(:data_type)
+            @sort_order = params.fetch(:sort_order)
+            @string_value = params.fetch(:string_value)
+            @numeric_value = params.fetch(:numeric_value)
+        end
+
+        # @return [Uuid] Unique id for the app enrollment
         attr_accessor :app_enrollment_id
-        # @return [uuid] Id of enrolled app
+        # @return [Uuid] Id of enrolled app
         attr_accessor :app_id
-        # @return [string] The name of the application
+        # @return [String] The name of the application
         attr_accessor :name
-        # @return [string] Tag for what type of app the application is
+        # @return [String] Tag for what type of app the application is
         attr_accessor :app_type
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [uuid] Unique Id for the custom field definition
+        # @return [Uuid] Unique Id for the custom field definition
         attr_accessor :custom_field_definition_id
-        # @return [string] Text to display in-application for custom field
+        # @return [String] Text to display in-application for custom field
         attr_accessor :custom_field_label
-        # @return [string] Data type of the custom field definition
+        # @return [String] Data type of the custom field definition
         attr_accessor :data_type
-        # @return [int32] Used for display logic when multiple app enrollment custom fields exist
+        # @return [Int32] Used for display logic when multiple app enrollment custom fields exist
         attr_accessor :sort_order
-        # @return [string] String of data for field
+        # @return [String] String of data for field
         attr_accessor :string_value
-        # @return [double] Number data for field
+        # @return [Double] Number data for field
         attr_accessor :numeric_value
     end
 end

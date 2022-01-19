@@ -16,16 +16,26 @@
 module LockstepSdk
 
     # Represents the data to finalize onboarding for a user
-    class provisioningFinalizeRequestModel
-        # @return [string] The full name of the user
+    class ProvisioningFinalizeRequestModel
+
+        # Initialize the ProvisioningFinalizeRequestModel using the provided prototype
+        def initialize(params = {})
+            @full_name = params.fetch(:full_name)
+            @time_zone = params.fetch(:time_zone)
+            @default_currency = params.fetch(:default_currency)
+            @company = params.fetch(:company)
+            @email_connector = params.fetch(:email_connector)
+        end
+
+        # @return [String] The full name of the user
         attr_accessor :full_name
-        # @return [string] The time zone of the user
+        # @return [String] The time zone of the user
         attr_accessor :time_zone
-        # @return [string] The default currency of the user
+        # @return [String] The default currency of the user
         attr_accessor :default_currency
-        # @return [companyModel] The company information for the user and group
+        # @return [CompanyModel] The company information for the user and group
         attr_accessor :company
-        # @return [erpInfoModel] Optional connector information needed to enroll user to their email connector
+        # @return [ErpInfoModel] Optional connector information needed to enroll user to their email connector
         attr_accessor :email_connector
     end
 end

@@ -22,26 +22,41 @@ module LockstepSdk
     # retrieve an API Key once it is created.
     # 
     # For more information, see [API Keys](https://developer.lockstep.io/docs/api-keys).
-    class apiKeyModel
-        # @return [uuid] The unique identifier for the API key.
+    class ApiKeyModel
+
+        # Initialize the ApiKeyModel using the provided prototype
+        def initialize(params = {})
+            @api_key_id = params.fetch(:api_key_id)
+            @group_key = params.fetch(:group_key)
+            @name = params.fetch(:name)
+            @api_key = params.fetch(:api_key)
+            @key_prefix = params.fetch(:key_prefix)
+            @created = params.fetch(:created)
+            @created_user_id = params.fetch(:created_user_id)
+            @revoked = params.fetch(:revoked)
+            @revoked_user_id = params.fetch(:revoked_user_id)
+            @expires = params.fetch(:expires)
+        end
+
+        # @return [Uuid] The unique identifier for the API key.
         attr_accessor :api_key_id
-        # @return [uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
+        # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
-        # @return [string] The name of the API key.
+        # @return [String] The name of the API key.
         attr_accessor :name
-        # @return [string] The API key to use for authentication. This will only be returned upon creation of the API key. All other times, this value will be `null`. For more information, see [API Keys](https://developer.lockstep.io/docs/api-keys).
+        # @return [String] The API key to use for authentication. This will only be returned upon creation of the API key. All other times, this value will be `null`. For more information, see [API Keys](https://developer.lockstep.io/docs/api-keys).
         attr_accessor :api_key
-        # @return [string] The first 10 characters of the API key. This information can be used to ensure that you are looking at the correct API Key, but cannot be used for authentication.
+        # @return [String] The first 10 characters of the API key. This information can be used to ensure that you are looking at the correct API Key, but cannot be used for authentication.
         attr_accessor :key_prefix
-        # @return [date-time] The date the API key was created.
+        # @return [Date-time] The date the API key was created.
         attr_accessor :created
-        # @return [uuid] The user that created the API key.
+        # @return [Uuid] The user that created the API key.
         attr_accessor :created_user_id
-        # @return [date-time] The date the API key was revoked.
+        # @return [Date-time] The date the API key was revoked.
         attr_accessor :revoked
-        # @return [uuid] The user who revoked the API key.
+        # @return [Uuid] The user who revoked the API key.
         attr_accessor :revoked_user_id
-        # @return [date-time] The UTC datetime when the API key expires.
+        # @return [Date-time] The UTC datetime when the API key expires.
         attr_accessor :expires
     end
 end

@@ -16,20 +16,32 @@
 module LockstepSdk
 
     # Represents the response to either a successful or failed account provisioning
-    class provisioningResponseModel
-        # @return [string] If provisioning is successful, contains the username of the created user.
+    class ProvisioningResponseModel
+
+        # Initialize the ProvisioningResponseModel using the provided prototype
+        def initialize(params = {})
+            @user_name = params.fetch(:user_name)
+            @account_name = params.fetch(:account_name)
+            @user_id = params.fetch(:user_id)
+            @group_key = params.fetch(:group_key)
+            @app_enrollment_id = params.fetch(:app_enrollment_id)
+            @sync_request_id = params.fetch(:sync_request_id)
+            @error_message = params.fetch(:error_message)
+        end
+
+        # @return [String] If provisioning is successful, contains the username of the created user.
         attr_accessor :user_name
-        # @return [string] If provisioning is successful, contains subscription account name of created user.
+        # @return [String] If provisioning is successful, contains subscription account name of created user.
         attr_accessor :account_name
-        # @return [uuid] If provisioning is successful, contains the unique identifier of the created user.
+        # @return [Uuid] If provisioning is successful, contains the unique identifier of the created user.
         attr_accessor :user_id
-        # @return [uuid] If provisioning is successful, contains the group key of the created user.
+        # @return [Uuid] If provisioning is successful, contains the group key of the created user.
         attr_accessor :group_key
-        # @return [uuid] If provisioning is successful, contains the app enrollment id of the created app enrollment.
+        # @return [Uuid] If provisioning is successful, contains the app enrollment id of the created app enrollment.
         attr_accessor :app_enrollment_id
-        # @return [uuid] if provisioning is successful, contains the sync request id of the sync that was started for the app enrollment.
+        # @return [Uuid] if provisioning is successful, contains the sync request id of the sync that was started for the app enrollment.
         attr_accessor :sync_request_id
-        # @return [string] The error message(s).
+        # @return [String] The error message(s).
         attr_accessor :error_message
     end
 end

@@ -11,4 +11,5 @@ Gem::Specification.new do |s|
     s.add_development_dependency 'rspec', '~> 3.7'
     s.homepage = 'https://developer.lockstep.io'
     s.license = 'MIT'
+    s.add_runtime_dependency "awrence" 
 end

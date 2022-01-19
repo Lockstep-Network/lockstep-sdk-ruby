@@ -16,12 +16,20 @@
 module LockstepSdk
 
     # Represents the daily sales outstanding report
-    class dailySalesOutstandingReportModel
-        # @return [date-time] Timeframe (month) the daily sales outstanding values are associated with
+    class DailySalesOutstandingReportModel
+
+        # Initialize the DailySalesOutstandingReportModel using the provided prototype
+        def initialize(params = {})
+            @timeframe = params.fetch(:timeframe)
+            @invoice_count = params.fetch(:invoice_count)
+            @daily_sales_outstanding = params.fetch(:daily_sales_outstanding)
+        end
+
+        # @return [Date-time] Timeframe (month) the daily sales outstanding values are associated with
         attr_accessor :timeframe
-        # @return [int32] Number of invoices the average daily sales outstanding is calculated on
+        # @return [Int32] Number of invoices the average daily sales outstanding is calculated on
         attr_accessor :invoice_count
-        # @return [double] Time (in days) between an invoice was completed paid off and when the invoice was issued
+        # @return [Double] Time (in days) between an invoice was completed paid off and when the invoice was issued
         attr_accessor :daily_sales_outstanding
     end
 end
