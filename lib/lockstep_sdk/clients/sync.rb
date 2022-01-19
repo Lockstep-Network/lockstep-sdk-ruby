@@ -15,6 +15,8 @@
 
 class sync_client
 
+    require 'awrence'
+
     # Initialize the sync_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

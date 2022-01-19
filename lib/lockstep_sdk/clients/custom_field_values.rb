@@ -15,6 +15,8 @@
 
 class custom_field_values_client
 
+    require 'awrence'
+
     # Initialize the custom_field_values_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

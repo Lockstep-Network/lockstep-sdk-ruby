@@ -15,6 +15,8 @@
 
 class payments_client
 
+    require 'awrence'
+
     # Initialize the payments_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

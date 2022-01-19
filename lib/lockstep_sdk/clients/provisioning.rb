@@ -15,6 +15,8 @@
 
 class provisioning_client
 
+    require 'awrence'
+
     # Initialize the provisioning_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
@@ -34,6 +36,11 @@ class provisioning_client
     # @param body [provisioning_finalize_request_model] Represents a User and their related metadata
     def finalize_user_account_provisioning()
         path = "/api/v1/Provisioning/finalize"
+        @lockstepsdk.request(:post, path, body, nil)
+    end
+
+    def provision_free_developer_account()
+        path = "/api/v1/Provisioning/free-account"
         @lockstepsdk.request(:post, path, body, nil)
     end
 end

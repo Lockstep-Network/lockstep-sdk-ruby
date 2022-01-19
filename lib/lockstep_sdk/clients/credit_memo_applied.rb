@@ -15,6 +15,8 @@
 
 class credit_memo_applied_client
 
+    require 'awrence'
+
     # Initialize the credit_memo_applied_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

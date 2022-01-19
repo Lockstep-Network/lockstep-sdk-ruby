@@ -15,6 +15,8 @@
 
 class user_roles_client
 
+    require 'awrence'
+
     # Initialize the user_roles_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

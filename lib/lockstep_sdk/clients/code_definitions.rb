@@ -15,6 +15,8 @@
 
 class code_definitions_client
 
+    require 'awrence'
+
     # Initialize the code_definitions_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

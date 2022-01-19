@@ -15,6 +15,8 @@
 
 class emails_client
 
+    require 'awrence'
+
     # Initialize the emails_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

@@ -15,6 +15,8 @@
 
 class api_keys_client
 
+    require 'awrence'
+
     # Initialize the api_keys_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

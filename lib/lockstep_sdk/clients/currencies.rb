@@ -15,6 +15,8 @@
 
 class currencies_client
 
+    require 'awrence'
+
     # Initialize the currencies_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

@@ -8,7 +8,7 @@
 #
 # @author     Ted Spence <tspence@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3.14.0
+# @version    2022.3.32.0
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -24,38 +24,38 @@ module LockstepSdk
     
         attr_accessor :version, \ 
                       :env, \
-            @activities, \
-            @api_keys, \
-            @app_enrollments, \
-            @applications, \
-            @attachments, \
-            @code_definitions, \
-            @companies, \
-            @contacts, \
-            @credit_memo_applied, \
-            @currencies, \
-            @custom_field_definitions, \
-            @custom_field_values, \
-            @definitions, \
-            @emails, \
-            @invoice_history, \
-            @invoices, \
-            @leads, \
-            @notes, \
-            @payment_applications, \
-            @payments, \
-            @provisioning, \
-            @reports, \
-            @status, \
-            @sync, \
-            @user_accounts, \
-            @user_roles, \
+                      :activities, \
+                      :api_keys, \
+                      :app_enrollments, \
+                      :applications, \
+                      :attachments, \
+                      :code_definitions, \
+                      :companies, \
+                      :contacts, \
+                      :credit_memo_applied, \
+                      :currencies, \
+                      :custom_field_definitions, \
+                      :custom_field_values, \
+                      :definitions, \
+                      :emails, \
+                      :invoice_history, \
+                      :invoices, \
+                      :leads, \
+                      :notes, \
+                      :payment_applications, \
+                      :payments, \
+                      :provisioning, \
+                      :reports, \
+                      :status, \
+                      :sync, \
+                      :user_accounts, \
+                      :user_roles, \
 
         # Construct a new Lockstep API client targeting the specified server.
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def self.new(env)
-            @version = "2022.3.14.0"
+            @version = "2022.3.32.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"

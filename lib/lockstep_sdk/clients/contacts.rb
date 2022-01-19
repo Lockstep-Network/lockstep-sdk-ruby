@@ -15,6 +15,8 @@
 
 class contacts_client
 
+    require 'awrence'
+
     # Initialize the contacts_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk

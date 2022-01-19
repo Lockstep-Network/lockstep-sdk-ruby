@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
     s.name = 'LockstepSdk'
-    s.version = '2022.3.14.0'
-    s.date = '2022-01-18'
+    s.version = '2022.3.32.0'
+    s.date = '2022-01-19'
     s.summary = 'API Client to use the Lockstep Platform API'
     s.description = 'Allows you to work with the Lockstep Platform API for financial systems automation.  The SDK provides rich, 
                      context sensitive help and documentation for all methods and objects.'

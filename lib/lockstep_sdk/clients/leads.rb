@@ -15,6 +15,8 @@
 
 class leads_client
 
+    require 'awrence'
+
     # Initialize the leads_client class with a lockstepsdk instance.
     def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
