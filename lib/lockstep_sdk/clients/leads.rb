@@ -17,8 +17,6 @@
 
 class LeadsClient
 
-    require 'awrence'
-
     # Initialize the LeadsClient class with a lockstepsdk instance.
     # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)

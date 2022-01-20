@@ -17,8 +17,6 @@
 
 class ProvisioningClient
 
-    require 'awrence'
-
     # Initialize the ProvisioningClient class with a lockstepsdk instance.
     # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)

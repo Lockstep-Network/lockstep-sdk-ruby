@@ -17,8 +17,6 @@
 
 class AppEnrollmentsClient
 
-    require 'awrence'
-
     # Initialize the AppEnrollmentsClient class with a lockstepsdk instance.
     # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
