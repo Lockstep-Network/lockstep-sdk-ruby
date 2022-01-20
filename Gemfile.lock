@@ -1,0 +1,19 @@
+PATH
+  remote: .
+  specs:
+    LockstepSdk (0.1.0)
+      awrence
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    awrence (1.2.1)
+
+PLATFORMS
+  -darwin-21
+
+DEPENDENCIES
+  LockstepSdk!
+
+BUNDLED WITH
+   2.3.3
