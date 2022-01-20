@@ -94,4 +94,4 @@ puts invoices['records']
 
 ## Sample Project 
 
-Lockstep provides example code on the (Fetch Invoice Sample Ruby Project)[https://github.com/Lockstep-Network/lockstep-sdk-examples/tree/main/RubyExample] page.
+Lockstep provides example code on the [Fetch Invoice Sample Ruby Project](https://github.com/Lockstep-Network/lockstep-sdk-examples/tree/main/RubyExample) page.
