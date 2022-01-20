@@ -1,6 +1,5 @@
 # Lockstep SDK For Ruby 
-<!-- ![PyPI](https://img.shields.io/pypi/v/lockstep-sdk) -->
-
+![Gem](https://img.shields.io/gem/v/LockstepSdk)
 
 A financial service SDK for ruby for innovative accounting solutions providers.
 
@@ -94,4 +93,5 @@ puts invoices['records']
 ```
 
 ## Sample Project 
-(Fetch Invoice Sample Python Project)[https://github.com/Lockstep-Network/lockstep-sdk-examples/tree/main/RubyExample]
+
+Lockstep provides example code on the (Fetch Invoice Sample Ruby Project)[https://github.com/Lockstep-Network/lockstep-sdk-examples/tree/main/RubyExample] page.
