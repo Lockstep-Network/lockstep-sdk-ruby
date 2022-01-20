@@ -7,8 +7,10 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2021.39
+# @version    2022.3.49.0
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -20,18 +22,72 @@ project_root = File.dirname(File.absolute_path(__FILE__))
 Dir.glob(project_root + '/clients/*') {|file| require file}
 
 module LockstepSdk
-    
     class LockstepApi
+    
+        require 'awrence'
+    
+        # @return [String] The version number of this Lockstep API client
+        attr_accessor :version
+        # @return [String] The name or URL of the environment
+        attr_accessor :env 
+        # @return [ActivitiesClient] Client object for Activities endpoints
+        attr_accessor :activities
+        # @return [ApiKeysClient] Client object for ApiKeys endpoints
+        attr_accessor :api_keys
+        # @return [AppEnrollmentsClient] Client object for AppEnrollments endpoints
+        attr_accessor :app_enrollments
+        # @return [ApplicationsClient] Client object for Applications endpoints
+        attr_accessor :applications
+        # @return [AttachmentsClient] Client object for Attachments endpoints
+        attr_accessor :attachments
+        # @return [CodeDefinitionsClient] Client object for CodeDefinitions endpoints
+        attr_accessor :code_definitions
+        # @return [CompaniesClient] Client object for Companies endpoints
+        attr_accessor :companies
+        # @return [ContactsClient] Client object for Contacts endpoints
+        attr_accessor :contacts
+        # @return [CreditMemoAppliedClient] Client object for CreditMemoApplied endpoints
+        attr_accessor :credit_memo_applied
+        # @return [CurrenciesClient] Client object for Currencies endpoints
+        attr_accessor :currencies
+        # @return [CustomFieldDefinitionsClient] Client object for CustomFieldDefinitions endpoints
+        attr_accessor :custom_field_definitions
+        # @return [CustomFieldValuesClient] Client object for CustomFieldValues endpoints
+        attr_accessor :custom_field_values
+        # @return [DefinitionsClient] Client object for Definitions endpoints
+        attr_accessor :definitions
+        # @return [EmailsClient] Client object for Emails endpoints
+        attr_accessor :emails
+        # @return [InvoiceHistoryClient] Client object for InvoiceHistory endpoints
+        attr_accessor :invoice_history
+        # @return [InvoicesClient] Client object for Invoices endpoints
+        attr_accessor :invoices
+        # @return [LeadsClient] Client object for Leads endpoints
+        attr_accessor :leads
+        # @return [NotesClient] Client object for Notes endpoints
+        attr_accessor :notes
+        # @return [PaymentApplicationsClient] Client object for PaymentApplications endpoints
+        attr_accessor :payment_applications
+        # @return [PaymentsClient] Client object for Payments endpoints
+        attr_accessor :payments
+        # @return [ProvisioningClient] Client object for Provisioning endpoints
+        attr_accessor :provisioning
+        # @return [ReportsClient] Client object for Reports endpoints
+        attr_accessor :reports
+        # @return [StatusClient] Client object for Status endpoints
+        attr_accessor :status
+        # @return [SyncClient] Client object for Sync endpoints
+        attr_accessor :sync
+        # @return [UserAccountsClient] Client object for UserAccounts endpoints
+        attr_accessor :user_accounts
+        # @return [UserRolesClient] Client object for UserRoles endpoints
+        attr_accessor :user_roles
 
-        attr_accessor :version, :env, :activities, :apikeys, :appenrollments, :applications, :attachments, :codedefinitions, :companies, \
-                      :contacts, :creditmemoapplied, :currencies, :customfielddefinitions, :customfieldvalues, :definitions, :emails, \
-                      :invoicehistory, :invoices, :leads, :migration, :notes, :paymentapplications, :payments, :provisioning, :reports, \
-                      :status, :sync, :useraccounts, :userroles
-    # Construct a new Lockstep API client targeting the specified server.
-    #
-    # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
-        def initialize(env)
-            @version = "2021.39"
+        # Construct a new Lockstep API client targeting the specified server.
+        #
+        # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
+        def self.new(env)
+            @version = "2022.3.49.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -42,33 +98,32 @@ module LockstepSdk
                 end
                 
             # Construct all the clients
-            @activities = Activities.new(self)
-            @apikeys = ApiKeys.new(self)
-            @appenrollments = AppEnrollments.new(self)
-            @applications = Applications.new(self)
-            @attachments = Attachments.new(self)
-            @codedefinitions = CodeDefinitions.new(self)
-            @companies = Companies.new(self)
-            @contacts = Contacts.new(self)
-            @creditmemoapplied = CreditMemoApplied.new(self)
-            @currencies = Currencies.new(self)
-            @customfielddefinitions = CustomFieldDefinitions.new(self)
-            @customfieldvalues = CustomFieldValues.new(self)
-            @definitions = Definitions.new(self)
-            @emails = Emails.new(self)
-            @invoicehistory = InvoiceHistory.new(self)
-            @invoices = Invoices.new(self)
-            @leads = Leads.new(self)
-            @migration = Migration.new(self)
-            @notes = Notes.new(self)
-            @paymentapplications = PaymentApplications.new(self)
-            @payments = Payments.new(self)
-            @provisioning = Provisioning.new(self)
-            @reports = Reports.new(self)
-            @status = Status.new(self)
-            @sync = Sync.new(self)
-            @useraccounts = UserAccounts.new(self)
-            @userroles = UserRoles.new(self)
+            @activities = ActivitiesClient.new(self)
+            @api_keys = ApiKeysClient.new(self)
+            @app_enrollments = AppEnrollmentsClient.new(self)
+            @applications = ApplicationsClient.new(self)
+            @attachments = AttachmentsClient.new(self)
+            @code_definitions = CodeDefinitionsClient.new(self)
+            @companies = CompaniesClient.new(self)
+            @contacts = ContactsClient.new(self)
+            @credit_memo_applied = CreditMemoAppliedClient.new(self)
+            @currencies = CurrenciesClient.new(self)
+            @custom_field_definitions = CustomFieldDefinitionsClient.new(self)
+            @custom_field_values = CustomFieldValuesClient.new(self)
+            @definitions = DefinitionsClient.new(self)
+            @emails = EmailsClient.new(self)
+            @invoice_history = InvoiceHistoryClient.new(self)
+            @invoices = InvoicesClient.new(self)
+            @leads = LeadsClient.new(self)
+            @notes = NotesClient.new(self)
+            @payment_applications = PaymentApplicationsClient.new(self)
+            @payments = PaymentsClient.new(self)
+            @provisioning = ProvisioningClient.new(self)
+            @reports = ReportsClient.new(self)
+            @status = StatusClient.new(self)
+            @sync = SyncClient.new(self)
+            @user_accounts = UserAccountsClient.new(self)
+            @user_roles = UserRolesClient.new(self)
         end
 
         # Configure this API client to use API key authentication
@@ -91,7 +146,7 @@ module LockstepSdk
         #
         # Sends a request to the 
         def request(method, path, body, params)
-
+        
             url = URI(@env + path)
             if !params.nil?  
                 url.query = URI.encode_www_form(params)
@@ -99,7 +154,7 @@ module LockstepSdk
             
             http = Net::HTTP.new(url.host, url.port)
             http.use_ssl = true
-
+            
             request = case method
                 when :get
                     Net::HTTP::Get.new(url)
@@ -114,16 +169,20 @@ module LockstepSdk
                 end
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
-            request.body = body
-
+            
+            # Convert the body to json
+            if !body.nil?
+                request.body = body.to_camelback_keys.to_json
+            end
+            
             # Which authentication are we using?
             if @api_key != nil 
-                request["Api-Key"] = @api_key
+              request["Api-Key"] = @api_key
             end
             if @bearer_token != nil 
-                request["Authorization"] = 'Bearer ' + @bearer_token
+              request["Authorization"] = 'Bearer ' + @bearer_token
             end
-
+            
             # Send the request
             response = http.request(request)
             response.read_body
