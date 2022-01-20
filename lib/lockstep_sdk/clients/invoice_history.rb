@@ -8,43 +8,37 @@
 #
 # @author     Ted Spence <tspence@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2021.39
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
 
-class invoice_history_client
+class InvoiceHistory
 
-    require 'awrence'
-
-    # Initialize the invoice_history_client class with a lockstepsdk instance.
-    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
-    def initialize(lockstepsdk)
+    def initialize(lockstepsdk) # Initialize the Activities class with a lockstepsdk instance.
         @lockstepsdk = lockstepsdk
     end
 
-
-    # Retrieves the history of the Invoice specified by this unique identifier.
-    # 
-    # An Invoice represents a bill sent from one company to another.  The Lockstep Platform tracks changes to each Invoice so that you can observe the changes over time.  You can view the InvoiceHistory list to monitor and observe the changes of this Invoice and track the dates when changes occurred.
-    # 
-    # @param id [uuid] The unique Lockstep Platform ID number of this invoice; NOT the customer's ERP key
-    def retrieve_invoice_history(id:)
+    #  Retrieves the history of the Invoice specified by this unique identifier.
+    #  
+    #  An Invoice represents a bill sent from one company to another.  The Lockstep Platform tracks changes to each Invoice so that you can observe the changes over time.  You can view the InvoiceHistory list to monitor and observe the changes of this Invoice and track the dates when changes occurred.
+    #  
+    #  @param id [uuid] The unique Lockstep Platform ID number of this invoice; NOT the customer's ERP key
+    def retrieve_invoice_history()
         path = "/api/v1/InvoiceHistory/#{id}"
-        params = {}
-        @lockstepsdk.request(:get, path, nil, params)
+        @lockstepsdk.request(:get, path, nil, nil)
     end
 
-    # Queries Invoice History for this account using the specified filtering, sorting, and pagination rules requested.
-    # 
-    # An Invoice represents a bill sent from one company to another.  The Lockstep Platform tracks changes to each Invoice so that you can observe the changes over time.  You can view the InvoiceHistory list to monitor and observe the changes of this Invoice and track the dates when changes occurred.
-    # 
-    # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available for querying but may be available in the future.
-    # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageSize [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageNumber [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_invoice_history(filter:, include_param:, order:, pageSize:, pageNumber:)
+    #  Queries Invoice History for this account using the specified filtering, sorting, and pagination rules requested.
+    #  
+    #  An Invoice represents a bill sent from one company to another.  The Lockstep Platform tracks changes to each Invoice so that you can observe the changes over time.  You can view the InvoiceHistory list to monitor and observe the changes of this Invoice and track the dates when changes occurred.
+    #  
+    #  @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    #  @param include [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available for querying but may be available in the future.
+    #  @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    #  @param pageSize [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    #  @param pageNumber [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    def query_invoice_history(filter, include_param, order, pageSize, pageNumber)
         path = "/api/v1/InvoiceHistory/query"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => pageSize, :pageNumber => pageNumber}
         @lockstepsdk.request(:get, path, nil, params)

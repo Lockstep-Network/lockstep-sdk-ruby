@@ -12,19 +12,23 @@
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
-
-class Leads
+class Migration
 
     def initialize(lockstepsdk) # Initialize the Activities class with a lockstepsdk instance.
         @lockstepsdk = lockstepsdk
     end
-
-    #  Creates one or more Leads within the Lockstep platform and returns the records as created.
+    
+    #  Migrates all customer data from the Lockstep Collect system to the API, including all stored data for contacts, companies, payments, and invoices.
     #  
-    #  A Lead is a person who is interested in the Lockstep platform but needs certain new features in order to use it. If you are interested in the Lockstep platform, you can create a lead with your information and our team will prioritize the feature you need.
-    #  @param body [LeadModel] The Leads to create
-    def create_leads()
-        path = "/api/v1/Leads"
-        @lockstepsdk.request(:post, path, body, nil)
+    def migrate_data()
+        path = "/api/v1/Migration"
+        @lockstepsdk.request(:post, path, nil, nil)
+    end
+
+    #  Lists all of the customer, contact, payment, and invoice data currently available for Migration.
+    #  
+    def list_migrations()
+        path = "/api/v1/Migration/list"
+        @lockstepsdk.request(:get, path, nil, nil)
     end
 end

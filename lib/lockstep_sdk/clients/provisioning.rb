@@ -8,40 +8,30 @@
 #
 # @author     Ted Spence <tspence@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2021.39
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
 
-class provisioning_client
+class Provisioning
 
-    require 'awrence'
-
-    # Initialize the provisioning_client class with a lockstepsdk instance.
-    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
-    def initialize(lockstepsdk)
+    def initialize(lockstepsdk) # Initialize the Activities class with a lockstepsdk instance.
         @lockstepsdk = lockstepsdk
     end
 
-
-    # Creates a new User or updates an Invited user based on metadata provided by the User during the onboarding process
-    # 
-    # @param body [ProvisioningModel] Represents a User and their related metadata
+    #  Creates a new User or updates an Invited user based on metadata provided by the User during the onboarding process
+    #  
+    #  @param body [ProvisioningModel] Represents a User and their related metadata
     def provision_user_account()
         path = "/api/v1/Provisioning"
         @lockstepsdk.request(:post, path, body, nil)
     end
 
-    # Updates user, company and group metadata for a User of status 'Onboarding' and finalizes a user's onboarding process by changing the user status to 'Active'
-    # 
-    # @param body [ProvisioningFinalizeRequestModel] Represents a User and their related metadata
+    #  Updates user, company and group metadata for a User of status 'Onboarding' and finalizes a user's onboarding process by changing the user status to 'Active'
+    #  
+    #  @param body [ProvisioningFinalizeRequestModel] Represents a User and their related metadata
     def finalize_user_account_provisioning()
         path = "/api/v1/Provisioning/finalize"
-        @lockstepsdk.request(:post, path, body, nil)
-    end
-
-    def provision_free_developer_account()
-        path = "/api/v1/Provisioning/free-account"
         @lockstepsdk.request(:post, path, body, nil)
     end
 end
