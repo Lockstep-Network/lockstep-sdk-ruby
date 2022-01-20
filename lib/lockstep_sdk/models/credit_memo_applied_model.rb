@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -24,23 +26,23 @@ module LockstepSdk
 
         # Initialize the CreditMemoAppliedModel using the provided prototype
         def initialize(params = {})
-            @credit_memo_applied_id = params.fetch(:credit_memo_applied_id)
-            @group_key = params.fetch(:group_key)
-            @invoice_id = params.fetch(:invoice_id)
-            @credit_memo_invoice_id = params.fetch(:credit_memo_invoice_id)
-            @erp_key = params.fetch(:erp_key)
-            @entry_number = params.fetch(:entry_number)
-            @apply_to_invoice_date = params.fetch(:apply_to_invoice_date)
-            @credit_memo_applied_amount = params.fetch(:credit_memo_applied_amount)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @attachments = params.fetch(:attachments)
-            @notes = params.fetch(:notes)
-            @custom_field_definitions = params.fetch(:custom_field_definitions)
-            @custom_field_values = params.fetch(:custom_field_values)
+            @credit_memo_applied_id = params.dig(:credit_memo_applied_id)
+            @group_key = params.dig(:group_key)
+            @invoice_id = params.dig(:invoice_id)
+            @credit_memo_invoice_id = params.dig(:credit_memo_invoice_id)
+            @erp_key = params.dig(:erp_key)
+            @entry_number = params.dig(:entry_number)
+            @apply_to_invoice_date = params.dig(:apply_to_invoice_date)
+            @credit_memo_applied_amount = params.dig(:credit_memo_applied_amount)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @attachments = params.dig(:attachments)
+            @notes = params.dig(:notes)
+            @custom_field_definitions = params.dig(:custom_field_definitions)
+            @custom_field_values = params.dig(:custom_field_values)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
@@ -77,5 +79,31 @@ module LockstepSdk
         attr_accessor :custom_field_definitions
         # @return [CustomFieldValueModel] All values attached to this Credit Memo. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
+    end
+
+    def as_json(options={})
+        {
+            'creditMemoAppliedId' => @credit_memo_applied_id,
+            'groupKey' => @group_key,
+            'invoiceId' => @invoice_id,
+            'creditMemoInvoiceId' => @credit_memo_invoice_id,
+            'erpKey' => @erp_key,
+            'entryNumber' => @entry_number,
+            'applyToInvoiceDate' => @apply_to_invoice_date,
+            'creditMemoAppliedAmount' => @credit_memo_applied_amount,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'appEnrollmentId' => @app_enrollment_id,
+            'attachments' => @attachments,
+            'notes' => @notes,
+            'customFieldDefinitions' => @custom_field_definitions,
+            'customFieldValues' => @custom_field_values,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

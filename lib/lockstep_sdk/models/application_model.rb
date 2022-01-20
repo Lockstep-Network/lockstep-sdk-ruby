@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -28,25 +30,25 @@ module LockstepSdk
 
         # Initialize the ApplicationModel using the provided prototype
         def initialize(params = {})
-            @app_id = params.fetch(:app_id)
-            @name = params.fetch(:name)
-            @description = params.fetch(:description)
-            @app_type = params.fetch(:app_type)
-            @owner_id = params.fetch(:owner_id)
-            @project_url = params.fetch(:project_url)
-            @icon_url = params.fetch(:icon_url)
-            @price_terms = params.fetch(:price_terms)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @created = params.fetch(:created)
-            @modified = params.fetch(:modified)
-            @is_active = params.fetch(:is_active)
-            @wiki_url = params.fetch(:wiki_url)
-            @group_key = params.fetch(:group_key)
-            @notes = params.fetch(:notes)
-            @attachments = params.fetch(:attachments)
-            @custom_field_definitions = params.fetch(:custom_field_definitions)
-            @custom_field_values = params.fetch(:custom_field_values)
+            @app_id = params.dig(:app_id)
+            @name = params.dig(:name)
+            @description = params.dig(:description)
+            @app_type = params.dig(:app_type)
+            @owner_id = params.dig(:owner_id)
+            @project_url = params.dig(:project_url)
+            @icon_url = params.dig(:icon_url)
+            @price_terms = params.dig(:price_terms)
+            @created_user_id = params.dig(:created_user_id)
+            @modified_user_id = params.dig(:modified_user_id)
+            @created = params.dig(:created)
+            @modified = params.dig(:modified)
+            @is_active = params.dig(:is_active)
+            @wiki_url = params.dig(:wiki_url)
+            @group_key = params.dig(:group_key)
+            @notes = params.dig(:notes)
+            @attachments = params.dig(:attachments)
+            @custom_field_definitions = params.dig(:custom_field_definitions)
+            @custom_field_values = params.dig(:custom_field_values)
         end
 
         # @return [Uuid] A unique code identifying this application
@@ -87,5 +89,33 @@ module LockstepSdk
         attr_accessor :custom_field_definitions
         # @return [CustomFieldValueModel] All values attached to the application. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
+    end
+
+    def as_json(options={})
+        {
+            'appId' => @app_id,
+            'name' => @name,
+            'description' => @description,
+            'appType' => @app_type,
+            'ownerId' => @owner_id,
+            'projectUrl' => @project_url,
+            'iconUrl' => @icon_url,
+            'priceTerms' => @price_terms,
+            'createdUserId' => @created_user_id,
+            'modifiedUserId' => @modified_user_id,
+            'created' => @created,
+            'modified' => @modified,
+            'isActive' => @is_active,
+            'wikiURL' => @wiki_url,
+            'groupKey' => @group_key,
+            'notes' => @notes,
+            'attachments' => @attachments,
+            'customFieldDefinitions' => @custom_field_definitions,
+            'customFieldValues' => @custom_field_values,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

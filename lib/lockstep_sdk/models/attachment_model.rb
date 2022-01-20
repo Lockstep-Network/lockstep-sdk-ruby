@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,19 +22,19 @@ module LockstepSdk
 
         # Initialize the AttachmentModel using the provided prototype
         def initialize(params = {})
-            @attachment_id = params.fetch(:attachment_id)
-            @group_key = params.fetch(:group_key)
-            @table_key = params.fetch(:table_key)
-            @object_key = params.fetch(:object_key)
-            @file_name = params.fetch(:file_name)
-            @file_ext = params.fetch(:file_ext)
-            @attachment_type_id = params.fetch(:attachment_type_id)
-            @is_archived = params.fetch(:is_archived)
-            @origin_attachment_id = params.fetch(:origin_attachment_id)
-            @view_internal = params.fetch(:view_internal)
-            @view_external = params.fetch(:view_external)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
+            @attachment_id = params.dig(:attachment_id)
+            @group_key = params.dig(:group_key)
+            @table_key = params.dig(:table_key)
+            @object_key = params.dig(:object_key)
+            @file_name = params.dig(:file_name)
+            @file_ext = params.dig(:file_ext)
+            @attachment_type_id = params.dig(:attachment_type_id)
+            @is_archived = params.dig(:is_archived)
+            @origin_attachment_id = params.dig(:origin_attachment_id)
+            @view_internal = params.dig(:view_internal)
+            @view_external = params.dig(:view_external)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
@@ -61,5 +63,27 @@ module LockstepSdk
         attr_accessor :created
         # @return [Uuid] Id of the user who made the file
         attr_accessor :created_user_id
+    end
+
+    def as_json(options={})
+        {
+            'attachmentId' => @attachment_id,
+            'groupKey' => @group_key,
+            'tableKey' => @table_key,
+            'objectKey' => @object_key,
+            'fileName' => @file_name,
+            'fileExt' => @file_ext,
+            'attachmentTypeId' => @attachment_type_id,
+            'isArchived' => @is_archived,
+            'originAttachmentId' => @origin_attachment_id,
+            'viewInternal' => @view_internal,
+            'viewExternal' => @view_external,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

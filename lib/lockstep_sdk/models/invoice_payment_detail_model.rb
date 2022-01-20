@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,16 +22,16 @@ module LockstepSdk
 
         # Initialize the InvoicePaymentDetailModel using the provided prototype
         def initialize(params = {})
-            @group_key = params.fetch(:group_key)
-            @payment_applied_id = params.fetch(:payment_applied_id)
-            @invoice_id = params.fetch(:invoice_id)
-            @payment_id = params.fetch(:payment_id)
-            @apply_to_invoice_date = params.fetch(:apply_to_invoice_date)
-            @payment_applied_amount = params.fetch(:payment_applied_amount)
-            @reference_code = params.fetch(:reference_code)
-            @company_id = params.fetch(:company_id)
-            @payment_amount = params.fetch(:payment_amount)
-            @unapplied_amount = params.fetch(:unapplied_amount)
+            @group_key = params.dig(:group_key)
+            @payment_applied_id = params.dig(:payment_applied_id)
+            @invoice_id = params.dig(:invoice_id)
+            @payment_id = params.dig(:payment_id)
+            @apply_to_invoice_date = params.dig(:apply_to_invoice_date)
+            @payment_applied_amount = params.dig(:payment_applied_amount)
+            @reference_code = params.dig(:reference_code)
+            @company_id = params.dig(:company_id)
+            @payment_amount = params.dig(:payment_amount)
+            @unapplied_amount = params.dig(:unapplied_amount)
         end
 
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -52,5 +54,24 @@ module LockstepSdk
         attr_accessor :payment_amount
         # @return [Double] The remaining balance value of this Payment.
         attr_accessor :unapplied_amount
+    end
+
+    def as_json(options={})
+        {
+            'groupKey' => @group_key,
+            'paymentAppliedId' => @payment_applied_id,
+            'invoiceId' => @invoice_id,
+            'paymentId' => @payment_id,
+            'applyToInvoiceDate' => @apply_to_invoice_date,
+            'paymentAppliedAmount' => @payment_applied_amount,
+            'referenceCode' => @reference_code,
+            'companyId' => @company_id,
+            'paymentAmount' => @payment_amount,
+            'unappliedAmount' => @unapplied_amount,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

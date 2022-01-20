@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,11 +22,11 @@ module LockstepSdk
 
         # Initialize the ProvisioningModel using the provided prototype
         def initialize(params = {})
-            @full_name = params.fetch(:full_name)
-            @time_zone = params.fetch(:time_zone)
-            @default_currency = params.fetch(:default_currency)
-            @erp = params.fetch(:erp)
-            @company = params.fetch(:company)
+            @full_name = params.dig(:full_name)
+            @time_zone = params.dig(:time_zone)
+            @default_currency = params.dig(:default_currency)
+            @erp = params.dig(:erp)
+            @company = params.dig(:company)
         end
 
         # @return [String] The full name of the new user
@@ -37,5 +39,19 @@ module LockstepSdk
         attr_accessor :erp
         # @return [CompanyModel] The company information for the new user and group
         attr_accessor :company
+    end
+
+    def as_json(options={})
+        {
+            'fullName' => @full_name,
+            'timeZone' => @time_zone,
+            'defaultCurrency' => @default_currency,
+            'erp' => @erp,
+            'company' => @company,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

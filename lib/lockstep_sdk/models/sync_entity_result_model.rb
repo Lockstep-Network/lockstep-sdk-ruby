@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,11 +22,11 @@ module LockstepSdk
 
         # Initialize the SyncEntityResultModel using the provided prototype
         def initialize(params = {})
-            @insert_count = params.fetch(:insert_count)
-            @update_count = params.fetch(:update_count)
-            @skip_count = params.fetch(:skip_count)
-            @error_count = params.fetch(:error_count)
-            @errors = params.fetch(:errors)
+            @insert_count = params.dig(:insert_count)
+            @update_count = params.dig(:update_count)
+            @skip_count = params.dig(:skip_count)
+            @error_count = params.dig(:error_count)
+            @errors = params.dig(:errors)
         end
 
         # @return [Int32] The number of entities inserted
@@ -37,5 +39,19 @@ module LockstepSdk
         attr_accessor :error_count
         # @return [Object] The errors encountered during sync keyed by ERP key
         attr_accessor :errors
+    end
+
+    def as_json(options={})
+        {
+            'insertCount' => @insert_count,
+            'updateCount' => @update_count,
+            'skipCount' => @skip_count,
+            'errorCount' => @error_count,
+            'errors' => @errors,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

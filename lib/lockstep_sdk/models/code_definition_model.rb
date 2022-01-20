@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -21,15 +23,15 @@ module LockstepSdk
 
         # Initialize the CodeDefinitionModel using the provided prototype
         def initialize(params = {})
-            @code_definition_id = params.fetch(:code_definition_id)
-            @group_key = params.fetch(:group_key)
-            @code_type = params.fetch(:code_type)
-            @code = params.fetch(:code)
-            @code_description = params.fetch(:code_description)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
+            @code_definition_id = params.dig(:code_definition_id)
+            @group_key = params.dig(:group_key)
+            @code_type = params.dig(:code_type)
+            @code = params.dig(:code)
+            @code_description = params.dig(:code_description)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
@@ -50,5 +52,23 @@ module LockstepSdk
         attr_accessor :modified
         # @return [Uuid] The ID of the user who last modified the Code Definition
         attr_accessor :modified_user_id
+    end
+
+    def as_json(options={})
+        {
+            'codeDefinitionId' => @code_definition_id,
+            'groupKey' => @group_key,
+            'codeType' => @code_type,
+            'code' => @code,
+            'codeDescription' => @code_description,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

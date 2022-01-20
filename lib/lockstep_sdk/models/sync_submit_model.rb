@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,10 +22,20 @@ module LockstepSdk
 
         # Initialize the SyncSubmitModel using the provided prototype
         def initialize(params = {})
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
         end
 
         # @return [Uuid] The identifier of the app enrollment
         attr_accessor :app_enrollment_id
+    end
+
+    def as_json(options={})
+        {
+            'appEnrollmentId' => @app_enrollment_id,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,9 +22,9 @@ module LockstepSdk
 
         # Initialize the ErpModel using the provided prototype
         def initialize(params = {})
-            @erp_system_id = params.fetch(:erp_system_id)
-            @name = params.fetch(:name)
-            @is_supported = params.fetch(:is_supported)
+            @erp_system_id = params.dig(:erp_system_id)
+            @name = params.dig(:name)
+            @is_supported = params.dig(:is_supported)
         end
 
         # @return [Uuid] Unique ID for this ERP
@@ -31,5 +33,17 @@ module LockstepSdk
         attr_accessor :name
         # @return [Boolean] Flag to indicate if ERP is supported
         attr_accessor :is_supported
+    end
+
+    def as_json(options={})
+        {
+            'erpSystemId' => @erp_system_id,
+            'name' => @name,
+            'isSupported' => @is_supported,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

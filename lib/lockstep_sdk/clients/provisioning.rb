@@ -7,31 +7,43 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2021.39
+# @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
 
-class Provisioning
+class ProvisioningClient
 
-    def initialize(lockstepsdk) # Initialize the Activities class with a lockstepsdk instance.
+    require 'awrence'
+
+    # Initialize the ProvisioningClient class with a lockstepsdk instance.
+    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
+    def initialize(lockstepsdk)
         @lockstepsdk = lockstepsdk
     end
 
-    #  Creates a new User or updates an Invited user based on metadata provided by the User during the onboarding process
-    #  
-    #  @param body [ProvisioningModel] Represents a User and their related metadata
+
+    # Creates a new User or updates an Invited user based on metadata provided by the User during the onboarding process
+    # 
+    # @param body [ProvisioningModel] Represents a User and their related metadata
     def provision_user_account()
         path = "/api/v1/Provisioning"
         @lockstepsdk.request(:post, path, body, nil)
     end
 
-    #  Updates user, company and group metadata for a User of status 'Onboarding' and finalizes a user's onboarding process by changing the user status to 'Active'
-    #  
-    #  @param body [ProvisioningFinalizeRequestModel] Represents a User and their related metadata
+    # Updates user, company and group metadata for a User of status 'Onboarding' and finalizes a user's onboarding process by changing the user status to 'Active'
+    # 
+    # @param body [ProvisioningFinalizeRequestModel] Represents a User and their related metadata
     def finalize_user_account_provisioning()
         path = "/api/v1/Provisioning/finalize"
+        @lockstepsdk.request(:post, path, body, nil)
+    end
+
+    def provision_free_developer_account()
+        path = "/api/v1/Provisioning/free-account"
         @lockstepsdk.request(:post, path, body, nil)
     end
 end

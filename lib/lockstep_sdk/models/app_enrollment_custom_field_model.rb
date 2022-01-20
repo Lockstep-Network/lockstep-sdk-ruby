@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,17 +22,17 @@ module LockstepSdk
 
         # Initialize the AppEnrollmentCustomFieldModel using the provided prototype
         def initialize(params = {})
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @app_id = params.fetch(:app_id)
-            @name = params.fetch(:name)
-            @app_type = params.fetch(:app_type)
-            @group_key = params.fetch(:group_key)
-            @custom_field_definition_id = params.fetch(:custom_field_definition_id)
-            @custom_field_label = params.fetch(:custom_field_label)
-            @data_type = params.fetch(:data_type)
-            @sort_order = params.fetch(:sort_order)
-            @string_value = params.fetch(:string_value)
-            @numeric_value = params.fetch(:numeric_value)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @app_id = params.dig(:app_id)
+            @name = params.dig(:name)
+            @app_type = params.dig(:app_type)
+            @group_key = params.dig(:group_key)
+            @custom_field_definition_id = params.dig(:custom_field_definition_id)
+            @custom_field_label = params.dig(:custom_field_label)
+            @data_type = params.dig(:data_type)
+            @sort_order = params.dig(:sort_order)
+            @string_value = params.dig(:string_value)
+            @numeric_value = params.dig(:numeric_value)
         end
 
         # @return [Uuid] Unique id for the app enrollment
@@ -55,5 +57,25 @@ module LockstepSdk
         attr_accessor :string_value
         # @return [Double] Number data for field
         attr_accessor :numeric_value
+    end
+
+    def as_json(options={})
+        {
+            'appEnrollmentId' => @app_enrollment_id,
+            'appId' => @app_id,
+            'name' => @name,
+            'appType' => @app_type,
+            'groupKey' => @group_key,
+            'customFieldDefinitionId' => @custom_field_definition_id,
+            'customFieldLabel' => @custom_field_label,
+            'dataType' => @data_type,
+            'sortOrder' => @sort_order,
+            'stringValue' => @string_value,
+            'numericValue' => @numeric_value,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

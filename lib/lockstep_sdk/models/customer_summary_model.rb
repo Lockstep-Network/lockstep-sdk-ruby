@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,21 +22,21 @@ module LockstepSdk
 
         # Initialize the CustomerSummaryModel using the provided prototype
         def initialize(params = {})
-            @group_key = params.fetch(:group_key)
-            @company_id = params.fetch(:company_id)
-            @company_name = params.fetch(:company_name)
-            @primary_contact = params.fetch(:primary_contact)
-            @outstanding_invoices = params.fetch(:outstanding_invoices)
-            @total_invoices_open = params.fetch(:total_invoices_open)
-            @total_invoices_past_due = params.fetch(:total_invoices_past_due)
-            @closed_invoices = params.fetch(:closed_invoices)
-            @amount_collected = params.fetch(:amount_collected)
-            @outstanding_amount = params.fetch(:outstanding_amount)
-            @amount_past_due = params.fetch(:amount_past_due)
-            @unapplied_payments = params.fetch(:unapplied_payments)
-            @percent_of_total_ar = params.fetch(:percent_of_total_ar)
-            @dso = params.fetch(:dso)
-            @newest_activity = params.fetch(:newest_activity)
+            @group_key = params.dig(:group_key)
+            @company_id = params.dig(:company_id)
+            @company_name = params.dig(:company_name)
+            @primary_contact = params.dig(:primary_contact)
+            @outstanding_invoices = params.dig(:outstanding_invoices)
+            @total_invoices_open = params.dig(:total_invoices_open)
+            @total_invoices_past_due = params.dig(:total_invoices_past_due)
+            @closed_invoices = params.dig(:closed_invoices)
+            @amount_collected = params.dig(:amount_collected)
+            @outstanding_amount = params.dig(:outstanding_amount)
+            @amount_past_due = params.dig(:amount_past_due)
+            @unapplied_payments = params.dig(:unapplied_payments)
+            @percent_of_total_ar = params.dig(:percent_of_total_ar)
+            @dso = params.dig(:dso)
+            @newest_activity = params.dig(:newest_activity)
         end
 
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -67,5 +69,29 @@ module LockstepSdk
         attr_accessor :dso
         # @return [Date] The date stamp for the newest Activity on this Customer.
         attr_accessor :newest_activity
+    end
+
+    def as_json(options={})
+        {
+            'groupKey' => @group_key,
+            'companyId' => @company_id,
+            'companyName' => @company_name,
+            'primaryContact' => @primary_contact,
+            'outstandingInvoices' => @outstanding_invoices,
+            'totalInvoicesOpen' => @total_invoices_open,
+            'totalInvoicesPastDue' => @total_invoices_past_due,
+            'closedInvoices' => @closed_invoices,
+            'amountCollected' => @amount_collected,
+            'outstandingAmount' => @outstanding_amount,
+            'amountPastDue' => @amount_past_due,
+            'unappliedPayments' => @unapplied_payments,
+            'percentOfTotalAr' => @percent_of_total_ar,
+            'dso' => @dso,
+            'newestActivity' => @newest_activity,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

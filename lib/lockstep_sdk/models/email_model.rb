@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -23,39 +25,39 @@ module LockstepSdk
 
         # Initialize the EmailModel using the provided prototype
         def initialize(params = {})
-            @email_id = params.fetch(:email_id)
-            @thread_id = params.fetch(:thread_id)
-            @group_key = params.fetch(:group_key)
-            @company_id = params.fetch(:company_id)
-            @email_from = params.fetch(:email_from)
-            @email_to = params.fetch(:email_to)
-            @email_cc = params.fetch(:email_cc)
-            @email_subject = params.fetch(:email_subject)
-            @email_body = params.fetch(:email_body)
-            @sent_date = params.fetch(:sent_date)
-            @is_unread = params.fetch(:is_unread)
-            @is_priority = params.fetch(:is_priority)
-            @is_spam = params.fetch(:is_spam)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @to_be_sent = params.fetch(:to_be_sent)
-            @customer_id = params.fetch(:customer_id)
-            @received_time_stamp = params.fetch(:received_time_stamp)
-            @opened_timestamp = params.fetch(:opened_timestamp)
-            @view_count = params.fetch(:view_count)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @external_email_id = params.fetch(:external_email_id)
-            @external_thread_id = params.fetch(:external_thread_id)
-            @email_bcc = params.fetch(:email_bcc)
-            @send_type = params.fetch(:send_type)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @response_origin_id = params.fetch(:response_origin_id)
-            @response_origin = params.fetch(:response_origin)
-            @notes = params.fetch(:notes)
-            @attachments = params.fetch(:attachments)
-            @custom_field_definitions = params.fetch(:custom_field_definitions)
-            @custom_field_values = params.fetch(:custom_field_values)
+            @email_id = params.dig(:email_id)
+            @thread_id = params.dig(:thread_id)
+            @group_key = params.dig(:group_key)
+            @company_id = params.dig(:company_id)
+            @email_from = params.dig(:email_from)
+            @email_to = params.dig(:email_to)
+            @email_cc = params.dig(:email_cc)
+            @email_subject = params.dig(:email_subject)
+            @email_body = params.dig(:email_body)
+            @sent_date = params.dig(:sent_date)
+            @is_unread = params.dig(:is_unread)
+            @is_priority = params.dig(:is_priority)
+            @is_spam = params.dig(:is_spam)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @to_be_sent = params.dig(:to_be_sent)
+            @customer_id = params.dig(:customer_id)
+            @received_time_stamp = params.dig(:received_time_stamp)
+            @opened_timestamp = params.dig(:opened_timestamp)
+            @view_count = params.dig(:view_count)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @external_email_id = params.dig(:external_email_id)
+            @external_thread_id = params.dig(:external_thread_id)
+            @email_bcc = params.dig(:email_bcc)
+            @send_type = params.dig(:send_type)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @response_origin_id = params.dig(:response_origin_id)
+            @response_origin = params.dig(:response_origin)
+            @notes = params.dig(:notes)
+            @attachments = params.dig(:attachments)
+            @custom_field_definitions = params.dig(:custom_field_definitions)
+            @custom_field_values = params.dig(:custom_field_values)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
@@ -124,5 +126,47 @@ module LockstepSdk
         attr_accessor :custom_field_definitions
         # @return [CustomFieldValueModel] All values attached to this email. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
+    end
+
+    def as_json(options={})
+        {
+            'emailId' => @email_id,
+            'threadId' => @thread_id,
+            'groupKey' => @group_key,
+            'companyId' => @company_id,
+            'emailFrom' => @email_from,
+            'emailTo' => @email_to,
+            'emailCC' => @email_cc,
+            'emailSubject' => @email_subject,
+            'emailBody' => @email_body,
+            'sentDate' => @sent_date,
+            'isUnread' => @is_unread,
+            'isPriority' => @is_priority,
+            'isSpam' => @is_spam,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'toBeSent' => @to_be_sent,
+            'customerId' => @customer_id,
+            'receivedTimeStamp' => @received_time_stamp,
+            'openedTimestamp' => @opened_timestamp,
+            'viewCount' => @view_count,
+            'appEnrollmentId' => @app_enrollment_id,
+            'externalEmailId' => @external_email_id,
+            'externalThreadId' => @external_thread_id,
+            'emailBcc' => @email_bcc,
+            'sendType' => @send_type,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'responseOriginId' => @response_origin_id,
+            'responseOrigin' => @response_origin,
+            'notes' => @notes,
+            'attachments' => @attachments,
+            'customFieldDefinitions' => @custom_field_definitions,
+            'customFieldValues' => @custom_field_values,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

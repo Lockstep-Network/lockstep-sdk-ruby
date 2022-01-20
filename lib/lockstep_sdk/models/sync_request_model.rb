@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,15 +22,15 @@ module LockstepSdk
 
         # Initialize the SyncRequestModel using the provided prototype
         def initialize(params = {})
-            @sync_request_id = params.fetch(:sync_request_id)
-            @group_key = params.fetch(:group_key)
-            @status_code = params.fetch(:status_code)
-            @process_result_message = params.fetch(:process_result_message)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @created = params.fetch(:created)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @details = params.fetch(:details)
+            @sync_request_id = params.dig(:sync_request_id)
+            @group_key = params.dig(:group_key)
+            @status_code = params.dig(:status_code)
+            @process_result_message = params.dig(:process_result_message)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @created = params.dig(:created)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @details = params.dig(:details)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
@@ -49,5 +51,23 @@ module LockstepSdk
         attr_accessor :modified_user_id
         # @return [Object] The detailed results from the sync. To retrieve this collection, set `includeDetails` to true in your GET requests.
         attr_accessor :details
+    end
+
+    def as_json(options={})
+        {
+            'syncRequestId' => @sync_request_id,
+            'groupKey' => @group_key,
+            'statusCode' => @status_code,
+            'processResultMessage' => @process_result_message,
+            'appEnrollmentId' => @app_enrollment_id,
+            'created' => @created,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'details' => @details,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

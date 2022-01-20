@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,31 +22,31 @@ module LockstepSdk
 
         # Initialize the InvoiceLineModel using the provided prototype
         def initialize(params = {})
-            @invoice_line_id = params.fetch(:invoice_line_id)
-            @group_key = params.fetch(:group_key)
-            @invoice_id = params.fetch(:invoice_id)
-            @erp_key = params.fetch(:erp_key)
-            @line_number = params.fetch(:line_number)
-            @product_code = params.fetch(:product_code)
-            @description = params.fetch(:description)
-            @unit_measure_code = params.fetch(:unit_measure_code)
-            @unit_price = params.fetch(:unit_price)
-            @quantity = params.fetch(:quantity)
-            @quantity_shipped = params.fetch(:quantity_shipped)
-            @quantity_received = params.fetch(:quantity_received)
-            @total_amount = params.fetch(:total_amount)
-            @exemption_code = params.fetch(:exemption_code)
-            @reporting_date = params.fetch(:reporting_date)
-            @override_origin_address_id = params.fetch(:override_origin_address_id)
-            @override_bill_to_address_id = params.fetch(:override_bill_to_address_id)
-            @override_ship_to_address_id = params.fetch(:override_ship_to_address_id)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @notes = params.fetch(:notes)
-            @attachments = params.fetch(:attachments)
+            @invoice_line_id = params.dig(:invoice_line_id)
+            @group_key = params.dig(:group_key)
+            @invoice_id = params.dig(:invoice_id)
+            @erp_key = params.dig(:erp_key)
+            @line_number = params.dig(:line_number)
+            @product_code = params.dig(:product_code)
+            @description = params.dig(:description)
+            @unit_measure_code = params.dig(:unit_measure_code)
+            @unit_price = params.dig(:unit_price)
+            @quantity = params.dig(:quantity)
+            @quantity_shipped = params.dig(:quantity_shipped)
+            @quantity_received = params.dig(:quantity_received)
+            @total_amount = params.dig(:total_amount)
+            @exemption_code = params.dig(:exemption_code)
+            @reporting_date = params.dig(:reporting_date)
+            @override_origin_address_id = params.dig(:override_origin_address_id)
+            @override_bill_to_address_id = params.dig(:override_bill_to_address_id)
+            @override_ship_to_address_id = params.dig(:override_ship_to_address_id)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @notes = params.dig(:notes)
+            @attachments = params.dig(:attachments)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
@@ -97,5 +99,39 @@ module LockstepSdk
         attr_accessor :notes
         # @return [AttachmentModel] All attachments attached to this company. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
         attr_accessor :attachments
+    end
+
+    def as_json(options={})
+        {
+            'invoiceLineId' => @invoice_line_id,
+            'groupKey' => @group_key,
+            'invoiceId' => @invoice_id,
+            'erpKey' => @erp_key,
+            'lineNumber' => @line_number,
+            'productCode' => @product_code,
+            'description' => @description,
+            'unitMeasureCode' => @unit_measure_code,
+            'unitPrice' => @unit_price,
+            'quantity' => @quantity,
+            'quantityShipped' => @quantity_shipped,
+            'quantityReceived' => @quantity_received,
+            'totalAmount' => @total_amount,
+            'exemptionCode' => @exemption_code,
+            'reportingDate' => @reporting_date,
+            'overrideOriginAddressId' => @override_origin_address_id,
+            'overrideBillToAddressId' => @override_bill_to_address_id,
+            'overrideShipToAddressId' => @override_ship_to_address_id,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'appEnrollmentId' => @app_enrollment_id,
+            'notes' => @notes,
+            'attachments' => @attachments,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

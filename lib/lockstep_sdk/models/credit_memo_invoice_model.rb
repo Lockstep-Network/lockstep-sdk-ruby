@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,18 +22,18 @@ module LockstepSdk
 
         # Initialize the CreditMemoInvoiceModel using the provided prototype
         def initialize(params = {})
-            @group_key = params.fetch(:group_key)
-            @credit_memo_applied_id = params.fetch(:credit_memo_applied_id)
-            @invoice_id = params.fetch(:invoice_id)
-            @credit_memo_invoice_id = params.fetch(:credit_memo_invoice_id)
-            @apply_to_invoice_date = params.fetch(:apply_to_invoice_date)
-            @credit_memo_applied_amount = params.fetch(:credit_memo_applied_amount)
-            @reference_code = params.fetch(:reference_code)
-            @company_id = params.fetch(:company_id)
-            @customer_id = params.fetch(:customer_id)
-            @invoice_status_code = params.fetch(:invoice_status_code)
-            @total_amount = params.fetch(:total_amount)
-            @outstanding_balance_amount = params.fetch(:outstanding_balance_amount)
+            @group_key = params.dig(:group_key)
+            @credit_memo_applied_id = params.dig(:credit_memo_applied_id)
+            @invoice_id = params.dig(:invoice_id)
+            @credit_memo_invoice_id = params.dig(:credit_memo_invoice_id)
+            @apply_to_invoice_date = params.dig(:apply_to_invoice_date)
+            @credit_memo_applied_amount = params.dig(:credit_memo_applied_amount)
+            @reference_code = params.dig(:reference_code)
+            @company_id = params.dig(:company_id)
+            @customer_id = params.dig(:customer_id)
+            @invoice_status_code = params.dig(:invoice_status_code)
+            @total_amount = params.dig(:total_amount)
+            @outstanding_balance_amount = params.dig(:outstanding_balance_amount)
         end
 
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -58,5 +60,26 @@ module LockstepSdk
         attr_accessor :total_amount
         # @return [Double] The remaining balance value of this invoice.
         attr_accessor :outstanding_balance_amount
+    end
+
+    def as_json(options={})
+        {
+            'groupKey' => @group_key,
+            'creditMemoAppliedId' => @credit_memo_applied_id,
+            'invoiceId' => @invoice_id,
+            'creditMemoInvoiceId' => @credit_memo_invoice_id,
+            'applyToInvoiceDate' => @apply_to_invoice_date,
+            'creditMemoAppliedAmount' => @credit_memo_applied_amount,
+            'referenceCode' => @reference_code,
+            'companyId' => @company_id,
+            'customerId' => @customer_id,
+            'invoiceStatusCode' => @invoice_status_code,
+            'totalAmount' => @total_amount,
+            'outstandingBalanceAmount' => @outstanding_balance_amount,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,28 +22,28 @@ module LockstepSdk
 
         # Initialize the PaymentDetailModel using the provided prototype
         def initialize(params = {})
-            @group_key = params.fetch(:group_key)
-            @payment_id = params.fetch(:payment_id)
-            @customer_id = params.fetch(:customer_id)
-            @customer_name = params.fetch(:customer_name)
-            @memo_text = params.fetch(:memo_text)
-            @reference_code = params.fetch(:reference_code)
-            @primary_contact = params.fetch(:primary_contact)
-            @email = params.fetch(:email)
-            @payment_amount = params.fetch(:payment_amount)
-            @unapplied_amount = params.fetch(:unapplied_amount)
-            @payment_type = params.fetch(:payment_type)
-            @payment_date = params.fetch(:payment_date)
-            @post_date = params.fetch(:post_date)
-            @phone = params.fetch(:phone)
-            @fax = params.fetch(:fax)
-            @address1 = params.fetch(:address1)
-            @address2 = params.fetch(:address2)
-            @address3 = params.fetch(:address3)
-            @city = params.fetch(:city)
-            @state_region = params.fetch(:state_region)
-            @postal_code = params.fetch(:postal_code)
-            @country_code = params.fetch(:country_code)
+            @group_key = params.dig(:group_key)
+            @payment_id = params.dig(:payment_id)
+            @customer_id = params.dig(:customer_id)
+            @customer_name = params.dig(:customer_name)
+            @memo_text = params.dig(:memo_text)
+            @reference_code = params.dig(:reference_code)
+            @primary_contact = params.dig(:primary_contact)
+            @email = params.dig(:email)
+            @payment_amount = params.dig(:payment_amount)
+            @unapplied_amount = params.dig(:unapplied_amount)
+            @payment_type = params.dig(:payment_type)
+            @payment_date = params.dig(:payment_date)
+            @post_date = params.dig(:post_date)
+            @phone = params.dig(:phone)
+            @fax = params.dig(:fax)
+            @address1 = params.dig(:address1)
+            @address2 = params.dig(:address2)
+            @address3 = params.dig(:address3)
+            @city = params.dig(:city)
+            @state_region = params.dig(:state_region)
+            @postal_code = params.dig(:postal_code)
+            @country_code = params.dig(:country_code)
         end
 
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -88,5 +90,36 @@ module LockstepSdk
         attr_accessor :postal_code
         # @return [String] The 2 character country code of the address for the Customer's Primary Contact.
         attr_accessor :country_code
+    end
+
+    def as_json(options={})
+        {
+            'groupKey' => @group_key,
+            'paymentId' => @payment_id,
+            'customerId' => @customer_id,
+            'customerName' => @customer_name,
+            'memoText' => @memo_text,
+            'referenceCode' => @reference_code,
+            'primaryContact' => @primary_contact,
+            'email' => @email,
+            'paymentAmount' => @payment_amount,
+            'unappliedAmount' => @unapplied_amount,
+            'paymentType' => @payment_type,
+            'paymentDate' => @payment_date,
+            'postDate' => @post_date,
+            'phone' => @phone,
+            'fax' => @fax,
+            'address1' => @address1,
+            'address2' => @address2,
+            'address3' => @address3,
+            'city' => @city,
+            'stateRegion' => @state_region,
+            'postalCode' => @postal_code,
+            'countryCode' => @country_code,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

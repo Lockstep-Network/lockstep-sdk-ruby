@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,22 +22,22 @@ module LockstepSdk
 
         # Initialize the InvoiceAddressModel using the provided prototype
         def initialize(params = {})
-            @invoice_address_id = params.fetch(:invoice_address_id)
-            @group_key = params.fetch(:group_key)
-            @invoice_id = params.fetch(:invoice_id)
-            @line1 = params.fetch(:line1)
-            @line2 = params.fetch(:line2)
-            @line3 = params.fetch(:line3)
-            @city = params.fetch(:city)
-            @region = params.fetch(:region)
-            @postal_code = params.fetch(:postal_code)
-            @country = params.fetch(:country)
-            @latitude = params.fetch(:latitude)
-            @longitude = params.fetch(:longitude)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
+            @invoice_address_id = params.dig(:invoice_address_id)
+            @group_key = params.dig(:group_key)
+            @invoice_id = params.dig(:invoice_id)
+            @line1 = params.dig(:line1)
+            @line2 = params.dig(:line2)
+            @line3 = params.dig(:line3)
+            @city = params.dig(:city)
+            @region = params.dig(:region)
+            @postal_code = params.dig(:postal_code)
+            @country = params.dig(:country)
+            @latitude = params.dig(:latitude)
+            @longitude = params.dig(:longitude)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
@@ -70,5 +72,30 @@ module LockstepSdk
         attr_accessor :modified
         # @return [Uuid] The ID number of the user who most recently modified this address.
         attr_accessor :modified_user_id
+    end
+
+    def as_json(options={})
+        {
+            'invoiceAddressId' => @invoice_address_id,
+            'groupKey' => @group_key,
+            'invoiceId' => @invoice_id,
+            'line1' => @line1,
+            'line2' => @line2,
+            'line3' => @line3,
+            'city' => @city,
+            'region' => @region,
+            'postalCode' => @postal_code,
+            'country' => @country,
+            'latitude' => @latitude,
+            'longitude' => @longitude,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,9 +22,9 @@ module LockstepSdk
 
         # Initialize the StateModel using the provided prototype
         def initialize(params = {})
-            @name = params.fetch(:name)
-            @alpha2 = params.fetch(:alpha2)
-            @aliases = params.fetch(:aliases)
+            @name = params.dig(:name)
+            @alpha2 = params.dig(:alpha2)
+            @aliases = params.dig(:aliases)
         end
 
         # @return [String] Name of the state
@@ -31,5 +33,17 @@ module LockstepSdk
         attr_accessor :alpha2
         # @return [String] A different name for a state
         attr_accessor :aliases
+    end
+
+    def as_json(options={})
+        {
+            'name' => @name,
+            'alpha2' => @alpha2,
+            'aliases' => @aliases,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

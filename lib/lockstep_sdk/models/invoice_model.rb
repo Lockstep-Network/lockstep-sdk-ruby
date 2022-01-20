@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -25,52 +27,52 @@ module LockstepSdk
 
         # Initialize the InvoiceModel using the provided prototype
         def initialize(params = {})
-            @group_key = params.fetch(:group_key)
-            @invoice_id = params.fetch(:invoice_id)
-            @company_id = params.fetch(:company_id)
-            @customer_id = params.fetch(:customer_id)
-            @erp_key = params.fetch(:erp_key)
-            @purchase_order_code = params.fetch(:purchase_order_code)
-            @reference_code = params.fetch(:reference_code)
-            @salesperson_code = params.fetch(:salesperson_code)
-            @salesperson_name = params.fetch(:salesperson_name)
-            @invoice_type_code = params.fetch(:invoice_type_code)
-            @invoice_status_code = params.fetch(:invoice_status_code)
-            @terms_code = params.fetch(:terms_code)
-            @special_terms = params.fetch(:special_terms)
-            @currency_code = params.fetch(:currency_code)
-            @total_amount = params.fetch(:total_amount)
-            @sales_tax_amount = params.fetch(:sales_tax_amount)
-            @discount_amount = params.fetch(:discount_amount)
-            @outstanding_balance_amount = params.fetch(:outstanding_balance_amount)
-            @invoice_date = params.fetch(:invoice_date)
-            @discount_date = params.fetch(:discount_date)
-            @posted_date = params.fetch(:posted_date)
-            @invoice_closed_date = params.fetch(:invoice_closed_date)
-            @payment_due_date = params.fetch(:payment_due_date)
-            @imported_date = params.fetch(:imported_date)
-            @primary_origin_address_id = params.fetch(:primary_origin_address_id)
-            @primary_bill_to_address_id = params.fetch(:primary_bill_to_address_id)
-            @primary_ship_to_address_id = params.fetch(:primary_ship_to_address_id)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @is_voided = params.fetch(:is_voided)
-            @in_dispute = params.fetch(:in_dispute)
-            @exclude_from_aging = params.fetch(:exclude_from_aging)
-            @addresses = params.fetch(:addresses)
-            @lines = params.fetch(:lines)
-            @payments = params.fetch(:payments)
-            @notes = params.fetch(:notes)
-            @attachments = params.fetch(:attachments)
-            @company = params.fetch(:company)
-            @customer = params.fetch(:customer)
-            @customer_primary_contact = params.fetch(:customer_primary_contact)
-            @credit_memos = params.fetch(:credit_memos)
-            @custom_field_values = params.fetch(:custom_field_values)
-            @custom_field_definitions = params.fetch(:custom_field_definitions)
+            @group_key = params.dig(:group_key)
+            @invoice_id = params.dig(:invoice_id)
+            @company_id = params.dig(:company_id)
+            @customer_id = params.dig(:customer_id)
+            @erp_key = params.dig(:erp_key)
+            @purchase_order_code = params.dig(:purchase_order_code)
+            @reference_code = params.dig(:reference_code)
+            @salesperson_code = params.dig(:salesperson_code)
+            @salesperson_name = params.dig(:salesperson_name)
+            @invoice_type_code = params.dig(:invoice_type_code)
+            @invoice_status_code = params.dig(:invoice_status_code)
+            @terms_code = params.dig(:terms_code)
+            @special_terms = params.dig(:special_terms)
+            @currency_code = params.dig(:currency_code)
+            @total_amount = params.dig(:total_amount)
+            @sales_tax_amount = params.dig(:sales_tax_amount)
+            @discount_amount = params.dig(:discount_amount)
+            @outstanding_balance_amount = params.dig(:outstanding_balance_amount)
+            @invoice_date = params.dig(:invoice_date)
+            @discount_date = params.dig(:discount_date)
+            @posted_date = params.dig(:posted_date)
+            @invoice_closed_date = params.dig(:invoice_closed_date)
+            @payment_due_date = params.dig(:payment_due_date)
+            @imported_date = params.dig(:imported_date)
+            @primary_origin_address_id = params.dig(:primary_origin_address_id)
+            @primary_bill_to_address_id = params.dig(:primary_bill_to_address_id)
+            @primary_ship_to_address_id = params.dig(:primary_ship_to_address_id)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @is_voided = params.dig(:is_voided)
+            @in_dispute = params.dig(:in_dispute)
+            @exclude_from_aging = params.dig(:exclude_from_aging)
+            @addresses = params.dig(:addresses)
+            @lines = params.dig(:lines)
+            @payments = params.dig(:payments)
+            @notes = params.dig(:notes)
+            @attachments = params.dig(:attachments)
+            @company = params.dig(:company)
+            @customer = params.dig(:customer)
+            @customer_primary_contact = params.dig(:customer_primary_contact)
+            @credit_memos = params.dig(:credit_memos)
+            @custom_field_values = params.dig(:custom_field_values)
+            @custom_field_definitions = params.dig(:custom_field_definitions)
         end
 
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -165,5 +167,60 @@ module LockstepSdk
         attr_accessor :custom_field_values
         # @return [CustomFieldDefinitionModel] All custom field definitions
         attr_accessor :custom_field_definitions
+    end
+
+    def as_json(options={})
+        {
+            'groupKey' => @group_key,
+            'invoiceId' => @invoice_id,
+            'companyId' => @company_id,
+            'customerId' => @customer_id,
+            'erpKey' => @erp_key,
+            'purchaseOrderCode' => @purchase_order_code,
+            'referenceCode' => @reference_code,
+            'salespersonCode' => @salesperson_code,
+            'salespersonName' => @salesperson_name,
+            'invoiceTypeCode' => @invoice_type_code,
+            'invoiceStatusCode' => @invoice_status_code,
+            'termsCode' => @terms_code,
+            'specialTerms' => @special_terms,
+            'currencyCode' => @currency_code,
+            'totalAmount' => @total_amount,
+            'salesTaxAmount' => @sales_tax_amount,
+            'discountAmount' => @discount_amount,
+            'outstandingBalanceAmount' => @outstanding_balance_amount,
+            'invoiceDate' => @invoice_date,
+            'discountDate' => @discount_date,
+            'postedDate' => @posted_date,
+            'invoiceClosedDate' => @invoice_closed_date,
+            'paymentDueDate' => @payment_due_date,
+            'importedDate' => @imported_date,
+            'primaryOriginAddressId' => @primary_origin_address_id,
+            'primaryBillToAddressId' => @primary_bill_to_address_id,
+            'primaryShipToAddressId' => @primary_ship_to_address_id,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'appEnrollmentId' => @app_enrollment_id,
+            'isVoided' => @is_voided,
+            'inDispute' => @in_dispute,
+            'excludeFromAging' => @exclude_from_aging,
+            'addresses' => @addresses,
+            'lines' => @lines,
+            'payments' => @payments,
+            'notes' => @notes,
+            'attachments' => @attachments,
+            'company' => @company,
+            'customer' => @customer,
+            'customerPrimaryContact' => @customer_primary_contact,
+            'creditMemos' => @credit_memos,
+            'customFieldValues' => @custom_field_values,
+            'customFieldDefinitions' => @custom_field_definitions,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -23,36 +25,36 @@ module LockstepSdk
 
         # Initialize the ContactModel using the provided prototype
         def initialize(params = {})
-            @contact_id = params.fetch(:contact_id)
-            @company_id = params.fetch(:company_id)
-            @group_key = params.fetch(:group_key)
-            @erp_key = params.fetch(:erp_key)
-            @contact_name = params.fetch(:contact_name)
-            @contact_code = params.fetch(:contact_code)
-            @title = params.fetch(:title)
-            @role_code = params.fetch(:role_code)
-            @email_address = params.fetch(:email_address)
-            @phone = params.fetch(:phone)
-            @fax = params.fetch(:fax)
-            @address1 = params.fetch(:address1)
-            @address2 = params.fetch(:address2)
-            @address3 = params.fetch(:address3)
-            @city = params.fetch(:city)
-            @state_region = params.fetch(:state_region)
-            @postal_code = params.fetch(:postal_code)
-            @country_code = params.fetch(:country_code)
-            @is_active = params.fetch(:is_active)
-            @webpage_url = params.fetch(:webpage_url)
-            @picture_url = params.fetch(:picture_url)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @notes = params.fetch(:notes)
-            @attachments = params.fetch(:attachments)
-            @custom_field_definitions = params.fetch(:custom_field_definitions)
-            @custom_field_values = params.fetch(:custom_field_values)
+            @contact_id = params.dig(:contact_id)
+            @company_id = params.dig(:company_id)
+            @group_key = params.dig(:group_key)
+            @erp_key = params.dig(:erp_key)
+            @contact_name = params.dig(:contact_name)
+            @contact_code = params.dig(:contact_code)
+            @title = params.dig(:title)
+            @role_code = params.dig(:role_code)
+            @email_address = params.dig(:email_address)
+            @phone = params.dig(:phone)
+            @fax = params.dig(:fax)
+            @address1 = params.dig(:address1)
+            @address2 = params.dig(:address2)
+            @address3 = params.dig(:address3)
+            @city = params.dig(:city)
+            @state_region = params.dig(:state_region)
+            @postal_code = params.dig(:postal_code)
+            @country_code = params.dig(:country_code)
+            @is_active = params.dig(:is_active)
+            @webpage_url = params.dig(:webpage_url)
+            @picture_url = params.dig(:picture_url)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @notes = params.dig(:notes)
+            @attachments = params.dig(:attachments)
+            @custom_field_definitions = params.dig(:custom_field_definitions)
+            @custom_field_values = params.dig(:custom_field_values)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
@@ -115,5 +117,44 @@ module LockstepSdk
         attr_accessor :custom_field_definitions
         # @return [CustomFieldValueModel] All values attached to this contact. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
+    end
+
+    def as_json(options={})
+        {
+            'contactId' => @contact_id,
+            'companyId' => @company_id,
+            'groupKey' => @group_key,
+            'erpKey' => @erp_key,
+            'contactName' => @contact_name,
+            'contactCode' => @contact_code,
+            'title' => @title,
+            'roleCode' => @role_code,
+            'emailAddress' => @email_address,
+            'phone' => @phone,
+            'fax' => @fax,
+            'address1' => @address1,
+            'address2' => @address2,
+            'address3' => @address3,
+            'city' => @city,
+            'stateRegion' => @state_region,
+            'postalCode' => @postal_code,
+            'countryCode' => @country_code,
+            'isActive' => @is_active,
+            'webpageUrl' => @webpage_url,
+            'pictureUrl' => @picture_url,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'appEnrollmentId' => @app_enrollment_id,
+            'notes' => @notes,
+            'attachments' => @attachments,
+            'customFieldDefinitions' => @custom_field_definitions,
+            'customFieldValues' => @custom_field_values,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

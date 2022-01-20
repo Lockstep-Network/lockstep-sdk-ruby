@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,13 +22,13 @@ module LockstepSdk
 
         # Initialize the ArAgingHeaderInfoModel using the provided prototype
         def initialize(params = {})
-            @group_key = params.fetch(:group_key)
-            @report_bucket = params.fetch(:report_bucket)
-            @total_customers = params.fetch(:total_customers)
-            @total_invoices_outstanding = params.fetch(:total_invoices_outstanding)
-            @total_outstanding_amount = params.fetch(:total_outstanding_amount)
-            @total_ar_amount = params.fetch(:total_ar_amount)
-            @percentage_of_total_ar = params.fetch(:percentage_of_total_ar)
+            @group_key = params.dig(:group_key)
+            @report_bucket = params.dig(:report_bucket)
+            @total_customers = params.dig(:total_customers)
+            @total_invoices_outstanding = params.dig(:total_invoices_outstanding)
+            @total_outstanding_amount = params.dig(:total_outstanding_amount)
+            @total_ar_amount = params.dig(:total_ar_amount)
+            @percentage_of_total_ar = params.dig(:percentage_of_total_ar)
         end
 
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -43,5 +45,21 @@ module LockstepSdk
         attr_accessor :total_ar_amount
         # @return [Double] Portion of Total AR this data represents.
         attr_accessor :percentage_of_total_ar
+    end
+
+    def as_json(options={})
+        {
+            'groupKey' => @group_key,
+            'reportBucket' => @report_bucket,
+            'totalCustomers' => @total_customers,
+            'totalInvoicesOutstanding' => @total_invoices_outstanding,
+            'totalOutstandingAmount' => @total_outstanding_amount,
+            'totalArAmount' => @total_ar_amount,
+            'percentageOfTotalAr' => @percentage_of_total_ar,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

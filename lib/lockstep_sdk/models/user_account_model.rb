@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -24,38 +26,38 @@ module LockstepSdk
 
         # Initialize the UserAccountModel using the provided prototype
         def initialize(params = {})
-            @user_id = params.fetch(:user_id)
-            @group_key = params.fetch(:group_key)
-            @user_name = params.fetch(:user_name)
-            @email = params.fetch(:email)
-            @status = params.fetch(:status)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @modified_user_name = params.fetch(:modified_user_name)
-            @b2_cuser_id = params.fetch(:b2_cuser_id)
-            @user_role = params.fetch(:user_role)
-            @invite_sent = params.fetch(:invite_sent)
-            @phone_number = params.fetch(:phone_number)
-            @fax_number = params.fetch(:fax_number)
-            @title = params.fetch(:title)
-            @accounting_role_code_def_id = params.fetch(:accounting_role_code_def_id)
-            @address1 = params.fetch(:address1)
-            @address2 = params.fetch(:address2)
-            @address3 = params.fetch(:address3)
-            @city = params.fetch(:city)
-            @state_region = params.fetch(:state_region)
-            @postal_code = params.fetch(:postal_code)
-            @country = params.fetch(:country)
-            @image_url = params.fetch(:image_url)
-            @description = params.fetch(:description)
-            @b2_clast_logged_in = params.fetch(:b2_clast_logged_in)
-            @default_currency_code = params.fetch(:default_currency_code)
-            @notes = params.fetch(:notes)
-            @attachments = params.fetch(:attachments)
-            @custom_field_values = params.fetch(:custom_field_values)
-            @accounting_role_code_definition = params.fetch(:accounting_role_code_definition)
+            @user_id = params.dig(:user_id)
+            @group_key = params.dig(:group_key)
+            @user_name = params.dig(:user_name)
+            @email = params.dig(:email)
+            @status = params.dig(:status)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @modified_user_name = params.dig(:modified_user_name)
+            @b2_cuser_id = params.dig(:b2_cuser_id)
+            @user_role = params.dig(:user_role)
+            @invite_sent = params.dig(:invite_sent)
+            @phone_number = params.dig(:phone_number)
+            @fax_number = params.dig(:fax_number)
+            @title = params.dig(:title)
+            @accounting_role_code_def_id = params.dig(:accounting_role_code_def_id)
+            @address1 = params.dig(:address1)
+            @address2 = params.dig(:address2)
+            @address3 = params.dig(:address3)
+            @city = params.dig(:city)
+            @state_region = params.dig(:state_region)
+            @postal_code = params.dig(:postal_code)
+            @country = params.dig(:country)
+            @image_url = params.dig(:image_url)
+            @description = params.dig(:description)
+            @b2_clast_logged_in = params.dig(:b2_clast_logged_in)
+            @default_currency_code = params.dig(:default_currency_code)
+            @notes = params.dig(:notes)
+            @attachments = params.dig(:attachments)
+            @custom_field_values = params.dig(:custom_field_values)
+            @accounting_role_code_definition = params.dig(:accounting_role_code_definition)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. This record provides a link to the user's Azure AD B2C OID.
@@ -122,5 +124,46 @@ module LockstepSdk
         attr_accessor :custom_field_values
         # @return [CodeDefinitionModel] Accounting role definition for this User. To retrieve this collection, specify `AccountingRole` in the "Include" parameter for your query.
         attr_accessor :accounting_role_code_definition
+    end
+
+    def as_json(options={})
+        {
+            'userId' => @user_id,
+            'groupKey' => @group_key,
+            'userName' => @user_name,
+            'email' => @email,
+            'status' => @status,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'modifiedUserName' => @modified_user_name,
+            'b2CUserId' => @b2_cuser_id,
+            'userRole' => @user_role,
+            'inviteSent' => @invite_sent,
+            'phoneNumber' => @phone_number,
+            'faxNumber' => @fax_number,
+            'title' => @title,
+            'accountingRoleCodeDefId' => @accounting_role_code_def_id,
+            'address1' => @address1,
+            'address2' => @address2,
+            'address3' => @address3,
+            'city' => @city,
+            'stateRegion' => @state_region,
+            'postalCode' => @postal_code,
+            'country' => @country,
+            'imageURL' => @image_url,
+            'description' => @description,
+            'b2CLastLoggedIn' => @b2_clast_logged_in,
+            'defaultCurrencyCode' => @default_currency_code,
+            'notes' => @notes,
+            'attachments' => @attachments,
+            'customFieldValues' => @custom_field_values,
+            'accountingRoleCodeDefinition' => @accounting_role_code_definition,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

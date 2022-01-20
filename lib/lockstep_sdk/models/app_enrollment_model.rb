@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -25,23 +27,23 @@ module LockstepSdk
 
         # Initialize the AppEnrollmentModel using the provided prototype
         def initialize(params = {})
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @app_id = params.fetch(:app_id)
-            @group_key = params.fetch(:group_key)
-            @is_active = params.fetch(:is_active)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @cron_settings = params.fetch(:cron_settings)
-            @sync_schedule_is_active = params.fetch(:sync_schedule_is_active)
-            @app = params.fetch(:app)
-            @custom_field_definitions = params.fetch(:custom_field_definitions)
-            @custom_field_values = params.fetch(:custom_field_values)
-            @last_sync = params.fetch(:last_sync)
-            @last_successful_sync = params.fetch(:last_successful_sync)
-            @erp_info = params.fetch(:erp_info)
-            @connector_info = params.fetch(:connector_info)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @app_id = params.dig(:app_id)
+            @group_key = params.dig(:group_key)
+            @is_active = params.dig(:is_active)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @cron_settings = params.dig(:cron_settings)
+            @sync_schedule_is_active = params.dig(:sync_schedule_is_active)
+            @app = params.dig(:app)
+            @custom_field_definitions = params.dig(:custom_field_definitions)
+            @custom_field_values = params.dig(:custom_field_values)
+            @last_sync = params.dig(:last_sync)
+            @last_successful_sync = params.dig(:last_successful_sync)
+            @erp_info = params.dig(:erp_info)
+            @connector_info = params.dig(:connector_info)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
@@ -78,5 +80,31 @@ module LockstepSdk
         attr_accessor :erp_info
         # @return [ConnectorInfoModel] Optional data necessary to create an app enrollment for a supported connector. Only enter relevant fields for the given connector.
         attr_accessor :connector_info
+    end
+
+    def as_json(options={})
+        {
+            'appEnrollmentId' => @app_enrollment_id,
+            'appId' => @app_id,
+            'groupKey' => @group_key,
+            'isActive' => @is_active,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'cronSettings' => @cron_settings,
+            'syncScheduleIsActive' => @sync_schedule_is_active,
+            'app' => @app,
+            'customFieldDefinitions' => @custom_field_definitions,
+            'customFieldValues' => @custom_field_values,
+            'lastSync' => @last_sync,
+            'lastSuccessfulSync' => @last_successful_sync,
+            'erpInfo' => @erp_info,
+            'connectorInfo' => @connector_info,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

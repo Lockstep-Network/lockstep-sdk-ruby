@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -25,18 +27,18 @@ module LockstepSdk
 
         # Initialize the CustomFieldDefinitionModel using the provided prototype
         def initialize(params = {})
-            @group_key = params.fetch(:group_key)
-            @custom_field_definition_id = params.fetch(:custom_field_definition_id)
-            @table_key = params.fetch(:table_key)
-            @app_id = params.fetch(:app_id)
-            @custom_field_label = params.fetch(:custom_field_label)
-            @data_type = params.fetch(:data_type)
-            @sort_order = params.fetch(:sort_order)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
+            @group_key = params.dig(:group_key)
+            @custom_field_definition_id = params.dig(:custom_field_definition_id)
+            @table_key = params.dig(:table_key)
+            @app_id = params.dig(:app_id)
+            @custom_field_label = params.dig(:custom_field_label)
+            @data_type = params.dig(:data_type)
+            @sort_order = params.dig(:sort_order)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
         end
 
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -63,5 +65,26 @@ module LockstepSdk
         attr_accessor :modified_user_id
         # @return [Uuid] AppEnrollmentId for this record; used for mapping purposes.
         attr_accessor :app_enrollment_id
+    end
+
+    def as_json(options={})
+        {
+            'groupKey' => @group_key,
+            'customFieldDefinitionId' => @custom_field_definition_id,
+            'tableKey' => @table_key,
+            'appId' => @app_id,
+            'customFieldLabel' => @custom_field_label,
+            'dataType' => @data_type,
+            'sortOrder' => @sort_order,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'appEnrollmentId' => @app_enrollment_id,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

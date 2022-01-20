@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -23,35 +25,35 @@ module LockstepSdk
 
         # Initialize the ActivityModel using the provided prototype
         def initialize(params = {})
-            @activity_id = params.fetch(:activity_id)
-            @group_key = params.fetch(:group_key)
-            @company_id = params.fetch(:company_id)
-            @activity_type_code = params.fetch(:activity_type_code)
-            @activity_name = params.fetch(:activity_name)
-            @activity_description = params.fetch(:activity_description)
-            @activity_status = params.fetch(:activity_status)
-            @is_open = params.fetch(:is_open)
-            @priority = params.fetch(:priority)
-            @user_assigned_to = params.fetch(:user_assigned_to)
-            @date_assigned = params.fetch(:date_assigned)
-            @date_closed = params.fetch(:date_closed)
-            @snooze_until_date = params.fetch(:snooze_until_date)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @amount_collected = params.fetch(:amount_collected)
-            @amount_paid = params.fetch(:amount_paid)
-            @credit_given = params.fetch(:credit_given)
-            @is_unread = params.fetch(:is_unread)
-            @is_archived = params.fetch(:is_archived)
-            @company = params.fetch(:company)
-            @user_assigned_to_name = params.fetch(:user_assigned_to_name)
-            @attachments = params.fetch(:attachments)
-            @notes = params.fetch(:notes)
-            @custom_field_definitions = params.fetch(:custom_field_definitions)
-            @custom_field_values = params.fetch(:custom_field_values)
-            @references = params.fetch(:references)
+            @activity_id = params.dig(:activity_id)
+            @group_key = params.dig(:group_key)
+            @company_id = params.dig(:company_id)
+            @activity_type_code = params.dig(:activity_type_code)
+            @activity_name = params.dig(:activity_name)
+            @activity_description = params.dig(:activity_description)
+            @activity_status = params.dig(:activity_status)
+            @is_open = params.dig(:is_open)
+            @priority = params.dig(:priority)
+            @user_assigned_to = params.dig(:user_assigned_to)
+            @date_assigned = params.dig(:date_assigned)
+            @date_closed = params.dig(:date_closed)
+            @snooze_until_date = params.dig(:snooze_until_date)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @amount_collected = params.dig(:amount_collected)
+            @amount_paid = params.dig(:amount_paid)
+            @credit_given = params.dig(:credit_given)
+            @is_unread = params.dig(:is_unread)
+            @is_archived = params.dig(:is_archived)
+            @company = params.dig(:company)
+            @user_assigned_to_name = params.dig(:user_assigned_to_name)
+            @attachments = params.dig(:attachments)
+            @notes = params.dig(:notes)
+            @custom_field_definitions = params.dig(:custom_field_definitions)
+            @custom_field_values = params.dig(:custom_field_values)
+            @references = params.dig(:references)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
@@ -112,5 +114,43 @@ module LockstepSdk
         attr_accessor :custom_field_values
         # @return [ActivityXRefModel] All references attached to this applied activity. To retrieve this collection, specify `References` in the "Include" parameter for your query.
         attr_accessor :references
+    end
+
+    def as_json(options={})
+        {
+            'activityId' => @activity_id,
+            'groupKey' => @group_key,
+            'companyId' => @company_id,
+            'activityTypeCode' => @activity_type_code,
+            'activityName' => @activity_name,
+            'activityDescription' => @activity_description,
+            'activityStatus' => @activity_status,
+            'isOpen' => @is_open,
+            'priority' => @priority,
+            'userAssignedTo' => @user_assigned_to,
+            'dateAssigned' => @date_assigned,
+            'dateClosed' => @date_closed,
+            'snoozeUntilDate' => @snooze_until_date,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'amountCollected' => @amount_collected,
+            'amountPaid' => @amount_paid,
+            'creditGiven' => @credit_given,
+            'isUnread' => @is_unread,
+            'isArchived' => @is_archived,
+            'company' => @company,
+            'userAssignedToName' => @user_assigned_to_name,
+            'attachments' => @attachments,
+            'notes' => @notes,
+            'customFieldDefinitions' => @custom_field_definitions,
+            'customFieldValues' => @custom_field_values,
+            'references' => @references,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

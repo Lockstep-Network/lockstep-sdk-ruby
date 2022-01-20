@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,13 +22,13 @@ module LockstepSdk
 
         # Initialize the ProvisioningResponseModel using the provided prototype
         def initialize(params = {})
-            @user_name = params.fetch(:user_name)
-            @account_name = params.fetch(:account_name)
-            @user_id = params.fetch(:user_id)
-            @group_key = params.fetch(:group_key)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @sync_request_id = params.fetch(:sync_request_id)
-            @error_message = params.fetch(:error_message)
+            @user_name = params.dig(:user_name)
+            @account_name = params.dig(:account_name)
+            @user_id = params.dig(:user_id)
+            @group_key = params.dig(:group_key)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @sync_request_id = params.dig(:sync_request_id)
+            @error_message = params.dig(:error_message)
         end
 
         # @return [String] If provisioning is successful, contains the username of the created user.
@@ -43,5 +45,21 @@ module LockstepSdk
         attr_accessor :sync_request_id
         # @return [String] The error message(s).
         attr_accessor :error_message
+    end
+
+    def as_json(options={})
+        {
+            'userName' => @user_name,
+            'accountName' => @account_name,
+            'userId' => @user_id,
+            'groupKey' => @group_key,
+            'appEnrollmentId' => @app_enrollment_id,
+            'syncRequestId' => @sync_request_id,
+            'errorMessage' => @error_message,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

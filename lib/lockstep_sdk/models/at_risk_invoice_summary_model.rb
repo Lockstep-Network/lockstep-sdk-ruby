@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,22 +22,22 @@ module LockstepSdk
 
         # Initialize the AtRiskInvoiceSummaryModel using the provided prototype
         def initialize(params = {})
-            @report_date = params.fetch(:report_date)
-            @group_key = params.fetch(:group_key)
-            @customer_id = params.fetch(:customer_id)
-            @invoice_id = params.fetch(:invoice_id)
-            @invoice_number = params.fetch(:invoice_number)
-            @invoice_date = params.fetch(:invoice_date)
-            @customer_name = params.fetch(:customer_name)
-            @status = params.fetch(:status)
-            @payment_due_date = params.fetch(:payment_due_date)
-            @invoice_amount = params.fetch(:invoice_amount)
-            @outstanding_balance = params.fetch(:outstanding_balance)
-            @invoice_type_code = params.fetch(:invoice_type_code)
-            @newest_activity = params.fetch(:newest_activity)
-            @days_past_due = params.fetch(:days_past_due)
-            @payment_numbers = params.fetch(:payment_numbers)
-            @payment_ids = params.fetch(:payment_ids)
+            @report_date = params.dig(:report_date)
+            @group_key = params.dig(:group_key)
+            @customer_id = params.dig(:customer_id)
+            @invoice_id = params.dig(:invoice_id)
+            @invoice_number = params.dig(:invoice_number)
+            @invoice_date = params.dig(:invoice_date)
+            @customer_name = params.dig(:customer_name)
+            @status = params.dig(:status)
+            @payment_due_date = params.dig(:payment_due_date)
+            @invoice_amount = params.dig(:invoice_amount)
+            @outstanding_balance = params.dig(:outstanding_balance)
+            @invoice_type_code = params.dig(:invoice_type_code)
+            @newest_activity = params.dig(:newest_activity)
+            @days_past_due = params.dig(:days_past_due)
+            @payment_numbers = params.dig(:payment_numbers)
+            @payment_ids = params.dig(:payment_ids)
         end
 
         # @return [Date] The date of the report
@@ -70,5 +72,30 @@ module LockstepSdk
         attr_accessor :payment_numbers
         # @return [Uuid] The ids of the payments associated to this invoice.
         attr_accessor :payment_ids
+    end
+
+    def as_json(options={})
+        {
+            'reportDate' => @report_date,
+            'groupKey' => @group_key,
+            'customerId' => @customer_id,
+            'invoiceId' => @invoice_id,
+            'invoiceNumber' => @invoice_number,
+            'invoiceDate' => @invoice_date,
+            'customerName' => @customer_name,
+            'status' => @status,
+            'paymentDueDate' => @payment_due_date,
+            'invoiceAmount' => @invoice_amount,
+            'outstandingBalance' => @outstanding_balance,
+            'invoiceTypeCode' => @invoice_type_code,
+            'newestActivity' => @newest_activity,
+            'daysPastDue' => @days_past_due,
+            'paymentNumbers' => @payment_numbers,
+            'paymentIds' => @payment_ids,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

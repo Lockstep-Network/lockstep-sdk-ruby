@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -26,32 +28,32 @@ module LockstepSdk
 
         # Initialize the PaymentModel using the provided prototype
         def initialize(params = {})
-            @group_key = params.fetch(:group_key)
-            @payment_id = params.fetch(:payment_id)
-            @company_id = params.fetch(:company_id)
-            @erp_key = params.fetch(:erp_key)
-            @payment_type = params.fetch(:payment_type)
-            @tender_type = params.fetch(:tender_type)
-            @is_open = params.fetch(:is_open)
-            @memo_text = params.fetch(:memo_text)
-            @payment_date = params.fetch(:payment_date)
-            @post_date = params.fetch(:post_date)
-            @payment_amount = params.fetch(:payment_amount)
-            @unapplied_amount = params.fetch(:unapplied_amount)
-            @currency_code = params.fetch(:currency_code)
-            @reference_code = params.fetch(:reference_code)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @is_voided = params.fetch(:is_voided)
-            @in_dispute = params.fetch(:in_dispute)
-            @applications = params.fetch(:applications)
-            @notes = params.fetch(:notes)
-            @attachments = params.fetch(:attachments)
-            @custom_field_definitions = params.fetch(:custom_field_definitions)
-            @custom_field_values = params.fetch(:custom_field_values)
+            @group_key = params.dig(:group_key)
+            @payment_id = params.dig(:payment_id)
+            @company_id = params.dig(:company_id)
+            @erp_key = params.dig(:erp_key)
+            @payment_type = params.dig(:payment_type)
+            @tender_type = params.dig(:tender_type)
+            @is_open = params.dig(:is_open)
+            @memo_text = params.dig(:memo_text)
+            @payment_date = params.dig(:payment_date)
+            @post_date = params.dig(:post_date)
+            @payment_amount = params.dig(:payment_amount)
+            @unapplied_amount = params.dig(:unapplied_amount)
+            @currency_code = params.dig(:currency_code)
+            @reference_code = params.dig(:reference_code)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @is_voided = params.dig(:is_voided)
+            @in_dispute = params.dig(:in_dispute)
+            @applications = params.dig(:applications)
+            @notes = params.dig(:notes)
+            @attachments = params.dig(:attachments)
+            @custom_field_definitions = params.dig(:custom_field_definitions)
+            @custom_field_values = params.dig(:custom_field_values)
         end
 
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -106,5 +108,40 @@ module LockstepSdk
         attr_accessor :custom_field_definitions
         # @return [CustomFieldValueModel] All values attached to this payment. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
+    end
+
+    def as_json(options={})
+        {
+            'groupKey' => @group_key,
+            'paymentId' => @payment_id,
+            'companyId' => @company_id,
+            'erpKey' => @erp_key,
+            'paymentType' => @payment_type,
+            'tenderType' => @tender_type,
+            'isOpen' => @is_open,
+            'memoText' => @memo_text,
+            'paymentDate' => @payment_date,
+            'postDate' => @post_date,
+            'paymentAmount' => @payment_amount,
+            'unappliedAmount' => @unapplied_amount,
+            'currencyCode' => @currency_code,
+            'referenceCode' => @reference_code,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'appEnrollmentId' => @app_enrollment_id,
+            'isVoided' => @is_voided,
+            'inDispute' => @in_dispute,
+            'applications' => @applications,
+            'notes' => @notes,
+            'attachments' => @attachments,
+            'customFieldDefinitions' => @custom_field_definitions,
+            'customFieldValues' => @custom_field_values,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

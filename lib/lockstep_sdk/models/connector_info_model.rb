@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -21,10 +23,10 @@ module LockstepSdk
 
         # Initialize the ConnectorInfoModel using the provided prototype
         def initialize(params = {})
-            @auth_code = params.fetch(:auth_code)
-            @realm_id = params.fetch(:realm_id)
-            @redirect_uri = params.fetch(:redirect_uri)
-            @email = params.fetch(:email)
+            @auth_code = params.dig(:auth_code)
+            @realm_id = params.dig(:realm_id)
+            @redirect_uri = params.dig(:redirect_uri)
+            @email = params.dig(:email)
         end
 
         # @return [String] The authorization code returned from the first step of the OAuth2 flow https://oauth.net/2/grant-types/authorization-code/
@@ -35,5 +37,18 @@ module LockstepSdk
         attr_accessor :redirect_uri
         # @return [String] The email an email connection is being created for.
         attr_accessor :email
+    end
+
+    def as_json(options={})
+        {
+            'authCode' => @auth_code,
+            'realmId' => @realm_id,
+            'redirectUri' => @redirect_uri,
+            'email' => @email,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

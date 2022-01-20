@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,16 +22,16 @@ module LockstepSdk
 
         # Initialize the ActivityStreamItemModel using the provided prototype
         def initialize(params = {})
-            @object_key = params.fetch(:object_key)
-            @activity_stream_type = params.fetch(:activity_stream_type)
-            @text_value = params.fetch(:text_value)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @group_key = params.fetch(:group_key)
-            @from_email_address = params.fetch(:from_email_address)
-            @to_email_address = params.fetch(:to_email_address)
-            @from_contact_name = params.fetch(:from_contact_name)
-            @to_contact_name = params.fetch(:to_contact_name)
+            @object_key = params.dig(:object_key)
+            @activity_stream_type = params.dig(:activity_stream_type)
+            @text_value = params.dig(:text_value)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @group_key = params.dig(:group_key)
+            @from_email_address = params.dig(:from_email_address)
+            @to_email_address = params.dig(:to_email_address)
+            @from_contact_name = params.dig(:from_contact_name)
+            @to_contact_name = params.dig(:to_contact_name)
         end
 
         # @return [Uuid] The object key of the activity stream item.
@@ -52,5 +54,24 @@ module LockstepSdk
         attr_accessor :from_contact_name
         # @return [String] The name of the contact sending the activity otherwise null.
         attr_accessor :to_contact_name
+    end
+
+    def as_json(options={})
+        {
+            'objectKey' => @object_key,
+            'activityStreamType' => @activity_stream_type,
+            'textValue' => @text_value,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'groupKey' => @group_key,
+            'fromEmailAddress' => @from_email_address,
+            'toEmailAddress' => @to_email_address,
+            'fromContactName' => @from_contact_name,
+            'toContactName' => @to_contact_name,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

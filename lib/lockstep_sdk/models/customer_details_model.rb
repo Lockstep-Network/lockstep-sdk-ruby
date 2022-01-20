@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -20,26 +22,26 @@ module LockstepSdk
 
         # Initialize the CustomerDetailsModel using the provided prototype
         def initialize(params = {})
-            @group_key = params.fetch(:group_key)
-            @customer_id = params.fetch(:customer_id)
-            @name = params.fetch(:name)
-            @address1 = params.fetch(:address1)
-            @address2 = params.fetch(:address2)
-            @address3 = params.fetch(:address3)
-            @city = params.fetch(:city)
-            @state = params.fetch(:state)
-            @postal_code = params.fetch(:postal_code)
-            @country = params.fetch(:country)
-            @phone_number = params.fetch(:phone_number)
-            @fax_number = params.fetch(:fax_number)
-            @email = params.fetch(:email)
-            @contact_id = params.fetch(:contact_id)
-            @contact_name = params.fetch(:contact_name)
-            @contact_email = params.fetch(:contact_email)
-            @outstanding_invoices = params.fetch(:outstanding_invoices)
-            @outstanding_amount = params.fetch(:outstanding_amount)
-            @amount_past_due = params.fetch(:amount_past_due)
-            @payments = params.fetch(:payments)
+            @group_key = params.dig(:group_key)
+            @customer_id = params.dig(:customer_id)
+            @name = params.dig(:name)
+            @address1 = params.dig(:address1)
+            @address2 = params.dig(:address2)
+            @address3 = params.dig(:address3)
+            @city = params.dig(:city)
+            @state = params.dig(:state)
+            @postal_code = params.dig(:postal_code)
+            @country = params.dig(:country)
+            @phone_number = params.dig(:phone_number)
+            @fax_number = params.dig(:fax_number)
+            @email = params.dig(:email)
+            @contact_id = params.dig(:contact_id)
+            @contact_name = params.dig(:contact_name)
+            @contact_email = params.dig(:contact_email)
+            @outstanding_invoices = params.dig(:outstanding_invoices)
+            @outstanding_amount = params.dig(:outstanding_amount)
+            @amount_past_due = params.dig(:amount_past_due)
+            @payments = params.dig(:payments)
         end
 
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -82,5 +84,34 @@ module LockstepSdk
         attr_accessor :amount_past_due
         # @return [CustomerDetailsPaymentModel] Customer payments collected
         attr_accessor :payments
+    end
+
+    def as_json(options={})
+        {
+            'groupKey' => @group_key,
+            'customerId' => @customer_id,
+            'name' => @name,
+            'address1' => @address1,
+            'address2' => @address2,
+            'address3' => @address3,
+            'city' => @city,
+            'state' => @state,
+            'postalCode' => @postal_code,
+            'country' => @country,
+            'phoneNumber' => @phone_number,
+            'faxNumber' => @fax_number,
+            'email' => @email,
+            'contactId' => @contact_id,
+            'contactName' => @contact_name,
+            'contactEmail' => @contact_email,
+            'outstandingInvoices' => @outstanding_invoices,
+            'outstandingAmount' => @outstanding_amount,
+            'amountPastDue' => @amount_past_due,
+            'payments' => @payments,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end

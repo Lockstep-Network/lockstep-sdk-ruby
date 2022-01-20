@@ -7,6 +7,8 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
+# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
@@ -24,54 +26,54 @@ module LockstepSdk
 
         # Initialize the CompanyModel using the provided prototype
         def initialize(params = {})
-            @company_id = params.fetch(:company_id)
-            @company_name = params.fetch(:company_name)
-            @erp_key = params.fetch(:erp_key)
-            @company_type = params.fetch(:company_type)
-            @company_status = params.fetch(:company_status)
-            @parent_company_id = params.fetch(:parent_company_id)
-            @enterprise_id = params.fetch(:enterprise_id)
-            @group_key = params.fetch(:group_key)
-            @is_active = params.fetch(:is_active)
-            @default_currency_code = params.fetch(:default_currency_code)
-            @company_logo_url = params.fetch(:company_logo_url)
-            @primary_contact_id = params.fetch(:primary_contact_id)
-            @address1 = params.fetch(:address1)
-            @address2 = params.fetch(:address2)
-            @address3 = params.fetch(:address3)
-            @corp_city = params.fetch(:corp_city)
-            @corp_state = params.fetch(:corp_state)
-            @corp_postal_code = params.fetch(:corp_postal_code)
-            @corp_country = params.fetch(:corp_country)
-            @corp_phone = params.fetch(:corp_phone)
-            @corp_fax = params.fetch(:corp_fax)
-            @city = params.fetch(:city)
-            @state_region = params.fetch(:state_region)
-            @postal_code = params.fetch(:postal_code)
-            @country = params.fetch(:country)
-            @phone_number = params.fetch(:phone_number)
-            @fax_number = params.fetch(:fax_number)
-            @created = params.fetch(:created)
-            @created_user_id = params.fetch(:created_user_id)
-            @modified = params.fetch(:modified)
-            @modified_user_id = params.fetch(:modified_user_id)
-            @modified_user_name = params.fetch(:modified_user_name)
-            @tax_id = params.fetch(:tax_id)
-            @duns_number = params.fetch(:duns_number)
-            @ap_email_address = params.fetch(:ap_email_address)
-            @ar_email_address = params.fetch(:ar_email_address)
-            @domain_name = params.fetch(:domain_name)
-            @company_classification_code_def_id = params.fetch(:company_classification_code_def_id)
-            @description = params.fetch(:description)
-            @website = params.fetch(:website)
-            @app_enrollment_id = params.fetch(:app_enrollment_id)
-            @notes = params.fetch(:notes)
-            @attachments = params.fetch(:attachments)
-            @contacts = params.fetch(:contacts)
-            @invoices = params.fetch(:invoices)
-            @custom_field_definitions = params.fetch(:custom_field_definitions)
-            @custom_field_values = params.fetch(:custom_field_values)
-            @company_classification_code_definition = params.fetch(:company_classification_code_definition)
+            @company_id = params.dig(:company_id)
+            @company_name = params.dig(:company_name)
+            @erp_key = params.dig(:erp_key)
+            @company_type = params.dig(:company_type)
+            @company_status = params.dig(:company_status)
+            @parent_company_id = params.dig(:parent_company_id)
+            @enterprise_id = params.dig(:enterprise_id)
+            @group_key = params.dig(:group_key)
+            @is_active = params.dig(:is_active)
+            @default_currency_code = params.dig(:default_currency_code)
+            @company_logo_url = params.dig(:company_logo_url)
+            @primary_contact_id = params.dig(:primary_contact_id)
+            @address1 = params.dig(:address1)
+            @address2 = params.dig(:address2)
+            @address3 = params.dig(:address3)
+            @corp_city = params.dig(:corp_city)
+            @corp_state = params.dig(:corp_state)
+            @corp_postal_code = params.dig(:corp_postal_code)
+            @corp_country = params.dig(:corp_country)
+            @corp_phone = params.dig(:corp_phone)
+            @corp_fax = params.dig(:corp_fax)
+            @city = params.dig(:city)
+            @state_region = params.dig(:state_region)
+            @postal_code = params.dig(:postal_code)
+            @country = params.dig(:country)
+            @phone_number = params.dig(:phone_number)
+            @fax_number = params.dig(:fax_number)
+            @created = params.dig(:created)
+            @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
+            @modified_user_name = params.dig(:modified_user_name)
+            @tax_id = params.dig(:tax_id)
+            @duns_number = params.dig(:duns_number)
+            @ap_email_address = params.dig(:ap_email_address)
+            @ar_email_address = params.dig(:ar_email_address)
+            @domain_name = params.dig(:domain_name)
+            @company_classification_code_def_id = params.dig(:company_classification_code_def_id)
+            @description = params.dig(:description)
+            @website = params.dig(:website)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @notes = params.dig(:notes)
+            @attachments = params.dig(:attachments)
+            @contacts = params.dig(:contacts)
+            @invoices = params.dig(:invoices)
+            @custom_field_definitions = params.dig(:custom_field_definitions)
+            @custom_field_values = params.dig(:custom_field_values)
+            @company_classification_code_definition = params.dig(:company_classification_code_definition)
         end
 
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform. For the ID of this record in its originating financial system, see `ErpKey`.
@@ -170,5 +172,62 @@ module LockstepSdk
         attr_accessor :custom_field_values
         # @return [CodeDefinitionModel] Classification code definition for this company. To retrieve this collection, specify `Classification` in the "Include" parameter for your query.
         attr_accessor :company_classification_code_definition
+    end
+
+    def as_json(options={})
+        {
+            'companyId' => @company_id,
+            'companyName' => @company_name,
+            'erpKey' => @erp_key,
+            'companyType' => @company_type,
+            'companyStatus' => @company_status,
+            'parentCompanyId' => @parent_company_id,
+            'enterpriseId' => @enterprise_id,
+            'groupKey' => @group_key,
+            'isActive' => @is_active,
+            'defaultCurrencyCode' => @default_currency_code,
+            'companyLogoUrl' => @company_logo_url,
+            'primaryContactId' => @primary_contact_id,
+            'address1' => @address1,
+            'address2' => @address2,
+            'address3' => @address3,
+            'corpCity' => @corp_city,
+            'corpState' => @corp_state,
+            'corpPostalCode' => @corp_postal_code,
+            'corpCountry' => @corp_country,
+            'corpPhone' => @corp_phone,
+            'corpFax' => @corp_fax,
+            'city' => @city,
+            'stateRegion' => @state_region,
+            'postalCode' => @postal_code,
+            'country' => @country,
+            'phoneNumber' => @phone_number,
+            'faxNumber' => @fax_number,
+            'created' => @created,
+            'createdUserId' => @created_user_id,
+            'modified' => @modified,
+            'modifiedUserId' => @modified_user_id,
+            'modifiedUserName' => @modified_user_name,
+            'taxId' => @tax_id,
+            'dunsNumber' => @duns_number,
+            'apEmailAddress' => @ap_email_address,
+            'arEmailAddress' => @ar_email_address,
+            'domainName' => @domain_name,
+            'companyClassificationCodeDefId' => @company_classification_code_def_id,
+            'description' => @description,
+            'website' => @website,
+            'appEnrollmentId' => @app_enrollment_id,
+            'notes' => @notes,
+            'attachments' => @attachments,
+            'contacts' => @contacts,
+            'invoices' => @invoices,
+            'customFieldDefinitions' => @custom_field_definitions,
+            'customFieldValues' => @custom_field_values,
+            'companyClassificationCodeDefinition' => @company_classification_code_definition,
+        }
+    end
+
+    def to_json(*options)
+        as_json(*options).to_json(*options)
     end
 end
