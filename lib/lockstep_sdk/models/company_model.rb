@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -172,62 +174,62 @@ module LockstepSdk
         attr_accessor :custom_field_values
         # @return [CodeDefinitionModel] Classification code definition for this company. To retrieve this collection, specify `Classification` in the "Include" parameter for your query.
         attr_accessor :company_classification_code_definition
-    end
 
-    def as_json(options={})
-        {
-            'companyId' => @company_id,
-            'companyName' => @company_name,
-            'erpKey' => @erp_key,
-            'companyType' => @company_type,
-            'companyStatus' => @company_status,
-            'parentCompanyId' => @parent_company_id,
-            'enterpriseId' => @enterprise_id,
-            'groupKey' => @group_key,
-            'isActive' => @is_active,
-            'defaultCurrencyCode' => @default_currency_code,
-            'companyLogoUrl' => @company_logo_url,
-            'primaryContactId' => @primary_contact_id,
-            'address1' => @address1,
-            'address2' => @address2,
-            'address3' => @address3,
-            'corpCity' => @corp_city,
-            'corpState' => @corp_state,
-            'corpPostalCode' => @corp_postal_code,
-            'corpCountry' => @corp_country,
-            'corpPhone' => @corp_phone,
-            'corpFax' => @corp_fax,
-            'city' => @city,
-            'stateRegion' => @state_region,
-            'postalCode' => @postal_code,
-            'country' => @country,
-            'phoneNumber' => @phone_number,
-            'faxNumber' => @fax_number,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-            'modifiedUserName' => @modified_user_name,
-            'taxId' => @tax_id,
-            'dunsNumber' => @duns_number,
-            'apEmailAddress' => @ap_email_address,
-            'arEmailAddress' => @ar_email_address,
-            'domainName' => @domain_name,
-            'companyClassificationCodeDefId' => @company_classification_code_def_id,
-            'description' => @description,
-            'website' => @website,
-            'appEnrollmentId' => @app_enrollment_id,
-            'notes' => @notes,
-            'attachments' => @attachments,
-            'contacts' => @contacts,
-            'invoices' => @invoices,
-            'customFieldDefinitions' => @custom_field_definitions,
-            'customFieldValues' => @custom_field_values,
-            'companyClassificationCodeDefinition' => @company_classification_code_definition,
-        }
-    end
+        def as_json(options={})
+            {
+                'companyId' => @company_id,
+                'companyName' => @company_name,
+                'erpKey' => @erp_key,
+                'companyType' => @company_type,
+                'companyStatus' => @company_status,
+                'parentCompanyId' => @parent_company_id,
+                'enterpriseId' => @enterprise_id,
+                'groupKey' => @group_key,
+                'isActive' => @is_active,
+                'defaultCurrencyCode' => @default_currency_code,
+                'companyLogoUrl' => @company_logo_url,
+                'primaryContactId' => @primary_contact_id,
+                'address1' => @address1,
+                'address2' => @address2,
+                'address3' => @address3,
+                'corpCity' => @corp_city,
+                'corpState' => @corp_state,
+                'corpPostalCode' => @corp_postal_code,
+                'corpCountry' => @corp_country,
+                'corpPhone' => @corp_phone,
+                'corpFax' => @corp_fax,
+                'city' => @city,
+                'stateRegion' => @state_region,
+                'postalCode' => @postal_code,
+                'country' => @country,
+                'phoneNumber' => @phone_number,
+                'faxNumber' => @fax_number,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+                'modifiedUserName' => @modified_user_name,
+                'taxId' => @tax_id,
+                'dunsNumber' => @duns_number,
+                'apEmailAddress' => @ap_email_address,
+                'arEmailAddress' => @ar_email_address,
+                'domainName' => @domain_name,
+                'companyClassificationCodeDefId' => @company_classification_code_def_id,
+                'description' => @description,
+                'website' => @website,
+                'appEnrollmentId' => @app_enrollment_id,
+                'notes' => @notes,
+                'attachments' => @attachments,
+                'contacts' => @contacts,
+                'invoices' => @invoices,
+                'customFieldDefinitions' => @custom_field_definitions,
+                'customFieldValues' => @custom_field_values,
+                'companyClassificationCodeDefinition' => @company_classification_code_definition,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

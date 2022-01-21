@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -99,39 +101,39 @@ module LockstepSdk
         attr_accessor :notes
         # @return [AttachmentModel] All attachments attached to this company. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
         attr_accessor :attachments
-    end
 
-    def as_json(options={})
-        {
-            'invoiceLineId' => @invoice_line_id,
-            'groupKey' => @group_key,
-            'invoiceId' => @invoice_id,
-            'erpKey' => @erp_key,
-            'lineNumber' => @line_number,
-            'productCode' => @product_code,
-            'description' => @description,
-            'unitMeasureCode' => @unit_measure_code,
-            'unitPrice' => @unit_price,
-            'quantity' => @quantity,
-            'quantityShipped' => @quantity_shipped,
-            'quantityReceived' => @quantity_received,
-            'totalAmount' => @total_amount,
-            'exemptionCode' => @exemption_code,
-            'reportingDate' => @reporting_date,
-            'overrideOriginAddressId' => @override_origin_address_id,
-            'overrideBillToAddressId' => @override_bill_to_address_id,
-            'overrideShipToAddressId' => @override_ship_to_address_id,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-            'appEnrollmentId' => @app_enrollment_id,
-            'notes' => @notes,
-            'attachments' => @attachments,
-        }
-    end
+        def as_json(options={})
+            {
+                'invoiceLineId' => @invoice_line_id,
+                'groupKey' => @group_key,
+                'invoiceId' => @invoice_id,
+                'erpKey' => @erp_key,
+                'lineNumber' => @line_number,
+                'productCode' => @product_code,
+                'description' => @description,
+                'unitMeasureCode' => @unit_measure_code,
+                'unitPrice' => @unit_price,
+                'quantity' => @quantity,
+                'quantityShipped' => @quantity_shipped,
+                'quantityReceived' => @quantity_received,
+                'totalAmount' => @total_amount,
+                'exemptionCode' => @exemption_code,
+                'reportingDate' => @reporting_date,
+                'overrideOriginAddressId' => @override_origin_address_id,
+                'overrideBillToAddressId' => @override_bill_to_address_id,
+                'overrideShipToAddressId' => @override_ship_to_address_id,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+                'appEnrollmentId' => @app_enrollment_id,
+                'notes' => @notes,
+                'attachments' => @attachments,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

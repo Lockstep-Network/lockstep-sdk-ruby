@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -54,24 +56,24 @@ module LockstepSdk
         attr_accessor :from_contact_name
         # @return [String] The name of the contact sending the activity otherwise null.
         attr_accessor :to_contact_name
-    end
 
-    def as_json(options={})
-        {
-            'objectKey' => @object_key,
-            'activityStreamType' => @activity_stream_type,
-            'textValue' => @text_value,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'groupKey' => @group_key,
-            'fromEmailAddress' => @from_email_address,
-            'toEmailAddress' => @to_email_address,
-            'fromContactName' => @from_contact_name,
-            'toContactName' => @to_contact_name,
-        }
-    end
+        def as_json(options={})
+            {
+                'objectKey' => @object_key,
+                'activityStreamType' => @activity_stream_type,
+                'textValue' => @text_value,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'groupKey' => @group_key,
+                'fromEmailAddress' => @from_email_address,
+                'toEmailAddress' => @to_email_address,
+                'fromContactName' => @from_contact_name,
+                'toContactName' => @to_contact_name,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

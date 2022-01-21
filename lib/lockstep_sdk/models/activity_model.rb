@@ -7,12 +7,14 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
+
+
 require 'json'
 
 module LockstepSdk
@@ -22,7 +24,7 @@ module LockstepSdk
     # the current status of the task, the name and description given for the particular task,
     # the priority of the task, and any amounts collected, paid, or credited for the task.
     class ActivityModel
-        
+
         # Initialize the ActivityModel using the provided prototype
         def initialize(params = {})
             @activity_id = params.dig(:activity_id)
@@ -145,12 +147,12 @@ module LockstepSdk
                 'notes' => @notes,
                 'customFieldDefinitions' => @custom_field_definitions,
                 'customFieldValues' => @custom_field_values,
-                'references' => @references
-            } 
+                'references' => @references,
+            }
         end
 
         def to_json(*options)
-            "[#{as_json(*options).to_json(*options)}]"
+            as_json(*options).to_json(*options)
         end
     end
 end

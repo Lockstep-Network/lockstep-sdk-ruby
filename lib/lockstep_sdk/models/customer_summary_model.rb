@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -69,29 +71,29 @@ module LockstepSdk
         attr_accessor :dso
         # @return [Date] The date stamp for the newest Activity on this Customer.
         attr_accessor :newest_activity
-    end
 
-    def as_json(options={})
-        {
-            'groupKey' => @group_key,
-            'companyId' => @company_id,
-            'companyName' => @company_name,
-            'primaryContact' => @primary_contact,
-            'outstandingInvoices' => @outstanding_invoices,
-            'totalInvoicesOpen' => @total_invoices_open,
-            'totalInvoicesPastDue' => @total_invoices_past_due,
-            'closedInvoices' => @closed_invoices,
-            'amountCollected' => @amount_collected,
-            'outstandingAmount' => @outstanding_amount,
-            'amountPastDue' => @amount_past_due,
-            'unappliedPayments' => @unapplied_payments,
-            'percentOfTotalAr' => @percent_of_total_ar,
-            'dso' => @dso,
-            'newestActivity' => @newest_activity,
-        }
-    end
+        def as_json(options={})
+            {
+                'groupKey' => @group_key,
+                'companyId' => @company_id,
+                'companyName' => @company_name,
+                'primaryContact' => @primary_contact,
+                'outstandingInvoices' => @outstanding_invoices,
+                'totalInvoicesOpen' => @total_invoices_open,
+                'totalInvoicesPastDue' => @total_invoices_past_due,
+                'closedInvoices' => @closed_invoices,
+                'amountCollected' => @amount_collected,
+                'outstandingAmount' => @outstanding_amount,
+                'amountPastDue' => @amount_past_due,
+                'unappliedPayments' => @unapplied_payments,
+                'percentOfTotalAr' => @percent_of_total_ar,
+                'dso' => @dso,
+                'newestActivity' => @newest_activity,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

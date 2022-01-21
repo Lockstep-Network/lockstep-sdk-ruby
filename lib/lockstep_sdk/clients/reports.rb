@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'awrence'
 
 class ReportsClient
 
@@ -55,11 +57,11 @@ class ReportsClient
 
     # Retrieves AR header information up to the date specified.
     # 
-    # @param reportDate [date] The date of the report.
-    # @param companyId [uuid] Include a company to get AR data for a specific company, leave as null to include all Companies.
-    def accounts_receivable_header(reportDate:, companyId:)
+    # @param report_date [date] The date of the report.
+    # @param company_id [uuid] Include a company to get AR data for a specific company, leave as null to include all Companies.
+    def accounts_receivable_header(report_date:, company_id:)
         path = "/api/v1/Reports/ar-header"
-        params = {:reportDate => reportDate, :companyId => companyId}
+        params = {:reportDate => report_date, :companyId => company_id}
         @lockstepsdk.request(:get, path, nil, params)
     end
 
@@ -71,14 +73,14 @@ class ReportsClient
     # 
     # To force a recalculation of aging data, specify the `recalculate` option.  Note that forcing a recalculation will slow your API response time.
     # 
-    # @param CompanyId [uuid] Company aging buckets are filtered by (all company aging returned if not company specified)
-    # @param Recalculate [boolean] Force api to recalculate aging data, cached data may be returned when set to false
-    # @param CurrencyCode [string] Currency aging buckets are converted to (all aging data returned without currency conversion if no currency is specified)
-    # @param CurrencyProvider [string] Currency provider currency rates should be returned from to convert aging amounts to (default Lockstep currency provider used if no data provider specified)
-    # @param Buckets [int32] Customized buckets used for aging calculations (default buckets [0,30,60,90,120,180] will be used if buckets not specified)
-    def invoice_aging_report(companyId:, recalculate:, currencyCode:, currencyProvider:, buckets:)
+    # @param company_id [uuid] Company aging buckets are filtered by (all company aging returned if not company specified)
+    # @param recalculate [boolean] Force api to recalculate aging data, cached data may be returned when set to false
+    # @param currency_code [string] Currency aging buckets are converted to (all aging data returned without currency conversion if no currency is specified)
+    # @param currency_provider [string] Currency provider currency rates should be returned from to convert aging amounts to (default Lockstep currency provider used if no data provider specified)
+    # @param buckets [int32] Customized buckets used for aging calculations (default buckets [0,30,60,90,120,180] will be used if buckets not specified)
+    def invoice_aging_report(company_id:, recalculate:, currency_code:, currency_provider:, buckets:)
         path = "/api/v1/Reports/aging"
-        params = {:CompanyId => CompanyId, :Recalculate => Recalculate, :CurrencyCode => CurrencyCode, :CurrencyProvider => CurrencyProvider, :Buckets => Buckets}
+        params = {:CompanyId => company_id, :Recalculate => recalculate, :CurrencyCode => currency_code, :CurrencyProvider => currency_provider, :Buckets => buckets}
         @lockstepsdk.request(:get, path, nil, params)
     end
 
@@ -95,10 +97,10 @@ class ReportsClient
     # 
     # The Attachment Header report contains aggregated information about the `TotalAttachments`, `TotalArchived`, and `TotalActive` attachment classifications.
     # 
-    # @param companyId [uuid] Include a specific company to get Attachment data for, leave as null to include all Companies.
-    def attachments_header_information(companyId:)
+    # @param company_id [uuid] Include a specific company to get Attachment data for, leave as null to include all Companies.
+    def attachments_header_information(company_id:)
         path = "/api/v1/Reports/attachments-header"
-        params = {:companyId => companyId}
+        params = {:companyId => company_id}
         @lockstepsdk.request(:get, path, nil, params)
     end
 end

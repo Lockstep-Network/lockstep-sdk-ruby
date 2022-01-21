@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'awrence'
 
 class AppEnrollmentsClient
 
@@ -48,10 +50,9 @@ class AppEnrollmentsClient
     # 
     # @param id [uuid] The unique ID number of the App Enrollment to update
     # @param body [object] A list of changes to apply to this App Enrollment
-    def update_app_enrollment(id:)
+    def update_app_enrollment(id:, body:)
         path = "/api/v1/AppEnrollments/#{id}"
-        params = {}
-        @lockstepsdk.request(:patch, path, body, params)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Deletes the App Enrollment referred to by this unique identifier. An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
@@ -59,10 +60,10 @@ class AppEnrollmentsClient
     # See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
     # 
     # @param id [uuid] The unique ID number of the App Enrollment to delete
-    # @param removeEnrollmentData [boolean] Option to remove all associated app enrollment data when deleting app enrollment (default false)
-    def delete_app_enrollment(id:, removeEnrollmentData:)
+    # @param remove_enrollment_data [boolean] Option to remove all associated app enrollment data when deleting app enrollment (default false)
+    def delete_app_enrollment(id:, remove_enrollment_data:)
         path = "/api/v1/AppEnrollments/#{id}"
-        params = {:removeEnrollmentData => removeEnrollmentData}
+        params = {:removeEnrollmentData => remove_enrollment_data}
         @lockstepsdk.request(:delete, path, nil, params)
     end
 
@@ -73,9 +74,9 @@ class AppEnrollmentsClient
     # See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
     # 
     # @param body [AppEnrollmentModel] The App Enrollments to create
-    def create_app_enrollments()
+    def create_app_enrollments(body:)
         path = "/api/v1/AppEnrollments"
-        @lockstepsdk.request(:post, path, body, nil)
+        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Queries App Enrollments for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
@@ -89,11 +90,11 @@ class AppEnrollmentsClient
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collections: App, CustomFields, LastSync, LastSuccessfulSync
     # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageSize [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageNumber [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_app_enrollments(filter:, include_param:, order:, pageSize:, pageNumber:)
+    # @param page_size [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    # @param page_number [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    def query_app_enrollments(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/AppEnrollments/query"
-        params = {:filter => filter, :include => include_param, :order => order, :pageSize => pageSize, :pageNumber => pageNumber}
+        params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @lockstepsdk.request(:get, path, nil, params)
     end
 
@@ -108,7 +109,6 @@ class AppEnrollmentsClient
     # @param id [uuid] The unique ID number of the App Enrollment for which we retrieve custom fields
     def query_enrollment_fields(id:)
         path = "/api/v1/AppEnrollments/settings/#{id}"
-        params = {}
-        @lockstepsdk.request(:get, path, nil, params)
+        @lockstepsdk.request(:get, path, nil, nil)
     end
 end

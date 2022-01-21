@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -62,25 +64,25 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
         # @return [CustomFieldDefinitionModel] Definition of the value
         attr_accessor :custom_field_definition
-    end
 
-    def as_json(options={})
-        {
-            'groupKey' => @group_key,
-            'customFieldDefinitionId' => @custom_field_definition_id,
-            'recordKey' => @record_key,
-            'stringValue' => @string_value,
-            'numericValue' => @numeric_value,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-            'appEnrollmentId' => @app_enrollment_id,
-            'customFieldDefinition' => @custom_field_definition,
-        }
-    end
+        def as_json(options={})
+            {
+                'groupKey' => @group_key,
+                'customFieldDefinitionId' => @custom_field_definition_id,
+                'recordKey' => @record_key,
+                'stringValue' => @string_value,
+                'numericValue' => @numeric_value,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+                'appEnrollmentId' => @app_enrollment_id,
+                'customFieldDefinition' => @custom_field_definition,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

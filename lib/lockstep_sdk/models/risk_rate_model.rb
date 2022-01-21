@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -51,23 +53,23 @@ module LockstepSdk
         attr_accessor :at_risk_count_percentage
         # @return [Double] The percentage of all open invoices for the calculation month that are over 90 days based on outstanding balance
         attr_accessor :at_risk_percentage
-    end
 
-    def as_json(options={})
-        {
-            'groupKey' => @group_key,
-            'reportPeriod' => @report_period,
-            'invoiceMonthName' => @invoice_month_name,
-            'totalInvoiceCount' => @total_invoice_count,
-            'totalInvoiceAmount' => @total_invoice_amount,
-            'atRiskCount' => @at_risk_count,
-            'atRiskAmount' => @at_risk_amount,
-            'atRiskCountPercentage' => @at_risk_count_percentage,
-            'atRiskPercentage' => @at_risk_percentage,
-        }
-    end
+        def as_json(options={})
+            {
+                'groupKey' => @group_key,
+                'reportPeriod' => @report_period,
+                'invoiceMonthName' => @invoice_month_name,
+                'totalInvoiceCount' => @total_invoice_count,
+                'totalInvoiceAmount' => @total_invoice_amount,
+                'atRiskCount' => @at_risk_count,
+                'atRiskAmount' => @at_risk_amount,
+                'atRiskCountPercentage' => @at_risk_count_percentage,
+                'atRiskPercentage' => @at_risk_percentage,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

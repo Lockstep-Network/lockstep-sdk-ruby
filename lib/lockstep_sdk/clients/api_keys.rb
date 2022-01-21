@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'awrence'
 
 class ApiKeysClient
 
@@ -43,8 +45,7 @@ class ApiKeysClient
     # @param id [uuid] The unique Lockstep Platform ID number of this API Key
     def revoke_api_key(id:)
         path = "/api/v1/ApiKeys/#{id}"
-        params = {}
-        @lockstepsdk.request(:delete, path, nil, params)
+        @lockstepsdk.request(:delete, path, nil, nil)
     end
 
     # Creates an API key with the specified name.
@@ -52,9 +53,9 @@ class ApiKeysClient
     # An API Key is an authentication token that you may use with the Lockstep API.  Because API Keys do not have an expiration date, they are well suited for unattended processes.  Each API Key is associated with a user, and may be revoked to prevent it from accessing the Lockstep API. When you create an API Key, make sure to save the value in a secure location.  Lockstep cannot retrieve an API Key once it is created.  For more information, see [API Keys](https://developer.lockstep.io/docs/api-keys).
     # 
     # @param body [ApiKeyModel] Metadata about the API Key to create.
-    def create_api_key()
+    def create_api_key(body:)
         path = "/api/v1/ApiKeys"
-        @lockstepsdk.request(:post, path, body, nil)
+        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Queries API Keys for this user using the specified filtering, sorting, nested fetch, and pagination rules requested.  An API Key is an authentication token that you may use with the Lockstep API.  Because API Keys do not have an expiration date, they are well suited for unattended processes.  Each API Key is associated with a user, and may be revoked to prevent it from accessing the Lockstep API. When you create an API Key, make sure to save the value in a secure location.  Lockstep cannot retrieve an API Key once it is created.  For more information, see [API Keys](https://developer.lockstep.io/docs/api-keys).
@@ -62,11 +63,11 @@ class ApiKeysClient
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available but may be offered in the future.
     # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageSize [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageNumber [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_api_keys(filter:, include_param:, order:, pageSize:, pageNumber:)
+    # @param page_size [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    # @param page_number [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    def query_api_keys(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/ApiKeys/query"
-        params = {:filter => filter, :include => include_param, :order => order, :pageSize => pageSize, :pageNumber => pageNumber}
+        params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @lockstepsdk.request(:get, path, nil, params)
     end
 end

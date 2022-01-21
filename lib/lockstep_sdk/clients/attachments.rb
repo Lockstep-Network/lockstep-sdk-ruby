@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'awrence'
 
 class AttachmentsClient
 
@@ -48,10 +50,9 @@ class AttachmentsClient
     # 
     # @param id [uuid] The unique Lockstep Platform ID number of the attachment to update
     # @param body [object] A list of changes to apply to this Attachment
-    def update_attachment(id:)
+    def update_attachment(id:, body:)
         path = "/api/v1/Attachments/#{id}"
-        params = {}
-        @lockstepsdk.request(:patch, path, body, params)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Flag this attachment as archived, which can distinguish between attachments currently active and attachments not intended for active use.  This is similar to deletion but preserves information about the record's existence.
@@ -63,8 +64,7 @@ class AttachmentsClient
     # @param id [uuid] The unique ID number of the Attachment to be archived
     def archive_attachment(id:)
         path = "/api/v1/Attachments/#{id}"
-        params = {}
-        @lockstepsdk.request(:delete, path, nil, params)
+        @lockstepsdk.request(:delete, path, nil, nil)
     end
 
     # Returns a URI for the Attachment file to be downloaded, based on the ID provided.
@@ -76,8 +76,7 @@ class AttachmentsClient
     # @param id [uuid] The unique ID number of the Attachment whose URI will be returned
     def download_attachment(id:)
         path = "/api/v1/Attachments/#{id}/download"
-        params = {}
-        @lockstepsdk.request(:get, path, nil, params)
+        @lockstepsdk.request(:get, path, nil, nil)
     end
 
     # Uploads and creates one or more Attachments from the provided arguments.
@@ -86,11 +85,11 @@ class AttachmentsClient
     # 
     # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
     # 
-    # @param tableName [string] The name of the type of object to which this Attachment will be linked
-    # @param objectId [uuid] The unique ID of the object to which this Attachment will be linked
-    def upload_attachment(tableName:, objectId:)
+    # @param table_name [string] The name of the type of object to which this Attachment will be linked
+    # @param object_id [uuid] The unique ID of the object to which this Attachment will be linked
+    def upload_attachment(table_name:, object_id:)
         path = "/api/v1/Attachments"
-        params = {:tableName => tableName, :objectId => objectId}
+        params = {:tableName => table_name, :objectId => object_id}
         @lockstepsdk.request(:post, path, nil, params)
     end
 
@@ -105,11 +104,11 @@ class AttachmentsClient
     # @param filter [string] The filter to use to select from the list of available Attachments, in the [Searchlight query syntax](https://github.com/tspence/csharp-searchlight).
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available for querying but may be available in the future.
     # @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
-    # @param pageSize [int32] The page size for results (default 200, maximum of 10,000)
-    # @param pageNumber [int32] The page number for results (default 0)
-    def query_attachments(filter:, include_param:, order:, pageSize:, pageNumber:)
+    # @param page_size [int32] The page size for results (default 200, maximum of 10,000)
+    # @param page_number [int32] The page number for results (default 0)
+    def query_attachments(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Attachments/query"
-        params = {:filter => filter, :include => include_param, :order => order, :pageSize => pageSize, :pageNumber => pageNumber}
+        params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @lockstepsdk.request(:get, path, nil, params)
     end
 end

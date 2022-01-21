@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -124,46 +126,46 @@ module LockstepSdk
         attr_accessor :custom_field_values
         # @return [CodeDefinitionModel] Accounting role definition for this User. To retrieve this collection, specify `AccountingRole` in the "Include" parameter for your query.
         attr_accessor :accounting_role_code_definition
-    end
 
-    def as_json(options={})
-        {
-            'userId' => @user_id,
-            'groupKey' => @group_key,
-            'userName' => @user_name,
-            'email' => @email,
-            'status' => @status,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-            'modifiedUserName' => @modified_user_name,
-            'b2CUserId' => @b2_cuser_id,
-            'userRole' => @user_role,
-            'inviteSent' => @invite_sent,
-            'phoneNumber' => @phone_number,
-            'faxNumber' => @fax_number,
-            'title' => @title,
-            'accountingRoleCodeDefId' => @accounting_role_code_def_id,
-            'address1' => @address1,
-            'address2' => @address2,
-            'address3' => @address3,
-            'city' => @city,
-            'stateRegion' => @state_region,
-            'postalCode' => @postal_code,
-            'country' => @country,
-            'imageURL' => @image_url,
-            'description' => @description,
-            'b2CLastLoggedIn' => @b2_clast_logged_in,
-            'defaultCurrencyCode' => @default_currency_code,
-            'notes' => @notes,
-            'attachments' => @attachments,
-            'customFieldValues' => @custom_field_values,
-            'accountingRoleCodeDefinition' => @accounting_role_code_definition,
-        }
-    end
+        def as_json(options={})
+            {
+                'userId' => @user_id,
+                'groupKey' => @group_key,
+                'userName' => @user_name,
+                'email' => @email,
+                'status' => @status,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+                'modifiedUserName' => @modified_user_name,
+                'b2CUserId' => @b2_cuser_id,
+                'userRole' => @user_role,
+                'inviteSent' => @invite_sent,
+                'phoneNumber' => @phone_number,
+                'faxNumber' => @fax_number,
+                'title' => @title,
+                'accountingRoleCodeDefId' => @accounting_role_code_def_id,
+                'address1' => @address1,
+                'address2' => @address2,
+                'address3' => @address3,
+                'city' => @city,
+                'stateRegion' => @state_region,
+                'postalCode' => @postal_code,
+                'country' => @country,
+                'imageURL' => @image_url,
+                'description' => @description,
+                'b2CLastLoggedIn' => @b2_clast_logged_in,
+                'defaultCurrencyCode' => @default_currency_code,
+                'notes' => @notes,
+                'attachments' => @attachments,
+                'customFieldValues' => @custom_field_values,
+                'accountingRoleCodeDefinition' => @accounting_role_code_definition,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

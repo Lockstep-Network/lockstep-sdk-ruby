@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'awrence'
 
 class ProvisioningClient
 
@@ -27,21 +29,21 @@ class ProvisioningClient
     # Creates a new User or updates an Invited user based on metadata provided by the User during the onboarding process
     # 
     # @param body [ProvisioningModel] Represents a User and their related metadata
-    def provision_user_account()
+    def provision_user_account(body:)
         path = "/api/v1/Provisioning"
-        @lockstepsdk.request(:post, path, body, nil)
+        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Updates user, company and group metadata for a User of status 'Onboarding' and finalizes a user's onboarding process by changing the user status to 'Active'
     # 
     # @param body [ProvisioningFinalizeRequestModel] Represents a User and their related metadata
-    def finalize_user_account_provisioning()
+    def finalize_user_account_provisioning(body:)
         path = "/api/v1/Provisioning/finalize"
-        @lockstepsdk.request(:post, path, body, nil)
+        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
     end
 
-    def provision_free_developer_account()
+    def provision_free_developer_account(body:)
         path = "/api/v1/Provisioning/free-account"
-        @lockstepsdk.request(:post, path, body, nil)
+        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
     end
 end

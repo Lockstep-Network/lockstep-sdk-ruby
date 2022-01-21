@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -90,36 +92,36 @@ module LockstepSdk
         attr_accessor :postal_code
         # @return [String] The 2 character country code of the address for the Customer's Primary Contact.
         attr_accessor :country_code
-    end
 
-    def as_json(options={})
-        {
-            'groupKey' => @group_key,
-            'paymentId' => @payment_id,
-            'customerId' => @customer_id,
-            'customerName' => @customer_name,
-            'memoText' => @memo_text,
-            'referenceCode' => @reference_code,
-            'primaryContact' => @primary_contact,
-            'email' => @email,
-            'paymentAmount' => @payment_amount,
-            'unappliedAmount' => @unapplied_amount,
-            'paymentType' => @payment_type,
-            'paymentDate' => @payment_date,
-            'postDate' => @post_date,
-            'phone' => @phone,
-            'fax' => @fax,
-            'address1' => @address1,
-            'address2' => @address2,
-            'address3' => @address3,
-            'city' => @city,
-            'stateRegion' => @state_region,
-            'postalCode' => @postal_code,
-            'countryCode' => @country_code,
-        }
-    end
+        def as_json(options={})
+            {
+                'groupKey' => @group_key,
+                'paymentId' => @payment_id,
+                'customerId' => @customer_id,
+                'customerName' => @customer_name,
+                'memoText' => @memo_text,
+                'referenceCode' => @reference_code,
+                'primaryContact' => @primary_contact,
+                'email' => @email,
+                'paymentAmount' => @payment_amount,
+                'unappliedAmount' => @unapplied_amount,
+                'paymentType' => @payment_type,
+                'paymentDate' => @payment_date,
+                'postDate' => @post_date,
+                'phone' => @phone,
+                'fax' => @fax,
+                'address1' => @address1,
+                'address2' => @address2,
+                'address3' => @address3,
+                'city' => @city,
+                'stateRegion' => @state_region,
+                'postalCode' => @postal_code,
+                'countryCode' => @country_code,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

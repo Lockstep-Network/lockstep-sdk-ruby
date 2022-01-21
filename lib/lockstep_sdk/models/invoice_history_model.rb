@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -122,46 +124,46 @@ module LockstepSdk
         attr_accessor :modified
         # @return [Uuid] The ID number of the user who most recently modified this invoice.
         attr_accessor :modified_user_id
-    end
 
-    def as_json(options={})
-        {
-            'groupKey' => @group_key,
-            'invoiceHistoryId' => @invoice_history_id,
-            'invoiceId' => @invoice_id,
-            'companyId' => @company_id,
-            'customerId' => @customer_id,
-            'erpKey' => @erp_key,
-            'purchaseOrderCode' => @purchase_order_code,
-            'referenceCode' => @reference_code,
-            'salespersonCode' => @salesperson_code,
-            'salespersonName' => @salesperson_name,
-            'invoiceTypeCode' => @invoice_type_code,
-            'invoiceStatusCode' => @invoice_status_code,
-            'termsCode' => @terms_code,
-            'specialTerms' => @special_terms,
-            'currencyCode' => @currency_code,
-            'totalAmount' => @total_amount,
-            'salesTaxAmount' => @sales_tax_amount,
-            'discountAmount' => @discount_amount,
-            'outstandingBalanceAmount' => @outstanding_balance_amount,
-            'invoiceDate' => @invoice_date,
-            'discountDate' => @discount_date,
-            'postedDate' => @posted_date,
-            'invoiceClosedDate' => @invoice_closed_date,
-            'paymentDueDate' => @payment_due_date,
-            'importedDate' => @imported_date,
-            'primaryOriginAddressId' => @primary_origin_address_id,
-            'primaryBillToAddressId' => @primary_bill_to_address_id,
-            'primaryShipToAddressId' => @primary_ship_to_address_id,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-        }
-    end
+        def as_json(options={})
+            {
+                'groupKey' => @group_key,
+                'invoiceHistoryId' => @invoice_history_id,
+                'invoiceId' => @invoice_id,
+                'companyId' => @company_id,
+                'customerId' => @customer_id,
+                'erpKey' => @erp_key,
+                'purchaseOrderCode' => @purchase_order_code,
+                'referenceCode' => @reference_code,
+                'salespersonCode' => @salesperson_code,
+                'salespersonName' => @salesperson_name,
+                'invoiceTypeCode' => @invoice_type_code,
+                'invoiceStatusCode' => @invoice_status_code,
+                'termsCode' => @terms_code,
+                'specialTerms' => @special_terms,
+                'currencyCode' => @currency_code,
+                'totalAmount' => @total_amount,
+                'salesTaxAmount' => @sales_tax_amount,
+                'discountAmount' => @discount_amount,
+                'outstandingBalanceAmount' => @outstanding_balance_amount,
+                'invoiceDate' => @invoice_date,
+                'discountDate' => @discount_date,
+                'postedDate' => @posted_date,
+                'invoiceClosedDate' => @invoice_closed_date,
+                'paymentDueDate' => @payment_due_date,
+                'importedDate' => @imported_date,
+                'primaryOriginAddressId' => @primary_origin_address_id,
+                'primaryBillToAddressId' => @primary_bill_to_address_id,
+                'primaryShipToAddressId' => @primary_ship_to_address_id,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

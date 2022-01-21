@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -84,34 +86,34 @@ module LockstepSdk
         attr_accessor :amount_past_due
         # @return [CustomerDetailsPaymentModel] Customer payments collected
         attr_accessor :payments
-    end
 
-    def as_json(options={})
-        {
-            'groupKey' => @group_key,
-            'customerId' => @customer_id,
-            'name' => @name,
-            'address1' => @address1,
-            'address2' => @address2,
-            'address3' => @address3,
-            'city' => @city,
-            'state' => @state,
-            'postalCode' => @postal_code,
-            'country' => @country,
-            'phoneNumber' => @phone_number,
-            'faxNumber' => @fax_number,
-            'email' => @email,
-            'contactId' => @contact_id,
-            'contactName' => @contact_name,
-            'contactEmail' => @contact_email,
-            'outstandingInvoices' => @outstanding_invoices,
-            'outstandingAmount' => @outstanding_amount,
-            'amountPastDue' => @amount_past_due,
-            'payments' => @payments,
-        }
-    end
+        def as_json(options={})
+            {
+                'groupKey' => @group_key,
+                'customerId' => @customer_id,
+                'name' => @name,
+                'address1' => @address1,
+                'address2' => @address2,
+                'address3' => @address3,
+                'city' => @city,
+                'state' => @state,
+                'postalCode' => @postal_code,
+                'country' => @country,
+                'phoneNumber' => @phone_number,
+                'faxNumber' => @fax_number,
+                'email' => @email,
+                'contactId' => @contact_id,
+                'contactName' => @contact_name,
+                'contactEmail' => @contact_email,
+                'outstandingInvoices' => @outstanding_invoices,
+                'outstandingAmount' => @outstanding_amount,
+                'amountPastDue' => @amount_past_due,
+                'payments' => @payments,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            as_json(*options).to_json(*options)
+        end
     end
 end

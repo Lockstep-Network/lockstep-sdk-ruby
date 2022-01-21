@@ -7,12 +7,14 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
+
+
 require 'awrence'
 
 class ActivitiesClient
@@ -46,8 +48,7 @@ class ActivitiesClient
     # @param body [object] A list of changes to apply to this Activity
     def update_activity(id:, body:)
         path = "/api/v1/Activities/#{id}"
-        params = {}
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, params)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Delete the Activity referred to by this unique identifier.
@@ -57,8 +58,7 @@ class ActivitiesClient
     # @param id [uuid] The unique Lockstep Platform ID number of the Activity to delete
     def delete_activity(id:)
         path = "/api/v1/Activities/#{id}"
-        params = {}
-        @lockstepsdk.request(:delete, path, nil, params)
+        @lockstepsdk.request(:delete, path, nil, nil)
     end
 
     # Creates one or more activities from a given model.
@@ -68,7 +68,7 @@ class ActivitiesClient
     # @param body [ActivityModel] The Activities to create
     def create_activities(body:)
         path = "/api/v1/Activities"
-        @lockstepsdk.request(:post, path, body, nil)
+        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Queries Activities for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
@@ -80,11 +80,11 @@ class ActivitiesClient
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collections: Company, Attachments, CustomFields, Notes, References, and UserAssignedToName
     # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageSize [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageNumber [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_activities(filter:, include_param:, order:, pageSize:, pageNumber:)
+    # @param page_size [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    # @param page_number [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    def query_activities(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Activities/query"
-        params = {:filter => filter, :include => include_param, :order => order, :pageSize => pageSize, :pageNumber => pageNumber}
+        params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @lockstepsdk.request(:get, path, nil, params)
     end
 
@@ -95,19 +95,17 @@ class ActivitiesClient
     # @param id [uuid] The unique Lockstep Platform ID number of this Activity
     def retrieve_activity_stream(id:)
         path = "/api/v1/Activities/#{id}/stream"
-        params = {}
-        @lockstepsdk.request(:get, path, nil, params)
+        @lockstepsdk.request(:get, path, nil, nil)
     end
 
     # Forwards an activity by creating a new activity with all child references and assigning the new activity to a new user.
     # 
     # An Activity contains information about work being done on a specific accounting task. You can use Activities to track information about who has been assigned a specific task, the current status of the task, the name and description given for the particular task, the priority of the task, and any amounts collected, paid, or credited for the task.
     # 
-    # @param activityId [uuid] 
-    # @param userId [uuid] 
-    def forward_activity(activityId:, userId:)
+    # @param activity_id [uuid] 
+    # @param user_id [uuid] 
+    def forward_activity(activity_id:, user_id:)
         path = "/api/v1/Activities/#{activityId}/forward/#{userId}"
-        params = {}
-        @lockstepsdk.request(:post, path, nil, params)
+        @lockstepsdk.request(:post, path, nil, nil)
     end
 end
