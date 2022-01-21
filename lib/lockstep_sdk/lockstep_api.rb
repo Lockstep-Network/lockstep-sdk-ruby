@@ -23,9 +23,7 @@ Dir.glob(project_root + '/clients/*') {|file| require file}
 
 module LockstepSdk
     class LockstepApi
-    
-        require 'awrence'
-    
+       
         # @return [String] The version number of this Lockstep API client
         attr_accessor :version
         # @return [String] The name or URL of the environment
@@ -86,7 +84,7 @@ module LockstepSdk
         # Construct a new Lockstep API client targeting the specified server.
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
-        def self.new(env)
+        def initialize(env)
             @version = "2022.3.49.0"
             @env = case env
                 when "sbx"
@@ -169,11 +167,8 @@ module LockstepSdk
                 end
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
-            
-            # Convert the body to json
-            if !body.nil?
-                request.body = body.to_camelback_keys.to_json
-            end
+
+            request.body = body
             
             # Which authentication are we using?
             if @api_key != nil 
