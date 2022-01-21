@@ -52,7 +52,7 @@ class AppEnrollmentsClient
     # @param body [object] A list of changes to apply to this App Enrollment
     def update_app_enrollment(id:, body:)
         path = "/api/v1/AppEnrollments/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Deletes the App Enrollment referred to by this unique identifier. An App Enrollment represents an app that has been enrolled to the current account.  When you sign up for an app using the Lockstep Platform, you obtain an enrollment record for that app.  Example types of apps include connectors and feature enhancement apps. The App Enrollment object contains information about this app, its configuration, and settings.
@@ -76,7 +76,7 @@ class AppEnrollmentsClient
     # @param body [AppEnrollmentModel] The App Enrollments to create
     def create_app_enrollments(body:)
         path = "/api/v1/AppEnrollments"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries App Enrollments for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.

@@ -33,7 +33,7 @@ class SyncClient
     # @param body [SyncSubmitModel] Information about the Sync to execute
     def create_sync(body:)
         path = "/api/v1/Sync"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Requests a new Sync task from a ZIP file you provide.  This ZIP file can contain one or more files with data from the customer's platform.  Individual files can be in the format CSV or JSONL (JSON with Lines).
@@ -57,7 +57,7 @@ class SyncClient
     # @param body [object] A list of changes to apply to this Application
     def update_sync(id:, body:)
         path = "/api/v1/Sync/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Retrieves the status and information about a Sync operation by the requested ID.  Provides status and progress information about this task.

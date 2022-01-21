@@ -46,7 +46,7 @@ class PaymentApplicationsClient
     # @param body [object] A list of changes to apply to this Payment Application
     def update_payment_application(id:, body:)
         path = "/api/v1/PaymentApplications/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Deletes the Payment Application referred to by this unique identifier.
@@ -66,7 +66,7 @@ class PaymentApplicationsClient
     # @param body [PaymentAppliedModel] The Payment Applications to create
     def create_payment_applications(body:)
         path = "/api/v1/PaymentApplications"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries Payment Applications for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.

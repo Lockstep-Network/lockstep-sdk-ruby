@@ -48,7 +48,7 @@ class ActivitiesClient
     # @param body [object] A list of changes to apply to this Activity
     def update_activity(id:, body:)
         path = "/api/v1/Activities/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Delete the Activity referred to by this unique identifier.
@@ -68,7 +68,7 @@ class ActivitiesClient
     # @param body [ActivityModel] The Activities to create
     def create_activities(body:)
         path = "/api/v1/Activities"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries Activities for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.

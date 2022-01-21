@@ -48,7 +48,7 @@ class EmailsClient
     # @param body [object] A list of changes to apply to this Email
     def update_email(id:, body:)
         path = "/api/v1/Emails/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Deletes the Email referred to by this unique identifier.
@@ -78,7 +78,7 @@ class EmailsClient
     # @param body [EmailModel] The array of emails to be created
     def create_emails(body:)
         path = "/api/v1/Emails"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries Emails on the Lockstep Platform using the specified filtering, sorting, nested fetch, and pagination rules requested.

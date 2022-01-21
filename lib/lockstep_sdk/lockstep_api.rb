@@ -24,8 +24,6 @@ Dir.glob(project_root + '/clients/*') {|file| require file}
 module LockstepSdk
     class LockstepApi
     
-        require 'awrence'
-    
         # @return [String] The version number of this Lockstep API client
         attr_accessor :version
         # @return [String] The name or URL of the environment

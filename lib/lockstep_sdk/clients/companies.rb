@@ -48,7 +48,7 @@ class CompaniesClient
     # @param body [object] A list of changes to apply to this Company
     def update_company(id:, body:)
         path = "/api/v1/Companies/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Disable the Company referred to by this unique identifier.
@@ -70,7 +70,7 @@ class CompaniesClient
     # @param body [CompanyModel] The Companies to create
     def create_companies(body:)
         path = "/api/v1/Companies"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries Companies for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.

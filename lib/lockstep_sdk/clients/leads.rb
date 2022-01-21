@@ -32,6 +32,6 @@ class LeadsClient
     # @param body [LeadModel] The Leads to create
     def create_leads(body:)
         path = "/api/v1/Leads"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 end

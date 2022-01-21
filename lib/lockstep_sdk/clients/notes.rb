@@ -57,7 +57,7 @@ class NotesClient
     # @param body [NoteModel] The array of notes to be created
     def create_notes(body:)
         path = "/api/v1/Notes"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries Notes on the Lockstep Platform using the specified filtering, sorting, nested fetch, and pagination rules requested.

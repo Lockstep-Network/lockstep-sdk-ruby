@@ -47,6 +47,6 @@ class CurrenciesClient
     def bulk_currency_data(destination_currency:, body:)
         path = "/api/v1/Currencies/bulk"
         params = {:destinationCurrency => destination_currency}
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, params)
+        @lockstepsdk.request(:post, path, body, params)
     end
 end

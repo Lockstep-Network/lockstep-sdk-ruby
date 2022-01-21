@@ -44,7 +44,7 @@ class ContactsClient
     # @param body [object] A list of changes to apply to this Contact
     def update_contact(id:, body:)
         path = "/api/v1/Contacts/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Disable the Contact referred to by this unique identifier.
@@ -64,7 +64,7 @@ class ContactsClient
     # @param body [ContactModel] The Contacts to create
     def create_contacts(body:)
         path = "/api/v1/Contacts"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries Contacts for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.

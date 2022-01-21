@@ -48,7 +48,7 @@ class CustomFieldDefinitionsClient
     # @param body [object] A list of changes to apply to this Custom Field Definition
     def update_field_definition(id:, body:)
         path = "/api/v1/CustomFieldDefinitions/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Deletes the Custom Field Definition referred to by this unique identifier.
@@ -66,7 +66,7 @@ class CustomFieldDefinitionsClient
     # @param body [CustomFieldDefinitionModel] The Custom Field Definitions to create
     def create_field_definitions(body:)
         path = "/api/v1/CustomFieldDefinitions"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries Custom Field Definitions within the Lockstep platform using the specified filtering, sorting, nested fetch, and pagination rules requested.

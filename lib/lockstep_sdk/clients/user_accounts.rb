@@ -48,7 +48,7 @@ class UserAccountsClient
     # @param body [object] A list of changes to apply to this User
     def update_user(id:, body:)
         path = "/api/v1/UserAccounts/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Disable the user referred to by this unique identifier.
@@ -79,7 +79,7 @@ class UserAccountsClient
     # @param body [InviteSubmitModel] The user to invite
     def invite_user(body:)
         path = "/api/v1/UserAccounts/invite"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Retrieves invite information for the specified invite token.
@@ -99,7 +99,7 @@ class UserAccountsClient
     # @param body [TransferOwnerSubmitModel] 
     def transfer_owner(body:)
         path = "/api/v1/UserAccounts/transfer-owner"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries Users for this account using the specified filtering, sorting, nested fetch, and pagination rules requested. A User represents a person who has the ability to authenticate against the Lockstep Platform and use services such as Lockstep Inbox.  A User is uniquely identified by an Azure identity, and each user must have an email address defined within their account.  All Users must validate their email to make use of Lockstep platform services.  Users may have different privileges and access control rights within the Lockstep Platform.

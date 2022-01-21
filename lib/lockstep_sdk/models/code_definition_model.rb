@@ -70,7 +70,7 @@ module LockstepSdk
         end
 
         def to_json(*options)
-            as_json(*options).to_json(*options)
+            [#{as_json(*options).to_json(*options)}]
         end
     end
 end

@@ -46,7 +46,7 @@ class CreditMemoAppliedClient
     # @param body [object] A list of changes to apply to this Credit Memo Application
     def update_credit_memo_application(id:, body:)
         path = "/api/v1/CreditMemoApplied/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:patch, path, body, nil)
     end
 
     # Deletes the Credit Memo Application referred to by this unique identifier.
@@ -66,7 +66,7 @@ class CreditMemoAppliedClient
     # @param body [CreditMemoAppliedModel] The Credit Memo Applications to create
     def create_credit_memo_applications(body:)
         path = "/api/v1/CreditMemoApplied"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Queries Credit Memo Applications for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.

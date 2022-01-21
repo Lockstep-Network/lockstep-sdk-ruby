@@ -31,7 +31,7 @@ class ProvisioningClient
     # @param body [ProvisioningModel] Represents a User and their related metadata
     def provision_user_account(body:)
         path = "/api/v1/Provisioning"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     # Updates user, company and group metadata for a User of status 'Onboarding' and finalizes a user's onboarding process by changing the user status to 'Active'
@@ -39,11 +39,11 @@ class ProvisioningClient
     # @param body [ProvisioningFinalizeRequestModel] Represents a User and their related metadata
     def finalize_user_account_provisioning(body:)
         path = "/api/v1/Provisioning/finalize"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 
     def provision_free_developer_account(body:)
         path = "/api/v1/Provisioning/free-account"
-        @lockstepsdk.request(:post, path, body.to_camelback_keys.to_json, nil)
+        @lockstepsdk.request(:post, path, body, nil)
     end
 end
