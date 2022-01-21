@@ -76,7 +76,7 @@ class ReportsClient
     # @param CurrencyCode [string] Currency aging buckets are converted to (all aging data returned without currency conversion if no currency is specified)
     # @param CurrencyProvider [string] Currency provider currency rates should be returned from to convert aging amounts to (default Lockstep currency provider used if no data provider specified)
     # @param Buckets [int32] Customized buckets used for aging calculations (default buckets [0,30,60,90,120,180] will be used if buckets not specified)
-    def invoice_aging_report(CompanyId:, Recalculate:, CurrencyCode:, CurrencyProvider:, Buckets:)
+    def invoice_aging_report(companyId:, recalculate:, currencyCode:, currencyProvider:, buckets:)
         path = "/api/v1/Reports/aging"
         params = {:CompanyId => CompanyId, :Recalculate => Recalculate, :CurrencyCode => CurrencyCode, :CurrencyProvider => CurrencyProvider, :Buckets => Buckets}
         @lockstepsdk.request(:get, path, nil, params)

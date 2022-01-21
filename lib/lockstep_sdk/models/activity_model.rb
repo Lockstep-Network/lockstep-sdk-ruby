@@ -13,7 +13,7 @@
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
-
+require 'json'
 
 module LockstepSdk
 
@@ -22,7 +22,7 @@ module LockstepSdk
     # the current status of the task, the name and description given for the particular task,
     # the priority of the task, and any amounts collected, paid, or credited for the task.
     class ActivityModel
-
+        
         # Initialize the ActivityModel using the provided prototype
         def initialize(params = {})
             @activity_id = params.dig(:activity_id)
@@ -114,43 +114,43 @@ module LockstepSdk
         attr_accessor :custom_field_values
         # @return [ActivityXRefModel] All references attached to this applied activity. To retrieve this collection, specify `References` in the "Include" parameter for your query.
         attr_accessor :references
-    end
 
-    def as_json(options={})
-        {
-            'activityId' => @activity_id,
-            'groupKey' => @group_key,
-            'companyId' => @company_id,
-            'activityTypeCode' => @activity_type_code,
-            'activityName' => @activity_name,
-            'activityDescription' => @activity_description,
-            'activityStatus' => @activity_status,
-            'isOpen' => @is_open,
-            'priority' => @priority,
-            'userAssignedTo' => @user_assigned_to,
-            'dateAssigned' => @date_assigned,
-            'dateClosed' => @date_closed,
-            'snoozeUntilDate' => @snooze_until_date,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-            'amountCollected' => @amount_collected,
-            'amountPaid' => @amount_paid,
-            'creditGiven' => @credit_given,
-            'isUnread' => @is_unread,
-            'isArchived' => @is_archived,
-            'company' => @company,
-            'userAssignedToName' => @user_assigned_to_name,
-            'attachments' => @attachments,
-            'notes' => @notes,
-            'customFieldDefinitions' => @custom_field_definitions,
-            'customFieldValues' => @custom_field_values,
-            'references' => @references,
-        }
-    end
+        def as_json(options={})
+            {
+                'activityId' => @activity_id,
+                'groupKey' => @group_key,
+                'companyId' => @company_id,
+                'activityTypeCode' => @activity_type_code,
+                'activityName' => @activity_name,
+                'activityDescription' => @activity_description,
+                'activityStatus' => @activity_status,
+                'isOpen' => @is_open,
+                'priority' => @priority,
+                'userAssignedTo' => @user_assigned_to,
+                'dateAssigned' => @date_assigned,
+                'dateClosed' => @date_closed,
+                'snoozeUntilDate' => @snooze_until_date,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+                'amountCollected' => @amount_collected,
+                'amountPaid' => @amount_paid,
+                'creditGiven' => @credit_given,
+                'isUnread' => @is_unread,
+                'isArchived' => @is_archived,
+                'company' => @company,
+                'userAssignedToName' => @user_assigned_to_name,
+                'attachments' => @attachments,
+                'notes' => @notes,
+                'customFieldDefinitions' => @custom_field_definitions,
+                'customFieldValues' => @custom_field_values,
+                'references' => @references
+            } 
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        def to_json(*options)
+            "[#{as_json(*options).to_json(*options)}]"
+        end
     end
 end
