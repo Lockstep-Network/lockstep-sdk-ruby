@@ -7,7 +7,7 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3.49.0
@@ -23,7 +23,7 @@ Dir.glob(project_root + '/clients/*') {|file| require file}
 
 module LockstepSdk
     class LockstepApi
-       
+    
         # @return [String] The version number of this Lockstep API client
         attr_accessor :version
         # @return [String] The name or URL of the environment
@@ -167,7 +167,6 @@ module LockstepSdk
                 end
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
-
             request.body = body
             
             # Which authentication are we using?

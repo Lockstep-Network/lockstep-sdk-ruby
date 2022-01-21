@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -89,33 +91,35 @@ module LockstepSdk
         attr_accessor :custom_field_definitions
         # @return [CustomFieldValueModel] All values attached to the application. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
-    end
 
-    def as_json(options={})
-        {
-            'appId' => @app_id,
-            'name' => @name,
-            'description' => @description,
-            'appType' => @app_type,
-            'ownerId' => @owner_id,
-            'projectUrl' => @project_url,
-            'iconUrl' => @icon_url,
-            'priceTerms' => @price_terms,
-            'createdUserId' => @created_user_id,
-            'modifiedUserId' => @modified_user_id,
-            'created' => @created,
-            'modified' => @modified,
-            'isActive' => @is_active,
-            'wikiURL' => @wiki_url,
-            'groupKey' => @group_key,
-            'notes' => @notes,
-            'attachments' => @attachments,
-            'customFieldDefinitions' => @custom_field_definitions,
-            'customFieldValues' => @custom_field_values,
-        }
-    end
+        # @return [object] This object as a JSON key-value structure
+        def as_json(options={})
+            {
+                'appId' => @app_id,
+                'name' => @name,
+                'description' => @description,
+                'appType' => @app_type,
+                'ownerId' => @owner_id,
+                'projectUrl' => @project_url,
+                'iconUrl' => @icon_url,
+                'priceTerms' => @price_terms,
+                'createdUserId' => @created_user_id,
+                'modifiedUserId' => @modified_user_id,
+                'created' => @created,
+                'modified' => @modified,
+                'isActive' => @is_active,
+                'wikiURL' => @wiki_url,
+                'groupKey' => @group_key,
+                'notes' => @notes,
+                'attachments' => @attachments,
+                'customFieldDefinitions' => @custom_field_definitions,
+                'customFieldValues' => @custom_field_values,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        # @return [String] This object converted to a JSON string
+        def to_json(*options)
+            "[#{as_json(*options).to_json(*options)}]"
+        end
     end
 end

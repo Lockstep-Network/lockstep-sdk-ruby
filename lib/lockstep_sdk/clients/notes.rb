@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'awrence'
 
 class NotesClient
 
@@ -43,8 +45,7 @@ class NotesClient
     # @param id [uuid] Note id to be archived
     def archive_note(id:)
         path = "/api/v1/Notes/#{id}"
-        params = {}
-        @lockstepsdk.request(:delete, path, nil, params)
+        @lockstepsdk.request(:delete, path, nil, nil)
     end
 
     # Creates one or more notes from the specified array of Note Models
@@ -54,7 +55,7 @@ class NotesClient
     # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
     # 
     # @param body [NoteModel] The array of notes to be created
-    def create_notes()
+    def create_notes(body:)
         path = "/api/v1/Notes"
         @lockstepsdk.request(:post, path, body, nil)
     end
@@ -68,11 +69,11 @@ class NotesClient
     # @param filter [string] The filter to use to select from the list of available applications, in the [Searchlight query syntax](https://github.com/tspence/csharp-searchlight).
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available but may be offered in the future
     # @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
-    # @param pageSize [int32] The page size for results (default 200, maximum of 10,000)
-    # @param pageNumber [int32] The page number for results (default 0)
-    def query_notes(filter:, include_param:, order:, pageSize:, pageNumber:)
+    # @param page_size [int32] The page size for results (default 200, maximum of 10,000)
+    # @param page_number [int32] The page number for results (default 0)
+    def query_notes(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Notes/query"
-        params = {:filter => filter, :include => include_param, :order => order, :pageSize => pageSize, :pageNumber => pageNumber}
+        params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @lockstepsdk.request(:get, path, nil, params)
     end
 end

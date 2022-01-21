@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'awrence'
 
 class EmailsClient
 
@@ -44,10 +46,9 @@ class EmailsClient
     # 
     # @param id [uuid] The unique Lockstep Platform ID number of the email to update
     # @param body [object] A list of changes to apply to this Email
-    def update_email(id:)
+    def update_email(id:, body:)
         path = "/api/v1/Emails/#{id}"
-        params = {}
-        @lockstepsdk.request(:patch, path, body, params)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Deletes the Email referred to by this unique identifier.
@@ -57,19 +58,17 @@ class EmailsClient
     # @param id [uuid] The unique Lockstep Platform ID number of the Email to delete
     def delete_email(id:)
         path = "/api/v1/Emails/#{id}"
-        params = {}
-        @lockstepsdk.request(:delete, path, nil, params)
+        @lockstepsdk.request(:delete, path, nil, nil)
     end
 
     # Retrieves a signature logo for the email with the specified identifier and increments 'ViewCount'.
     # 
     # An Email represents a communication sent from one company to another.  The creator of the email is identified by the `CompanyId` field, recipient(s) by the `EmailTo` field, and cc recipient(s) by the 'EmailCC' field. The Email Model represents an email and a number of different metadata attributes related to the creation, storage, and ownership of the email.
-    # @param emailId [uuid] The unique ID number of the Email to retrieve.
+    # @param email_id [uuid] The unique ID number of the Email to retrieve.
     # @param nonce [uuid] The random nonce applied at time of url creation.
-    def retrieve_email_logo(emailId:, nonce:)
+    def retrieve_email_logo(email_id:, nonce:)
         path = "/api/v1/Emails/#{emailId}/logo/#{nonce}"
-        params = {}
-        @lockstepsdk.request(:get, path, nil, params)
+        @lockstepsdk.request(:get, path, nil, nil)
     end
 
     # Creates one or more emails from the specified array of Email Models
@@ -77,7 +76,7 @@ class EmailsClient
     # An Email represents a communication sent from one company to another.  The creator of the email is identified by the `CompanyId` field, recipient(s) by the `EmailTo` field, and cc recipient(s) by the 'EmailCC' field. The Email Model represents an email and a number of different metadata attributes related to the creation, storage, and ownership of the email.
     # 
     # @param body [EmailModel] The array of emails to be created
-    def create_emails()
+    def create_emails(body:)
         path = "/api/v1/Emails"
         @lockstepsdk.request(:post, path, body, nil)
     end
@@ -91,11 +90,11 @@ class EmailsClient
     # @param filter [string] The filter to use to select from the list of available applications, in the [Searchlight query syntax](https://github.com/tspence/csharp-searchlight).
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collections: Attachments, CustomFields, Notes, ResponseOrigin
     # @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
-    # @param pageSize [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageNumber [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_emails(filter:, include_param:, order:, pageSize:, pageNumber:)
+    # @param page_size [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    # @param page_number [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    def query_emails(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Emails/query"
-        params = {:filter => filter, :include => include_param, :order => order, :pageSize => pageSize, :pageNumber => pageNumber}
+        params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @lockstepsdk.request(:get, path, nil, params)
     end
 end

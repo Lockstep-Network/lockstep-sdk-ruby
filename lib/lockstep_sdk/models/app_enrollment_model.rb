@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -80,31 +82,33 @@ module LockstepSdk
         attr_accessor :erp_info
         # @return [ConnectorInfoModel] Optional data necessary to create an app enrollment for a supported connector. Only enter relevant fields for the given connector.
         attr_accessor :connector_info
-    end
 
-    def as_json(options={})
-        {
-            'appEnrollmentId' => @app_enrollment_id,
-            'appId' => @app_id,
-            'groupKey' => @group_key,
-            'isActive' => @is_active,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-            'cronSettings' => @cron_settings,
-            'syncScheduleIsActive' => @sync_schedule_is_active,
-            'app' => @app,
-            'customFieldDefinitions' => @custom_field_definitions,
-            'customFieldValues' => @custom_field_values,
-            'lastSync' => @last_sync,
-            'lastSuccessfulSync' => @last_successful_sync,
-            'erpInfo' => @erp_info,
-            'connectorInfo' => @connector_info,
-        }
-    end
+        # @return [object] This object as a JSON key-value structure
+        def as_json(options={})
+            {
+                'appEnrollmentId' => @app_enrollment_id,
+                'appId' => @app_id,
+                'groupKey' => @group_key,
+                'isActive' => @is_active,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+                'cronSettings' => @cron_settings,
+                'syncScheduleIsActive' => @sync_schedule_is_active,
+                'app' => @app,
+                'customFieldDefinitions' => @custom_field_definitions,
+                'customFieldValues' => @custom_field_values,
+                'lastSync' => @last_sync,
+                'lastSuccessfulSync' => @last_successful_sync,
+                'erpInfo' => @erp_info,
+                'connectorInfo' => @connector_info,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        # @return [String] This object converted to a JSON string
+        def to_json(*options)
+            "[#{as_json(*options).to_json(*options)}]"
+        end
     end
 end

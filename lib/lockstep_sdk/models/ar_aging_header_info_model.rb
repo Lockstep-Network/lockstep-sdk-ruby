@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -45,21 +47,23 @@ module LockstepSdk
         attr_accessor :total_ar_amount
         # @return [Double] Portion of Total AR this data represents.
         attr_accessor :percentage_of_total_ar
-    end
 
-    def as_json(options={})
-        {
-            'groupKey' => @group_key,
-            'reportBucket' => @report_bucket,
-            'totalCustomers' => @total_customers,
-            'totalInvoicesOutstanding' => @total_invoices_outstanding,
-            'totalOutstandingAmount' => @total_outstanding_amount,
-            'totalArAmount' => @total_ar_amount,
-            'percentageOfTotalAr' => @percentage_of_total_ar,
-        }
-    end
+        # @return [object] This object as a JSON key-value structure
+        def as_json(options={})
+            {
+                'groupKey' => @group_key,
+                'reportBucket' => @report_bucket,
+                'totalCustomers' => @total_customers,
+                'totalInvoicesOutstanding' => @total_invoices_outstanding,
+                'totalOutstandingAmount' => @total_outstanding_amount,
+                'totalArAmount' => @total_ar_amount,
+                'percentageOfTotalAr' => @percentage_of_total_ar,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        # @return [String] This object converted to a JSON string
+        def to_json(*options)
+            "[#{as_json(*options).to_json(*options)}]"
+        end
     end
 end

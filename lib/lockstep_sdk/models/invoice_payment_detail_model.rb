@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -54,24 +56,26 @@ module LockstepSdk
         attr_accessor :payment_amount
         # @return [Double] The remaining balance value of this Payment.
         attr_accessor :unapplied_amount
-    end
 
-    def as_json(options={})
-        {
-            'groupKey' => @group_key,
-            'paymentAppliedId' => @payment_applied_id,
-            'invoiceId' => @invoice_id,
-            'paymentId' => @payment_id,
-            'applyToInvoiceDate' => @apply_to_invoice_date,
-            'paymentAppliedAmount' => @payment_applied_amount,
-            'referenceCode' => @reference_code,
-            'companyId' => @company_id,
-            'paymentAmount' => @payment_amount,
-            'unappliedAmount' => @unapplied_amount,
-        }
-    end
+        # @return [object] This object as a JSON key-value structure
+        def as_json(options={})
+            {
+                'groupKey' => @group_key,
+                'paymentAppliedId' => @payment_applied_id,
+                'invoiceId' => @invoice_id,
+                'paymentId' => @payment_id,
+                'applyToInvoiceDate' => @apply_to_invoice_date,
+                'paymentAppliedAmount' => @payment_applied_amount,
+                'referenceCode' => @reference_code,
+                'companyId' => @company_id,
+                'paymentAmount' => @payment_amount,
+                'unappliedAmount' => @unapplied_amount,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        # @return [String] This object converted to a JSON string
+        def to_json(*options)
+            "[#{as_json(*options).to_json(*options)}]"
+        end
     end
 end

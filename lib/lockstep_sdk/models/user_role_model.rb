@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -45,21 +47,23 @@ module LockstepSdk
         attr_accessor :modified
         # @return [Uuid] The ID of the user who last modified the user role
         attr_accessor :modified_user_id
-    end
 
-    def as_json(options={})
-        {
-            'userRoleId' => @user_role_id,
-            'groupKey' => @group_key,
-            'userRoleName' => @user_role_name,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-        }
-    end
+        # @return [object] This object as a JSON key-value structure
+        def as_json(options={})
+            {
+                'userRoleId' => @user_role_id,
+                'groupKey' => @group_key,
+                'userRoleName' => @user_role_name,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        # @return [String] This object converted to a JSON string
+        def to_json(*options)
+            "[#{as_json(*options).to_json(*options)}]"
+        end
     end
 end

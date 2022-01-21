@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -126,47 +128,49 @@ module LockstepSdk
         attr_accessor :custom_field_definitions
         # @return [CustomFieldValueModel] All values attached to this email. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
-    end
 
-    def as_json(options={})
-        {
-            'emailId' => @email_id,
-            'threadId' => @thread_id,
-            'groupKey' => @group_key,
-            'companyId' => @company_id,
-            'emailFrom' => @email_from,
-            'emailTo' => @email_to,
-            'emailCC' => @email_cc,
-            'emailSubject' => @email_subject,
-            'emailBody' => @email_body,
-            'sentDate' => @sent_date,
-            'isUnread' => @is_unread,
-            'isPriority' => @is_priority,
-            'isSpam' => @is_spam,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'toBeSent' => @to_be_sent,
-            'customerId' => @customer_id,
-            'receivedTimeStamp' => @received_time_stamp,
-            'openedTimestamp' => @opened_timestamp,
-            'viewCount' => @view_count,
-            'appEnrollmentId' => @app_enrollment_id,
-            'externalEmailId' => @external_email_id,
-            'externalThreadId' => @external_thread_id,
-            'emailBcc' => @email_bcc,
-            'sendType' => @send_type,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-            'responseOriginId' => @response_origin_id,
-            'responseOrigin' => @response_origin,
-            'notes' => @notes,
-            'attachments' => @attachments,
-            'customFieldDefinitions' => @custom_field_definitions,
-            'customFieldValues' => @custom_field_values,
-        }
-    end
+        # @return [object] This object as a JSON key-value structure
+        def as_json(options={})
+            {
+                'emailId' => @email_id,
+                'threadId' => @thread_id,
+                'groupKey' => @group_key,
+                'companyId' => @company_id,
+                'emailFrom' => @email_from,
+                'emailTo' => @email_to,
+                'emailCC' => @email_cc,
+                'emailSubject' => @email_subject,
+                'emailBody' => @email_body,
+                'sentDate' => @sent_date,
+                'isUnread' => @is_unread,
+                'isPriority' => @is_priority,
+                'isSpam' => @is_spam,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'toBeSent' => @to_be_sent,
+                'customerId' => @customer_id,
+                'receivedTimeStamp' => @received_time_stamp,
+                'openedTimestamp' => @opened_timestamp,
+                'viewCount' => @view_count,
+                'appEnrollmentId' => @app_enrollment_id,
+                'externalEmailId' => @external_email_id,
+                'externalThreadId' => @external_thread_id,
+                'emailBcc' => @email_bcc,
+                'sendType' => @send_type,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+                'responseOriginId' => @response_origin_id,
+                'responseOrigin' => @response_origin,
+                'notes' => @notes,
+                'attachments' => @attachments,
+                'customFieldDefinitions' => @custom_field_definitions,
+                'customFieldValues' => @custom_field_values,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        # @return [String] This object converted to a JSON string
+        def to_json(*options)
+            "[#{as_json(*options).to_json(*options)}]"
+        end
     end
 end

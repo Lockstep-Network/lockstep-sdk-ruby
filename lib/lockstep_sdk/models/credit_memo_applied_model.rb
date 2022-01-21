@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -79,31 +81,33 @@ module LockstepSdk
         attr_accessor :custom_field_definitions
         # @return [CustomFieldValueModel] All values attached to this Credit Memo. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
-    end
 
-    def as_json(options={})
-        {
-            'creditMemoAppliedId' => @credit_memo_applied_id,
-            'groupKey' => @group_key,
-            'invoiceId' => @invoice_id,
-            'creditMemoInvoiceId' => @credit_memo_invoice_id,
-            'erpKey' => @erp_key,
-            'entryNumber' => @entry_number,
-            'applyToInvoiceDate' => @apply_to_invoice_date,
-            'creditMemoAppliedAmount' => @credit_memo_applied_amount,
-            'created' => @created,
-            'createdUserId' => @created_user_id,
-            'modified' => @modified,
-            'modifiedUserId' => @modified_user_id,
-            'appEnrollmentId' => @app_enrollment_id,
-            'attachments' => @attachments,
-            'notes' => @notes,
-            'customFieldDefinitions' => @custom_field_definitions,
-            'customFieldValues' => @custom_field_values,
-        }
-    end
+        # @return [object] This object as a JSON key-value structure
+        def as_json(options={})
+            {
+                'creditMemoAppliedId' => @credit_memo_applied_id,
+                'groupKey' => @group_key,
+                'invoiceId' => @invoice_id,
+                'creditMemoInvoiceId' => @credit_memo_invoice_id,
+                'erpKey' => @erp_key,
+                'entryNumber' => @entry_number,
+                'applyToInvoiceDate' => @apply_to_invoice_date,
+                'creditMemoAppliedAmount' => @credit_memo_applied_amount,
+                'created' => @created,
+                'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
+                'appEnrollmentId' => @app_enrollment_id,
+                'attachments' => @attachments,
+                'notes' => @notes,
+                'customFieldDefinitions' => @custom_field_definitions,
+                'customFieldValues' => @custom_field_values,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        # @return [String] This object converted to a JSON string
+        def to_json(*options)
+            "[#{as_json(*options).to_json(*options)}]"
+        end
     end
 end

@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'awrence'
 
 class CustomFieldDefinitionsClient
 
@@ -44,10 +46,9 @@ class CustomFieldDefinitionsClient
     # 
     # @param id [uuid] The unique Lockstep Platform ID number of the Custom Field Definition to update
     # @param body [object] A list of changes to apply to this Custom Field Definition
-    def update_field_definition(id:)
+    def update_field_definition(id:, body:)
         path = "/api/v1/CustomFieldDefinitions/#{id}"
-        params = {}
-        @lockstepsdk.request(:patch, path, body, params)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Deletes the Custom Field Definition referred to by this unique identifier.
@@ -57,14 +58,13 @@ class CustomFieldDefinitionsClient
     # @param id [uuid] The unique Lockstep Platform ID number of the Custom Field Definition to delete
     def delete_field_definition(id:)
         path = "/api/v1/CustomFieldDefinitions/#{id}"
-        params = {}
-        @lockstepsdk.request(:delete, path, nil, params)
+        @lockstepsdk.request(:delete, path, nil, nil)
     end
 
     # Creates one or more Custom Field Definitions and returns the records as created.  A Custom Field represents metadata added to an object within the Lockstep Platform.  Lockstep provides a core definition for each object.  The core definition is intended to represent a level of compatibility that provides support across most accounting systems and products.  When a user or developer requires information beyond this core definition, you can use Custom Fields to represent this information.  See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
     # 
     # @param body [CustomFieldDefinitionModel] The Custom Field Definitions to create
-    def create_field_definitions()
+    def create_field_definitions(body:)
         path = "/api/v1/CustomFieldDefinitions"
         @lockstepsdk.request(:post, path, body, nil)
     end
@@ -78,11 +78,11 @@ class CustomFieldDefinitionsClient
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No additional data collections are currently defined on this object, but may be supported in the future.
     # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageSize [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param pageNumber [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_field_definitions(filter:, include_param:, order:, pageSize:, pageNumber:)
+    # @param page_size [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    # @param page_number [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    def query_field_definitions(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/CustomFieldDefinitions/query"
-        params = {:filter => filter, :include => include_param, :order => order, :pageSize => pageSize, :pageNumber => pageNumber}
+        params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @lockstepsdk.request(:get, path, nil, params)
     end
 end

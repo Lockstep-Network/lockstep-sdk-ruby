@@ -7,13 +7,15 @@
 # file that was distributed with this source code.
 #
 # @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayanan <manish.n@lockstep.io>
+# @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
+
+require 'json'
 
 module LockstepSdk
 
@@ -69,29 +71,31 @@ module LockstepSdk
         attr_accessor :payment_numbers
         # @return [Uuid] The ids of the payments associated to this invoice.
         attr_accessor :payment_ids
-    end
 
-    def as_json(options={})
-        {
-            'groupKey' => @group_key,
-            'customerId' => @customer_id,
-            'invoiceId' => @invoice_id,
-            'invoiceNumber' => @invoice_number,
-            'invoiceDate' => @invoice_date,
-            'customerName' => @customer_name,
-            'status' => @status,
-            'paymentDueDate' => @payment_due_date,
-            'invoiceAmount' => @invoice_amount,
-            'outstandingBalance' => @outstanding_balance,
-            'invoiceTypeCode' => @invoice_type_code,
-            'newestActivity' => @newest_activity,
-            'daysPastDue' => @days_past_due,
-            'paymentNumbers' => @payment_numbers,
-            'paymentIds' => @payment_ids,
-        }
-    end
+        # @return [object] This object as a JSON key-value structure
+        def as_json(options={})
+            {
+                'groupKey' => @group_key,
+                'customerId' => @customer_id,
+                'invoiceId' => @invoice_id,
+                'invoiceNumber' => @invoice_number,
+                'invoiceDate' => @invoice_date,
+                'customerName' => @customer_name,
+                'status' => @status,
+                'paymentDueDate' => @payment_due_date,
+                'invoiceAmount' => @invoice_amount,
+                'outstandingBalance' => @outstanding_balance,
+                'invoiceTypeCode' => @invoice_type_code,
+                'newestActivity' => @newest_activity,
+                'daysPastDue' => @days_past_due,
+                'paymentNumbers' => @payment_numbers,
+                'paymentIds' => @payment_ids,
+            }
+        end
 
-    def to_json(*options)
-        as_json(*options).to_json(*options)
+        # @return [String] This object converted to a JSON string
+        def to_json(*options)
+            "[#{as_json(*options).to_json(*options)}]"
+        end
     end
 end
