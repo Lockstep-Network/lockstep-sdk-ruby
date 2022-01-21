@@ -48,7 +48,7 @@ class EmailsClient
     # @param body [object] A list of changes to apply to this Email
     def update_email(id:, body:)
         path = "/api/v1/Emails/#{id}"
-        @lockstepsdk.request(:patch, path, body, nil)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Deletes the Email referred to by this unique identifier.

@@ -48,7 +48,7 @@ class UserAccountsClient
     # @param body [object] A list of changes to apply to this User
     def update_user(id:, body:)
         path = "/api/v1/UserAccounts/#{id}"
-        @lockstepsdk.request(:patch, path, body, nil)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Disable the user referred to by this unique identifier.

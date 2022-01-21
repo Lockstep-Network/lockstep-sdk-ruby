@@ -30,14 +30,16 @@ module LockstepSdk
         # @return [Uuid] The identifier of the app enrollment
         attr_accessor :app_enrollment_id
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'appEnrollmentId' => @app_enrollment_id,
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

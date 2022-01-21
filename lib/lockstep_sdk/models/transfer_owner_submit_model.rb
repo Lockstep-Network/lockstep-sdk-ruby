@@ -30,14 +30,16 @@ module LockstepSdk
         # @return [Uuid] The ID of the user to transfer ownership to.
         attr_accessor :target_user_id
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'targetUserId' => @target_user_id,
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

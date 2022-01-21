@@ -30,14 +30,16 @@ module LockstepSdk
         # @return [Email] The email address of the user to invite
         attr_accessor :email
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'email' => @email,
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

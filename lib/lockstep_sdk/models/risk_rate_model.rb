@@ -54,6 +54,7 @@ module LockstepSdk
         # @return [Double] The percentage of all open invoices for the calculation month that are over 90 days based on outstanding balance
         attr_accessor :at_risk_percentage
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'groupKey' => @group_key,
@@ -68,8 +69,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

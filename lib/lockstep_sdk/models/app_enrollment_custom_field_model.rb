@@ -60,6 +60,7 @@ module LockstepSdk
         # @return [Double] Number data for field
         attr_accessor :numeric_value
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'appEnrollmentId' => @app_enrollment_id,
@@ -76,8 +77,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

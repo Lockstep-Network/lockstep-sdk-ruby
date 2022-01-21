@@ -42,6 +42,7 @@ module LockstepSdk
         # @return [Object] The errors encountered during sync keyed by ERP key
         attr_accessor :errors
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'insertCount' => @insert_count,
@@ -52,8 +53,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

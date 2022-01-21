@@ -37,6 +37,7 @@ module LockstepSdk
         # @return [String] The redirect uri used for step one of the OAuth2.0 flow.
         attr_accessor :redirect_uri
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'authCode' => @auth_code,
@@ -45,8 +46,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

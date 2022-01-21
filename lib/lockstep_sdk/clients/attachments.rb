@@ -52,7 +52,7 @@ class AttachmentsClient
     # @param body [object] A list of changes to apply to this Attachment
     def update_attachment(id:, body:)
         path = "/api/v1/Attachments/#{id}"
-        @lockstepsdk.request(:patch, path, body, nil)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Flag this attachment as archived, which can distinguish between attachments currently active and attachments not intended for active use.  This is similar to deletion but preserves information about the record's existence.

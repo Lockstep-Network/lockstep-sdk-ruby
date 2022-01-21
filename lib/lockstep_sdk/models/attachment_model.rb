@@ -66,6 +66,7 @@ module LockstepSdk
         # @return [Uuid] Id of the user who made the file
         attr_accessor :created_user_id
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'attachmentId' => @attachment_id,
@@ -84,8 +85,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

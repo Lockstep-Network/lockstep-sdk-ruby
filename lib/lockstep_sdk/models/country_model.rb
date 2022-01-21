@@ -63,6 +63,7 @@ module LockstepSdk
         # @return [String] A different name for a country
         attr_accessor :aliases
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'name' => @name,
@@ -80,8 +81,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

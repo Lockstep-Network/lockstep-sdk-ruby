@@ -175,6 +175,7 @@ module LockstepSdk
         # @return [CodeDefinitionModel] Classification code definition for this company. To retrieve this collection, specify `Classification` in the "Include" parameter for your query.
         attr_accessor :company_classification_code_definition
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'companyId' => @company_id,
@@ -228,8 +229,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

@@ -33,6 +33,7 @@ module LockstepSdk
         # @return [ConnectorInfoModel] The data required to store for connector access
         attr_accessor :data
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'appId' => @app_id,
@@ -40,8 +41,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

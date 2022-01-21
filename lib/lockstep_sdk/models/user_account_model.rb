@@ -127,6 +127,7 @@ module LockstepSdk
         # @return [CodeDefinitionModel] Accounting role definition for this User. To retrieve this collection, specify `AccountingRole` in the "Include" parameter for your query.
         attr_accessor :accounting_role_code_definition
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'userId' => @user_id,
@@ -164,8 +165,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

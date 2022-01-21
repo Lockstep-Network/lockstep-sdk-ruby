@@ -57,7 +57,7 @@ class SyncClient
     # @param body [object] A list of changes to apply to this Application
     def update_sync(id:, body:)
         path = "/api/v1/Sync/#{id}"
-        @lockstepsdk.request(:patch, path, body, nil)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Retrieves the status and information about a Sync operation by the requested ID.  Provides status and progress information about this task.

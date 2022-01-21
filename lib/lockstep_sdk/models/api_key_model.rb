@@ -63,6 +63,7 @@ module LockstepSdk
         # @return [Date-time] The UTC datetime when the API key expires.
         attr_accessor :expires
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'apiKeyId' => @api_key_id,
@@ -78,8 +79,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

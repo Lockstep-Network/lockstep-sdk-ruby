@@ -48,7 +48,7 @@ class CompaniesClient
     # @param body [object] A list of changes to apply to this Company
     def update_company(id:, body:)
         path = "/api/v1/Companies/#{id}"
-        @lockstepsdk.request(:patch, path, body, nil)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Disable the Company referred to by this unique identifier.

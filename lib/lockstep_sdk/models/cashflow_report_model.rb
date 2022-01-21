@@ -42,6 +42,7 @@ module LockstepSdk
         # @return [Int32] Number of invoices billed in the timeframe
         attr_accessor :invoices_billed_count
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'timeframe' => @timeframe,
@@ -52,8 +53,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

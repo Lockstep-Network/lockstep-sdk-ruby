@@ -39,6 +39,7 @@ module LockstepSdk
         # @return [Double] The currency rate value
         attr_accessor :currency_rate
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'sourceCurrency' => @source_currency,
@@ -48,8 +49,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

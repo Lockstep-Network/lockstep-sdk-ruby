@@ -48,6 +48,7 @@ module LockstepSdk
         # @return [Double] Portion of Total AR this data represents.
         attr_accessor :percentage_of_total_ar
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'groupKey' => @group_key,
@@ -60,8 +61,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

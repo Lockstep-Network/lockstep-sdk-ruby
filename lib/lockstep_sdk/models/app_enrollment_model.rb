@@ -83,6 +83,7 @@ module LockstepSdk
         # @return [ConnectorInfoModel] Optional data necessary to create an app enrollment for a supported connector. Only enter relevant fields for the given connector.
         attr_accessor :connector_info
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'appEnrollmentId' => @app_enrollment_id,
@@ -105,8 +106,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

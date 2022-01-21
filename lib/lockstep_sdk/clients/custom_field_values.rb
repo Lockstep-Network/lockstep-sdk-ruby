@@ -50,7 +50,7 @@ class CustomFieldValuesClient
     # @param body [object] A list of changes to apply to this Custom Field
     def update_field(definition_id:, record_key:, body:)
         path = "/api/v1/CustomFieldValues/#{definitionId}/#{recordKey}"
-        @lockstepsdk.request(:patch, path, body, nil)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     # Deletes the Custom Field referred to by this unique identifier.

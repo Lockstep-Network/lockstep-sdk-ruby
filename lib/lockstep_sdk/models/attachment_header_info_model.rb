@@ -42,6 +42,7 @@ module LockstepSdk
         # @return [Int32] The total number of active attachments associated with the provided GroupKey and CompanyId.
         attr_accessor :total_active
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'groupKey' => @group_key,
@@ -52,8 +53,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

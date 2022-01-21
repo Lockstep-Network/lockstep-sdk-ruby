@@ -125,6 +125,7 @@ module LockstepSdk
         # @return [Uuid] The ID number of the user who most recently modified this invoice.
         attr_accessor :modified_user_id
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'groupKey' => @group_key,
@@ -162,8 +163,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end

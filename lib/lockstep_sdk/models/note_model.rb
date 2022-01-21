@@ -68,6 +68,7 @@ module LockstepSdk
         # @return [String] The person to whom this note is intended for.
         attr_accessor :recipient_name
 
+        # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'noteId' => @note_id,
@@ -85,8 +86,9 @@ module LockstepSdk
             }
         end
 
+        # @return [String] This object converted to a JSON string
         def to_json(*options)
-            [#{as_json(*options).to_json(*options)}]
+            "[#{as_json(*options).to_json(*options)}]"
         end
     end
 end
