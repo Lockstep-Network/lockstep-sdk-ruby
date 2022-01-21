@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
                      context sensitive help and documentation for all methods and objects.'
     s.author = 'Lockstep'
     s.email = 'developer@lockstep.io'
-    s.files = ['lib/**/*.rb']
+    s.files = Dir['lib/**/*.rb']
     s.homepage = 'https://developer.lockstep.io'
     s.license = 'MIT'
     s.add_runtime_dependency "awrence"

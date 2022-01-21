@@ -13,7 +13,7 @@
 # @version    2022.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
-
+require 'awrence'
 
 class ActivitiesClient
 
@@ -44,10 +44,10 @@ class ActivitiesClient
     # 
     # @param id [uuid] The unique Lockstep Platform ID number of the Activity to update
     # @param body [object] A list of changes to apply to this Activity
-    def update_activity(id:)
+    def update_activity(id:, body:)
         path = "/api/v1/Activities/#{id}"
         params = {}
-        @lockstepsdk.request(:patch, path, body, params)
+        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, params)
     end
 
     # Delete the Activity referred to by this unique identifier.
@@ -66,7 +66,7 @@ class ActivitiesClient
     # An Activity contains information about work being done on a specific accounting task. You can use Activities to track information about who has been assigned a specific task, the current status of the task, the name and description given for the particular task, the priority of the task, and any amounts collected, paid, or credited for the task.
     # 
     # @param body [ActivityModel] The Activities to create
-    def create_activities()
+    def create_activities(body:)
         path = "/api/v1/Activities"
         @lockstepsdk.request(:post, path, body, nil)
     end
