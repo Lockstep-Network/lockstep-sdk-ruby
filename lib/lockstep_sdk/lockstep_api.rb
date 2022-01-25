@@ -169,6 +169,9 @@ module LockstepSdk
             request["Content-Type"] = 'application/*+json'
             request.body = body
             
+            request["SdkType"] = 'Ruby'
+            request["SdkVersion"] = '2022.3.50.0'
+            
             # Which authentication are we using?
             if @api_key != nil 
               request["Api-Key"] = @api_key
