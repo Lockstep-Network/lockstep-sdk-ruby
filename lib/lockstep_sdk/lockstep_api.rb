@@ -17,6 +17,7 @@
 require 'net/http'
 require 'openssl'
 require 'uri'
+require 'socket'
 
 project_root = File.dirname(File.absolute_path(__FILE__))
 Dir.glob(project_root + '/clients/*') {|file| require file}
@@ -140,6 +141,13 @@ module LockstepSdk
             @bearer_token = bearer_token
         end
 
+        # Configure this API to use an application name
+        #
+        # @param app_name [string] The name of the application
+        def with_app_name(app_name)
+            @app_name = app_name
+        end
+
         # Send a request to the API and return the results
         #
         # Sends a request to the 
@@ -169,6 +177,16 @@ module LockstepSdk
             request["Content-Type"] = 'application/*+json'
             request.body = body
             
+            request["SdkType"] = 'Ruby'
+            request["SdkVersion"] = '2022.3.50.0'
+           
+            request["MachineName"] = Socket.gethostname
+
+            # If there is an application name
+            if @app_name != nil
+                request["ApplicationName"] = @app_name
+            end
+
             # Which authentication are we using?
             if @api_key != nil 
               request["Api-Key"] = @api_key
