@@ -179,10 +179,8 @@ module LockstepSdk
             
             request["SdkType"] = 'Ruby'
             request["SdkVersion"] = '2022.3.50.0'
-            
-            machine_name = Socket.gethostname
-
-            request["MachineName"] = machine_name
+           
+            request["MachineName"] = Socket.gethostname
 
             # If there is an application name
             if @app_name != nil
