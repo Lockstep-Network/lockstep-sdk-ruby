@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Represents unsupported ERP systems
     class ErpModel
 
+        ##
         # Initialize the ErpModel using the provided prototype
         def initialize(params = {})
             @erp_system_id = params.dig(:erp_system_id)
@@ -29,13 +31,19 @@ module LockstepSdk
             @is_supported = params.dig(:is_supported)
         end
 
+        ##
         # @return [Uuid] Unique ID for this ERP
         attr_accessor :erp_system_id
+
+        ##
         # @return [String] Name of ERP
         attr_accessor :name
+
+        ##
         # @return [Boolean] Flag to indicate if ERP is supported
         attr_accessor :is_supported
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -45,6 +53,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

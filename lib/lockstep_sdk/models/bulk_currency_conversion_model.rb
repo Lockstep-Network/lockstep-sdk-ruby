@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,20 +19,26 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Input format used for bulk conversion route
     class BulkCurrencyConversionModel
 
+        ##
         # Initialize the BulkCurrencyConversionModel using the provided prototype
         def initialize(params = {})
             @date = params.dig(:date)
             @source_currency = params.dig(:source_currency)
         end
 
+        ##
         # @return [Date] The date for the currency rate
         attr_accessor :date
+
+        ##
         # @return [String] The currency code This will be validated by the /api/v1/currencies data set
         attr_accessor :source_currency
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -41,6 +47,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

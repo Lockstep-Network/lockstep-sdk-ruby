@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Represents the daily sales outstanding report
     class DailySalesOutstandingReportModel
 
+        ##
         # Initialize the DailySalesOutstandingReportModel using the provided prototype
         def initialize(params = {})
             @timeframe = params.dig(:timeframe)
@@ -29,13 +31,19 @@ module LockstepSdk
             @daily_sales_outstanding = params.dig(:daily_sales_outstanding)
         end
 
+        ##
         # @return [Date-time] Timeframe (month) the daily sales outstanding values are associated with
         attr_accessor :timeframe
+
+        ##
         # @return [Int32] Number of invoices the average daily sales outstanding is calculated on
         attr_accessor :invoice_count
+
+        ##
         # @return [Double] Time (in days) between an invoice was completed paid off and when the invoice was issued
         attr_accessor :daily_sales_outstanding
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -45,6 +53,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Represents a user uploaded attachment
     class AttachmentModel
 
+        ##
         # Initialize the AttachmentModel using the provided prototype
         def initialize(params = {})
             @attachment_id = params.dig(:attachment_id)
@@ -39,33 +41,59 @@ module LockstepSdk
             @created_user_id = params.dig(:created_user_id)
         end
 
+        ##
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         attr_accessor :attachment_id
+
+        ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
+
+        ##
         # @return [String] The name of the table the attachment is associated with
         attr_accessor :table_key
+
+        ##
         # @return [Uuid] The ID of the object the attachment is associated with
         attr_accessor :object_key
+
+        ##
         # @return [String] Name of the file
         attr_accessor :file_name
+
+        ##
         # @return [String] Extension type of the file
         attr_accessor :file_ext
+
+        ##
         # @return [Uuid] Corresponding AttachmentType object to describe this attachment
         attr_accessor :attachment_type_id
+
+        ##
         # @return [Boolean] Flag indicating the attachment was archived
         attr_accessor :is_archived
+
+        ##
         # @return [Uuid] 
         attr_accessor :origin_attachment_id
+
+        ##
         # @return [Boolean] Flag for if LS clients can see this file
         attr_accessor :view_internal
+
+        ##
         # @return [Boolean] Flag for if Vendors and customers can see this file
         attr_accessor :view_external
+
+        ##
         # @return [Date-time] The date the attachment was created
         attr_accessor :created
+
+        ##
         # @return [Uuid] Id of the user who made the file
         attr_accessor :created_user_id
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -85,6 +113,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,10 +19,12 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Represents all the possible data sent as a part of the provisioning post.
     # Only send required fields for the given connector.
     class ErpInfoDataModel
 
+        ##
         # Initialize the ErpInfoDataModel using the provided prototype
         def initialize(params = {})
             @auth_code = params.dig(:auth_code)
@@ -30,13 +32,19 @@ module LockstepSdk
             @redirect_uri = params.dig(:redirect_uri)
         end
 
+        ##
         # @return [String] The authorization code returned from the first step of the OAuth2 flow https://oauth.net/2/grant-types/authorization-code/
         attr_accessor :auth_code
+
+        ##
         # @return [String] The realm id of the account being granted permissions to access
         attr_accessor :realm_id
+
+        ##
         # @return [String] The redirect uri used for step one of the OAuth2.0 flow.
         attr_accessor :redirect_uri
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -46,6 +54,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

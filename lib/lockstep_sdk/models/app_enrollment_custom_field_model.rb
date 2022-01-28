@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # App enrollment and custom field merged into one
     class AppEnrollmentCustomFieldModel
 
+        ##
         # Initialize the AppEnrollmentCustomFieldModel using the provided prototype
         def initialize(params = {})
             @app_enrollment_id = params.dig(:app_enrollment_id)
@@ -37,29 +39,51 @@ module LockstepSdk
             @numeric_value = params.dig(:numeric_value)
         end
 
+        ##
         # @return [Uuid] Unique id for the app enrollment
         attr_accessor :app_enrollment_id
+
+        ##
         # @return [Uuid] Id of enrolled app
         attr_accessor :app_id
+
+        ##
         # @return [String] The name of the application
         attr_accessor :name
+
+        ##
         # @return [String] Tag for what type of app the application is
         attr_accessor :app_type
+
+        ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
+
+        ##
         # @return [Uuid] Unique Id for the custom field definition
         attr_accessor :custom_field_definition_id
+
+        ##
         # @return [String] Text to display in-application for custom field
         attr_accessor :custom_field_label
+
+        ##
         # @return [String] Data type of the custom field definition
         attr_accessor :data_type
+
+        ##
         # @return [Int32] Used for display logic when multiple app enrollment custom fields exist
         attr_accessor :sort_order
+
+        ##
         # @return [String] String of data for field
         attr_accessor :string_value
+
+        ##
         # @return [Double] Number data for field
         attr_accessor :numeric_value
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -77,6 +101,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

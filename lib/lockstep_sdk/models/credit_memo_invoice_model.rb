@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Contains information about a credit memo invoice
     class CreditMemoInvoiceModel
 
+        ##
         # Initialize the CreditMemoInvoiceModel using the provided prototype
         def initialize(params = {})
             @group_key = params.dig(:group_key)
@@ -38,31 +40,55 @@ module LockstepSdk
             @outstanding_balance_amount = params.dig(:outstanding_balance_amount)
         end
 
+        ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
+
+        ##
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         attr_accessor :credit_memo_applied_id
+
+        ##
         # @return [Uuid] The id of the invoice
         attr_accessor :invoice_id
+
+        ##
         # @return [Uuid] The id of the credit memo invoice
         attr_accessor :credit_memo_invoice_id
+
+        ##
         # @return [Date] Date invoice applied to credit memo.
         attr_accessor :apply_to_invoice_date
+
+        ##
         # @return [Double] Amount applied to credit memo.
         attr_accessor :credit_memo_applied_amount
+
+        ##
         # @return [String] An additional reference code that is sometimes used to identify this invoice. The meaning of this field is specific to the ERP or accounting system used by the user.
         attr_accessor :reference_code
+
+        ##
         # @return [Uuid] The ID number of the company that created this invoice.
         attr_accessor :company_id
+
+        ##
         # @return [Uuid] The ID number of the counterparty for the invoice, for example, a customer or vendor.
         attr_accessor :customer_id
+
+        ##
         # @return [String] A code identifying the status of this invoice.
         attr_accessor :invoice_status_code
+
+        ##
         # @return [Double] The total value of this invoice, inclusive of all taxes and line items.
         attr_accessor :total_amount
+
+        ##
         # @return [Double] The remaining balance value of this invoice.
         attr_accessor :outstanding_balance_amount
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -81,6 +107,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

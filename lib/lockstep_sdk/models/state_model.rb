@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # State model for ISO-3166-2
     class StateModel
 
+        ##
         # Initialize the StateModel using the provided prototype
         def initialize(params = {})
             @name = params.dig(:name)
@@ -29,13 +31,19 @@ module LockstepSdk
             @aliases = params.dig(:aliases)
         end
 
+        ##
         # @return [String] Name of the state
         attr_accessor :name
+
+        ##
         # @return [String] 2 letter alphabetic code for the given state
         attr_accessor :alpha2
+
+        ##
         # @return [String] A different name for a state
         attr_accessor :aliases
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -45,6 +53,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

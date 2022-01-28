@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Represents an aging record
     class AgingModel
 
+        ##
         # Initialize the AgingModel using the provided prototype
         def initialize(params = {})
             @bucket = params.dig(:bucket)
@@ -29,13 +31,19 @@ module LockstepSdk
             @outstanding_balance = params.dig(:outstanding_balance)
         end
 
+        ##
         # @return [Int32] Aging bucket of outstanding balance data (days past due date of invoice)
         attr_accessor :bucket
+
+        ##
         # @return [String] Currency code of aging bucket
         attr_accessor :currency_code
+
+        ##
         # @return [Double] Outstanding balance for the given aging bucket
         attr_accessor :outstanding_balance
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -45,6 +53,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

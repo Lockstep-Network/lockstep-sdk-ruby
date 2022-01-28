@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,17 +19,21 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Model to invite a new user to your accounting group
     class InviteSubmitModel
 
+        ##
         # Initialize the InviteSubmitModel using the provided prototype
         def initialize(params = {})
             @email = params.dig(:email)
         end
 
+        ##
         # @return [Email] The email address of the user to invite
         attr_accessor :email
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -37,6 +41,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

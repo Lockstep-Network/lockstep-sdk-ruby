@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Represents leads for creating new ERP connectors
     class LeadModel
 
+        ##
         # Initialize the LeadModel using the provided prototype
         def initialize(params = {})
             @lead_id = params.dig(:lead_id)
@@ -31,17 +33,27 @@ module LockstepSdk
             @erp_system = params.dig(:erp_system)
         end
 
+        ##
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         attr_accessor :lead_id
+
+        ##
         # @return [String] Name of lead
         attr_accessor :name
+
+        ##
         # @return [String] Name of company of lead
         attr_accessor :company
+
+        ##
         # @return [String] Email of lead
         attr_accessor :email
+
+        ##
         # @return [String] Requested ERP of lead
         attr_accessor :erp_system
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -53,6 +65,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

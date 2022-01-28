@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,14 +19,16 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # A note is a customizable text string that can be attached to various account attributes
     # within Lockstep. You can use notes for internal communication, correspondence with
     # clients, or personal reminders. The Note Model represents a note and a number of
     # different metadata attributes related to the creation, storage, and ownership of the note.
-    # 
+    #
     # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
     class NoteModel
 
+        ##
         # Initialize the NoteModel using the provided prototype
         def initialize(params = {})
             @note_id = params.dig(:note_id)
@@ -43,31 +45,55 @@ module LockstepSdk
             @recipient_name = params.dig(:recipient_name)
         end
 
+        ##
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
         attr_accessor :note_id
+
+        ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
+
+        ##
         # @return [String] The name of the table the note is associated with
         attr_accessor :table_key
+
+        ##
         # @return [Uuid] The ID of the object the note is associated with
         attr_accessor :object_key
+
+        ##
         # @return [String] The text of the note
         attr_accessor :note_text
+
+        ##
         # @return [String] The type of the note
         attr_accessor :note_type
+
+        ##
         # @return [Boolean] Flag indicating if the note has been archived
         attr_accessor :is_archived
+
+        ##
         # @return [Date-time] The date the note was created
         attr_accessor :created
+
+        ##
         # @return [Uuid] The ID of the user who created the note
         attr_accessor :created_user_id
+
+        ##
         # @return [String] The name of the user who created the note
         attr_accessor :created_user_name
+
+        ##
         # @return [Uuid] AppEnrollmentId for this record; used for mapping purposes.
         attr_accessor :app_enrollment_id
+
+        ##
         # @return [String] The person to whom this note is intended for.
         attr_accessor :recipient_name
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -86,6 +112,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"
