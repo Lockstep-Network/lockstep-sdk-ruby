@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -21,6 +21,7 @@ module LockstepSdk
 
     class ActivityXRefModel
 
+        ##
         # Initialize the ActivityXRefModel using the provided prototype
         def initialize(params = {})
             @activity_xref_id = params.dig(:activity_xref_id)
@@ -30,17 +31,27 @@ module LockstepSdk
             @object_key = params.dig(:object_key)
         end
 
+        ##
         # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this is added to the Lockstep platform.
         attr_accessor :activity_xref_id
+
+        ##
         # @return [Uuid] The ID of the activity to which this reference belongs.
         attr_accessor :activity_id
+
+        ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
+
+        ##
         # @return [String] The name of the table the activity reference is associated with
         attr_accessor :table_key
+
+        ##
         # @return [String] The ID of the object the activity reference is associated with
         attr_accessor :object_key
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -52,6 +63,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

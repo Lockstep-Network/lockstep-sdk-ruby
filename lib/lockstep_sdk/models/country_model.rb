@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Country model for ISO-3166
     class CountryModel
 
+        ##
         # Initialize the CountryModel using the provided prototype
         def initialize(params = {})
             @name = params.dig(:name)
@@ -38,31 +40,55 @@ module LockstepSdk
             @aliases = params.dig(:aliases)
         end
 
+        ##
         # @return [String] Name of the country
         attr_accessor :name
+
+        ##
         # @return [String] 2 letter alphabetic code for the given country
         attr_accessor :alpha2
+
+        ##
         # @return [String] 3 letter alphabetic code for the given country
         attr_accessor :alpha3
+
+        ##
         # @return [Int32] Unique 3 digit number for the given country
         attr_accessor :country_code
+
+        ##
         # @return [String] Region of the country
         attr_accessor :region
+
+        ##
         # @return [String] Subregion of the country
         attr_accessor :sub_region
+
+        ##
         # @return [String] Intermediate region of the country
         attr_accessor :intermediate_region
+
+        ##
         # @return [Int32] Numeric code for a region
         attr_accessor :region_code
+
+        ##
         # @return [Int32] Numeric code for a subregion
         attr_accessor :sub_region_code
+
+        ##
         # @return [Int32] Numeric code for an intermediate region
         attr_accessor :intermediate_region_code
+
+        ##
         # @return [String] French name of the country
         attr_accessor :french_name
+
+        ##
         # @return [String] A different name for a country
         attr_accessor :aliases
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -81,6 +107,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

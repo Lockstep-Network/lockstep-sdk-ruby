@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,17 +19,21 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Model used to submit a transfer ownership request
     class TransferOwnerSubmitModel
 
+        ##
         # Initialize the TransferOwnerSubmitModel using the provided prototype
         def initialize(params = {})
             @target_user_id = params.dig(:target_user_id)
         end
 
+        ##
         # @return [Uuid] The ID of the user to transfer ownership to.
         attr_accessor :target_user_id
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -37,6 +41,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,6 +19,7 @@ require 'awrence'
 
 class UserRolesClient
 
+    ##
     # Initialize the UserRolesClient class with a lockstepsdk instance.
     # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
     def initialize(lockstepsdk)
@@ -26,8 +27,9 @@ class UserRolesClient
     end
 
 
+    ##
     # Retrieves the User Role with this identifier.
-    # 
+    #
     # @param id [uuid] The unique ID number of the User Role to retrieve
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available but may be offered in the future
     def retrieve_user_role(id:, include_param:)
@@ -36,8 +38,9 @@ class UserRolesClient
         @lockstepsdk.request(:get, path, nil, params)
     end
 
+    ##
     # Queries User Roles for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
-    # 
+    #
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available but may be offered in the future
     # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)

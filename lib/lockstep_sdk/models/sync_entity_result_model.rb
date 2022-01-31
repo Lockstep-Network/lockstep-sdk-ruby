@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Contains information about a sync process for an entity.
     class SyncEntityResultModel
 
+        ##
         # Initialize the SyncEntityResultModel using the provided prototype
         def initialize(params = {})
             @insert_count = params.dig(:insert_count)
@@ -31,17 +33,27 @@ module LockstepSdk
             @errors = params.dig(:errors)
         end
 
+        ##
         # @return [Int32] The number of entities inserted
         attr_accessor :insert_count
+
+        ##
         # @return [Int32] The number of entities updated
         attr_accessor :update_count
+
+        ##
         # @return [Int32] The number of entities skipped
         attr_accessor :skip_count
+
+        ##
         # @return [Int32] The number of errors encountered during sync
         attr_accessor :error_count
+
+        ##
         # @return [Object] The errors encountered during sync keyed by ERP key
         attr_accessor :errors
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -53,6 +65,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"

@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.3
+# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -19,9 +19,11 @@ require 'json'
 
 module LockstepSdk
 
+    ##
     # Represents a currency rate for specific currencies and date
     class CurrencyRateModel
 
+        ##
         # Initialize the CurrencyRateModel using the provided prototype
         def initialize(params = {})
             @source_currency = params.dig(:source_currency)
@@ -30,15 +32,23 @@ module LockstepSdk
             @currency_rate = params.dig(:currency_rate)
         end
 
+        ##
         # @return [String] The source currency
         attr_accessor :source_currency
+
+        ##
         # @return [String] The destination currency
         attr_accessor :destination_currency
+
+        ##
         # @return [Date] The date for the currency rate
         attr_accessor :date
+
+        ##
         # @return [Double] The currency rate value
         attr_accessor :currency_rate
 
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -49,6 +59,7 @@ module LockstepSdk
             }
         end
 
+        ##
         # @return [String] This object converted to a JSON string
         def to_json(*options)
             "[#{as_json(*options).to_json(*options)}]"
