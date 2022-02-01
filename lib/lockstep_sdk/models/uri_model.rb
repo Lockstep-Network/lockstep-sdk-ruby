@@ -19,36 +19,24 @@ require 'json'
 module LockstepSdk
 
     ##
-    # State model for ISO-3166-2
-    class StateModel
+    # Represents a Uri for download link
+    class UriModel
 
         ##
-        # Initialize the StateModel using the provided prototype
+        # Initialize the UriModel using the provided prototype
         def initialize(params = {})
-            @name = params.dig(:name)
-            @alpha2 = params.dig(:alpha2)
-            @aliases = params.dig(:aliases)
+            @download_link = params.dig(:download_link)
         end
 
         ##
-        # @return [String] Name of the state
-        attr_accessor :name
-
-        ##
-        # @return [String] 2 letter alphabetic code for the given state
-        attr_accessor :alpha2
-
-        ##
-        # @return [String] A different name for a state
-        attr_accessor :aliases
+        # @return [Uri] Represents the download link
+        attr_accessor :download_link
 
         ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
-                'name' => @name,
-                'alpha2' => @alpha2,
-                'aliases' => @aliases,
+                'downloadLink' => @download_link,
             }
         end
 
