@@ -10,7 +10,6 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -93,7 +92,8 @@ class AttachmentsClient
     #
     # @param table_name [string] The name of the type of object to which this Attachment will be linked
     # @param object_id [uuid] The unique ID of the object to which this Attachment will be linked
-    def upload_attachment(table_name:, object_id:)
+    # @param filename [File] The full path of a file to upload to the API
+    def upload_attachment(table_name:, object_id:, filename:)
         path = "/api/v1/Attachments"
         params = {:tableName => table_name, :objectId => object_id}
         @lockstepsdk.request(:post, path, nil, params)

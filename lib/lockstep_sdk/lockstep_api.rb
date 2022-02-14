@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.4.32.0
+# @version    2022.6.48.0
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -137,13 +137,17 @@ module LockstepSdk
         # @return [UserRolesClient] Client object for UserRoles endpoints
         attr_accessor :user_roles
 
+        ##
+        # @return [WebhooksClient] Client object for Webhooks endpoints
+        attr_accessor :webhooks
+
 
         ##
         # Construct a new Lockstep API client targeting the specified server.
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def initialize(env)
-            @version = "2022.4.32.0"
+            @version = "2022.6.48.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -180,6 +184,7 @@ module LockstepSdk
             @sync = SyncClient.new(self)
             @user_accounts = UserAccountsClient.new(self)
             @user_roles = UserRolesClient.new(self)
+            @webhooks = WebhooksClient.new(self)
         end
 
         ##
@@ -239,7 +244,7 @@ module LockstepSdk
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
             request["SdkType"] = 'Ruby'
-            request["SdkVersion"] = '2022.4.32.0'
+            request["SdkVersion"] = '2022.6.48.0'
             request["MachineName"] = Socket.gethostname
             request.body = body
 

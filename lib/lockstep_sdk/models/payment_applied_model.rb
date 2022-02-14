@@ -10,7 +10,6 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -66,15 +65,15 @@ module LockstepSdk
         attr_accessor :erp_key
 
         ##
-        # @return [Int32] Reference number for the payment applied.
+        # @return [Int32] The entry number of this payment application. This is often a journal entry number, confirmation code, or other identifying field for this payment application.
         attr_accessor :entry_number
 
         ##
-        # @return [Date-time] Date payment applied to invoice.
+        # @return [Date-time] The date this payment was applied to this invoice.
         attr_accessor :apply_to_invoice_date
 
         ##
-        # @return [Double] Amount applied to invoice.
+        # @return [Double] The total amount that was applied to this Invoice from the Payment.
         attr_accessor :payment_applied_amount
 
         ##

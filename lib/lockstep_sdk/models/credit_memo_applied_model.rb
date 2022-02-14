@@ -10,7 +10,6 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.4
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -58,11 +57,11 @@ module LockstepSdk
         attr_accessor :group_key
 
         ##
-        # @return [Uuid] The id of the invoice
+        # @return [Uuid] The Lockstep ID of the Invoice to which this credit memo was applied. This Invoice's outstanding balance was reduced by the value of the field `CreditMemoAppliedAmount` on the date `ApplyToInvoiceDate`. Example: Company ABC received a credit memo, CM000123 for $500. Company ABC then chooses to apply this credit memo to reduce the balance of the invoice PO1000578. The `InvoiceErpKey` is the Lockstep Platform ID number of Invoice `PO1000578`.
         attr_accessor :invoice_id
 
         ##
-        # @return [Uuid] The id of the credit memo invoice
+        # @return [Uuid] The Lockstep ID of the Invoice of type "Credit Memo" that was consumed in this payment application event. Example: Company ABC received a credit memo, CM000123 for $500. Company ABC then chooses to apply this credit memo to reduce the balance of the invoice PO1000578. The `CreditMemoInvoiceId` is the Lockstep Platform ID number of Invoice `CM000123`.
         attr_accessor :credit_memo_invoice_id
 
         ##
@@ -74,11 +73,11 @@ module LockstepSdk
         attr_accessor :entry_number
 
         ##
-        # @return [Date-time] Date payment applied to credit memo.
+        # @return [Date-time] The date on which this credit memo was applied to the Invoice represented by `InvoiceId`.
         attr_accessor :apply_to_invoice_date
 
         ##
-        # @return [Double] Amount applied to credit memo.
+        # @return [Double] The amount of the credit memo that was applied to the Invoice represented by `InvoiceId`.
         attr_accessor :credit_memo_applied_amount
 
         ##
@@ -110,11 +109,11 @@ module LockstepSdk
         attr_accessor :notes
 
         ##
-        # @return [CustomFieldDefinitionModel] All definitions attached to this applied Credit Memo. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
+        # @return [CustomFieldDefinitionModel] All definitions attached to this applied Credit Memo. To retrieve this collection, specify `CustomFields` in the "Include" parameter for your query.
         attr_accessor :custom_field_definitions
 
         ##
-        # @return [CustomFieldValueModel] All values attached to this Credit Memo. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
+        # @return [CustomFieldValueModel] All values attached to this Credit Memo. To retrieve this collection, specify `CustomFields` in the "Include" parameter for your query.
         attr_accessor :custom_field_values
 
         ##
