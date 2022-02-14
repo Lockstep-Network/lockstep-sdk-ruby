@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.6.48.0
+# @version    2022.6.49.0
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -147,7 +147,7 @@ module LockstepSdk
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def initialize(env)
-            @version = "2022.6.48.0"
+            @version = "2022.6.49.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -244,7 +244,7 @@ module LockstepSdk
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
             request["SdkType"] = 'Ruby'
-            request["SdkVersion"] = '2022.6.48.0'
+            request["SdkVersion"] = '2022.6.49.0'
             request["MachineName"] = Socket.gethostname
             request.body = body
 
