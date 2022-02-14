@@ -1,5 +1,5 @@
 # Lockstep SDK For Ruby 
-![Gem](https://img.shields.io/gem/v/LockstepSdk)
+![Gem](https://img.shields.io/gem/v/lockstep_sdk)
 
 A financial service SDK for ruby for innovative accounting solutions providers.
 
@@ -12,7 +12,7 @@ Here's how to add the Lockstep ruby SDK to your project.
 
 1. Add the LockstepSdk gem to your Gemfile or install it  
 ```bash
- gem install LockstepSdk
+ gem install lockstep_sdk
 ```
 
 2. Obtain an API key for the Lockstep Platform API by visiting: [API Key](https://developer.lockstep.io/docs/api-keys)
