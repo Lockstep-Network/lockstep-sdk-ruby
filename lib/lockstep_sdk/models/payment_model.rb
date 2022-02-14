@@ -76,15 +76,15 @@ module LockstepSdk
         attr_accessor :erp_key
 
         ##
-        # @return [String] The type of payment, cash or check.
+        # @return [String] The type of payment, cash or check. Recognized PaymentType values are: * `Cash` - A cash payment or other direct transfer. * `Check` - A check payment.
         attr_accessor :payment_type
 
         ##
-        # @return [String] Cash, check, credit card, wire transfer.
+        # @return [String] Cash, check, credit card, wire transfer. Recognized TenderType values are: * `Cash` - A cash payment or other direct transfer. * `Check` - A check payment. * `Credit Card` - A payment made via a credit card. * `Wire Transfer` - A payment made via wire transfer from another financial institution.
         attr_accessor :tender_type
 
         ##
-        # @return [Boolean] Has the payment been fully applied?
+        # @return [Boolean] True if this payment includes some unassigned amount that has not yet been applied to an invoice. If this value is true, the field `UnappliedAmount` will be nonzero.
         attr_accessor :is_open
 
         ##
@@ -92,11 +92,11 @@ module LockstepSdk
         attr_accessor :memo_text
 
         ##
-        # @return [Date] The date of this payment.
+        # @return [Date] The date when this payment was received. This typically is the date when an accounting employee recorded that they received notification that the payment had occurred, whether they were notified by email, postal mail, or financial transaction notification.
         attr_accessor :payment_date
 
         ##
-        # @return [Date] Payment post date.
+        # @return [Date] The date when a payment was posted to a ledger. This date is often determined by a company's accounting practices and may be different than the date when the payment was received. This date may be affected by issues such as temporary holds on funds transferred, bank holidays, or other actions.
         attr_accessor :post_date
 
         ##
@@ -104,11 +104,11 @@ module LockstepSdk
         attr_accessor :payment_amount
 
         ##
-        # @return [Double] Unapplied balance of this payment.
+        # @return [Double] Unapplied balance of this payment. If this amount is nonzero, the field `IsOpen` will be true.
         attr_accessor :unapplied_amount
 
         ##
-        # @return [String] Currency of the payment. This will be validated by the /api/v1/currencies data set
+        # @return [String] The ISO 4217 currency code for this payment. For a list of ISO 4217 currency codes, see [Query Currencies](https://developer.lockstep.io/reference/get_api-v1-definitions-currencies). This will be validated by the /api/v1/currencies data set
         attr_accessor :currency_code
 
         ##

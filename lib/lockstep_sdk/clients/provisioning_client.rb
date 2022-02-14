@@ -44,10 +44,6 @@ class ProvisioningClient
         @lockstepsdk.request(:post, path, body, nil)
     end
 
-    ##
-    #
-    #
-    # @param body [DeveloperAccountSubmitModel] 
     def provision_free_developer_account(body:)
         path = "/api/v1/Provisioning/free-account"
         @lockstepsdk.request(:post, path, body, nil)

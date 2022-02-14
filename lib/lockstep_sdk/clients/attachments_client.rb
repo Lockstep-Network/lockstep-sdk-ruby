@@ -92,7 +92,8 @@ class AttachmentsClient
     #
     # @param table_name [string] The name of the type of object to which this Attachment will be linked
     # @param object_id [uuid] The unique ID of the object to which this Attachment will be linked
-    def upload_attachment(table_name:, object_id:)
+    # @param filename [File] The full path of a file to upload to the API
+    def upload_attachment(table_name:, object_id:, filename:)
         path = "/api/v1/Attachments"
         params = {:tableName => table_name, :objectId => object_id}
         @lockstepsdk.request(:post, path, nil, params)
