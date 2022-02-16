@@ -60,7 +60,7 @@ module LockstepSdk
         attr_accessor :process_result_message
 
         ##
-        # @return [Uuid] App enrollment sync request is for
+        # @return [Uuid] The AppEnrollmentId of the AppEnrollment object that executed this sync request
         attr_accessor :app_enrollment_id
 
         ##

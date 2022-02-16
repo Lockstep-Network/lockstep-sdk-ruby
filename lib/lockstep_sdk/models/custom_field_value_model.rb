@@ -80,7 +80,7 @@ module LockstepSdk
         attr_accessor :modified_user_id
 
         ##
-        # @return [Uuid] AppEnrollmentId for this record; used for mapping purposes.
+        # @return [Uuid] The AppEnrollmentId of the application that imported this attachment record. For accounts with more than one financial system connected, this field identifies the originating financial system that produced this record. This value is null if this record was not loaded from an external ERP or financial system.
         attr_accessor :app_enrollment_id
 
         ##

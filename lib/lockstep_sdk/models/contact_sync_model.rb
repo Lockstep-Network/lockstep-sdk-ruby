@@ -81,7 +81,7 @@ module LockstepSdk
         attr_accessor :role_code
 
         ##
-        # @return [Email] The email address of the contact.
+        # @return [String] The email address of the contact.
         attr_accessor :email_address
 
         ##
@@ -125,11 +125,11 @@ module LockstepSdk
         attr_accessor :is_active
 
         ##
-        # @return [Uri] A webpage URL for more information about this contact.
+        # @return [String] A webpage URL for more information about this contact.
         attr_accessor :webpage_url
 
         ##
-        # @return [Uri] If available, the URL of a photograph that shows this contact.
+        # @return [String] If available, the URL of a photograph that shows this contact.
         attr_accessor :picture_url
 
         ##

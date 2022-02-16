@@ -293,11 +293,11 @@ module LockstepSdk
         attr_accessor :modified
 
         ##
-        # @return [Boolean] Is the invoice voided?
+        # @return [Boolean] Is the invoice voided? If not specified, we assume the invoice is not voided.
         attr_accessor :is_voided
 
         ##
-        # @return [Boolean] Is the invoice in dispute?
+        # @return [Boolean] Is the invoice in dispute? If not specified, we assume the invoice is not in dispute.
         attr_accessor :in_dispute
 
         ##

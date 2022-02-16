@@ -44,6 +44,9 @@ class ProvisioningClient
         @lockstepsdk.request(:post, path, body, nil)
     end
 
+    ##
+    # Creates a new account for a developer, sending an email with information on how to access the API.
+    # @param body [DeveloperAccountSubmitModel] 
     def provision_free_developer_account(body:)
         path = "/api/v1/Provisioning/free-account"
         @lockstepsdk.request(:post, path, body, nil)

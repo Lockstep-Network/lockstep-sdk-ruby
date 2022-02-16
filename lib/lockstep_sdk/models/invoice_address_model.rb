@@ -41,6 +41,7 @@ module LockstepSdk
             @created_user_id = params.dig(:created_user_id)
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
         end
 
         ##
@@ -108,6 +109,10 @@ module LockstepSdk
         attr_accessor :modified_user_id
 
         ##
+        # @return [Uuid] The AppEnrollmentId of the application that imported this record. For accounts with more than one financial system connected, this field identifies the originating financial system that produced this record. This value is null if this record was not loaded from an external ERP or financial system.
+        attr_accessor :app_enrollment_id
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -127,6 +132,7 @@ module LockstepSdk
                 'createdUserId' => @created_user_id,
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
+                'appEnrollmentId' => @app_enrollment_id,
             }
         end
 
