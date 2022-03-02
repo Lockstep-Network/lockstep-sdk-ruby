@@ -187,19 +187,19 @@ module LockstepSdk
         attr_accessor :primary_ship_to_address_id
 
         ##
-        # @return [Date-time] The date on which this address record was created.
+        # @return [Date-time] The date on which this invoice record was created.
         attr_accessor :created
 
         ##
-        # @return [Uuid] The ID number of the user who created this address.
+        # @return [Uuid] The ID number of the user who created this invoice.
         attr_accessor :created_user_id
 
         ##
-        # @return [Date-time] The date on which this address record was last modified.
+        # @return [Date-time] The date on which this invoice record was last modified.
         attr_accessor :modified
 
         ##
-        # @return [Uuid] The ID number of the user who most recently modified this address.
+        # @return [Uuid] The ID number of the user who most recently modified this invoice.
         attr_accessor :modified_user_id
 
         ##

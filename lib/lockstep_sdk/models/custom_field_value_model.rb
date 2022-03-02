@@ -40,6 +40,7 @@ module LockstepSdk
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
             @app_enrollment_id = params.dig(:app_enrollment_id)
+            @value = params.dig(:value)
             @custom_field_definition = params.dig(:custom_field_definition)
         end
 
@@ -84,6 +85,10 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
 
         ##
+        # @return [String] The value of this custom field.
+        attr_accessor :value
+
+        ##
         # @return [CustomFieldDefinitionModel] Definition of the value
         attr_accessor :custom_field_definition
 
@@ -101,6 +106,7 @@ module LockstepSdk
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
                 'appEnrollmentId' => @app_enrollment_id,
+                'value' => @value,
                 'customFieldDefinition' => @custom_field_definition,
             }
         end

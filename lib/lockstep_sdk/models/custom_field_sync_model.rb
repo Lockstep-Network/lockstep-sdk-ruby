@@ -42,6 +42,7 @@ module LockstepSdk
             @custom_field_label = params.dig(:custom_field_label)
             @string_value = params.dig(:string_value)
             @numeric_value = params.dig(:numeric_value)
+            @value = params.dig(:value)
             @created = params.dig(:created)
             @modified = params.dig(:modified)
         end
@@ -67,6 +68,10 @@ module LockstepSdk
         attr_accessor :numeric_value
 
         ##
+        # @return [String] The value of this custom field.
+        attr_accessor :value
+
+        ##
         # @return [Date-time] If known, the date when this record was created according to the originating financial system in which this record is maintained. If the originating financial system does not maintain a created-date, leave this field null.
         attr_accessor :created
 
@@ -83,6 +88,7 @@ module LockstepSdk
                 'customFieldLabel' => @custom_field_label,
                 'stringValue' => @string_value,
                 'numericValue' => @numeric_value,
+                'value' => @value,
                 'created' => @created,
                 'modified' => @modified,
             }

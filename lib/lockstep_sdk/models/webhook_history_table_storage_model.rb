@@ -27,9 +27,12 @@ module LockstepSdk
         def initialize(params = {})
             @group_key = params.dig(:group_key)
             @webhook_id = params.dig(:webhook_id)
+            @webhook_history_id = params.dig(:webhook_history_id)
             @event_type = params.dig(:event_type)
             @request_sent = params.dig(:request_sent)
+            @is_successful = params.dig(:is_successful)
             @response_status_code = params.dig(:response_status_code)
+            @process_result_message = params.dig(:process_result_message)
             @failure_count = params.dig(:failure_count)
             @timestamp = params.dig(:timestamp)
         end
@@ -39,8 +42,12 @@ module LockstepSdk
         attr_accessor :group_key
 
         ##
-        # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
+        # @return [Uuid] The WebhookId uniquely identifies the webhook used to send notification that an event action has taken place.
         attr_accessor :webhook_id
+
+        ##
+        # @return [Uuid] The unique ID of this record, automatically assigned by Lockstep when this record is added to the Lockstep platform.
+        attr_accessor :webhook_history_id
 
         ##
         # @return [String] Event type which fired webhook [entity].[action]
@@ -51,8 +58,16 @@ module LockstepSdk
         attr_accessor :request_sent
 
         ##
+        # @return [Boolean] Flag whether webhook notification was successful overall (if webhook disabled should always return true otherwise depends on the response from the callback url)
+        attr_accessor :is_successful
+
+        ##
         # @return [String] Response status code that is returned when calling a callback url.
         attr_accessor :response_status_code
+
+        ##
+        # @return [String] Message containing information about the webhook callback results
+        attr_accessor :process_result_message
 
         ##
         # @return [Int32] Number of times message failed to be sent over to callback url before succeeding or failing out. The maximum value should is based on webhook.
@@ -68,9 +83,12 @@ module LockstepSdk
             {
                 'groupKey' => @group_key,
                 'webhookId' => @webhook_id,
+                'webhookHistoryId' => @webhook_history_id,
                 'eventType' => @event_type,
                 'requestSent' => @request_sent,
+                'isSuccessful' => @is_successful,
                 'responseStatusCode' => @response_status_code,
+                'processResultMessage' => @process_result_message,
                 'failureCount' => @failure_count,
                 'timestamp' => @timestamp,
             }
