@@ -88,7 +88,7 @@ module LockstepSdk
         attr_accessor :activity_status
 
         ##
-        # @return [Boolean] True if this activity is currently "open", which indicates that the activitiy is currently in progress.
+        # @return [Boolean] True if this activity is currently "open", which indicates that the activity is currently in progress.
         attr_accessor :is_open
 
         ##
@@ -156,19 +156,19 @@ module LockstepSdk
         attr_accessor :user_assigned_to_name
 
         ##
-        # @return [AttachmentModel] All attachments attached to applied activity. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
+        # @return [AttachmentModel] A collection of attachments linked to this record. To retrieve this collection, specify `Attachments` in the `include` parameter when retrieving data. To create an attachment, use the [Upload Attachment](https://developer.lockstep.io/reference/post_api-v1-attachments) endpoint with the `TableKey` to `Activity` and the `ObjectKey` set to the `ActivityId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :attachments
 
         ##
-        # @return [NoteModel] All notes attached to this applied activity. To retrieve this collection, specify `Notes` in the "Include" parameter for your query.
+        # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `Activity` and the `ObjectKey` set to the `ActivityId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
         ##
-        # @return [CustomFieldDefinitionModel] All definitions attached to this applied activity. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
+        # @return [CustomFieldDefinitionModel] A collection of custom fields linked to this record. To retrieve this collection, specify `CustomFieldDefinitions` in the `include` parameter when retrieving data. To create a custom field, use the [Create Custom Field](https://developer.lockstep.io/reference/post_api-v1-customfieldvalues) endpoint with the `TableKey` to `Activity` and the `ObjectKey` set to the `ActivityId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :custom_field_definitions
 
         ##
-        # @return [CustomFieldValueModel] All values attached to this activity. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
+        # @return [CustomFieldValueModel] A collection of custom fields linked to this record. To retrieve this collection, specify `CustomFieldValues` in the `include` parameter when retrieving data. To create a custom field, use the [Create Custom Field](https://developer.lockstep.io/reference/post_api-v1-customfieldvalues) endpoint with the `TableKey` to `Activity` and the `ObjectKey` set to the `ActivityId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :custom_field_values
 
         ##

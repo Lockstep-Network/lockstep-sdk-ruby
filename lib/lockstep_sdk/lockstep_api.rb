@@ -10,7 +10,7 @@
 # @author     Manish Narayan B S <manish.n@lockstep.io>
 # @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.6.49.0
+# @version    2022.9.6.0
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -90,6 +90,18 @@ module LockstepSdk
         attr_accessor :emails
 
         ##
+        # @return [FinancialAccountClient] Client object for FinancialAccount endpoints
+        attr_accessor :financial_account
+
+        ##
+        # @return [FinancialAccountBalanceHistoryClient] Client object for FinancialAccountBalanceHistory endpoints
+        attr_accessor :financial_account_balance_history
+
+        ##
+        # @return [FinancialYearSettingsClient] Client object for FinancialYearSettings endpoints
+        attr_accessor :financial_year_settings
+
+        ##
         # @return [InvoiceHistoryClient] Client object for InvoiceHistory endpoints
         attr_accessor :invoice_history
 
@@ -147,7 +159,7 @@ module LockstepSdk
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def initialize(env)
-            @version = "2022.6.49.0"
+            @version = "2022.9.6.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -172,6 +184,9 @@ module LockstepSdk
             @custom_field_values = CustomFieldValuesClient.new(self)
             @definitions = DefinitionsClient.new(self)
             @emails = EmailsClient.new(self)
+            @financial_account = FinancialAccountClient.new(self)
+            @financial_account_balance_history = FinancialAccountBalanceHistoryClient.new(self)
+            @financial_year_settings = FinancialYearSettingsClient.new(self)
             @invoice_history = InvoiceHistoryClient.new(self)
             @invoices = InvoicesClient.new(self)
             @leads = LeadsClient.new(self)
@@ -244,7 +259,7 @@ module LockstepSdk
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
             request["SdkType"] = 'Ruby'
-            request["SdkVersion"] = '2022.6.49.0'
+            request["SdkVersion"] = '2022.9.6.0'
             request["MachineName"] = Socket.gethostname
             request.body = body
 

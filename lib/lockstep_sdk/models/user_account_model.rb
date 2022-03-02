@@ -176,15 +176,15 @@ module LockstepSdk
         attr_accessor :default_currency_code
 
         ##
-        # @return [NoteModel] All notes attached to this User. To retrieve this collection, specify `Notes` in the "Include" parameter for your query.
+        # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `UserAccount` and the `ObjectKey` set to the `UserId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
         ##
-        # @return [AttachmentModel] All attachments attached to this User. To retrieve this collection, specify `Attachments` in the "Include" parameter for your query.
+        # @return [AttachmentModel] A collection of attachments linked to this record. To retrieve this collection, specify `Attachments` in the `include` parameter when retrieving data. To create an attachment, use the [Upload Attachment](https://developer.lockstep.io/reference/post_api-v1-attachments) endpoint with the `TableKey` to `UserAccount` and the `ObjectKey` set to the `UserId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :attachments
 
         ##
-        # @return [CustomFieldValueModel] All values attached to this User. To retrieve this collection, specify `CustomFieldValues` in the "Include" parameter for your query.
+        # @return [CustomFieldValueModel] A collection of custom fields linked to this record. To retrieve this collection, specify `CustomFieldValues` in the `include` parameter when retrieving data. To create a custom field, use the [Create Custom Field](https://developer.lockstep.io/reference/post_api-v1-customfieldvalues) endpoint with the `TableKey` to `UserAccount` and the `ObjectKey` set to the `UserId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :custom_field_values
 
         ##

@@ -44,6 +44,7 @@ module LockstepSdk
             @created_user_id = params.dig(:created_user_id)
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
+            @partition_key = params.dig(:partition_key)
         end
 
         ##
@@ -107,6 +108,10 @@ module LockstepSdk
         attr_accessor :modified_user_id
 
         ##
+        # @return [String] The partition key used for the webhook callback history
+        attr_accessor :partition_key
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -125,6 +130,7 @@ module LockstepSdk
                 'createdUserId' => @created_user_id,
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
+                'partitionKey' => @partition_key,
             }
         end
 

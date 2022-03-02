@@ -18,6 +18,8 @@ require 'json'
 
 module LockstepSdk
 
+    ##
+    # Represents links between an Activity and another record.
     class ActivityXRefModel
 
         ##

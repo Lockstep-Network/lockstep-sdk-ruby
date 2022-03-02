@@ -75,7 +75,7 @@ module LockstepSdk
         attr_accessor :is_archived
 
         ##
-        # @return [Uuid] 
+        # @return [Uuid] Tracks the original record for this attachment, not currently used.
         attr_accessor :origin_attachment_id
 
         ##
@@ -91,7 +91,7 @@ module LockstepSdk
         attr_accessor :erp_key
 
         ##
-        # @return [Uuid] The AppEnrollmentId of the application that imported this attachment record. For accounts with more than one financial system connected, this field identifies the originating financial system that produced this record.
+        # @return [Uuid] The AppEnrollmentId of the application that imported this record. For accounts with more than one financial system connected, this field identifies the originating financial system that produced this record. This value is null if this record was not loaded from an external ERP or financial system.
         attr_accessor :app_enrollment_id
 
         ##

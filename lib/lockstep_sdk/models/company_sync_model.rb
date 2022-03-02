@@ -72,7 +72,7 @@ module LockstepSdk
         attr_accessor :company_type
 
         ##
-        # @return [String] Either `Active` or `Inactive`.
+        # @return [String] An optional field including status codes. Defined status codes are `Active` and `Inactive`.
         attr_accessor :company_status
 
         ##
@@ -88,7 +88,7 @@ module LockstepSdk
         attr_accessor :default_currency_code
 
         ##
-        # @return [Uri] The URL of this company's logo, if known.
+        # @return [String] The URL of this company's logo, if known.
         attr_accessor :company_logo_url
 
         ##
@@ -124,11 +124,11 @@ module LockstepSdk
         attr_accessor :country
 
         ##
-        # @return [Tel] The main phone number of this company.
+        # @return [String] The main phone number of this company.
         attr_accessor :phone_number
 
         ##
-        # @return [Tel] The main fax number of this company.
+        # @return [String] The main fax number of this company.
         attr_accessor :fax_number
 
         ##
@@ -148,11 +148,11 @@ module LockstepSdk
         attr_accessor :duns_number
 
         ##
-        # @return [Email] If you know the AP (accounts payable) email address of this company, fill it in here. This is the email address where you would send questions to the company if the company owed you money.
+        # @return [String] If you know the AP (accounts payable) email address of this company, fill it in here. This is the email address where you would send questions to the company if the company owed you money.
         attr_accessor :ap_email_address
 
         ##
-        # @return [Email] If you know the AR (accounts receivable) email address of this company, fill it in here. This is the email address where you would send questions to the company if you owed this company money.
+        # @return [String] If you know the AR (accounts receivable) email address of this company, fill it in here. This is the email address where you would send questions to the company if you owed this company money.
         attr_accessor :ar_email_address
 
         ##
