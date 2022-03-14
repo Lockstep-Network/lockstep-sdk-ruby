@@ -110,4 +110,17 @@ class ReportsClient
         params = {:companyId => company_id}
         @lockstepsdk.request(:get, path, nil, params)
     end
+
+    ##
+    # Generates a Trial Balance Report for the given time range.
+    #
+    # The Attachment Header report contains aggregated information about the `TotalAttachments`, `TotalArchived`, and `TotalActive` attachment classifications.
+    #
+    # @param start_date [date-time] 
+    # @param end_date [date-time] 
+    def trial_balance_report(start_date:, end_date:)
+        path = "/api/v1/Reports/trial-balance"
+        params = {:startDate => start_date, :endDate => end_date}
+        @lockstepsdk.request(:get, path, nil, params)
+    end
 end

@@ -19,30 +19,24 @@ require 'json'
 module LockstepSdk
 
     ##
-    # Represents the data sent during the onboarding flow
-    class ProvisioningModel
+    # Represents a cell of a financial report
+    class FinancialReportCellModel
 
         ##
-        # Initialize the ProvisioningModel using the provided prototype
+        # Initialize the FinancialReportCellModel using the provided prototype
         def initialize(params = {})
-            @full_name = params.dig(:full_name)
-            @erp = params.dig(:erp)
+            @value = params.dig(:value)
         end
 
         ##
-        # @return [String] The full name of the new user
-        attr_accessor :full_name
-
-        ##
-        # @return [ErpInfoModel] The information necessary to enroll the user in their ERP
-        attr_accessor :erp
+        # @return [String] The value of the financial report cell
+        attr_accessor :value
 
         ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
-                'fullName' => @full_name,
-                'erp' => @erp,
+                'value' => @value,
             }
         end
 

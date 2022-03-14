@@ -30,6 +30,10 @@ module LockstepSdk
             @realm_id = params.dig(:realm_id)
             @redirect_uri = params.dig(:redirect_uri)
             @email = params.dig(:email)
+            @username = params.dig(:username)
+            @password = params.dig(:password)
+            @server_name = params.dig(:server_name)
+            @server_port = params.dig(:server_port)
         end
 
         ##
@@ -49,6 +53,22 @@ module LockstepSdk
         attr_accessor :email
 
         ##
+        # @return [String] The username of the web services account with access permissions.
+        attr_accessor :username
+
+        ##
+        # @return [String] The password for the web services account with access permissions.
+        attr_accessor :password
+
+        ##
+        # @return [String] The server name a connection is being created for.
+        attr_accessor :server_name
+
+        ##
+        # @return [Int32] The port number of the server a connection is being created for.
+        attr_accessor :server_port
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -56,6 +76,10 @@ module LockstepSdk
                 'realmId' => @realm_id,
                 'redirectUri' => @redirect_uri,
                 'email' => @email,
+                'username' => @username,
+                'password' => @password,
+                'serverName' => @server_name,
+                'serverPort' => @server_port,
             }
         end
 

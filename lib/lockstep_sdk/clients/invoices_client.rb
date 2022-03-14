@@ -92,6 +92,19 @@ class InvoicesClient
     end
 
     ##
+    # Retrieves a PDF file for this invoice if it is of one of the supported invoice types and has been synced using an app enrollment to one of the supported apps.
+    #
+    # Supported apps: Quickbooks Online, Xero
+    #
+    # Supported invoice types: Invoice, Credit Memo
+    #
+    # @param id [uuid] The unique Lockstep Platform ID number of this invoice; NOT the customer's ERP key
+    def retrieve_invoice_pdf(id:)
+        path = "/api/v1/Invoices/#{id}/pdf"
+        @lockstepsdk.request(:get, path, nil, nil)
+    end
+
+    ##
     # Queries Invoices for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.  Display the results using the Invoice Summary View format.
     #
     # More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.

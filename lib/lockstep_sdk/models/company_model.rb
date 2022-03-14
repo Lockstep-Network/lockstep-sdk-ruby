@@ -44,12 +44,6 @@ module LockstepSdk
             @address1 = params.dig(:address1)
             @address2 = params.dig(:address2)
             @address3 = params.dig(:address3)
-            @corp_city = params.dig(:corp_city)
-            @corp_state = params.dig(:corp_state)
-            @corp_postal_code = params.dig(:corp_postal_code)
-            @corp_country = params.dig(:corp_country)
-            @corp_phone = params.dig(:corp_phone)
-            @corp_fax = params.dig(:corp_fax)
             @city = params.dig(:city)
             @state_region = params.dig(:state_region)
             @postal_code = params.dig(:postal_code)
@@ -138,30 +132,6 @@ module LockstepSdk
         ##
         # @return [String] Address info
         attr_accessor :address3
-
-        ##
-        # @return [String] Corporate Address info
-        attr_accessor :corp_city
-
-        ##
-        # @return [String] Corporate Address info
-        attr_accessor :corp_state
-
-        ##
-        # @return [String] Corporate Address info
-        attr_accessor :corp_postal_code
-
-        ##
-        # @return [String] Corporate Address info
-        attr_accessor :corp_country
-
-        ##
-        # @return [String] Corporate phone number
-        attr_accessor :corp_phone
-
-        ##
-        # @return [String] Corporate fax number
-        attr_accessor :corp_fax
 
         ##
         # @return [String] Address info
@@ -290,12 +260,6 @@ module LockstepSdk
                 'address1' => @address1,
                 'address2' => @address2,
                 'address3' => @address3,
-                'corpCity' => @corp_city,
-                'corpState' => @corp_state,
-                'corpPostalCode' => @corp_postal_code,
-                'corpCountry' => @corp_country,
-                'corpPhone' => @corp_phone,
-                'corpFax' => @corp_fax,
                 'city' => @city,
                 'stateRegion' => @state_region,
                 'postalCode' => @postal_code,

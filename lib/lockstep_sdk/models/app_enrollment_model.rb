@@ -45,7 +45,6 @@ module LockstepSdk
             @custom_field_values = params.dig(:custom_field_values)
             @last_sync = params.dig(:last_sync)
             @last_successful_sync = params.dig(:last_successful_sync)
-            @erp_info = params.dig(:erp_info)
             @connector_info = params.dig(:connector_info)
         end
 
@@ -110,10 +109,6 @@ module LockstepSdk
         attr_accessor :last_successful_sync
 
         ##
-        # @return [ErpInfoDataModel] Use `ConnectorInfo` instead.
-        attr_accessor :erp_info
-
-        ##
         # @return [ConnectorInfoModel] Optional data necessary to create an app enrollment for a supported connector. Only enter relevant fields for the given connector.
         attr_accessor :connector_info
 
@@ -136,7 +131,6 @@ module LockstepSdk
                 'customFieldValues' => @custom_field_values,
                 'lastSync' => @last_sync,
                 'lastSuccessfulSync' => @last_successful_sync,
-                'erpInfo' => @erp_info,
                 'connectorInfo' => @connector_info,
             }
         end
