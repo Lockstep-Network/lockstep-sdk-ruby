@@ -36,6 +36,7 @@ module LockstepSdk
             @sort_order = params.dig(:sort_order)
             @string_value = params.dig(:string_value)
             @numeric_value = params.dig(:numeric_value)
+            @value = params.dig(:value)
         end
 
         ##
@@ -83,6 +84,10 @@ module LockstepSdk
         attr_accessor :numeric_value
 
         ##
+        # @return [String] Value for the field
+        attr_accessor :value
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -97,6 +102,7 @@ module LockstepSdk
                 'sortOrder' => @sort_order,
                 'stringValue' => @string_value,
                 'numericValue' => @numeric_value,
+                'value' => @value,
             }
         end
 

@@ -19,7 +19,12 @@ require 'json'
 module LockstepSdk
 
     ##
-    # Represents a user uploaded attachment
+    # An Attachment is a file that can be attached to various account attributes within Lockstep.
+    # This data model contains metadata about the attachment.  You can upload and download attachments
+    # into the Lockstep Platform along with this metadata.  Attachments can be used for invoices, payments,
+    # legal documents, or any other external files that you wish to track.
+    #
+    # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
     class AttachmentModel
 
         ##
@@ -40,6 +45,7 @@ module LockstepSdk
             @app_enrollment_id = params.dig(:app_enrollment_id)
             @created = params.dig(:created)
             @created_user_id = params.dig(:created_user_id)
+            @attachment_type = params.dig(:attachment_type)
         end
 
         ##
@@ -51,31 +57,31 @@ module LockstepSdk
         attr_accessor :group_key
 
         ##
-        # @return [String] The name of the table the attachment is associated with
+        # @return [String] An Attachment is connected to an existing item within the Lockstep Platform by the fields `TableKey` and `ObjectKey`. For example, an Attachment connected to Invoice 12345 would have a `TableKey` value of `Invoice` and an `ObjectKey` value of `12345`. The `TableKey` value contains the name of the table within the Lockstep Platform to which this Attachment is connected. For more information, see [linking metadata to an object](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :table_key
 
         ##
-        # @return [Uuid] The ID of the object the attachment is associated with
+        # @return [Uuid] An Attachment is connected to an existing item within the Lockstep Platform by the fields `TableKey` and `ObjectKey`. For example, an Attachment connected to Invoice 12345 would have a `TableKey` value of `Invoice` and an `ObjectKey` value of `12345`. The `ObjectKey` value contains the primary key of the record within the Lockstep Platform to which this Attachment is connected. For more information, see [linking metadata to an object](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :object_key
 
         ##
-        # @return [String] Name of the file
+        # @return [String] An Attachment represents a file that was uploaded to the Lockstep Platform. This field contains the original name of the file on disk, without its extension.
         attr_accessor :file_name
 
         ##
-        # @return [String] Extension type of the file
+        # @return [String] An Attachment represents a file that was uploaded to the Lockstep Platform. This field contains the original extension name of the file on disk.
         attr_accessor :file_ext
 
         ##
-        # @return [Uuid] Corresponding AttachmentType object to describe this attachment
+        # @return [Uuid] DEPRECATED: This field is replaced by `AttachmentType`.
         attr_accessor :attachment_type_id
 
         ##
-        # @return [Boolean] Flag indicating the attachment was archived
+        # @return [Boolean] A flag indicating whether this Attachment is archived (also known as hidden or deleted). When you call [ArchiveAttachment](https://developer.lockstep.io/reference/delete_api-v1-attachments-id) this field will be set to true. You should avoid displaying Attachments with the IsArchived field set to true in your user interface.
         attr_accessor :is_archived
 
         ##
-        # @return [Uuid] Tracks the original record for this attachment, not currently used.
+        # @return [Uuid] DEPRECATED - Do not use
         attr_accessor :origin_attachment_id
 
         ##
@@ -95,12 +101,16 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
 
         ##
-        # @return [Date-time] The date the attachment was created
+        # @return [Date-time] The date the attachment was created.
         attr_accessor :created
 
         ##
-        # @return [Uuid] Id of the user who made the file
+        # @return [Uuid] The unique ID of the [UserAccount](https://developer.lockstep.io/docs/useraccountmodel) of the user who created this Attachment.
         attr_accessor :created_user_id
+
+        ##
+        # @return [String] A text string describing the type of this Attachment.
+        attr_accessor :attachment_type
 
         ##
         # @return [object] This object as a JSON key-value structure
@@ -121,6 +131,7 @@ module LockstepSdk
                 'appEnrollmentId' => @app_enrollment_id,
                 'created' => @created,
                 'createdUserId' => @created_user_id,
+                'attachmentType' => @attachment_type,
             }
         end
 

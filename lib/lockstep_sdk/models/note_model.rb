@@ -53,15 +53,15 @@ module LockstepSdk
         attr_accessor :group_key
 
         ##
-        # @return [String] The name of the table the note is associated with
+        # @return [String] A Note is connected to an existing item within the Lockstep Platform by the fields `TableKey` and `ObjectKey`. For example, a Note connected to Invoice 12345 would have a `TableKey` value of `Invoice` and an `ObjectKey` value of `12345`. The `TableKey` value contains the name of the table within the Lockstep Platform to which this metadata is connected. For more information, see [linking metadata to an object](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :table_key
 
         ##
-        # @return [Uuid] The ID of the object the note is associated with
+        # @return [Uuid] A Note is connected to an existing item within the Lockstep Platform by the fields `TableKey` and `ObjectKey`. For example, a Note connected to Invoice 12345 would have a `TableKey` value of `Invoice` and an `ObjectKey` value of `12345`. The `ObjectKey` value contains the primary key of the record within the Lockstep Platform to which this metadata is connected. For more information, see [linking metadata to an object](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :object_key
 
         ##
-        # @return [String] The text of the note
+        # @return [String] The full text of the note
         attr_accessor :note_text
 
         ##
@@ -69,7 +69,7 @@ module LockstepSdk
         attr_accessor :note_type
 
         ##
-        # @return [Boolean] Flag indicating if the note has been archived
+        # @return [Boolean] A flag indicating whether this Note is archived (also known as hidden or deleted). When you call [ArchiveNote](https://developer.lockstep.io/reference/delete_api-v1-notes-id) this field will be set to true. You should avoid displaying Notes with the IsArchived field set to true in your user interface.
         attr_accessor :is_archived
 
         ##
@@ -77,7 +77,7 @@ module LockstepSdk
         attr_accessor :created
 
         ##
-        # @return [Uuid] The ID of the user who created the note
+        # @return [Uuid] The unique ID of the [UserAccount](https://developer.lockstep.io/docs/useraccountmodel) of the user who created this Note.
         attr_accessor :created_user_id
 
         ##

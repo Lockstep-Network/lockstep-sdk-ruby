@@ -94,6 +94,17 @@ class PaymentsClient
     end
 
     ##
+    # Retrieves a PDF file for this payment if it has been synced using an app enrollment to one of the supported apps.
+    #
+    # Supported apps: Quickbooks Online
+    #
+    # @param id [uuid] The unique Lockstep Platform ID number of this payment; NOT the customer's ERP key
+    def retrieve_payment_pdf(id:)
+        path = "/api/v1/Payments/#{id}/pdf"
+        @lockstepsdk.request(:get, path, nil, nil)
+    end
+
+    ##
     # Queries Payments for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.  This query endpoint provides extra data about the summary of payment information.
     #
     # More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.
