@@ -92,7 +92,7 @@ module LockstepSdk
         attr_accessor :unapplied_amount
 
         ##
-        # @return [String] The ISO 4217 currency code for this payment. For a list of ISO 4217 currency codes, see [Query Currencies](https://developer.lockstep.io/reference/get_api-v1-definitions-currencies). This will be validated by the /api/v1/currencies data set
+        # @return [String] The ISO 4217 currency code for this payment. For a list of ISO 4217 currency codes, see [Query Currencies](https://developer.lockstep.io/reference/get_api-v1-definitions-currencies). This will be validated by the /api/v1/definitions/currencies data set
         attr_accessor :currency_code
 
         ##

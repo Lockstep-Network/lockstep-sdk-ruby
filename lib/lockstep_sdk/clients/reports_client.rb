@@ -114,13 +114,24 @@ class ReportsClient
     ##
     # Generates a Trial Balance Report for the given time range.
     #
-    # The Attachment Header report contains aggregated information about the `TotalAttachments`, `TotalArchived`, and `TotalActive` attachment classifications.
-    #
     # @param start_date [date-time] 
     # @param end_date [date-time] 
     def trial_balance_report(start_date:, end_date:)
         path = "/api/v1/Reports/trial-balance"
         params = {:startDate => start_date, :endDate => end_date}
+        @lockstepsdk.request(:get, path, nil, params)
+    end
+
+    ##
+    # Generates an Income Statement for the given time range.
+    #
+    # @param start_date [date-time] The start date of the report
+    # @param end_date [date-time] The end date of the report
+    # @param column_option [string] The desired column splitting of the report data. An empty string or anything unrecognized will result in only totals being displayed. Options are as follows: By Period - a column for every month/fiscal period within the reporting dates Quarterly - a column for every quarter within the reporting dates Annually - a column for every year within the reporting dates
+    # @param display_depth [ReportDepth] The desired row splitting of the report data. Options are as follows: 1 - combine all accounts by their category 2 - combine all accounts by their subcategory 3 - display all accounts
+    def income_statement_report(start_date:, end_date:, column_option:, display_depth:)
+        path = "/api/v1/Reports/income-statement"
+        params = {:startDate => start_date, :endDate => end_date, :columnOption => column_option, :displayDepth => display_depth}
         @lockstepsdk.request(:get, path, nil, params)
     end
 end

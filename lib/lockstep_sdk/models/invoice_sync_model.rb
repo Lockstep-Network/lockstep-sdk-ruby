@@ -133,7 +133,7 @@ module LockstepSdk
         attr_accessor :special_terms
 
         ##
-        # @return [String] The three-character ISO 4217 currency code used for this invoice. This will be validated by the /api/v1/currencies data set
+        # @return [String] The three-character ISO 4217 currency code used for this invoice. This will be validated by the /api/v1/definitions/currencies data set
         attr_accessor :currency_code
 
         ##
@@ -201,7 +201,7 @@ module LockstepSdk
         attr_accessor :origin_address_postal_code
 
         ##
-        # @return [String] The origination address for this invoice This will be validated by the /api/v1/countries data set
+        # @return [String] The origination address for this invoice This will be validated by the /api/v1/definitions/countries data set
         attr_accessor :origin_address_country
 
         ##
@@ -237,7 +237,7 @@ module LockstepSdk
         attr_accessor :bill_to_address_postal_code
 
         ##
-        # @return [String] The billing address for this invoice This will be validated by the /api/v1/countries data set
+        # @return [String] The billing address for this invoice This will be validated by the /api/v1/definitions/countries data set
         attr_accessor :bill_to_address_country
 
         ##
@@ -273,7 +273,7 @@ module LockstepSdk
         attr_accessor :ship_to_address_postal_code
 
         ##
-        # @return [String] The shipping address for this invoice This will be validated by the /api/v1/countries data set
+        # @return [String] The shipping address for this invoice This will be validated by the /api/v1/definitions/countries data set
         attr_accessor :ship_to_address_country
 
         ##

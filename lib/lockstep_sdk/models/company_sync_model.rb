@@ -84,7 +84,7 @@ module LockstepSdk
         attr_accessor :is_active
 
         ##
-        # @return [String] The default currency code for transactions related to this company. For a list of currency codes, see [Query Currencies](https://developer.lockstep.io/reference/get_api-v1-definitions-currencies). This will be validated by the /api/v1/currencies data set
+        # @return [String] The default currency code for transactions related to this company. For a list of currency codes, see [Query Currencies](https://developer.lockstep.io/reference/get_api-v1-definitions-currencies). This will be validated by the /api/v1/definitions/currencies data set
         attr_accessor :default_currency_code
 
         ##
@@ -120,7 +120,7 @@ module LockstepSdk
         attr_accessor :postal_code
 
         ##
-        # @return [String] The company's primary mailing address information This will be validated by the /api/v1/countries data set
+        # @return [String] The company's primary mailing address information This will be validated by the /api/v1/definitions/countries data set
         attr_accessor :country
 
         ##

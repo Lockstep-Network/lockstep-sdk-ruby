@@ -34,7 +34,7 @@ module LockstepSdk
         attr_accessor :date
 
         ##
-        # @return [String] The currency code This will be validated by the /api/v1/currencies data set
+        # @return [String] The currency code This will be validated by the /api/v1/definitions/currencies data set
         attr_accessor :source_currency
 
         ##
