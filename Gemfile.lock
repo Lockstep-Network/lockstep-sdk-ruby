@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    LockstepSdk (2022.11.55.0)
+    LockstepSdk (2022.11.60.0)
       awrence
 
 GEM

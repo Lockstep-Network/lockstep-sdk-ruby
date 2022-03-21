@@ -32,7 +32,7 @@ class FinancialAccountBalanceHistoryClient
     # A Financial Account Balance History records either the current or end of period balance for a corresponding financial account.
     #
     # @param id [uuid] The unique Lockstep Platform ID number of this Financial Account Balance History
-    def retrieve_financial_account_balance_history(id:)
+    def retrieve_balance_history(id:)
         path = "/api/v1/FinancialAccountBalanceHistory/#{id}"
         @lockstepsdk.request(:get, path, nil, nil)
     end
@@ -46,7 +46,7 @@ class FinancialAccountBalanceHistoryClient
     #
     # @param id [uuid] The unique Lockstep Platform ID number of the Financial Account Balance History to update
     # @param body [object] A list of changes to apply to this Financial Account Balance History
-    def update_financial_account_balance_history(id:, body:)
+    def update_balance_history(id:, body:)
         path = "/api/v1/FinancialAccountBalanceHistory/#{id}"
         @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
@@ -57,7 +57,7 @@ class FinancialAccountBalanceHistoryClient
     # A Financial Account Balance History records either the current or end of period balance for a corresponding financial account.
     #
     # @param id [uuid] The unique Lockstep Platform ID number of the Financial Account Balance History to disable
-    def delete_financial_account_balance_history(id:)
+    def delete_balance_history(id:)
         path = "/api/v1/FinancialAccountBalanceHistory/#{id}"
         @lockstepsdk.request(:delete, path, nil, nil)
     end
@@ -68,7 +68,7 @@ class FinancialAccountBalanceHistoryClient
     # A Financial Account Balance History records either the current or end of period balance for a corresponding financial account.
     #
     # @param body [FinancialAccountBalanceHistoryModel] The Financial Account Balance Histories to create
-    def create_financial_account_balance_history(body:)
+    def create_balance_history(body:)
         path = "/api/v1/FinancialAccountBalanceHistory"
         @lockstepsdk.request(:post, path, body, nil)
     end
@@ -84,7 +84,7 @@ class FinancialAccountBalanceHistoryClient
     # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param page_size [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param page_number [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_financial_account_balance_history(filter:, order:, page_size:, page_number:)
+    def query_balance_history(filter:, order:, page_size:, page_number:)
         path = "/api/v1/FinancialAccountBalanceHistory/query"
         params = {:filter => filter, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @lockstepsdk.request(:get, path, nil, params)
