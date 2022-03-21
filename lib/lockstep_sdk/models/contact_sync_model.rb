@@ -117,7 +117,7 @@ module LockstepSdk
         attr_accessor :postal_code
 
         ##
-        # @return [String] The mailing address information for this contact. This will be validated by the /api/v1/countries data set
+        # @return [String] The mailing address information for this contact. This will be validated by the /api/v1/definitions/countries data set
         attr_accessor :country_code
 
         ##

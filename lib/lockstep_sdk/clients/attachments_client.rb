@@ -78,8 +78,21 @@ class AttachmentsClient
     # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
     #
     # @param id [uuid] The unique ID number of the Attachment whose URI will be returned
-    def download_attachment(id:)
-        path = "/api/v1/Attachments/#{id}/download"
+    def download_attachment_url(id:)
+        path = "/api/v1/Attachments/#{id}/download-url"
+        @lockstepsdk.request(:get, path, nil, nil)
+    end
+
+    ##
+    # Returns the Attachment file to be downloaded, based on the ID provided.
+    #
+    # An Attachment is a file that can be attached to various account attributes within Lockstep. Attachments can be used for invoices, bills, or any other external files that you wish to track and have access to. Attachments represents an Attachment and a number of different metadata attributes related to the creation, storage, and ownership of the Attachment.
+    #
+    # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
+    #
+    # @param id [uuid] The unique ID number of the Attachment whose URI will be returned
+    def download_attachment_file(id:)
+        path = "/api/v1/Attachments/#{id}/download-file"
         @lockstepsdk.request(:get, path, nil, nil)
     end
 

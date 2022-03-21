@@ -134,7 +134,7 @@ class InvoicesClient
     # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param page_size [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param page_number [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_at_risk_invoice_summary_view(filter:, include_param:, order:, page_size:, page_number:)
+    def query_at_risk_view(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Invoices/views/at-risk-summary"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @lockstepsdk.request(:get, path, nil, params)
