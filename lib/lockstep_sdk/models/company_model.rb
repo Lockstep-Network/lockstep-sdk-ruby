@@ -48,6 +48,7 @@ module LockstepSdk
             @state_region = params.dig(:state_region)
             @postal_code = params.dig(:postal_code)
             @country = params.dig(:country)
+            @time_zone = params.dig(:time_zone)
             @phone_number = params.dig(:phone_number)
             @fax_number = params.dig(:fax_number)
             @created = params.dig(:created)
@@ -148,6 +149,10 @@ module LockstepSdk
         ##
         # @return [String] Address info
         attr_accessor :country
+
+        ##
+        # @return [String] Time zone
+        attr_accessor :time_zone
 
         ##
         # @return [String] Phone number
@@ -264,6 +269,7 @@ module LockstepSdk
                 'stateRegion' => @state_region,
                 'postalCode' => @postal_code,
                 'country' => @country,
+                'timeZone' => @time_zone,
                 'phoneNumber' => @phone_number,
                 'faxNumber' => @fax_number,
                 'created' => @created,
