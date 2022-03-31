@@ -91,6 +91,17 @@ class SyncClient
     end
 
     ##
+    # Cancels a Sync process for an Application if the request is still being processed within the Application. This does not cancel Sync processes which have already proceeded to completion within the Application, or Sync processes outside of Applications such as from a Zip file or Batch Import.
+    #
+    # A Sync task represents an action performed by an Application for a particular account.  An Application can provide many different tasks as part of their capabilities.  Sync tasks are executed in the background and will continue running after they are created.  Use one of the creation APIs to request execution of a task. To check on the progress of the task, call GetSync or QuerySync.
+    #
+    # @param id [uuid] The unique ID number of the Sync task to cancel
+    def cancel_sync(id:)
+        path = "/api/v1/Sync/#{id}"
+        @lockstepsdk.request(:delete, path, nil, nil)
+    end
+
+    ##
     # Queries Sync tasks for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
     #
     # More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.

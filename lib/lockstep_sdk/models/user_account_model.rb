@@ -53,6 +53,7 @@ module LockstepSdk
             @state_region = params.dig(:state_region)
             @postal_code = params.dig(:postal_code)
             @country = params.dig(:country)
+            @time_zone = params.dig(:time_zone)
             @image_url = params.dig(:image_url)
             @description = params.dig(:description)
             @b2_clast_logged_in = params.dig(:b2_clast_logged_in)
@@ -160,6 +161,10 @@ module LockstepSdk
         attr_accessor :country
 
         ##
+        # @return [String] Time zone for this user
+        attr_accessor :time_zone
+
+        ##
         # @return [String] Image URL for this User
         attr_accessor :image_url
 
@@ -219,6 +224,7 @@ module LockstepSdk
                 'stateRegion' => @state_region,
                 'postalCode' => @postal_code,
                 'country' => @country,
+                'timeZone' => @time_zone,
                 'imageURL' => @image_url,
                 'description' => @description,
                 'b2CLastLoggedIn' => @b2_clast_logged_in,
