@@ -1,14 +1,12 @@
 #
-# Lockstep Software Development Kit for Ruby
+# Lockstep Platform SDK for Ruby
 #
 # (c) 2021-2022 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
-# @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayan B S <manish.n@lockstep.io>
-# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
+# @author     Lockstep Network <support@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
@@ -19,10 +17,10 @@ require 'awrence'
 class CompaniesClient
 
     ##
-    # Initialize the CompaniesClient class with a lockstepsdk instance.
-    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
-    def initialize(lockstepsdk)
-        @lockstepsdk = lockstepsdk
+    # Initialize the CompaniesClient class with an API client instance.
+    # @param connection [LockstepApi] The API client object for this connection
+    def initialize(connection)
+        @connection = connection
     end
 
 
@@ -38,7 +36,7 @@ class CompaniesClient
     def retrieve_company(id:, include_param:)
         path = "/api/v1/Companies/#{id}"
         params = {:include => include_param}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -54,7 +52,7 @@ class CompaniesClient
     # @param body [object] A list of changes to apply to this Company
     def update_company(id:, body:)
         path = "/api/v1/Companies/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @connection.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     ##
@@ -67,7 +65,7 @@ class CompaniesClient
     # @param id [uuid] The unique Lockstep Platform ID number of this Company; NOT the customer's ERP key
     def disable_company(id:)
         path = "/api/v1/Companies/#{id}"
-        @lockstepsdk.request(:delete, path, nil, nil)
+        @connection.request(:delete, path, nil, nil)
     end
 
     ##
@@ -80,7 +78,7 @@ class CompaniesClient
     # @param body [CompanyModel] The Companies to create
     def create_companies(body:)
         path = "/api/v1/Companies"
-        @lockstepsdk.request(:post, path, body, nil)
+        @connection.request(:post, path, body, nil)
     end
 
     ##
@@ -100,7 +98,7 @@ class CompaniesClient
     def query_companies(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Companies/query"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -120,7 +118,7 @@ class CompaniesClient
     def query_customer_summary(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Companies/views/customer-summary"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -133,6 +131,6 @@ class CompaniesClient
     # @param id [uuid] The unique Lockstep Platform ID number of this Company; NOT the customer's ERP key
     def retrieve_customer_detail(id:)
         path = "/api/v1/Companies/views/customer-details/#{id}"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 end

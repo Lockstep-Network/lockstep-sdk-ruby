@@ -1,14 +1,12 @@
 #
-# Lockstep Software Development Kit for Ruby
+# Lockstep Platform SDK for Ruby
 #
 # (c) 2021-2022 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
-# @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayan B S <manish.n@lockstep.io>
-# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
+# @author     Lockstep Network <support@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
@@ -19,10 +17,10 @@ require 'awrence'
 class PaymentsClient
 
     ##
-    # Initialize the PaymentsClient class with a lockstepsdk instance.
-    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
-    def initialize(lockstepsdk)
-        @lockstepsdk = lockstepsdk
+    # Initialize the PaymentsClient class with an API client instance.
+    # @param connection [LockstepApi] The API client object for this connection
+    def initialize(connection)
+        @connection = connection
     end
 
 
@@ -36,7 +34,7 @@ class PaymentsClient
     def retrieve_payment(id:, include_param:)
         path = "/api/v1/Payments/#{id}"
         params = {:include => include_param}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -50,7 +48,7 @@ class PaymentsClient
     # @param body [object] A list of changes to apply to this Payment
     def update_payment(id:, body:)
         path = "/api/v1/Payments/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @connection.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     ##
@@ -61,7 +59,7 @@ class PaymentsClient
     # @param id [uuid] The unique Lockstep Platform ID number of the Payment to delete; NOT the customer's ERP key
     def delete_payment(id:)
         path = "/api/v1/Payments/#{id}"
-        @lockstepsdk.request(:delete, path, nil, nil)
+        @connection.request(:delete, path, nil, nil)
     end
 
     ##
@@ -72,7 +70,7 @@ class PaymentsClient
     # @param body [PaymentModel] The Payments to create
     def create_payments(body:)
         path = "/api/v1/Payments"
-        @lockstepsdk.request(:post, path, body, nil)
+        @connection.request(:post, path, body, nil)
     end
 
     ##
@@ -90,7 +88,7 @@ class PaymentsClient
     def query_payments(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Payments/query"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -101,7 +99,7 @@ class PaymentsClient
     # @param id [uuid] The unique Lockstep Platform ID number of this payment; NOT the customer's ERP key
     def retrieve_payment_pdf(id:)
         path = "/api/v1/Payments/#{id}/pdf"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 
     ##
@@ -119,7 +117,7 @@ class PaymentsClient
     def query_payment_summary_view(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Payments/views/summary"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -127,7 +125,7 @@ class PaymentsClient
     #
     def retrieve_payment_detail_header()
         path = "/api/v1/Payments/views/detail-header"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 
     ##
@@ -143,6 +141,6 @@ class PaymentsClient
     def query_payment_detail_view(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Payments/views/detail"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 end

@@ -1,14 +1,12 @@
 #
-# Lockstep Software Development Kit for Ruby
+# Lockstep Platform SDK for Ruby
 #
 # (c) 2021-2022 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
-# @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayan B S <manish.n@lockstep.io>
-# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
+# @author     Lockstep Network <support@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
@@ -19,10 +17,10 @@ require 'awrence'
 class ReportsClient
 
     ##
-    # Initialize the ReportsClient class with a lockstepsdk instance.
-    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
-    def initialize(lockstepsdk)
-        @lockstepsdk = lockstepsdk
+    # Initialize the ReportsClient class with an API client instance.
+    # @param connection [LockstepApi] The API client object for this connection
+    def initialize(connection)
+        @connection = connection
     end
 
 
@@ -35,7 +33,7 @@ class ReportsClient
     def cash_flow(timeframe:)
         path = "/api/v1/Reports/cashflow"
         params = {:timeframe => timeframe}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -45,7 +43,7 @@ class ReportsClient
     #
     def daily_sales_outstanding()
         path = "/api/v1/Reports/dailysalesoutstanding"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 
     ##
@@ -55,7 +53,7 @@ class ReportsClient
     #
     def risk_rates()
         path = "/api/v1/Reports/riskrates"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 
     ##
@@ -66,7 +64,7 @@ class ReportsClient
     def accounts_receivable_header(report_date:, company_id:)
         path = "/api/v1/Reports/ar-header"
         params = {:reportDate => report_date, :companyId => company_id}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -86,7 +84,7 @@ class ReportsClient
     def invoice_aging_report(company_id:, recalculate:, currency_code:, currency_provider:, buckets:)
         path = "/api/v1/Reports/aging"
         params = {:CompanyId => company_id, :Recalculate => recalculate, :CurrencyCode => currency_code, :CurrencyProvider => currency_provider, :Buckets => buckets}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -96,7 +94,7 @@ class ReportsClient
     #
     def accounts_receivable_aging_header()
         path = "/api/v1/Reports/ar-aging-header"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 
     ##
@@ -108,7 +106,7 @@ class ReportsClient
     def attachments_header_information(company_id:)
         path = "/api/v1/Reports/attachments-header"
         params = {:companyId => company_id}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -119,7 +117,7 @@ class ReportsClient
     def trial_balance_report(start_date:, end_date:)
         path = "/api/v1/Reports/trial-balance"
         params = {:startDate => start_date, :endDate => end_date}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -135,6 +133,6 @@ class ReportsClient
     def income_statement_report(start_date:, end_date:, column_option:, display_depth:, comparison_period:, show_currency_difference:, show_percentage_difference:)
         path = "/api/v1/Reports/income-statement"
         params = {:startDate => start_date, :endDate => end_date, :columnOption => column_option, :displayDepth => display_depth, :comparisonPeriod => comparison_period, :showCurrencyDifference => show_currency_difference, :showPercentageDifference => show_percentage_difference}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 end

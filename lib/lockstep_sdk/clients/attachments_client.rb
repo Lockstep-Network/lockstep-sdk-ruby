@@ -1,14 +1,12 @@
 #
-# Lockstep Software Development Kit for Ruby
+# Lockstep Platform SDK for Ruby
 #
 # (c) 2021-2022 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
-# @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayan B S <manish.n@lockstep.io>
-# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
+# @author     Lockstep Network <support@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
@@ -19,10 +17,10 @@ require 'awrence'
 class AttachmentsClient
 
     ##
-    # Initialize the AttachmentsClient class with a lockstepsdk instance.
-    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
-    def initialize(lockstepsdk)
-        @lockstepsdk = lockstepsdk
+    # Initialize the AttachmentsClient class with an API client instance.
+    # @param connection [LockstepApi] The API client object for this connection
+    def initialize(connection)
+        @connection = connection
     end
 
 
@@ -38,7 +36,7 @@ class AttachmentsClient
     def retrieve_attachment(id:, include_param:)
         path = "/api/v1/Attachments/#{id}"
         params = {:include => include_param}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -54,7 +52,7 @@ class AttachmentsClient
     # @param body [object] A list of changes to apply to this Attachment
     def update_attachment(id:, body:)
         path = "/api/v1/Attachments/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @connection.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     ##
@@ -67,7 +65,7 @@ class AttachmentsClient
     # @param id [uuid] The unique ID number of the Attachment to be archived
     def archive_attachment(id:)
         path = "/api/v1/Attachments/#{id}"
-        @lockstepsdk.request(:delete, path, nil, nil)
+        @connection.request(:delete, path, nil, nil)
     end
 
     ##
@@ -80,7 +78,7 @@ class AttachmentsClient
     # @param id [uuid] The unique ID number of the Attachment whose URI will be returned
     def download_attachment_url(id:)
         path = "/api/v1/Attachments/#{id}/download-url"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 
     ##
@@ -93,7 +91,7 @@ class AttachmentsClient
     # @param id [uuid] The unique ID number of the Attachment whose URI will be returned
     def download_attachment_file(id:)
         path = "/api/v1/Attachments/#{id}/download-file"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 
     ##
@@ -110,7 +108,7 @@ class AttachmentsClient
     def upload_attachment(table_name:, object_id:, attachment_type:, filename:)
         path = "/api/v1/Attachments"
         params = {:tableName => table_name, :objectId => object_id, :attachmentType => attachment_type}
-        @lockstepsdk.request(:post, path, nil, params)
+        @connection.request(:post, path, nil, params)
     end
 
     ##
@@ -130,6 +128,6 @@ class AttachmentsClient
     def query_attachments(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Attachments/query"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 end

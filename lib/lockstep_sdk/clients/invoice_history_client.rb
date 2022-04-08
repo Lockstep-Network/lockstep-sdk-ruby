@@ -1,14 +1,12 @@
 #
-# Lockstep Software Development Kit for Ruby
+# Lockstep Platform SDK for Ruby
 #
 # (c) 2021-2022 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
-# @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayan B S <manish.n@lockstep.io>
-# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
+# @author     Lockstep Network <support@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
@@ -19,10 +17,10 @@ require 'awrence'
 class InvoiceHistoryClient
 
     ##
-    # Initialize the InvoiceHistoryClient class with a lockstepsdk instance.
-    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
-    def initialize(lockstepsdk)
-        @lockstepsdk = lockstepsdk
+    # Initialize the InvoiceHistoryClient class with an API client instance.
+    # @param connection [LockstepApi] The API client object for this connection
+    def initialize(connection)
+        @connection = connection
     end
 
 
@@ -34,7 +32,7 @@ class InvoiceHistoryClient
     # @param id [uuid] The unique Lockstep Platform ID number of this invoice; NOT the customer's ERP key
     def retrieve_invoice_history(id:)
         path = "/api/v1/InvoiceHistory/#{id}"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 
     ##
@@ -50,6 +48,6 @@ class InvoiceHistoryClient
     def query_invoice_history(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/InvoiceHistory/query"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 end
