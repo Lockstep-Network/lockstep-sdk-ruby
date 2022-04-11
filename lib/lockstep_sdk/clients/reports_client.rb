@@ -135,4 +135,20 @@ class ReportsClient
         params = {:startDate => start_date, :endDate => end_date, :columnOption => column_option, :displayDepth => display_depth, :comparisonPeriod => comparison_period, :showCurrencyDifference => show_currency_difference, :showPercentageDifference => show_percentage_difference}
         @connection.request(:get, path, nil, params)
     end
+
+    ##
+    # Generates a balance sheet for the given time range.
+    #
+    # @param start_date [date-time] The start date of the report
+    # @param end_date [date-time] The end date of the report
+    # @param column_option [string] The desired column splitting of the report data. An empty string or anything unrecognized will result in only totals being displayed. Options are as follows: By Period - a column for every month/fiscal period within the reporting dates Quarterly - a column for every quarter within the reporting dates Annually - a column for every year within the reporting dates
+    # @param display_depth [ReportDepth] The desired row splitting of the report data. For Balance Sheets, the minimum report depth is 1. Options are as follows: 1 - combine all accounts by their category 2 - combine all accounts by their subcategory 3 - display all accounts
+    # @param comparison_period [string] Add a column for historical data with the following options and use showCurrencyDifference and/or show percentageDifference to display a comparison of that historical data to the report period. "PP" - previous period (will show the previous quarter or year if Quarterly or Annually is chosen for columnOption) "PY" - previous year (the same date range as the report, but for the year prior)
+    # @param show_currency_difference [boolean] A boolean to turn on a currency based difference between the reporting period and the comparison period.
+    # @param show_percentage_difference [boolean] A boolean to turn on a percent based difference between the reporting period and the comparison period.
+    def balance_sheet_report(start_date:, end_date:, column_option:, display_depth:, comparison_period:, show_currency_difference:, show_percentage_difference:)
+        path = "/api/v1/Reports/balance-sheet"
+        params = {:startDate => start_date, :endDate => end_date, :columnOption => column_option, :displayDepth => display_depth, :comparisonPeriod => comparison_period, :showCurrencyDifference => show_currency_difference, :showPercentageDifference => show_percentage_difference}
+        @connection.request(:get, path, nil, params)
+    end
 end
