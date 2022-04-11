@@ -1,14 +1,12 @@
 #
-# Lockstep Software Development Kit for Ruby
+# Lockstep Platform SDK for Ruby
 #
 # (c) 2021-2022 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
-# @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayan B S <manish.n@lockstep.io>
-# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
+# @author     Lockstep Network <support@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
@@ -19,10 +17,10 @@ require 'awrence'
 class WebhooksClient
 
     ##
-    # Initialize the WebhooksClient class with a lockstepsdk instance.
-    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
-    def initialize(lockstepsdk)
-        @lockstepsdk = lockstepsdk
+    # Initialize the WebhooksClient class with an API client instance.
+    # @param connection [LockstepApi] The API client object for this connection
+    def initialize(connection)
+        @connection = connection
     end
 
 
@@ -32,7 +30,7 @@ class WebhooksClient
     # @param id [uuid] The unique Lockstep Platform ID number of this Webhook
     def retrieve_webhook(id:)
         path = "/api/v1/Webhooks/#{id}"
-        @lockstepsdk.request(:get, path, nil, nil)
+        @connection.request(:get, path, nil, nil)
     end
 
     ##
@@ -44,7 +42,7 @@ class WebhooksClient
     # @param body [object] A list of changes to apply to this Webhook
     def update_webhook(id:, body:)
         path = "/api/v1/Webhooks/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @connection.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     ##
@@ -53,7 +51,7 @@ class WebhooksClient
     # @param id [uuid] The unique Lockstep Platform ID number of the Webhook to delete.
     def delete_webhook(id:)
         path = "/api/v1/Webhooks/#{id}"
-        @lockstepsdk.request(:delete, path, nil, nil)
+        @connection.request(:delete, path, nil, nil)
     end
 
     ##
@@ -62,7 +60,7 @@ class WebhooksClient
     # @param body [WebhookModel] The Webhooks to create
     def create_webhooks(body:)
         path = "/api/v1/Webhooks"
-        @lockstepsdk.request(:post, path, body, nil)
+        @connection.request(:post, path, body, nil)
     end
 
     ##
@@ -71,7 +69,7 @@ class WebhooksClient
     # @param id [uuid] The unique Lockstep Platform ID number of the Webhook to update.
     def regenerate_client_secret(id:)
         path = "/api/v1/Webhooks/#{id}/regenerateclientsecret"
-        @lockstepsdk.request(:patch, path, nil, nil)
+        @connection.request(:patch, path, nil, nil)
     end
 
     ##
@@ -86,7 +84,7 @@ class WebhooksClient
     def query_webhooks(filter:, order:, page_size:, page_number:)
         path = "/api/v1/Webhooks/query"
         params = {:filter => filter, :order => order, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -100,6 +98,6 @@ class WebhooksClient
     def query_webhook_history(webhook_id:, filter:, select:, page_size:, page_number:)
         path = "/api/v1/Webhooks/#{webhookId}/history/query"
         params = {:filter => filter, :select => select, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 end

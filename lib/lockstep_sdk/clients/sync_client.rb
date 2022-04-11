@@ -1,14 +1,12 @@
 #
-# Lockstep Software Development Kit for Ruby
+# Lockstep Platform SDK for Ruby
 #
 # (c) 2021-2022 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
-# @author     Ted Spence <tspence@lockstep.io>
-# @author     Manish Narayan B S <manish.n@lockstep.io>
-# @author     Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
+# @author     Lockstep Network <support@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
@@ -19,10 +17,10 @@ require 'awrence'
 class SyncClient
 
     ##
-    # Initialize the SyncClient class with a lockstepsdk instance.
-    # @param lockstepsdk [LockstepApi] The Lockstep API client object for this connection
-    def initialize(lockstepsdk)
-        @lockstepsdk = lockstepsdk
+    # Initialize the SyncClient class with an API client instance.
+    # @param connection [LockstepApi] The API client object for this connection
+    def initialize(connection)
+        @connection = connection
     end
 
 
@@ -34,7 +32,7 @@ class SyncClient
     # @param body [SyncSubmitModel] Information about the Sync to execute
     def create_sync(body:)
         path = "/api/v1/Sync"
-        @lockstepsdk.request(:post, path, body, nil)
+        @connection.request(:post, path, body, nil)
     end
 
     ##
@@ -47,7 +45,7 @@ class SyncClient
     # @param body [BatchSyncModel] Information about the Sync to execute
     def create_batch_import(body:)
         path = "/api/v1/Sync/batch"
-        @lockstepsdk.request(:post, path, body, nil)
+        @connection.request(:post, path, body, nil)
     end
 
     ##
@@ -58,7 +56,7 @@ class SyncClient
     # @param filename [File] The full path of a file to upload to the API
     def upload_sync_file(filename:)
         path = "/api/v1/Sync/zip"
-        @lockstepsdk.request(:post, path, nil, nil)
+        @connection.request(:post, path, nil, nil)
     end
 
     ##
@@ -74,7 +72,7 @@ class SyncClient
     # @param body [object] A list of changes to apply to this Application
     def update_sync(id:, body:)
         path = "/api/v1/Sync/#{id}"
-        @lockstepsdk.request(:patch, path, body.to_camelback_keys.to_json, nil)
+        @connection.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     ##
@@ -87,7 +85,7 @@ class SyncClient
     def retrieve_sync(id:, include_param:)
         path = "/api/v1/Sync/#{id}"
         params = {:include => include_param}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 
     ##
@@ -98,7 +96,7 @@ class SyncClient
     # @param id [uuid] The unique ID number of the Sync task to cancel
     def cancel_sync(id:)
         path = "/api/v1/Sync/#{id}"
-        @lockstepsdk.request(:delete, path, nil, nil)
+        @connection.request(:delete, path, nil, nil)
     end
 
     ##
@@ -116,6 +114,6 @@ class SyncClient
     def query_syncs(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Sync/query"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
-        @lockstepsdk.request(:get, path, nil, params)
+        @connection.request(:get, path, nil, params)
     end
 end

@@ -9,7 +9,7 @@
 # @author     Lockstep Network <support@lockstep.io>
 #             Manish Narayan B S <manish.n@lockstep.io>, Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.13.29
+# @version    2022.14.30
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -21,7 +21,7 @@ require 'socket'
 project_root = File.dirname(File.absolute_path(__FILE__))
 Dir.glob(project_root + '/clients/*') {|file| require file}
 
-module lockstep_sdk
+module LockstepSdk
     class LockstepApi
     
         ##
@@ -158,7 +158,7 @@ module lockstep_sdk
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def initialize(env)
-            @version = "2022.13.29.0"
+            @version = "2022.14.30.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -204,6 +204,8 @@ module lockstep_sdk
         ##
         # Configure this API client to use API key authentication
         #
+        # Authentication is either via [Lockstep Platform API key](https://developer.lockstep.io/docs/api-keys) or [JWT Bearer Token](https://developer.lockstep.io/docs/jwt-bearer-tokens)
+        #
         # @param api_key [string] The API Key to use for authentication
         def with_api_key(api_key)
             @bearer_token = nil
@@ -212,6 +214,8 @@ module lockstep_sdk
 
         ##
         # Configure this API client to use JWT Bearer Token authentication
+        #
+        # Authentication is either via [Lockstep Platform API key](https://developer.lockstep.io/docs/api-keys) or [JWT Bearer Token](https://developer.lockstep.io/docs/jwt-bearer-tokens)
         #
         # @param bearer_token [string] The Bearer Token to use for authentication
         def with_bearer_token(bearer_token)
@@ -258,7 +262,7 @@ module lockstep_sdk
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
             request["SdkType"] = 'Ruby'
-            request["SdkVersion"] = '2022.13.29.0'
+            request["SdkVersion"] = '2022.14.30.0'
             request["MachineName"] = Socket.gethostname
             request.body = body
 
