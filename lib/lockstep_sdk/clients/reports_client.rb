@@ -112,8 +112,8 @@ class ReportsClient
     ##
     # Generates a Trial Balance Report for the given time range.
     #
-    # @param start_date [date-time] 
-    # @param end_date [date-time] 
+    # @param start_date [date-time] The start date of the report
+    # @param end_date [date-time] The end date of the report
     def trial_balance_report(start_date:, end_date:)
         path = "/api/v1/Reports/trial-balance"
         params = {:startDate => start_date, :endDate => end_date}
