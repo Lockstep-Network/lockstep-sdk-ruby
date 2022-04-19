@@ -55,7 +55,7 @@ module LockstepSdk
         end
 
         ##
-        # @return [String] This is the primary key of the Contact record. For this field, you should use whatever the contact's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your contact records in a database, whatever the primary key for the contact table is in the database should be the "ErpKey". For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
+        # @return [String] This is the primary key of the Contact record. For this field, you should use whatever the contact's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your contact records in a database, whatever the primary key for the contact table is in the database should be the "ErpKey". As some ERP systems don't maintain a unique key for Contacts, we also support syncing Contacts with ERP keys of the form {CompanyErpKey}|{index}, for example CompanyErpKey|1, CompanyErpKey|2 and so on. For this reason, please ensure that your Company/Contact ERP keys don't contain the '|' symbol or that it is replaced by an alternate symbol if they do. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
 
         ##
