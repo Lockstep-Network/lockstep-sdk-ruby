@@ -82,6 +82,16 @@ class AppEnrollmentsClient
     end
 
     ##
+    # Updates the OAuth settings associated with this App Enrollment
+    #
+    # @param id [uuid] 
+    # @param body [string] 
+    def reconnect_app_enrollment_oauth(id:, body:)
+        path = "/api/v1/AppEnrollments/#{id}/reconnect"
+        @connection.request(:patch, path, body, nil)
+    end
+
+    ##
     # Queries App Enrollments for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
     #
     # More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.

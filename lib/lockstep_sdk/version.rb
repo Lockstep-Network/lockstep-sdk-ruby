@@ -1,3 +1,3 @@
 module LockstepSdk
-    VERSION = "2022.15.31.0"
+    VERSION = "2022.17.35.0"
 end

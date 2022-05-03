@@ -47,6 +47,16 @@ class ReportsClient
     end
 
     ##
+    # Retrieves a current Days Payable Outstanding (DPO) report for this account.
+    #
+    # Days payable outstanding (DPO) is a financial ratio that indicates the average time (in days) that a company takes to pay its bills to its trade creditors, which may include suppliers, vendors, or financiers.
+    #
+    def days_payable_outstanding()
+        path = "/api/v1/Reports/daily-payable-outstanding"
+        @connection.request(:get, path, nil, nil)
+    end
+
+    ##
     # Retrieves a current Risk Rate report for this account.
     #
     # Risk Rate is a metric that indicates the percentage of total AR balance left unpaid after 90 days.  You can use this report to identify the percentage of invoice value that is not being collected in a timely manner.
@@ -81,9 +91,10 @@ class ReportsClient
     # @param currency_code [string] Currency aging buckets are converted to (all aging data returned without currency conversion if no currency is specified)
     # @param currency_provider [string] Currency provider currency rates should be returned from to convert aging amounts to (default Lockstep currency provider used if no data provider specified)
     # @param buckets [int32] Customized buckets used for aging calculations (default buckets [0,30,60,90,120,180] will be used if buckets not specified)
-    def invoice_aging_report(company_id:, recalculate:, currency_code:, currency_provider:, buckets:)
+    # @param ap_report [boolean] A boolean to turn on AP Aging reports
+    def invoice_aging_report(company_id:, recalculate:, currency_code:, currency_provider:, buckets:, ap_report:)
         path = "/api/v1/Reports/aging"
-        params = {:CompanyId => company_id, :Recalculate => recalculate, :CurrencyCode => currency_code, :CurrencyProvider => currency_provider, :Buckets => buckets}
+        params = {:CompanyId => company_id, :Recalculate => recalculate, :CurrencyCode => currency_code, :CurrencyProvider => currency_provider, :Buckets => buckets, :ApReport => ap_report}
         @connection.request(:get, path, nil, params)
     end
 
@@ -114,9 +125,10 @@ class ReportsClient
     #
     # @param start_date [date-time] The start date of the report
     # @param end_date [date-time] The end date of the report
-    def trial_balance_report(start_date:, end_date:)
+    # @param app_enrollment_id [uuid] The app enrollment id of the app enrollment whose data will be used.
+    def trial_balance_report(start_date:, end_date:, app_enrollment_id:)
         path = "/api/v1/Reports/trial-balance"
-        params = {:startDate => start_date, :endDate => end_date}
+        params = {:startDate => start_date, :endDate => end_date, :appEnrollmentId => app_enrollment_id}
         @connection.request(:get, path, nil, params)
     end
 
@@ -125,14 +137,15 @@ class ReportsClient
     #
     # @param start_date [date-time] The start date of the report
     # @param end_date [date-time] The end date of the report
+    # @param app_enrollment_id [uuid] The app enrollment id of the app enrollment whose data will be used.
     # @param column_option [string] The desired column splitting of the report data. An empty string or anything unrecognized will result in only totals being displayed. Options are as follows: By Period - a column for every month/fiscal period within the reporting dates Quarterly - a column for every quarter within the reporting dates Annually - a column for every year within the reporting dates
     # @param display_depth [ReportDepth] The desired row splitting of the report data. For Income Statements, the minimum report depth is 1. Options are as follows: 1 - combine all accounts by their category 2 - combine all accounts by their subcategory 3 - display all accounts
     # @param comparison_period [string] Add a column for historical data with the following options and use showCurrencyDifference and/or show percentageDifference to display a comparison of that historical data to the report period. Options are as follows (note for YTD the data will be compared as a percentage of YTD and showCurrencyDifference and showPercentageDifference should not be used): "PP" - previous period (will show the previous quarter or year if Quarterly or Annually is chosen for columnOption) "PY" - previous year (the same date range as the report, but for the year prior) "YTD" - year to date (the current financial year to the current period)
     # @param show_currency_difference [boolean] A boolean to turn on a currency based difference between the reporting period and the comparison period.
     # @param show_percentage_difference [boolean] A boolean to turn on a percent based difference between the reporting period and the comparison period.
-    def income_statement_report(start_date:, end_date:, column_option:, display_depth:, comparison_period:, show_currency_difference:, show_percentage_difference:)
+    def income_statement_report(start_date:, end_date:, app_enrollment_id:, column_option:, display_depth:, comparison_period:, show_currency_difference:, show_percentage_difference:)
         path = "/api/v1/Reports/income-statement"
-        params = {:startDate => start_date, :endDate => end_date, :columnOption => column_option, :displayDepth => display_depth, :comparisonPeriod => comparison_period, :showCurrencyDifference => show_currency_difference, :showPercentageDifference => show_percentage_difference}
+        params = {:startDate => start_date, :endDate => end_date, :appEnrollmentId => app_enrollment_id, :columnOption => column_option, :displayDepth => display_depth, :comparisonPeriod => comparison_period, :showCurrencyDifference => show_currency_difference, :showPercentageDifference => show_percentage_difference}
         @connection.request(:get, path, nil, params)
     end
 
@@ -141,14 +154,29 @@ class ReportsClient
     #
     # @param start_date [date-time] The start date of the report
     # @param end_date [date-time] The end date of the report
+    # @param app_enrollment_id [uuid] The app enrollment id of the app enrollment whose data will be used.
     # @param column_option [string] The desired column splitting of the report data. An empty string or anything unrecognized will result in only totals being displayed. Options are as follows: By Period - a column for every month/fiscal period within the reporting dates Quarterly - a column for every quarter within the reporting dates Annually - a column for every year within the reporting dates
     # @param display_depth [ReportDepth] The desired row splitting of the report data. For Balance Sheets, the minimum report depth is 1. Options are as follows: 1 - combine all accounts by their category 2 - combine all accounts by their subcategory 3 - display all accounts
     # @param comparison_period [string] Add a column for historical data with the following options and use showCurrencyDifference and/or show percentageDifference to display a comparison of that historical data to the report period. "PP" - previous period (will show the previous quarter or year if Quarterly or Annually is chosen for columnOption) "PY" - previous year (the same date range as the report, but for the year prior)
     # @param show_currency_difference [boolean] A boolean to turn on a currency based difference between the reporting period and the comparison period.
     # @param show_percentage_difference [boolean] A boolean to turn on a percent based difference between the reporting period and the comparison period.
-    def balance_sheet_report(start_date:, end_date:, column_option:, display_depth:, comparison_period:, show_currency_difference:, show_percentage_difference:)
+    def balance_sheet_report(start_date:, end_date:, app_enrollment_id:, column_option:, display_depth:, comparison_period:, show_currency_difference:, show_percentage_difference:)
         path = "/api/v1/Reports/balance-sheet"
-        params = {:startDate => start_date, :endDate => end_date, :columnOption => column_option, :displayDepth => display_depth, :comparisonPeriod => comparison_period, :showCurrencyDifference => show_currency_difference, :showPercentageDifference => show_percentage_difference}
+        params = {:startDate => start_date, :endDate => end_date, :appEnrollmentId => app_enrollment_id, :columnOption => column_option, :displayDepth => display_depth, :comparisonPeriod => comparison_period, :showCurrencyDifference => show_currency_difference, :showPercentageDifference => show_percentage_difference}
+        @connection.request(:get, path, nil, params)
+    end
+
+    ##
+    # Generates a cash flow statement for the given time range.
+    #
+    # @param start_date [date-time] The start date of the report
+    # @param end_date [date-time] The end date of the report
+    # @param app_enrollment_id [uuid] The app enrollment id of the app enrollment whose data will be used.
+    # @param column_option [string] The desired column splitting of the report data. An empty string or anything unrecognized will result in only totals being displayed. Options are as follows: By Period - a column for every month/fiscal period within the reporting dates Quarterly - a column for every quarter within the reporting dates Annually - a column for every year within the reporting dates
+    # @param display_depth [ReportDepth] The desired row splitting of the report data. Options are as follows: 0 - combine all accounts by their classification 1 - combine all accounts by their category 2 - combine all accounts by their subcategory 3 - display all accounts
+    def cash_flow_statement_report(start_date:, end_date:, app_enrollment_id:, column_option:, display_depth:)
+        path = "/api/v1/Reports/cash-flow-statement"
+        params = {:startDate => start_date, :endDate => end_date, :appEnrollmentId => app_enrollment_id, :columnOption => column_option, :displayDepth => display_depth}
         @connection.request(:get, path, nil, params)
     end
 end

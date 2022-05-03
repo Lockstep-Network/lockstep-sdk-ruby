@@ -55,6 +55,7 @@ module LockstepSdk
             @duns_number = params.dig(:duns_number)
             @ap_email_address = params.dig(:ap_email_address)
             @ar_email_address = params.dig(:ar_email_address)
+            @preferred_delivery_method = params.dig(:preferred_delivery_method)
         end
 
         ##
@@ -154,6 +155,10 @@ module LockstepSdk
         attr_accessor :ar_email_address
 
         ##
+        # @return [String] Indicates the preferred invoice delivery method. Examples include Print, Email, Fax
+        attr_accessor :preferred_delivery_method
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -181,6 +186,7 @@ module LockstepSdk
                 'dunsNumber' => @duns_number,
                 'apEmailAddress' => @ap_email_address,
                 'arEmailAddress' => @ar_email_address,
+                'preferredDeliveryMethod' => @preferred_delivery_method,
             }
         end
 
