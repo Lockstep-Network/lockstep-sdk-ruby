@@ -56,7 +56,7 @@ class FinancialAccountClient
     # Deletes the Financial Account referred to by this unique identifier.
     #
     # @param id [uuid] The unique Lockstep Platform ID number of the Financial Account to disable; NOT the customer's ERP key
-    def deletes_financial_account(id:)
+    def delete_financial_account(id:)
         path = "/api/v1/FinancialAccount/#{id}"
         @connection.request(:delete, path, nil, nil)
     end

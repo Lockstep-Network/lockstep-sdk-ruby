@@ -39,6 +39,7 @@ module LockstepSdk
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
             @app_enrollment_id = params.dig(:app_enrollment_id)
+            @payment = params.dig(:payment)
             @invoice = params.dig(:invoice)
         end
 
@@ -95,6 +96,10 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
 
         ##
+        # @return [PaymentModel] The payment associated with this applied payment
+        attr_accessor :payment
+
+        ##
         # @return [InvoiceModel] The invoice associated with this applied payment.
         attr_accessor :invoice
 
@@ -115,6 +120,7 @@ module LockstepSdk
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
                 'appEnrollmentId' => @app_enrollment_id,
+                'payment' => @payment,
                 'invoice' => @invoice,
             }
         end

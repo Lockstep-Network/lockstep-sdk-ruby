@@ -122,15 +122,35 @@ class CompaniesClient
     end
 
     ##
-    # Retrieves the Customer Details specified by this unique identifier, optionally including nested data sets.
+    # Queries Vendor Summaries for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
     #
-    # The Customer Detail View represents a slightly different view of the data and includes some extra fields that might be useful. For more information, see the data format of the Customer Detail Model.
+    # More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.
+    #
+    # The Vendor Summary View represents a slightly different view of the data and includes some extra fields that might be useful. For more information, see the data format of the Vendor Summary Model.
     #
     # See [Vendors, Customers, and Companies](https://developer.lockstep.io/docs/companies-customers-and-vendors) for more information.
     #
-    # @param id [uuid] The unique Lockstep Platform ID number of this Company; NOT the customer's ERP key
-    def retrieve_customer_detail(id:)
-        path = "/api/v1/Companies/views/customer-details/#{id}"
+    # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available but may be offered in the future
+    # @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
+    # @param page_size [int32] The page size for results (default 200, maximum of 10,000)
+    # @param page_number [int32] The page number for results (default 0)
+    def query_vendor_summary(filter:, include_param:, order:, page_size:, page_number:)
+        path = "/api/v1/Companies/views/vendor-summary"
+        params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
+        @connection.request(:get, path, nil, params)
+    end
+
+    ##
+    # Retrieves the Company Details specified by this unique identifier, optionally including nested data sets.
+    #
+    # The Company Detail View represents a slightly different view of the data and includes some extra fields that might be useful. For more information, see the data format of the Company Detail Model.
+    #
+    # See [Vendors, Customers, and Companies](https://developer.lockstep.io/docs/companies-customers-and-vendors) for more information.
+    #
+    # @param id [uuid] The unique Lockstep Platform ID number of this Company; NOT the company's ERP key
+    def retrieve_company_detail(id:)
+        path = "/api/v1/Companies/views/details/#{id}"
         @connection.request(:get, path, nil, nil)
     end
 end

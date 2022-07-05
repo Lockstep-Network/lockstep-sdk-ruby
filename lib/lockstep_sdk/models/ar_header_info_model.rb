@@ -41,9 +41,15 @@ module LockstepSdk
             @total_invoice_amount_current_year = params.dig(:total_invoice_amount_current_year)
             @total_invoice_amount_previous_year = params.dig(:total_invoice_amount_previous_year)
             @total_payment_amount_current_year = params.dig(:total_payment_amount_current_year)
-            @total_collected_past_thirty_days = params.dig(:total_collected_past_thirty_days)
-            @total_invoices_paid_past_thirty_days = params.dig(:total_invoices_paid_past_thirty_days)
             @percentage_of_total_ar90_days_past_due = params.dig(:percentage_of_total_ar90_days_past_due)
+            @customers_paid_past_thirty_days = params.dig(:customers_paid_past_thirty_days)
+            @amount_collected_past_thirty_days = params.dig(:amount_collected_past_thirty_days)
+            @unapplied_amount_past_thirty_days = params.dig(:unapplied_amount_past_thirty_days)
+            @invoices_paid_past_thirty_days = params.dig(:invoices_paid_past_thirty_days)
+            @customers_invoiced_past_thirty_days = params.dig(:customers_invoiced_past_thirty_days)
+            @amount_invoiced_past_thirty_days = params.dig(:amount_invoiced_past_thirty_days)
+            @amount_due_past_thirty_days = params.dig(:amount_due_past_thirty_days)
+            @invoices_past_thirty_days = params.dig(:invoices_past_thirty_days)
         end
 
         ##
@@ -119,16 +125,40 @@ module LockstepSdk
         attr_accessor :total_payment_amount_current_year
 
         ##
-        # @return [Int32] The total amount of payments received in the last 30 days
-        attr_accessor :total_collected_past_thirty_days
-
-        ##
-        # @return [Int32] The total amount of Invoices paid in the last 30 days
-        attr_accessor :total_invoices_paid_past_thirty_days
-
-        ##
         # @return [Double] Portion of Total AR that is 90+ days Past due.
         attr_accessor :percentage_of_total_ar90_days_past_due
+
+        ##
+        # @return [Int32] The number of customers who paid within the past thirty days.
+        attr_accessor :customers_paid_past_thirty_days
+
+        ##
+        # @return [Double] The total amount collected over the past thirty days.
+        attr_accessor :amount_collected_past_thirty_days
+
+        ##
+        # @return [Double] The amount unapplied from the payments collected over the past thirty days.
+        attr_accessor :unapplied_amount_past_thirty_days
+
+        ##
+        # @return [Int32] The number of invoices paid over the past thirty days.
+        attr_accessor :invoices_paid_past_thirty_days
+
+        ##
+        # @return [Int32] The number of customers invoiced over the the past thirty days.
+        attr_accessor :customers_invoiced_past_thirty_days
+
+        ##
+        # @return [Double] The total amount invoiced over the past thirty days.
+        attr_accessor :amount_invoiced_past_thirty_days
+
+        ##
+        # @return [Double] The amount outstanding on the invoices invoiced over the past thirty days.
+        attr_accessor :amount_due_past_thirty_days
+
+        ##
+        # @return [Int32] The number of invoices invoiced over the past thirty days.
+        attr_accessor :invoices_past_thirty_days
 
         ##
         # @return [object] This object as a JSON key-value structure
@@ -152,9 +182,15 @@ module LockstepSdk
                 'totalInvoiceAmountCurrentYear' => @total_invoice_amount_current_year,
                 'totalInvoiceAmountPreviousYear' => @total_invoice_amount_previous_year,
                 'totalPaymentAmountCurrentYear' => @total_payment_amount_current_year,
-                'totalCollectedPastThirtyDays' => @total_collected_past_thirty_days,
-                'totalInvoicesPaidPastThirtyDays' => @total_invoices_paid_past_thirty_days,
                 'percentageOfTotalAr90DaysPastDue' => @percentage_of_total_ar90_days_past_due,
+                'customersPaidPastThirtyDays' => @customers_paid_past_thirty_days,
+                'amountCollectedPastThirtyDays' => @amount_collected_past_thirty_days,
+                'unappliedAmountPastThirtyDays' => @unapplied_amount_past_thirty_days,
+                'invoicesPaidPastThirtyDays' => @invoices_paid_past_thirty_days,
+                'customersInvoicedPastThirtyDays' => @customers_invoiced_past_thirty_days,
+                'amountInvoicedPastThirtyDays' => @amount_invoiced_past_thirty_days,
+                'amountDuePastThirtyDays' => @amount_due_past_thirty_days,
+                'invoicesPastThirtyDays' => @invoices_past_thirty_days,
             }
         end
 

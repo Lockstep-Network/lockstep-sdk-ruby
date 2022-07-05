@@ -25,7 +25,10 @@ module LockstepSdk
         # Initialize the ConnectorInfoModel using the provided prototype
         def initialize(params = {})
             @auth_code = params.dig(:auth_code)
+            @token_id = params.dig(:token_id)
+            @token_secret = params.dig(:token_secret)
             @realm_id = params.dig(:realm_id)
+            @subsidiary_id = params.dig(:subsidiary_id)
             @redirect_uri = params.dig(:redirect_uri)
             @email = params.dig(:email)
             @username = params.dig(:username)
@@ -39,8 +42,20 @@ module LockstepSdk
         attr_accessor :auth_code
 
         ##
+        # @return [String] The access token id for the connector enrollment.
+        attr_accessor :token_id
+
+        ##
+        # @return [String] The access token secret for the connector enrollment.
+        attr_accessor :token_secret
+
+        ##
         # @return [String] The realm id of the account being granted permissions to access
         attr_accessor :realm_id
+
+        ##
+        # @return [String] The subsidiary id that corresponds to a legal entity.
+        attr_accessor :subsidiary_id
 
         ##
         # @return [String] The redirect uri used for step one of the OAuth2.0 flow.
@@ -71,7 +86,10 @@ module LockstepSdk
         def as_json(options={})
             {
                 'authCode' => @auth_code,
+                'tokenId' => @token_id,
+                'tokenSecret' => @token_secret,
                 'realmId' => @realm_id,
+                'subsidiaryId' => @subsidiary_id,
                 'redirectUri' => @redirect_uri,
                 'email' => @email,
                 'username' => @username,

@@ -78,12 +78,13 @@ class WebhooksClient
     # More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.
     #
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collection: WebhookRules
     # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param page_size [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param page_number [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    def query_webhooks(filter:, order:, page_size:, page_number:)
+    def query_webhooks(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Webhooks/query"
-        params = {:filter => filter, :order => order, :pageSize => page_size, :pageNumber => page_number}
+        params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
     end
 
@@ -99,5 +100,15 @@ class WebhooksClient
         path = "/api/v1/Webhooks/#{webhookId}/history/query"
         params = {:filter => filter, :select => select, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
+    end
+
+    ##
+    #
+    #
+    # @param webhook_id [uuid] The unique Lockstep Platform ID number of this Webhook
+    # @param webhook_history_id [uuid] The unique Lockstep Platform ID number of the Webhook History to be retried. Note: the webhook history supplied must have a isSuccessful status of false to be retried.
+    def retry_failed_webhook_history(webhook_id:, webhook_history_id:)
+        path = "/api/v1/Webhooks/#{webhookId}/history/#{webhookHistoryId}/retry"
+        @connection.request(:get, path, nil, nil)
     end
 end

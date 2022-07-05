@@ -25,6 +25,7 @@ module LockstepSdk
         def initialize(params = {})
             @insert_count = params.dig(:insert_count)
             @update_count = params.dig(:update_count)
+            @delete_count = params.dig(:delete_count)
             @skip_count = params.dig(:skip_count)
             @error_count = params.dig(:error_count)
             @errors = params.dig(:errors)
@@ -37,6 +38,10 @@ module LockstepSdk
         ##
         # @return [Int32] The number of entities updated
         attr_accessor :update_count
+
+        ##
+        # @return [Int32] The number of entities deleted
+        attr_accessor :delete_count
 
         ##
         # @return [Int32] The number of entities skipped
@@ -56,6 +61,7 @@ module LockstepSdk
             {
                 'insertCount' => @insert_count,
                 'updateCount' => @update_count,
+                'deleteCount' => @delete_count,
                 'skipCount' => @skip_count,
                 'errorCount' => @error_count,
                 'errors' => @errors,

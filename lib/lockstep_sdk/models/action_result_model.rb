@@ -17,30 +17,29 @@ require 'json'
 module LockstepSdk
 
     ##
-    # Represents the daily sales outstanding report
-    class DailySalesOutstandingReportModel
+    # Represents the result of an action.
+    #
+    # In the Lockstep API, an Action is returned when an API call does not produce any data
+    # but does produce messages that can be useful in understanding what work was performed.
+    # You may use the messages text to display user visible error messages or the results of
+    # various operations.
+    class ActionResultModel
 
         ##
-        # Initialize the DailySalesOutstandingReportModel using the provided prototype
+        # Initialize the ActionResultModel using the provided prototype
         def initialize(params = {})
-            @timeframe = params.dig(:timeframe)
-            @daily_sales_outstanding = params.dig(:daily_sales_outstanding)
+            @messages = params.dig(:messages)
         end
 
         ##
-        # @return [Date-time] Timeframe (month) the daily sales outstanding values are associated with
-        attr_accessor :timeframe
-
-        ##
-        # @return [Double] Time (in days) between an invoice was completed paid off and when the invoice was issued
-        attr_accessor :daily_sales_outstanding
+        # @return [String] If the API call produced messages, this element will contain a list of user-visible text strings that contain information about what work occurred in the API.
+        attr_accessor :messages
 
         ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
-                'timeframe' => @timeframe,
-                'dailySalesOutstanding' => @daily_sales_outstanding,
+                'messages' => @messages,
             }
         end
 
