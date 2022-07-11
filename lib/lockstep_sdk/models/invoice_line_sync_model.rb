@@ -152,7 +152,7 @@ module LockstepSdk
         attr_accessor :origin_address_postal_code
 
         ##
-        # @return [String] Origination address for this invoice line, if this line item was originated from a different address This will be validated by the /api/v1/definitions/countries data set
+        # @return [String] Origination address for this invoice line, if this line item was originated from a different address
         attr_accessor :origin_address_country
 
         ##
@@ -188,7 +188,7 @@ module LockstepSdk
         attr_accessor :bill_to_address_postal_code
 
         ##
-        # @return [String] Billing address for this invoice line, if this line item is to be billed to a different address This will be validated by the /api/v1/definitions/countries data set
+        # @return [String] Billing address for this invoice line, if this line item is to be billed to a different address
         attr_accessor :bill_to_address_country
 
         ##
@@ -224,7 +224,7 @@ module LockstepSdk
         attr_accessor :ship_to_address_postal_code
 
         ##
-        # @return [String] Shipping address for this invoice line, if this line item is to be shipped to a different address This will be validated by the /api/v1/definitions/countries data set
+        # @return [String] Shipping address for this invoice line, if this line item is to be shipped to a different address
         attr_accessor :ship_to_address_country
 
         ##

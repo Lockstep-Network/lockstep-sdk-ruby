@@ -9,7 +9,7 @@
 # @author     Lockstep Network <support@lockstep.io>
 #             Manish Narayan B S <manish.n@lockstep.io>, Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.15.31
+# @version    2022.26.12
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -21,7 +21,7 @@ require 'socket'
 project_root = File.dirname(File.absolute_path(__FILE__))
 Dir.glob(project_root + '/clients/*') {|file| require file}
 
-module Lockstep_sdk
+module lockstep_sdk
     class LockstepApi
     
         ##
@@ -101,6 +101,10 @@ module Lockstep_sdk
         attr_accessor :financial_year_settings
 
         ##
+        # @return [GroupAccountsClient] Client object for GroupAccounts endpoints
+        attr_accessor :group_accounts
+
+        ##
         # @return [InvoiceHistoryClient] Client object for InvoiceHistory endpoints
         attr_accessor :invoice_history
 
@@ -149,6 +153,10 @@ module Lockstep_sdk
         attr_accessor :user_roles
 
         ##
+        # @return [WebhookRulesClient] Client object for WebhookRules endpoints
+        attr_accessor :webhook_rules
+
+        ##
         # @return [WebhooksClient] Client object for Webhooks endpoints
         attr_accessor :webhooks
 
@@ -158,7 +166,7 @@ module Lockstep_sdk
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def initialize(env)
-            @version = "2022.15.31.0"
+            @version = "2022.26.12.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -186,6 +194,7 @@ module Lockstep_sdk
             @financial_account = FinancialAccountClient.new(self)
             @financial_account_balance_history = FinancialAccountBalanceHistoryClient.new(self)
             @financial_year_settings = FinancialYearSettingsClient.new(self)
+            @group_accounts = GroupAccountsClient.new(self)
             @invoice_history = InvoiceHistoryClient.new(self)
             @invoices = InvoicesClient.new(self)
             @leads = LeadsClient.new(self)
@@ -198,6 +207,7 @@ module Lockstep_sdk
             @sync = SyncClient.new(self)
             @user_accounts = UserAccountsClient.new(self)
             @user_roles = UserRolesClient.new(self)
+            @webhook_rules = WebhookRulesClient.new(self)
             @webhooks = WebhooksClient.new(self)
         end
 
@@ -262,7 +272,7 @@ module Lockstep_sdk
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
             request["SdkType"] = 'Ruby'
-            request["SdkVersion"] = '2022.15.31.0'
+            request["SdkVersion"] = '2022.26.12.0'
             request["MachineName"] = Socket.gethostname
             request.body = body
 

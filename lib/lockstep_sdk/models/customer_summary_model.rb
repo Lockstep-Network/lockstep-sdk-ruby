@@ -31,10 +31,16 @@ module LockstepSdk
             @total_invoices_open = params.dig(:total_invoices_open)
             @total_invoices_past_due = params.dig(:total_invoices_past_due)
             @closed_invoices = params.dig(:closed_invoices)
+            @closed_invoices_past_thirty_days = params.dig(:closed_invoices_past_thirty_days)
             @amount_collected = params.dig(:amount_collected)
+            @amount_collected_past_thirty_days = params.dig(:amount_collected_past_thirty_days)
             @outstanding_amount = params.dig(:outstanding_amount)
+            @invoiced_amount_past_thirty_days = params.dig(:invoiced_amount_past_thirty_days)
+            @outstanding_amount_past_thirty_days = params.dig(:outstanding_amount_past_thirty_days)
+            @invoices_past_thirty_days = params.dig(:invoices_past_thirty_days)
             @amount_past_due = params.dig(:amount_past_due)
             @unapplied_payments = params.dig(:unapplied_payments)
+            @unapplied_amount_past_thirty_days = params.dig(:unapplied_amount_past_thirty_days)
             @percent_of_total_ar = params.dig(:percent_of_total_ar)
             @dso = params.dig(:dso)
             @newest_activity = params.dig(:newest_activity)
@@ -73,12 +79,32 @@ module LockstepSdk
         attr_accessor :closed_invoices
 
         ##
+        # @return [Int32] The number of closed invoices for this customer in the past thirty days.
+        attr_accessor :closed_invoices_past_thirty_days
+
+        ##
         # @return [Double] The total from collected payments.
         attr_accessor :amount_collected
 
         ##
+        # @return [Double] The total from collected payments in the past thirty days.
+        attr_accessor :amount_collected_past_thirty_days
+
+        ##
         # @return [Double] The total balance of outstanding invoices.
         attr_accessor :outstanding_amount
+
+        ##
+        # @return [Double] The total amount invoiced in the past thirty days.
+        attr_accessor :invoiced_amount_past_thirty_days
+
+        ##
+        # @return [Double] The total amount outstanding from the invoices invoiced in the past thirty days.
+        attr_accessor :outstanding_amount_past_thirty_days
+
+        ##
+        # @return [Int32] The number of invoices invoiced in the past thirty days.
+        attr_accessor :invoices_past_thirty_days
 
         ##
         # @return [Double] The total amount past due for this customer.
@@ -87,6 +113,10 @@ module LockstepSdk
         ##
         # @return [Double] The total value of unapplied Payments for this Customer.
         attr_accessor :unapplied_payments
+
+        ##
+        # @return [Double] The total value of unapplied Payments for this Customer in the past thirty days.
+        attr_accessor :unapplied_amount_past_thirty_days
 
         ##
         # @return [Double] Portion of Total AR for this Customer that is Past due. (TotalPastDue / Total AR).
@@ -112,10 +142,16 @@ module LockstepSdk
                 'totalInvoicesOpen' => @total_invoices_open,
                 'totalInvoicesPastDue' => @total_invoices_past_due,
                 'closedInvoices' => @closed_invoices,
+                'closedInvoicesPastThirtyDays' => @closed_invoices_past_thirty_days,
                 'amountCollected' => @amount_collected,
+                'amountCollectedPastThirtyDays' => @amount_collected_past_thirty_days,
                 'outstandingAmount' => @outstanding_amount,
+                'invoicedAmountPastThirtyDays' => @invoiced_amount_past_thirty_days,
+                'outstandingAmountPastThirtyDays' => @outstanding_amount_past_thirty_days,
+                'invoicesPastThirtyDays' => @invoices_past_thirty_days,
                 'amountPastDue' => @amount_past_due,
                 'unappliedPayments' => @unapplied_payments,
+                'unappliedAmountPastThirtyDays' => @unapplied_amount_past_thirty_days,
                 'percentOfTotalAr' => @percent_of_total_ar,
                 'dso' => @dso,
                 'newestActivity' => @newest_activity,

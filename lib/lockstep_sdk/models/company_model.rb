@@ -58,6 +58,7 @@ module LockstepSdk
             @duns_number = params.dig(:duns_number)
             @ap_email_address = params.dig(:ap_email_address)
             @ar_email_address = params.dig(:ar_email_address)
+            @preferred_delivery_method = params.dig(:preferred_delivery_method)
             @domain_name = params.dig(:domain_name)
             @company_classification_code_def_id = params.dig(:company_classification_code_def_id)
             @description = params.dig(:description)
@@ -197,6 +198,10 @@ module LockstepSdk
         attr_accessor :ar_email_address
 
         ##
+        # @return [String] Indicates the preferred invoice delivery method. Examples include Print, Email, Fax
+        attr_accessor :preferred_delivery_method
+
+        ##
         # @return [String] For companies that use a custom domain name for their email system, this is the domain name used by this company. If this value is known, new emails that come in from this domain will be connected to this company.
         attr_accessor :domain_name
 
@@ -279,6 +284,7 @@ module LockstepSdk
                 'dunsNumber' => @duns_number,
                 'apEmailAddress' => @ap_email_address,
                 'arEmailAddress' => @ar_email_address,
+                'preferredDeliveryMethod' => @preferred_delivery_method,
                 'domainName' => @domain_name,
                 'companyClassificationCodeDefId' => @company_classification_code_def_id,
                 'description' => @description,

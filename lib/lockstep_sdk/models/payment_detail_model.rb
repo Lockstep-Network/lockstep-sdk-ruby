@@ -34,6 +34,7 @@ module LockstepSdk
             @payment_amount = params.dig(:payment_amount)
             @unapplied_amount = params.dig(:unapplied_amount)
             @payment_type = params.dig(:payment_type)
+            @tender_type = params.dig(:tender_type)
             @payment_date = params.dig(:payment_date)
             @post_date = params.dig(:post_date)
             @phone = params.dig(:phone)
@@ -88,8 +89,12 @@ module LockstepSdk
         attr_accessor :unapplied_amount
 
         ##
-        # @return [String] The type of payment, Payment or AP Payment.
+        # @return [String] The type of payment, AR Payment or AP Payment. Recognized PaymentType values are: * `AR Payment` - A payment made by a Customer to the Company * `AP Payment` - A payment made by the Company to a Vendor
         attr_accessor :payment_type
+
+        ##
+        # @return [String] Cash, check, credit card, wire transfer. Recognized TenderType values are: * `Cash` - A cash payment or other direct transfer. * `Check` - A check payment. * `Credit Card` - A payment made via a credit card. * `Wire Transfer` - A payment made via wire transfer from another financial institution. * `Other` - A payment made via another method not listed above.
+        attr_accessor :tender_type
 
         ##
         # @return [Date] The date of this Payment.
@@ -150,6 +155,7 @@ module LockstepSdk
                 'paymentAmount' => @payment_amount,
                 'unappliedAmount' => @unapplied_amount,
                 'paymentType' => @payment_type,
+                'tenderType' => @tender_type,
                 'paymentDate' => @payment_date,
                 'postDate' => @post_date,
                 'phone' => @phone,

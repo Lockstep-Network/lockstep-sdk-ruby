@@ -30,7 +30,7 @@ class PaymentApplicationsClient
     # A Payment Application is created by a business who receives a Payment from a customer.  A customer may make a single Payment to match an Invoice exactly, a partial Payment for an Invoice, or a single Payment may be made for multiple smaller Invoices.  The Payment Application contains information about which Invoices are connected to which Payments and for which amounts.
     #
     # @param id [uuid] The unique Lockstep Platform ID number of this Payment Application; NOT the customer's ERP key
-    # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collections: Invoice
+    # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collections: Invoice, Payment
     def retrieve_payment_application(id:, include_param:)
         path = "/api/v1/PaymentApplications/#{id}"
         params = {:include => include_param}

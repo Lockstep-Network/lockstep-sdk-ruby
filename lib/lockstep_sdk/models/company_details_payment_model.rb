@@ -17,11 +17,11 @@ require 'json'
 module LockstepSdk
 
     ##
-    # Customer payment collected information
-    class CustomerDetailsPaymentModel
+    # Company payment collected information
+    class CompanyDetailsPaymentModel
 
         ##
-        # Initialize the CustomerDetailsPaymentModel using the provided prototype
+        # Initialize the CompanyDetailsPaymentModel using the provided prototype
         def initialize(params = {})
             @group_key = params.dig(:group_key)
             @payment_id = params.dig(:payment_id)

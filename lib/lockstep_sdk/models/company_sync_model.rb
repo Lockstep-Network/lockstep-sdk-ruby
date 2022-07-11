@@ -55,6 +55,8 @@ module LockstepSdk
             @duns_number = params.dig(:duns_number)
             @ap_email_address = params.dig(:ap_email_address)
             @ar_email_address = params.dig(:ar_email_address)
+            @preferred_delivery_method = params.dig(:preferred_delivery_method)
+            @external_reference = params.dig(:external_reference)
         end
 
         ##
@@ -118,7 +120,7 @@ module LockstepSdk
         attr_accessor :postal_code
 
         ##
-        # @return [String] The company's primary mailing address information This will be validated by the /api/v1/definitions/countries data set
+        # @return [String] The company's primary mailing address information
         attr_accessor :country
 
         ##
@@ -154,6 +156,14 @@ module LockstepSdk
         attr_accessor :ar_email_address
 
         ##
+        # @return [String] Indicates the preferred invoice delivery method. Examples include Print, Email, Fax
+        attr_accessor :preferred_delivery_method
+
+        ##
+        # @return [String] An external reference that identifies the Company from the originating ERP system, separate from the ErpKey.
+        attr_accessor :external_reference
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -181,6 +191,8 @@ module LockstepSdk
                 'dunsNumber' => @duns_number,
                 'apEmailAddress' => @ap_email_address,
                 'arEmailAddress' => @ar_email_address,
+                'preferredDeliveryMethod' => @preferred_delivery_method,
+                'externalReference' => @external_reference,
             }
         end
 

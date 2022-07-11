@@ -42,6 +42,7 @@ module LockstepSdk
             @created_user_id = params.dig(:created_user_id)
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
+            @webhook_rules = params.dig(:webhook_rules)
             @partition_key = params.dig(:partition_key)
         end
 
@@ -70,7 +71,7 @@ module LockstepSdk
         attr_accessor :client_secret
 
         ##
-        # @return [String] The format of the content to be returned in the webhook notifications. Options TBD.
+        # @return [String] The format of the content to be returned in the webhook notifications. Current options are 'Full' or 'Id'.
         attr_accessor :request_content_type
 
         ##
@@ -106,6 +107,10 @@ module LockstepSdk
         attr_accessor :modified_user_id
 
         ##
+        # @return [WebhookRuleModel] A list of Webhook Rules associated with this Webhook.
+        attr_accessor :webhook_rules
+
+        ##
         # @return [String] The partition key used for the webhook callback history
         attr_accessor :partition_key
 
@@ -128,6 +133,7 @@ module LockstepSdk
                 'createdUserId' => @created_user_id,
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
+                'webhookRules' => @webhook_rules,
                 'partitionKey' => @partition_key,
             }
         end

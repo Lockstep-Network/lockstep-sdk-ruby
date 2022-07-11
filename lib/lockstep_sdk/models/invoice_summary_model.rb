@@ -28,6 +28,7 @@ module LockstepSdk
             @invoice_id = params.dig(:invoice_id)
             @invoice_number = params.dig(:invoice_number)
             @invoice_date = params.dig(:invoice_date)
+            @invoice_closed_date = params.dig(:invoice_closed_date)
             @customer_name = params.dig(:customer_name)
             @status = params.dig(:status)
             @payment_due_date = params.dig(:payment_due_date)
@@ -59,6 +60,10 @@ module LockstepSdk
         ##
         # @return [Date] The reporting date for this invoice.
         attr_accessor :invoice_date
+
+        ##
+        # @return [Date] The date when the invoice was closed and finalized after completion of all payments and delivery of all products and services.
+        attr_accessor :invoice_closed_date
 
         ##
         # @return [String] The name of the counterparty for the invoice, for example, a customer or vendor.
@@ -109,6 +114,7 @@ module LockstepSdk
                 'invoiceId' => @invoice_id,
                 'invoiceNumber' => @invoice_number,
                 'invoiceDate' => @invoice_date,
+                'invoiceClosedDate' => @invoice_closed_date,
                 'customerName' => @customer_name,
                 'status' => @status,
                 'paymentDueDate' => @payment_due_date,

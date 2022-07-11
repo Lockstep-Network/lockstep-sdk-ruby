@@ -121,4 +121,16 @@ class UserAccountsClient
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
     end
+
+    ##
+    # Change the active GroupKey of the calling user.
+    #
+    # A User represents a person who has the ability to authenticate against the Lockstep Platform and use services such as Lockstep Inbox.  A User is uniquely identified by an Azure identity, and each user must have an email address defined within their account.  All Users must validate their email to make use of Lockstep platform services.  Users may have different privileges and access control rights within the Lockstep Platform.
+    #
+    # @param group_key [uuid] 
+    def change_user_group(group_key:)
+        path = "/api/v1/UserAccounts/change-group"
+        params = {:groupKey => group_key}
+        @connection.request(:post, path, nil, params)
+    end
 end

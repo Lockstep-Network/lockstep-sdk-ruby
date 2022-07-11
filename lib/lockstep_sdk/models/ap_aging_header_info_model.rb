@@ -17,22 +17,22 @@ require 'json'
 module LockstepSdk
 
     ##
-    # Aggregated Accounts Receivable Aging information.
-    class ArAgingHeaderInfoModel
+    # Aggregated Accounts Payable Aging information.
+    class ApAgingHeaderInfoModel
 
         ##
-        # Initialize the ArAgingHeaderInfoModel using the provided prototype
+        # Initialize the ApAgingHeaderInfoModel using the provided prototype
         def initialize(params = {})
             @group_key = params.dig(:group_key)
             @report_bucket = params.dig(:report_bucket)
-            @total_customers = params.dig(:total_customers)
-            @total_invoices_outstanding = params.dig(:total_invoices_outstanding)
-            @total_invoice_outstanding_amount = params.dig(:total_invoice_outstanding_amount)
+            @total_vendors = params.dig(:total_vendors)
+            @total_bills_outstanding = params.dig(:total_bills_outstanding)
+            @total_bills_outstanding_amount = params.dig(:total_bills_outstanding_amount)
             @total_credit_memo_outstanding_amount = params.dig(:total_credit_memo_outstanding_amount)
-            @total_unapplied_payment_amount = params.dig(:total_unapplied_payment_amount)
+            @total_advance_payment_amount = params.dig(:total_advance_payment_amount)
             @total_outstanding_amount = params.dig(:total_outstanding_amount)
-            @total_ar_amount = params.dig(:total_ar_amount)
-            @percentage_of_total_ar = params.dig(:percentage_of_total_ar)
+            @total_ap_amount = params.dig(:total_ap_amount)
+            @percentage_of_total_ap = params.dig(:percentage_of_total_ap)
         end
 
         ##
@@ -44,36 +44,36 @@ module LockstepSdk
         attr_accessor :report_bucket
 
         ##
-        # @return [Int32] The total number of customers.
-        attr_accessor :total_customers
+        # @return [Int32] The total number of vendors.
+        attr_accessor :total_vendors
 
         ##
-        # @return [Int32] The total number of invoices outstanding.
-        attr_accessor :total_invoices_outstanding
+        # @return [Int32] The total number of bills outstanding.
+        attr_accessor :total_bills_outstanding
 
         ##
-        # @return [Double] The total amount outstanding on invoices.
-        attr_accessor :total_invoice_outstanding_amount
+        # @return [Double] The total amount outstanding on bills.
+        attr_accessor :total_bills_outstanding_amount
 
         ##
         # @return [Double] The total amount outstanding on credit memos.
         attr_accessor :total_credit_memo_outstanding_amount
 
         ##
-        # @return [Double] The total amount of unapplied payments.
-        attr_accessor :total_unapplied_payment_amount
+        # @return [Double] The total amount of advance payments.
+        attr_accessor :total_advance_payment_amount
 
         ##
         # @return [Double] The total amount outstanding.
         attr_accessor :total_outstanding_amount
 
         ##
-        # @return [Double] The total amount for AR.
-        attr_accessor :total_ar_amount
+        # @return [Double] The total amount for AP.
+        attr_accessor :total_ap_amount
 
         ##
-        # @return [Double] Portion of Total AR this data represents.
-        attr_accessor :percentage_of_total_ar
+        # @return [Double] Portion of Total AP this data represents.
+        attr_accessor :percentage_of_total_ap
 
         ##
         # @return [object] This object as a JSON key-value structure
@@ -81,14 +81,14 @@ module LockstepSdk
             {
                 'groupKey' => @group_key,
                 'reportBucket' => @report_bucket,
-                'totalCustomers' => @total_customers,
-                'totalInvoicesOutstanding' => @total_invoices_outstanding,
-                'totalInvoiceOutstandingAmount' => @total_invoice_outstanding_amount,
+                'totalVendors' => @total_vendors,
+                'totalBillsOutstanding' => @total_bills_outstanding,
+                'totalBillsOutstandingAmount' => @total_bills_outstanding_amount,
                 'totalCreditMemoOutstandingAmount' => @total_credit_memo_outstanding_amount,
-                'totalUnappliedPaymentAmount' => @total_unapplied_payment_amount,
+                'totalAdvancePaymentAmount' => @total_advance_payment_amount,
                 'totalOutstandingAmount' => @total_outstanding_amount,
-                'totalArAmount' => @total_ar_amount,
-                'percentageOfTotalAr' => @percentage_of_total_ar,
+                'totalApAmount' => @total_ap_amount,
+                'percentageOfTotalAp' => @percentage_of_total_ap,
             }
         end
 

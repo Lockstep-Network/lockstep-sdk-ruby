@@ -17,11 +17,11 @@ require 'json'
 module LockstepSdk
 
     ##
-    # Contains customer details data
-    class CustomerDetailsModel
+    # Contains company details data
+    class CompanyDetailsModel
 
         ##
-        # Initialize the CustomerDetailsModel using the provided prototype
+        # Initialize the CompanyDetailsModel using the provided prototype
         def initialize(params = {})
             @group_key = params.dig(:group_key)
             @customer_id = params.dig(:customer_id)
@@ -50,79 +50,79 @@ module LockstepSdk
         attr_accessor :group_key
 
         ##
-        # @return [Uuid] The unique ID of this customer
+        # @return [Uuid] The unique ID of this company
         attr_accessor :customer_id
 
         ##
-        # @return [String] The unique ID of this customer
+        # @return [String] The unique ID of this company
         attr_accessor :name
 
         ##
-        # @return [String] Customer address info
+        # @return [String] Company address info
         attr_accessor :address1
 
         ##
-        # @return [String] Customer address info
+        # @return [String] Company address info
         attr_accessor :address2
 
         ##
-        # @return [String] Customer address info
+        # @return [String] Company address info
         attr_accessor :address3
 
         ##
-        # @return [String] Customer address info
+        # @return [String] Company address info
         attr_accessor :city
 
         ##
-        # @return [String] Customer address info
+        # @return [String] Company address info
         attr_accessor :state
 
         ##
-        # @return [String] Customer address info
+        # @return [String] Company address info
         attr_accessor :postal_code
 
         ##
-        # @return [String] Customer address country
+        # @return [String] Company address country
         attr_accessor :country
 
         ##
-        # @return [String] Customer phone number
+        # @return [String] Company phone number
         attr_accessor :phone_number
 
         ##
-        # @return [String] Customer fax number
+        # @return [String] Company fax number
         attr_accessor :fax_number
 
         ##
-        # @return [String] Customer AR email address
+        # @return [String] Company email address
         attr_accessor :email
 
         ##
-        # @return [Uuid] Customer primary contact id
+        # @return [Uuid] Company primary contact id
         attr_accessor :contact_id
 
         ##
-        # @return [String] Customer primary contact name
+        # @return [String] Company primary contact name
         attr_accessor :contact_name
 
         ##
-        # @return [String] Customer primary contact email address
+        # @return [String] Company primary contact email address
         attr_accessor :contact_email
 
         ##
-        # @return [Int32] Customer number of outstanding invoices
+        # @return [Int32] Company number of outstanding invoices
         attr_accessor :outstanding_invoices
 
         ##
-        # @return [Double] Customer total outstanding invoice amount
+        # @return [Double] Company total outstanding invoice amount
         attr_accessor :outstanding_amount
 
         ##
-        # @return [Double] Customer total past due amount
+        # @return [Double] Company total past due amount
         attr_accessor :amount_past_due
 
         ##
-        # @return [CustomerDetailsPaymentModel] Customer payments collected
+        # @return [CompanyDetailsPaymentModel] Company payments collected
         attr_accessor :payments
 
         ##

@@ -36,7 +36,9 @@ module LockstepSdk
             @user_status = params.dig(:user_status)
             @environment = params.dig(:environment)
             @version = params.dig(:version)
+            @onboarding_scheduled = params.dig(:onboarding_scheduled)
             @dependencies = params.dig(:dependencies)
+            @user_groups = params.dig(:user_groups)
         end
 
         ##
@@ -92,8 +94,16 @@ module LockstepSdk
         attr_accessor :version
 
         ##
+        # @return [Boolean] If authentication is successful, contains the onboarding session status of the logged-in user's group account.
+        attr_accessor :onboarding_scheduled
+
+        ##
         # @return [Object] Statuses for the dependencies of this api. OK if the dependency is working.
         attr_accessor :dependencies
+
+        ##
+        # @return [UserGroupModel] The set of Groups that the user has access to. You can use the /api/v1/useraccounts/change-group endpoint to change your active group.
+        attr_accessor :user_groups
 
         ##
         # @return [object] This object as a JSON key-value structure
@@ -112,7 +122,9 @@ module LockstepSdk
                 'userStatus' => @user_status,
                 'environment' => @environment,
                 'version' => @version,
+                'onboardingScheduled' => @onboarding_scheduled,
                 'dependencies' => @dependencies,
+                'userGroups' => @user_groups,
             }
         end
 

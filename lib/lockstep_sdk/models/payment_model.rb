@@ -74,11 +74,11 @@ module LockstepSdk
         attr_accessor :erp_key
 
         ##
-        # @return [String] The type of payment, cash or check. Recognized PaymentType values are: * `Cash` - A cash payment or other direct transfer. * `Check` - A check payment.
+        # @return [String] The type of payment, AR Payment or AP Payment. Recognized PaymentType values are: * `AR Payment` - A payment made by a Customer to the Company * `AP Payment` - A payment made by the Company to a Vendor
         attr_accessor :payment_type
 
         ##
-        # @return [String] Cash, check, credit card, wire transfer. Recognized TenderType values are: * `Cash` - A cash payment or other direct transfer. * `Check` - A check payment. * `Credit Card` - A payment made via a credit card. * `Wire Transfer` - A payment made via wire transfer from another financial institution.
+        # @return [String] Cash, check, credit card, wire transfer. Recognized TenderType values are: * `Cash` - A cash payment or other direct transfer. * `Check` - A check payment. * `Credit Card` - A payment made via a credit card. * `Wire Transfer` - A payment made via wire transfer from another financial institution. * `Other` - A payment made via another method not listed above.
         attr_accessor :tender_type
 
         ##
