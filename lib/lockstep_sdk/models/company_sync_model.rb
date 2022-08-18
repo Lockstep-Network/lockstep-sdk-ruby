@@ -31,6 +31,7 @@ module LockstepSdk
         ##
         # Initialize the CompanySyncModel using the provided prototype
         def initialize(params = {})
+            @on_match_action = params.dig(:on_match_action)
             @erp_key = params.dig(:erp_key)
             @company_name = params.dig(:company_name)
             @company_type = params.dig(:company_type)
@@ -56,8 +57,13 @@ module LockstepSdk
             @ap_email_address = params.dig(:ap_email_address)
             @ar_email_address = params.dig(:ar_email_address)
             @preferred_delivery_method = params.dig(:preferred_delivery_method)
+            @email_address = params.dig(:email_address)
             @external_reference = params.dig(:external_reference)
         end
+
+        ##
+        # @return [UpdateAction] Indicates what action to take when a sync model has been found during the sync process.
+        attr_accessor :on_match_action
 
         ##
         # @return [String] This is the primary key of the Company record. For this field, you should use whatever the company's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your company records in a database, whatever the primary key for the company table is in the database should be the `ErpKey`. Example: If you use a financial system such as Quickbooks or Xero, look for the primary ID number of the company record within that financial system. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
@@ -84,7 +90,7 @@ module LockstepSdk
         attr_accessor :is_active
 
         ##
-        # @return [String] The default currency code for transactions related to this company. For a list of currency codes, see [Query Currencies](https://developer.lockstep.io/reference/get_api-v1-definitions-currencies). This will be validated by the /api/v1/definitions/currencies data set
+        # @return [String] The default currency code for transactions related to this company. For a list of currency codes, see [Query Currencies](https://developer.lockstep.io/reference/get_api-v1-definitions-currencies).
         attr_accessor :default_currency_code
 
         ##
@@ -160,6 +166,10 @@ module LockstepSdk
         attr_accessor :preferred_delivery_method
 
         ##
+        # @return [String] The company email address.
+        attr_accessor :email_address
+
+        ##
         # @return [String] An external reference that identifies the Company from the originating ERP system, separate from the ErpKey.
         attr_accessor :external_reference
 
@@ -167,6 +177,7 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
+                'onMatchAction' => @on_match_action,
                 'erpKey' => @erp_key,
                 'companyName' => @company_name,
                 'companyType' => @company_type,
@@ -192,6 +203,7 @@ module LockstepSdk
                 'apEmailAddress' => @ap_email_address,
                 'arEmailAddress' => @ar_email_address,
                 'preferredDeliveryMethod' => @preferred_delivery_method,
+                'emailAddress' => @email_address,
                 'externalReference' => @external_reference,
             }
         end

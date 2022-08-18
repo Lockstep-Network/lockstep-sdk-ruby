@@ -44,6 +44,8 @@ module LockstepSdk
             @notes = params.dig(:notes)
             @custom_field_definitions = params.dig(:custom_field_definitions)
             @custom_field_values = params.dig(:custom_field_values)
+            @credit_memo_invoice = params.dig(:credit_memo_invoice)
+            @invoice = params.dig(:invoice)
         end
 
         ##
@@ -115,6 +117,14 @@ module LockstepSdk
         attr_accessor :custom_field_values
 
         ##
+        # @return [InvoiceModel] The credit memo invoice associated with this applied credit memo
+        attr_accessor :credit_memo_invoice
+
+        ##
+        # @return [InvoiceModel] The invoice associated with this applied credit memo
+        attr_accessor :invoice
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -135,6 +145,8 @@ module LockstepSdk
                 'notes' => @notes,
                 'customFieldDefinitions' => @custom_field_definitions,
                 'customFieldValues' => @custom_field_values,
+                'creditMemoInvoice' => @credit_memo_invoice,
+                'invoice' => @invoice,
             }
         end
 

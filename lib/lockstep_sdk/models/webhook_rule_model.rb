@@ -17,10 +17,10 @@ require 'json'
 module LockstepSdk
 
     ##
-    # A Webhook Rule is a subscription to receive notifications automatically for
+    # A Webhook Rule is a subscription to receive notifications whenever a specific event occurs.
     #
-    # Currently supported objects:
-    #  * `SyncRequest` - Receive a notification when a new sync request has completed for the group key.
+    # With the rule, you specify the Table and event you want to subscribe to.
+    # You can also optionally specify a filter to further refine the updates you want to receive.
     class WebhookRuleModel
 
         ##
@@ -31,9 +31,7 @@ module LockstepSdk
             @group_key = params.dig(:group_key)
             @table_key = params.dig(:table_key)
             @event_type = params.dig(:event_type)
-            @expiration_date = params.dig(:expiration_date)
             @filter = params.dig(:filter)
-            @request_content_type = params.dig(:request_content_type)
             @created = params.dig(:created)
             @created_user_id = params.dig(:created_user_id)
             @modified = params.dig(:modified)
@@ -61,16 +59,8 @@ module LockstepSdk
         attr_accessor :event_type
 
         ##
-        # @return [Date-time] The expiration date for the given webhook subscription. Once the expiration date passes, notifications will no longer be sent to the callback url.
-        attr_accessor :expiration_date
-
-        ##
-        # @return [String] The filter for this webhook rule (if necessary) . See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+        # @return [String] An optional Searchlight filter for this webhook rule. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
         attr_accessor :filter
-
-        ##
-        # @return [String] The format of the content to be returned in the webhook notifications. Current options are 'Full' or 'Id'.
-        attr_accessor :request_content_type
 
         ##
         # @return [Date-time] The date this webhook rule was created
@@ -97,9 +87,7 @@ module LockstepSdk
                 'groupKey' => @group_key,
                 'tableKey' => @table_key,
                 'eventType' => @event_type,
-                'expirationDate' => @expiration_date,
                 'filter' => @filter,
-                'requestContentType' => @request_content_type,
                 'created' => @created,
                 'createdUserId' => @created_user_id,
                 'modified' => @modified,

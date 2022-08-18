@@ -34,6 +34,7 @@ module LockstepSdk
             @group_key = params.dig(:group_key)
             @status_code = params.dig(:status_code)
             @process_result_message = params.dig(:process_result_message)
+            @run_full_sync = params.dig(:run_full_sync)
             @app_enrollment_id = params.dig(:app_enrollment_id)
             @created = params.dig(:created)
             @modified = params.dig(:modified)
@@ -56,6 +57,10 @@ module LockstepSdk
         ##
         # @return [String] Message containing information about the sync request results
         attr_accessor :process_result_message
+
+        ##
+        # @return [String] A boolean indicating whether a sync from an ERP system should process all the data from the ERP as opposed to just the delta of changes since the previous sync run
+        attr_accessor :run_full_sync
 
         ##
         # @return [Uuid] The AppEnrollmentId of the AppEnrollment object that executed this sync request
@@ -85,6 +90,7 @@ module LockstepSdk
                 'groupKey' => @group_key,
                 'statusCode' => @status_code,
                 'processResultMessage' => @process_result_message,
+                'runFullSync' => @run_full_sync,
                 'appEnrollmentId' => @app_enrollment_id,
                 'created' => @created,
                 'modified' => @modified,

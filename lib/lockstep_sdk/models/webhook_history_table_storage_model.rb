@@ -33,6 +33,9 @@ module LockstepSdk
             @process_result_message = params.dig(:process_result_message)
             @failure_count = params.dig(:failure_count)
             @timestamp = params.dig(:timestamp)
+            @records = params.dig(:records)
+            @request_message = params.dig(:request_message)
+            @response_message = params.dig(:response_message)
         end
 
         ##
@@ -76,6 +79,18 @@ module LockstepSdk
         attr_accessor :timestamp
 
         ##
+        # @return [String] The records sent with the webhook.
+        attr_accessor :records
+
+        ##
+        # @return [String] The request message sent with the webhook.
+        attr_accessor :request_message
+
+        ##
+        # @return [String] The response received back from the webhook.
+        attr_accessor :response_message
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -89,6 +104,9 @@ module LockstepSdk
                 'processResultMessage' => @process_result_message,
                 'failureCount' => @failure_count,
                 'timestamp' => @timestamp,
+                'records' => @records,
+                'requestMessage' => @request_message,
+                'responseMessage' => @response_message,
             }
         end
 

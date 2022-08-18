@@ -33,18 +33,4 @@ class StatusClient
         path = "/api/v1/Status"
         @connection.request(:get, path, nil, nil)
     end
-
-    ##
-    # Generates an error code that your program may use to test handling of common types of error conditions.
-    #
-    # * If you specify `?err=500`, you will receive a 500 internal server error. * If you specify `?err=timeout`, the API will stall for 90 seconds and then return 200 OK.  Many network connections will drop after 60 seconds of no activity. * If you do not specify any of these errors, the API will return 200 OK.
-    #
-    # The Error Test API allows you to test whether your client program is capable of handling certain types of error codes.  Developers writing libraries may find it useful to create integration tests that verify that their code can correctly detect the difference between a validation error resulting in a 400 error code, a network timeout resulting in a broken network connection, and a server error resulting in a 500 error code.  You may use the Error Test API to verify that your code is able to identify and handle these cases correctly.
-    #
-    # @param err [string] The type of error test to execute. Supported error types: 500, timeout
-    def error_test(err:)
-        path = "/api/v1/Status/testing"
-        params = {:err => err}
-        @connection.request(:get, path, nil, params)
-    end
 end

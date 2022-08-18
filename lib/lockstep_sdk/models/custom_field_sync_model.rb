@@ -23,7 +23,7 @@ module LockstepSdk
     # information about an object that does not match Lockstep's official schema, you can store it in the Custom
     # Field system using CustomFieldSyncModel.
     #
-    # To store a custom field for an object, create a CustomFieldSyncModel record containing the `EntityType` and
+    # To store a custom field for an object, create a CustomFieldSyncModel record containing the `TableKey` and
     # `ErpKey` of the entity to which you will attach a custom field. Next specify the field's `CustomFieldLabel`
     # and either a `StringValue` or `NumericValue`.
     #
@@ -36,7 +36,7 @@ module LockstepSdk
         # Initialize the CustomFieldSyncModel using the provided prototype
         def initialize(params = {})
             @erp_key = params.dig(:erp_key)
-            @entity_type = params.dig(:entity_type)
+            @table_key = params.dig(:table_key)
             @custom_field_label = params.dig(:custom_field_label)
             @string_value = params.dig(:string_value)
             @numeric_value = params.dig(:numeric_value)
@@ -46,12 +46,12 @@ module LockstepSdk
         end
 
         ##
-        # @return [String] This is the primary key of the record to which you will attach this custom field. You should provide the identifying number as it is stored in the originating financial system. Search for a unique, non-changing number within the originating financial system for this record. Custom Fields are identified by the `EntityType` and `ErpKey` values together. Example: You have an invoice whose ID number is 100047878, and you wish to store a custom field on that invoice named "ApprovalStatusCode". For the `ErpKey` field, specify the value `100047878`. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
+        # @return [String] This is the primary key of the record to which you will attach this custom field. You should provide the identifying number as it is stored in the originating financial system. Search for a unique, non-changing number within the originating financial system for this record. Custom Fields are identified by the `TableKey` and `ErpKey` values together. Example: You have an invoice whose ID number is 100047878, and you wish to store a custom field on that invoice named "ApprovalStatusCode". For the `ErpKey` field, specify the value `100047878`. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
 
         ##
-        # @return [String] Custom Fields are identified by the `EntityType` and `ErpKey` values together. Example: You have an invoice whose ID number is 100047878, and you wish to store a custom field on that invoice named "ApprovalStatusCode". For the `EntityType` field, specify the value `Invoice`. Recognized types include: * `Company` - Link this custom field to a CompanySyncModel * `Contact` - Link this custom field to a ContactSyncModel * `Invoice` - Link this custom field to an InvoiceSyncModel * `InvoiceLine` - Link this custom field to an InvoiceLineSyncModel * `Payment` - Link this custom field to a PaymentSyncModel
-        attr_accessor :entity_type
+        # @return [String] Custom Fields are identified by the `TableKey` and `ErpKey` values together. Example: You have an invoice whose ID number is 100047878, and you wish to store a custom field on that invoice named "ApprovalStatusCode". For the `TableKey` field, specify the value `Invoice`. Recognized types include: * `Company` - Link this custom field to a CompanySyncModel * `Contact` - Link this custom field to a ContactSyncModel * `Invoice` - Link this custom field to an InvoiceSyncModel * `InvoiceLine` - Link this custom field to an InvoiceLineSyncModel * `Payment` - Link this custom field to a PaymentSyncModel
+        attr_accessor :table_key
 
         ##
         # @return [String] A label that uniquely identifies this custom field within your software. Example: You have an invoice whose ID number is 100047878, and you wish to store a custom field on that invoice named "ApprovalStatusCode". For the `CustomFieldLabel` field, specify the value `ApprovalStatusCode`.
@@ -82,7 +82,7 @@ module LockstepSdk
         def as_json(options={})
             {
                 'erpKey' => @erp_key,
-                'entityType' => @entity_type,
+                'tableKey' => @table_key,
                 'customFieldLabel' => @custom_field_label,
                 'stringValue' => @string_value,
                 'numericValue' => @numeric_value,

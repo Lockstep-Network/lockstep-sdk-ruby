@@ -53,9 +53,11 @@ class ReportsClient
     #
     # Daily Sales Outstanding, or DSO, is a metric that indicates the average number of days that it takes for an invoice to be fully paid.  You can use this report to identify whether a company is improving on its ability to collect on invoices.
     #
-    def daily_sales_outstanding()
+    # @param report_date [date-time] Optional: Specify the specific report date to generate the from (default UTC now)
+    def daily_sales_outstanding(report_date:)
         path = "/api/v1/Reports/dailysalesoutstanding"
-        @connection.request(:get, path, nil, nil)
+        params = {:reportDate => report_date}
+        @connection.request(:get, path, nil, params)
     end
 
     ##
