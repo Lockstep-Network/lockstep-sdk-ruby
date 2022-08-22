@@ -64,6 +64,7 @@ module LockstepSdk
             @description = params.dig(:description)
             @website = params.dig(:website)
             @app_enrollment_id = params.dig(:app_enrollment_id)
+            @email_address = params.dig(:email_address)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
             @contacts = params.dig(:contacts)
@@ -222,6 +223,10 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
 
         ##
+        # @return [Email] Company Email Address
+        attr_accessor :email_address
+
+        ##
         # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `Company` and the `ObjectKey` set to the `CompanyId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
@@ -290,6 +295,7 @@ module LockstepSdk
                 'description' => @description,
                 'website' => @website,
                 'appEnrollmentId' => @app_enrollment_id,
+                'emailAddress' => @email_address,
                 'notes' => @notes,
                 'attachments' => @attachments,
                 'contacts' => @contacts,

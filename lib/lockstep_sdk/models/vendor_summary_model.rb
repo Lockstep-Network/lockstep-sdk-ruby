@@ -40,6 +40,7 @@ module LockstepSdk
             @open_bill_count = params.dig(:open_bill_count)
             @paid_bill_count = params.dig(:paid_bill_count)
             @total_bill_count = params.dig(:total_bill_count)
+            @dpo = params.dig(:dpo)
         end
 
         ##
@@ -111,6 +112,10 @@ module LockstepSdk
         attr_accessor :total_bill_count
 
         ##
+        # @return [Double] The days payabale outstanding.
+        attr_accessor :dpo
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -131,6 +136,7 @@ module LockstepSdk
                 'openBillCount' => @open_bill_count,
                 'paidBillCount' => @paid_bill_count,
                 'totalBillCount' => @total_bill_count,
+                'dpo' => @dpo,
             }
         end
 

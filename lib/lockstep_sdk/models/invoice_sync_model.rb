@@ -132,7 +132,7 @@ module LockstepSdk
         attr_accessor :special_terms
 
         ##
-        # @return [String] The three-character ISO 4217 currency code used for this invoice. This will be validated by the /api/v1/definitions/currencies data set
+        # @return [String] The three-character ISO 4217 currency code used for this invoice.
         attr_accessor :currency_code
 
         ##

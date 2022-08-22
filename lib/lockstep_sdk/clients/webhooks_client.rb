@@ -92,13 +92,14 @@ class WebhooksClient
     #
     #
     # @param webhook_id [uuid] The unique Lockstep Platform ID number of this Webhook
+    # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collection: Records, RequestMessage, ResponseMessage
     # @param filter [string] The filter for this query. See [Azure Query Language](https://docs.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities)
     # @param select [string] The selection for this query. Selection is the desired properties of an entity to pull from the set. If a property is not selected, it will either return as null or empty. See [Azure Query Language](https://docs.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities)
     # @param page_size [int32] The page size for results (default 200).
     # @param page_number [int32] The page number for results (default 0).
-    def query_webhook_history(webhook_id:, filter:, select:, page_size:, page_number:)
+    def query_webhook_history(webhook_id:, include_param:, filter:, select:, page_size:, page_number:)
         path = "/api/v1/Webhooks/#{webhookId}/history/query"
-        params = {:filter => filter, :select => select, :pageSize => page_size, :pageNumber => page_number}
+        params = {:include => include_param, :filter => filter, :select => select, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
     end
 

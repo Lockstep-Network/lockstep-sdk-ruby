@@ -27,6 +27,7 @@ module LockstepSdk
             @company_id = params.dig(:company_id)
             @company_name = params.dig(:company_name)
             @primary_contact = params.dig(:primary_contact)
+            @app_enrollment_id = params.dig(:app_enrollment_id)
             @outstanding_invoices = params.dig(:outstanding_invoices)
             @total_invoices_open = params.dig(:total_invoices_open)
             @total_invoices_past_due = params.dig(:total_invoices_past_due)
@@ -61,6 +62,10 @@ module LockstepSdk
         ##
         # @return [String] The name of the primary contact.
         attr_accessor :primary_contact
+
+        ##
+        # @return [Uuid] The app enrollment ID this Customer is associated with
+        attr_accessor :app_enrollment_id
 
         ##
         # @return [Int32] The number of outstanding invoices for this customer.
@@ -138,6 +143,7 @@ module LockstepSdk
                 'companyId' => @company_id,
                 'companyName' => @company_name,
                 'primaryContact' => @primary_contact,
+                'appEnrollmentId' => @app_enrollment_id,
                 'outstandingInvoices' => @outstanding_invoices,
                 'totalInvoicesOpen' => @total_invoices_open,
                 'totalInvoicesPastDue' => @total_invoices_past_due,

@@ -39,6 +39,9 @@ module LockstepSdk
             @custom_fields = params.dig(:custom_fields)
             @payments = params.dig(:payments)
             @payment_applications = params.dig(:payment_applications)
+            @financial_year_settings = params.dig(:financial_year_settings)
+            @financial_accounts = params.dig(:financial_accounts)
+            @financial_account_balance_histories = params.dig(:financial_account_balance_histories)
         end
 
         ##
@@ -74,6 +77,18 @@ module LockstepSdk
         attr_accessor :payment_applications
 
         ##
+        # @return [FinancialYearSettingSyncModel] A list of FinancialYearSetting records to merge with your Lockstep Platform data
+        attr_accessor :financial_year_settings
+
+        ##
+        # @return [FinancialAccountSyncModel] A list of FinancialAccount records to merge with your Lockstep Platform data
+        attr_accessor :financial_accounts
+
+        ##
+        # @return [FinancialAccountBalanceHistorySyncModel] A list of FinancialAccountBalanceHistory records to merge with your Lockstep Platform data
+        attr_accessor :financial_account_balance_histories
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -85,6 +100,9 @@ module LockstepSdk
                 'customFields' => @custom_fields,
                 'payments' => @payments,
                 'paymentApplications' => @payment_applications,
+                'financialYearSettings' => @financial_year_settings,
+                'financialAccounts' => @financial_accounts,
+                'financialAccountBalanceHistories' => @financial_account_balance_histories,
             }
         end
 

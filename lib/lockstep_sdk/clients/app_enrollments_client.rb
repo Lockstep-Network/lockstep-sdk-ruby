@@ -75,20 +75,22 @@ class AppEnrollmentsClient
     #
     # See [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments) for more information.
     #
+    # @param start_sync [boolean] Option to start sync immediately after creation of app enrollments (default false)
     # @param body [AppEnrollmentModel] The App Enrollments to create
-    def create_app_enrollments(body:)
+    def create_app_enrollments(start_sync:, body:)
         path = "/api/v1/AppEnrollments"
-        @connection.request(:post, path, body, nil)
+        params = {:startSync => start_sync}
+        @connection.request(:post, path, body, params)
     end
 
     ##
     # Updates the OAuth settings associated with this App Enrollment
     #
-    # @param id [uuid] 
-    # @param body [string] 
+    # @param id [uuid] The unique ID number of the App Enrollment to reconnect
+    # @param body [AppEnrollmentReconnectRequest] Information to reconnect the App Enrollment
     def reconnect_app_enrollment_oauth(id:, body:)
         path = "/api/v1/AppEnrollments/#{id}/reconnect"
-        @connection.request(:patch, path, body, nil)
+        @connection.request(:post, path, body, nil)
     end
 
     ##
