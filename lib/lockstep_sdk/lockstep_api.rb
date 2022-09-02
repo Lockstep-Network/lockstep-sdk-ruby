@@ -9,7 +9,7 @@
 # @author     Lockstep Network <support@lockstep.io>
 #             Manish Narayan B S <manish.n@lockstep.io>, Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.33.14
+# @version    2022.35.5
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -129,6 +129,10 @@ module lockstep_sdk
         attr_accessor :payments
 
         ##
+        # @return [ProfilesClient] Client object for Profiles endpoints
+        attr_accessor :profiles
+
+        ##
         # @return [ProvisioningClient] Client object for Provisioning endpoints
         attr_accessor :provisioning
 
@@ -166,7 +170,7 @@ module lockstep_sdk
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def initialize(env)
-            @version = "2022.33.14.0"
+            @version = "2022.35.5.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -201,6 +205,7 @@ module lockstep_sdk
             @notes = NotesClient.new(self)
             @payment_applications = PaymentApplicationsClient.new(self)
             @payments = PaymentsClient.new(self)
+            @profiles = ProfilesClient.new(self)
             @provisioning = ProvisioningClient.new(self)
             @reports = ReportsClient.new(self)
             @status = StatusClient.new(self)
@@ -272,7 +277,7 @@ module lockstep_sdk
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
             request["SdkType"] = 'Ruby'
-            request["SdkVersion"] = '2022.33.14.0'
+            request["SdkVersion"] = '2022.35.5.0'
             request["MachineName"] = Socket.gethostname
             request.body = body
 
