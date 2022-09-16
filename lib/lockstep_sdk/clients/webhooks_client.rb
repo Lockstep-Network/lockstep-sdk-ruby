@@ -68,7 +68,7 @@ class WebhooksClient
     #
     # @param id [uuid] The unique Lockstep Platform ID number of the Webhook to update.
     def regenerate_client_secret(id:)
-        path = "/api/v1/Webhooks/#{id}/regenerateclientsecret"
+        path = "/api/v1/Webhooks/#{id}/regenerate-client-secret"
         @connection.request(:patch, path, nil, nil)
     end
 

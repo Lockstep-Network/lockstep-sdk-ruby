@@ -24,6 +24,10 @@ module LockstepSdk
         # Initialize the AppEnrollmentReconnectRequest using the provided prototype
         def initialize(params = {})
             @auth_code = params.dig(:auth_code)
+            @username = params.dig(:username)
+            @password = params.dig(:password)
+            @token_id = params.dig(:token_id)
+            @token_secret = params.dig(:token_secret)
         end
 
         ##
@@ -31,10 +35,30 @@ module LockstepSdk
         attr_accessor :auth_code
 
         ##
+        # @return [String] The OAuth authentication code.
+        attr_accessor :username
+
+        ##
+        # @return [String] The password for the web services account with access permissions.
+        attr_accessor :password
+
+        ##
+        # @return [String] The access token id for the connector enrollment.
+        attr_accessor :token_id
+
+        ##
+        # @return [String] The access token secret for the connector enrollment.
+        attr_accessor :token_secret
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'authCode' => @auth_code,
+                'username' => @username,
+                'password' => @password,
+                'tokenId' => @token_id,
+                'tokenSecret' => @token_secret,
             }
         end
 

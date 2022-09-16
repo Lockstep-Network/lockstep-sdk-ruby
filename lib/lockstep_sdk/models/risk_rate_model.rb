@@ -25,6 +25,7 @@ module LockstepSdk
         def initialize(params = {})
             @group_key = params.dig(:group_key)
             @report_period = params.dig(:report_period)
+            @report_date = params.dig(:report_date)
             @invoice_month_name = params.dig(:invoice_month_name)
             @total_invoice_count = params.dig(:total_invoice_count)
             @total_invoice_amount = params.dig(:total_invoice_amount)
@@ -41,6 +42,10 @@ module LockstepSdk
         ##
         # @return [Date-time] The month the risk rate was calculated for
         attr_accessor :report_period
+
+        ##
+        # @return [Date-time] The month the risk rate was calculated for
+        attr_accessor :report_date
 
         ##
         # @return [String] The string name of the month the risk rate was calculated for
@@ -76,6 +81,7 @@ module LockstepSdk
             {
                 'groupKey' => @group_key,
                 'reportPeriod' => @report_period,
+                'reportDate' => @report_date,
                 'invoiceMonthName' => @invoice_month_name,
                 'totalInvoiceCount' => @total_invoice_count,
                 'totalInvoiceAmount' => @total_invoice_amount,

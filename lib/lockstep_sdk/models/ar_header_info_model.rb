@@ -24,6 +24,7 @@ module LockstepSdk
         # Initialize the ArHeaderInfoModel using the provided prototype
         def initialize(params = {})
             @group_key = params.dig(:group_key)
+            @report_date = params.dig(:report_date)
             @report_period = params.dig(:report_period)
             @total_customers = params.dig(:total_customers)
             @total_invoices = params.dig(:total_invoices)
@@ -58,6 +59,10 @@ module LockstepSdk
 
         ##
         # @return [Date] The date of the report
+        attr_accessor :report_date
+
+        ##
+        # @return [String] The date of the report
         attr_accessor :report_period
 
         ##
@@ -165,6 +170,7 @@ module LockstepSdk
         def as_json(options={})
             {
                 'groupKey' => @group_key,
+                'reportDate' => @report_date,
                 'reportPeriod' => @report_period,
                 'totalCustomers' => @total_customers,
                 'totalInvoices' => @total_invoices,

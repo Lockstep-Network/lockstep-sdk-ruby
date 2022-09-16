@@ -84,11 +84,11 @@ class AppEnrollmentsClient
     end
 
     ##
-    # Updates the OAuth settings associated with this App Enrollment
+    # Updates the settings associated with this App Enrollment
     #
     # @param id [uuid] The unique ID number of the App Enrollment to reconnect
     # @param body [AppEnrollmentReconnectRequest] Information to reconnect the App Enrollment
-    def reconnect_app_enrollment_oauth(id:, body:)
+    def reconnect_app_enrollment(id:, body:)
         path = "/api/v1/AppEnrollments/#{id}/reconnect"
         @connection.request(:post, path, body, nil)
     end

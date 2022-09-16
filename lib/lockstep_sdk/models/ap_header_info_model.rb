@@ -24,6 +24,7 @@ module LockstepSdk
         # Initialize the ApHeaderInfoModel using the provided prototype
         def initialize(params = {})
             @group_key = params.dig(:group_key)
+            @report_date = params.dig(:report_date)
             @report_period = params.dig(:report_period)
             @total_vendors = params.dig(:total_vendors)
             @total_bills = params.dig(:total_bills)
@@ -54,6 +55,10 @@ module LockstepSdk
         ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
+
+        ##
+        # @return [Date-time] The date of the report
+        attr_accessor :report_date
 
         ##
         # @return [Date-time] The date of the report
@@ -160,6 +165,7 @@ module LockstepSdk
         def as_json(options={})
             {
                 'groupKey' => @group_key,
+                'reportDate' => @report_date,
                 'reportPeriod' => @report_period,
                 'totalVendors' => @total_vendors,
                 'totalBills' => @total_bills,
