@@ -55,7 +55,7 @@ class ReportsClient
     #
     # @param report_date [date-time] Optional: Specify the specific report date to generate the from (default UTC now)
     def daily_sales_outstanding(report_date:)
-        path = "/api/v1/Reports/dailysalesoutstanding"
+        path = "/api/v1/Reports/daily-sales-outstanding"
         params = {:reportDate => report_date}
         @connection.request(:get, path, nil, params)
     end
@@ -108,7 +108,7 @@ class ReportsClient
     # Risk Rate is a metric that indicates the percentage of total AR balance left unpaid after 90 days.  You can use this report to identify the percentage of invoice value that is not being collected in a timely manner.
     #
     def risk_rates()
-        path = "/api/v1/Reports/riskrates"
+        path = "/api/v1/Reports/risk-rates"
         @connection.request(:get, path, nil, nil)
     end
 

@@ -46,6 +46,7 @@ module LockstepSdk
             @is_active = params.dig(:is_active)
             @wiki_url = params.dig(:wiki_url)
             @group_key = params.dig(:group_key)
+            @b2_cclient_id = params.dig(:b2_cclient_id)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
             @custom_field_definitions = params.dig(:custom_field_definitions)
@@ -113,6 +114,10 @@ module LockstepSdk
         attr_accessor :group_key
 
         ##
+        # @return [Uuid] The B2C Client ID of the application
+        attr_accessor :b2_cclient_id
+
+        ##
         # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `Application` and the `ObjectKey` set to the `ApplicationId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
@@ -147,6 +152,7 @@ module LockstepSdk
                 'isActive' => @is_active,
                 'wikiURL' => @wiki_url,
                 'groupKey' => @group_key,
+                'b2CClientId' => @b2_cclient_id,
                 'notes' => @notes,
                 'attachments' => @attachments,
                 'customFieldDefinitions' => @custom_field_definitions,
