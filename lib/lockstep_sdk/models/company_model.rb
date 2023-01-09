@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -31,7 +31,6 @@ module LockstepSdk
             @company_name = params.dig(:company_name)
             @erp_key = params.dig(:erp_key)
             @company_type = params.dig(:company_type)
-            @company_status = params.dig(:company_status)
             @parent_company_id = params.dig(:parent_company_id)
             @enterprise_id = params.dig(:enterprise_id)
             @group_key = params.dig(:group_key)
@@ -66,6 +65,7 @@ module LockstepSdk
             @app_enrollment_id = params.dig(:app_enrollment_id)
             @email_address = params.dig(:email_address)
             @public_url_slug = params.dig(:public_url_slug)
+            @view_box_settings = params.dig(:view_box_settings)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
             @contacts = params.dig(:contacts)
@@ -90,10 +90,6 @@ module LockstepSdk
         ##
         # @return [String] This field indicates the type of company. It can be one of a limited number of values: Company, Customer, Group, Vendor, or Third Party. A company that represents both a customer and a vendor is identified as a CustomerVendor. * `Company` - This record represents a company that is part of the organization of the account holder. * `Customer` - This record represents a business entity that purchases things from the account holder. * `Group` - Only one record of type `GROUP` exists in each account. Contains your account profile. * `Vendor` - This record represents a business entity that sells things to the account holder. * `Third Party` - This record represents a business entity that is neither a customer nor vendor. * `CustomerVendor` - Both a customer and a vendor.
         attr_accessor :company_type
-
-        ##
-        # @return [String] The status of the company. Companies can be either `Active` or `Inactive`. When matched to a Lockstep corporate profile, this value will change to reflect that this record will be kept in sync with that company's identity.
-        attr_accessor :company_status
 
         ##
         # @return [Uuid] If this business entity is part of an organization, this value is non-null and it is set to the `CompanyId` value of the parent company of this business entity. If this value is null, this business entity is a standalone.
@@ -232,6 +228,10 @@ module LockstepSdk
         attr_accessor :public_url_slug
 
         ##
+        # @return [ViewBoxSettingsModel] View box settings for the company logo.
+        attr_accessor :view_box_settings
+
+        ##
         # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `Company` and the `ObjectKey` set to the `CompanyId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
@@ -267,7 +267,6 @@ module LockstepSdk
                 'companyName' => @company_name,
                 'erpKey' => @erp_key,
                 'companyType' => @company_type,
-                'companyStatus' => @company_status,
                 'parentCompanyId' => @parent_company_id,
                 'enterpriseId' => @enterprise_id,
                 'groupKey' => @group_key,
@@ -302,6 +301,7 @@ module LockstepSdk
                 'appEnrollmentId' => @app_enrollment_id,
                 'emailAddress' => @email_address,
                 'publicUrlSlug' => @public_url_slug,
+                'viewBoxSettings' => @view_box_settings,
                 'notes' => @notes,
                 'attachments' => @attachments,
                 'contacts' => @contacts,

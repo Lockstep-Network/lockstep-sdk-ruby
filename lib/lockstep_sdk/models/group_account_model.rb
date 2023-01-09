@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -27,6 +27,7 @@ module LockstepSdk
             @group_name = params.dig(:group_name)
             @primary_user_id = params.dig(:primary_user_id)
             @group_company_id = params.dig(:group_company_id)
+            @base_currency_code = params.dig(:base_currency_code)
             @is_active = params.dig(:is_active)
             @onboarding_scheduled = params.dig(:onboarding_scheduled)
             @created = params.dig(:created)
@@ -50,6 +51,10 @@ module LockstepSdk
         ##
         # @return [Uuid] The CompanyId of the Company the group is associated with
         attr_accessor :group_company_id
+
+        ##
+        # @return [String] Base Currency of the group
+        attr_accessor :base_currency_code
 
         ##
         # @return [Boolean] The active status of the group
@@ -83,6 +88,7 @@ module LockstepSdk
                 'groupName' => @group_name,
                 'primaryUserId' => @primary_user_id,
                 'groupCompanyId' => @group_company_id,
+                'baseCurrencyCode' => @base_currency_code,
                 'isActive' => @is_active,
                 'onboardingScheduled' => @onboarding_scheduled,
                 'created' => @created,

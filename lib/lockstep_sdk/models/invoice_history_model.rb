@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -58,6 +58,7 @@ module LockstepSdk
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
             @app_enrollment_id = params.dig(:app_enrollment_id)
+            @currency_rate = params.dig(:currency_rate)
         end
 
         ##
@@ -193,6 +194,10 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
 
         ##
+        # @return [Double] The Currency Rate used to get from the account's base currency to the invoice amount.
+        attr_accessor :currency_rate
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -229,6 +234,7 @@ module LockstepSdk
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
                 'appEnrollmentId' => @app_enrollment_id,
+                'currencyRate' => @currency_rate,
             }
         end
 

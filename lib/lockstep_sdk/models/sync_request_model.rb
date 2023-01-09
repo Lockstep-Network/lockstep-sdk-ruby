@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -33,6 +33,8 @@ module LockstepSdk
             @sync_request_id = params.dig(:sync_request_id)
             @group_key = params.dig(:group_key)
             @status_code = params.dig(:status_code)
+            @operation_type_name = params.dig(:operation_type_name)
+            @operation_type = params.dig(:operation_type)
             @process_result_message = params.dig(:process_result_message)
             @run_full_sync = params.dig(:run_full_sync)
             @app_enrollment_id = params.dig(:app_enrollment_id)
@@ -53,6 +55,14 @@ module LockstepSdk
         ##
         # @return [String] The status of processing for this SyncRequest. When a SyncRequest is created, it is flagged as `Ready`. When it is picked up for execution, its status moves to `In Progress`. When it is complete, its status will move to `Success` or `Failed`. If another API call cancels the SyncRequest, its status will move to `Cancelled`. * Ready * In Progress * Cancelled * Failed * Success
         attr_accessor :status_code
+
+        ##
+        # @return [String] The name of the OperationType for this SyncRequest
+        attr_accessor :operation_type_name
+
+        ##
+        # @return [Int32] The name of the OperationType for this SyncRequest
+        attr_accessor :operation_type
 
         ##
         # @return [String] Message containing information about the sync request results
@@ -89,6 +99,8 @@ module LockstepSdk
                 'syncRequestId' => @sync_request_id,
                 'groupKey' => @group_key,
                 'statusCode' => @status_code,
+                'operationTypeName' => @operation_type_name,
+                'operationType' => @operation_type,
                 'processResultMessage' => @process_result_message,
                 'runFullSync' => @run_full_sync,
                 'appEnrollmentId' => @app_enrollment_id,

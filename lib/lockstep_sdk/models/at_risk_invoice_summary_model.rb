@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -32,8 +32,12 @@ module LockstepSdk
             @customer_name = params.dig(:customer_name)
             @status = params.dig(:status)
             @payment_due_date = params.dig(:payment_due_date)
+            @currency_code = params.dig(:currency_code)
             @invoice_amount = params.dig(:invoice_amount)
             @outstanding_balance = params.dig(:outstanding_balance)
+            @base_currency_code = params.dig(:base_currency_code)
+            @base_currency_invoice_amount = params.dig(:base_currency_invoice_amount)
+            @base_currency_outstanding_balance = params.dig(:base_currency_outstanding_balance)
             @invoice_type_code = params.dig(:invoice_type_code)
             @newest_activity = params.dig(:newest_activity)
             @days_past_due = params.dig(:days_past_due)
@@ -78,12 +82,28 @@ module LockstepSdk
         attr_accessor :payment_due_date
 
         ##
+        # @return [String] The currency code of the invoice
+        attr_accessor :currency_code
+
+        ##
         # @return [Double] The total amount of the Invoice.
         attr_accessor :invoice_amount
 
         ##
         # @return [Double] The remaining balance value of this invoice.
         attr_accessor :outstanding_balance
+
+        ##
+        # @return [String] The currency code of the group.
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [Double] The total amount of the Invoice in the group's currency.
+        attr_accessor :base_currency_invoice_amount
+
+        ##
+        # @return [Double] The remaining balance value of this invoice in the group's currency.
+        attr_accessor :base_currency_outstanding_balance
 
         ##
         # @return [String] A code identifying the type of this Invoice.
@@ -118,8 +138,12 @@ module LockstepSdk
                 'customerName' => @customer_name,
                 'status' => @status,
                 'paymentDueDate' => @payment_due_date,
+                'currencyCode' => @currency_code,
                 'invoiceAmount' => @invoice_amount,
                 'outstandingBalance' => @outstanding_balance,
+                'baseCurrencyCode' => @base_currency_code,
+                'baseCurrencyInvoiceAmount' => @base_currency_invoice_amount,
+                'baseCurrencyOutstandingBalance' => @base_currency_outstanding_balance,
                 'invoiceTypeCode' => @invoice_type_code,
                 'newestActivity' => @newest_activity,
                 'daysPastDue' => @days_past_due,

@@ -1,23 +1,23 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
 
 require 'awrence'
 
-class ProfilesClient
+class ProfilesCompaniesClient
 
     ##
-    # Initialize the ProfilesClient class with an API client instance.
+    # Initialize the ProfilesCompaniesClient class with an API client instance.
     # @param connection [LockstepApi] The API client object for this connection
     def initialize(connection)
         @connection = connection
@@ -31,7 +31,7 @@ class ProfilesClient
     #
     # @param url_slug [string] 
     def retrieve_public_company_profile(url_slug:)
-        path = "/api/v1/Profiles/companies/#{urlSlug}"
+        path = "/api/v1/profiles/companies/#{urlSlug}"
         @connection.request(:get, path, nil, nil)
     end
 
@@ -46,10 +46,10 @@ class ProfilesClient
     #
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
-    # @param page_size [int32] The page size for results (default 200, maximum of 10,000)
+    # @param page_size [int32] The page size for results (default 250, maximum of 500)
     # @param page_number [int32] The page number for results (default 0)
     def query_public_company_profiles(filter:, order:, page_size:, page_number:)
-        path = "/api/v1/Profiles/companies/query"
+        path = "/api/v1/profiles/companies/query"
         params = {:filter => filter, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
     end

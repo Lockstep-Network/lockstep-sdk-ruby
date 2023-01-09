@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -31,6 +31,9 @@ module LockstepSdk
             @group_key = params.dig(:group_key)
             @custom_field_definition_id = params.dig(:custom_field_definition_id)
             @record_key = params.dig(:record_key)
+            @table_key = params.dig(:table_key)
+            @custom_field_label = params.dig(:custom_field_label)
+            @data_type = params.dig(:data_type)
             @string_value = params.dig(:string_value)
             @numeric_value = params.dig(:numeric_value)
             @created = params.dig(:created)
@@ -53,6 +56,18 @@ module LockstepSdk
         ##
         # @return [Uuid] Additional key if source table doesn't have a unique id
         attr_accessor :record_key
+
+        ##
+        # @return [String] Table to which this definition belongs
+        attr_accessor :table_key
+
+        ##
+        # @return [String] Text to display in-application for custom field
+        attr_accessor :custom_field_label
+
+        ##
+        # @return [String] Data type of this definition
+        attr_accessor :data_type
 
         ##
         # @return [String] String of data for field
@@ -97,6 +112,9 @@ module LockstepSdk
                 'groupKey' => @group_key,
                 'customFieldDefinitionId' => @custom_field_definition_id,
                 'recordKey' => @record_key,
+                'tableKey' => @table_key,
+                'customFieldLabel' => @custom_field_label,
+                'dataType' => @data_type,
                 'stringValue' => @string_value,
                 'numericValue' => @numeric_value,
                 'created' => @created,
