@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -45,6 +45,7 @@ module LockstepSdk
             @percent_of_total_ar = params.dig(:percent_of_total_ar)
             @dso = params.dig(:dso)
             @newest_activity = params.dig(:newest_activity)
+            @modified = params.dig(:modified)
         end
 
         ##
@@ -136,6 +137,10 @@ module LockstepSdk
         attr_accessor :newest_activity
 
         ##
+        # @return [Date-time] The modified date of the customer.
+        attr_accessor :modified
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -161,6 +166,7 @@ module LockstepSdk
                 'percentOfTotalAr' => @percent_of_total_ar,
                 'dso' => @dso,
                 'newestActivity' => @newest_activity,
+                'modified' => @modified,
             }
         end
 

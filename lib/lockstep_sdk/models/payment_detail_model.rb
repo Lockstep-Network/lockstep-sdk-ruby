@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -31,8 +31,12 @@ module LockstepSdk
             @reference_code = params.dig(:reference_code)
             @primary_contact = params.dig(:primary_contact)
             @email = params.dig(:email)
+            @currency_code = params.dig(:currency_code)
             @payment_amount = params.dig(:payment_amount)
             @unapplied_amount = params.dig(:unapplied_amount)
+            @base_currency_code = params.dig(:base_currency_code)
+            @base_currency_payment_amount = params.dig(:base_currency_payment_amount)
+            @base_currency_unapplied_amount = params.dig(:base_currency_unapplied_amount)
             @payment_type = params.dig(:payment_type)
             @tender_type = params.dig(:tender_type)
             @payment_date = params.dig(:payment_date)
@@ -81,12 +85,28 @@ module LockstepSdk
         attr_accessor :email
 
         ##
+        # @return [String] The currency code of the payment.
+        attr_accessor :currency_code
+
+        ##
         # @return [Double] Total amount of this Payment.
         attr_accessor :payment_amount
 
         ##
         # @return [Double] Unapplied balance of this Payment.
         attr_accessor :unapplied_amount
+
+        ##
+        # @return [String] The base currency code of the group.
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [Double] The payment amount in the group's base currency.
+        attr_accessor :base_currency_payment_amount
+
+        ##
+        # @return [Double] The payment amount in the group's base currency.
+        attr_accessor :base_currency_unapplied_amount
 
         ##
         # @return [String] The type of payment, AR Payment or AP Payment. Recognized PaymentType values are: * `AR Payment` - A payment made by a Customer to the Company * `AP Payment` - A payment made by the Company to a Vendor
@@ -152,8 +172,12 @@ module LockstepSdk
                 'referenceCode' => @reference_code,
                 'primaryContact' => @primary_contact,
                 'email' => @email,
+                'currencyCode' => @currency_code,
                 'paymentAmount' => @payment_amount,
                 'unappliedAmount' => @unapplied_amount,
+                'baseCurrencyCode' => @base_currency_code,
+                'baseCurrencyPaymentAmount' => @base_currency_payment_amount,
+                'baseCurrencyUnappliedAmount' => @base_currency_unapplied_amount,
                 'paymentType' => @payment_type,
                 'tenderType' => @tender_type,
                 'paymentDate' => @payment_date,

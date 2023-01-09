@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -24,20 +24,33 @@ module LockstepSdk
         # Initialize the InvoicePaymentDetailModel using the provided prototype
         def initialize(params = {})
             @group_key = params.dig(:group_key)
+            @base_currency_code = params.dig(:base_currency_code)
+            @currency_code = params.dig(:currency_code)
             @payment_applied_id = params.dig(:payment_applied_id)
             @invoice_id = params.dig(:invoice_id)
             @payment_id = params.dig(:payment_id)
             @apply_to_invoice_date = params.dig(:apply_to_invoice_date)
             @payment_applied_amount = params.dig(:payment_applied_amount)
+            @base_currency_payment_applied_amount = params.dig(:base_currency_payment_applied_amount)
             @reference_code = params.dig(:reference_code)
             @company_id = params.dig(:company_id)
             @payment_amount = params.dig(:payment_amount)
             @unapplied_amount = params.dig(:unapplied_amount)
+            @base_currency_payment_amount = params.dig(:base_currency_payment_amount)
+            @base_currency_unapplied_amount = params.dig(:base_currency_unapplied_amount)
         end
 
         ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
+
+        ##
+        # @return [String] The base currency code of the group.
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [String] The payment's currency code.
+        attr_accessor :currency_code
 
         ##
         # @return [Uuid] The unique identifier of this PaymentApplied record.
@@ -60,6 +73,10 @@ module LockstepSdk
         attr_accessor :payment_applied_amount
 
         ##
+        # @return [Double] Amount applied to Invoice in the group's base currency.
+        attr_accessor :base_currency_payment_applied_amount
+
+        ##
         # @return [String] An additional reference code that is sometimes used to identify this Payment. The meaning of this field is specific to the ERP or accounting system used by the user.
         attr_accessor :reference_code
 
@@ -76,19 +93,32 @@ module LockstepSdk
         attr_accessor :unapplied_amount
 
         ##
+        # @return [Double] The total value of this Payment in the group's base currency.
+        attr_accessor :base_currency_payment_amount
+
+        ##
+        # @return [Double] The remaining balance value of this Payment in the group's base currency.
+        attr_accessor :base_currency_unapplied_amount
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'groupKey' => @group_key,
+                'baseCurrencyCode' => @base_currency_code,
+                'currencyCode' => @currency_code,
                 'paymentAppliedId' => @payment_applied_id,
                 'invoiceId' => @invoice_id,
                 'paymentId' => @payment_id,
                 'applyToInvoiceDate' => @apply_to_invoice_date,
                 'paymentAppliedAmount' => @payment_applied_amount,
+                'baseCurrencyPaymentAppliedAmount' => @base_currency_payment_applied_amount,
                 'referenceCode' => @reference_code,
                 'companyId' => @company_id,
                 'paymentAmount' => @payment_amount,
                 'unappliedAmount' => @unapplied_amount,
+                'baseCurrencyPaymentAmount' => @base_currency_payment_amount,
+                'baseCurrencyUnappliedAmount' => @base_currency_unapplied_amount,
             }
         end
 

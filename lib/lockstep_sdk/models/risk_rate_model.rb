@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -24,6 +24,7 @@ module LockstepSdk
         # Initialize the RiskRateModel using the provided prototype
         def initialize(params = {})
             @group_key = params.dig(:group_key)
+            @base_currency_code = params.dig(:base_currency_code)
             @report_period = params.dig(:report_period)
             @report_date = params.dig(:report_date)
             @invoice_month_name = params.dig(:invoice_month_name)
@@ -38,6 +39,10 @@ module LockstepSdk
         ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
         attr_accessor :group_key
+
+        ##
+        # @return [String] The base currency code of the group.
+        attr_accessor :base_currency_code
 
         ##
         # @return [Date-time] The month the risk rate was calculated for
@@ -56,7 +61,7 @@ module LockstepSdk
         attr_accessor :total_invoice_count
 
         ##
-        # @return [Double] The sum of the total amount for invoices in the calculation month
+        # @return [Double] The sum of the total amount for invoices in the calculation month in the group's base currency.
         attr_accessor :total_invoice_amount
 
         ##
@@ -64,7 +69,7 @@ module LockstepSdk
         attr_accessor :at_risk_count
 
         ##
-        # @return [Double] The sum of the outstanding balance of open invoices over 90 days from the calculation month
+        # @return [Double] The sum of the outstanding balance of open invoices over 90 days from the calculation month in the group's base currency.
         attr_accessor :at_risk_amount
 
         ##
@@ -80,6 +85,7 @@ module LockstepSdk
         def as_json(options={})
             {
                 'groupKey' => @group_key,
+                'baseCurrencyCode' => @base_currency_code,
                 'reportPeriod' => @report_period,
                 'reportDate' => @report_date,
                 'invoiceMonthName' => @invoice_month_name,

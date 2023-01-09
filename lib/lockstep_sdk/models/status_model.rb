@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -24,6 +24,7 @@ module LockstepSdk
         # Initialize the StatusModel using the provided prototype
         def initialize(params = {})
             @user_name = params.dig(:user_name)
+            @email_address = params.dig(:email_address)
             @account_name = params.dig(:account_name)
             @account_company_id = params.dig(:account_company_id)
             @user_id = params.dig(:user_id)
@@ -37,13 +38,21 @@ module LockstepSdk
             @environment = params.dig(:environment)
             @version = params.dig(:version)
             @onboarding_scheduled = params.dig(:onboarding_scheduled)
+            @magic_link_id = params.dig(:magic_link_id)
+            @magic_link_company_id = params.dig(:magic_link_company_id)
+            @magic_link = params.dig(:magic_link)
             @dependencies = params.dig(:dependencies)
             @user_groups = params.dig(:user_groups)
+            @base_currency_code = params.dig(:base_currency_code)
         end
 
         ##
         # @return [String] If authentication is successful, contains the username of the logged-in user.
         attr_accessor :user_name
+
+        ##
+        # @return [String] If authentication is successful, contains the email address of the logged-in user.
+        attr_accessor :email_address
 
         ##
         # @return [String] If authentication is successful, contains subscription account name of logged-in user.
@@ -98,6 +107,18 @@ module LockstepSdk
         attr_accessor :onboarding_scheduled
 
         ##
+        # @return [Uuid] The id of the Magic link used to authenticate.
+        attr_accessor :magic_link_id
+
+        ##
+        # @return [Uuid] The id of the target company for the Magic Link
+        attr_accessor :magic_link_company_id
+
+        ##
+        # @return [MagicLinkStatusModel] Magic link information about the user
+        attr_accessor :magic_link
+
+        ##
         # @return [Object] Statuses for the dependencies of this api. OK if the dependency is working.
         attr_accessor :dependencies
 
@@ -106,10 +127,15 @@ module LockstepSdk
         attr_accessor :user_groups
 
         ##
+        # @return [String] Base Currency of the group
+        attr_accessor :base_currency_code
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'userName' => @user_name,
+                'emailAddress' => @email_address,
                 'accountName' => @account_name,
                 'accountCompanyId' => @account_company_id,
                 'userId' => @user_id,
@@ -123,8 +149,12 @@ module LockstepSdk
                 'environment' => @environment,
                 'version' => @version,
                 'onboardingScheduled' => @onboarding_scheduled,
+                'magicLinkId' => @magic_link_id,
+                'magicLinkCompanyId' => @magic_link_company_id,
+                'magicLink' => @magic_link,
                 'dependencies' => @dependencies,
                 'userGroups' => @user_groups,
+                'baseCurrencyCode' => @base_currency_code,
             }
         end
 

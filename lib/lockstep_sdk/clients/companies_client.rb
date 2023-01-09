@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -56,14 +56,14 @@ class CompaniesClient
     end
 
     ##
-    # Disable the Company referred to by this unique identifier.
+    # Delete the Company referred to by this unique identifier.
     #
     # A Company represents a customer, a vendor, or a company within the organization of the account holder. Companies can have parents and children, representing an organizational hierarchy of corporate entities. You can use Companies to track projects and financial data under this Company label.
     #
     # See [Vendors, Customers, and Companies](https://developer.lockstep.io/docs/companies-customers-and-vendors) for more information.
     #
     # @param id [uuid] The unique Lockstep Platform ID number of this Company; NOT the customer's ERP key
-    def disable_company(id:)
+    def delete_company(id:)
         path = "/api/v1/Companies/#{id}"
         @connection.request(:delete, path, nil, nil)
     end
@@ -82,6 +82,19 @@ class CompaniesClient
     end
 
     ##
+    # Delete the Companies referred to by these unique identifiers.
+    #
+    # A Company represents a customer, a vendor, or a company within the organization of the account holder. Companies can have parents and children, representing an organizational hierarchy of corporate entities. You can use Companies to track projects and financial data under this Company label.
+    #
+    # See [Vendors, Customers, and Companies](https://developer.lockstep.io/docs/companies-customers-and-vendors) for more information.
+    #
+    # @param body [BulkDeleteRequestModel] The unique Lockstep Platform ID numbers of the Companies to delete; NOT the customer's ERP key
+    def delete_companies(body:)
+        path = "/api/v1/Companies"
+        @connection.request(:delete, path, body, nil)
+    end
+
+    ##
     # Queries Companies for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
     #
     # More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.
@@ -93,7 +106,7 @@ class CompaniesClient
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collections: Attachments, Contacts, CustomFields, Invoices, Notes, Classification
     # @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
-    # @param page_size [int32] The page size for results (default 200, maximum of 10,000)
+    # @param page_size [int32] The page size for results (default 250, maximum of 500)
     # @param page_number [int32] The page number for results (default 0)
     def query_companies(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/Companies/query"
@@ -113,7 +126,7 @@ class CompaniesClient
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available but may be offered in the future
     # @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
-    # @param page_size [int32] The page size for results (default 200, maximum of 10,000)
+    # @param page_size [int32] The page size for results (default 250, maximum of 500)
     # @param page_number [int32] The page number for results (default 0)
     # @param report_date [date-time] The date to calculate the fields on. If no date is entered the current UTC date will be used.
     def query_customer_summary(filter:, include_param:, order:, page_size:, page_number:, report_date:)
@@ -134,7 +147,7 @@ class CompaniesClient
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. No collections are currently available but may be offered in the future
     # @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
-    # @param page_size [int32] The page size for results (default 200, maximum of 10,000)
+    # @param page_size [int32] The page size for results (default 250, maximum of 500)
     # @param page_number [int32] The page number for results (default 0)
     # @param report_date [date-time] The date to calculate the fields on. If no date is entered the current UTC date will be used.
     def query_vendor_summary(filter:, include_param:, order:, page_size:, page_number:, report_date:)
@@ -159,16 +172,33 @@ class CompaniesClient
     ##
     # Sets the logo for specified company. The logo will be stored in the Lockstep Platform and will be **publicly accessible**.
     #
-    # .jpg, .jpeg, and .png are supported. 5MB maximum. If no logo is uploaded, the existing logo will be deleted.
+    # .jpg, .jpeg, .png, and .webp are supported. 2MB maximum. If no logo is uploaded, the existing logo will be deleted.
     #
     # A Company represents a customer, a vendor, or a company within the organization of the account holder. Companies can have parents and children, representing an organizational hierarchy of corporate entities. You can use Companies to track projects and financial data under this Company label.
+    #
+    # Optional view box meta data for the provided logo may be supplied using the following query parameters. Please note that you must supply either all of the values or none of the values. <ul><li>min_x</li><li>min_y</li><li>width</li><li>height</li></ul>
     #
     # See [Vendors, Customers, and Companies](https://developer.lockstep.io/docs/companies-customers-and-vendors) for more information.
     #
     # @param id [uuid] The unique Lockstep Platform ID number of this Company; NOT the customer's ERP key
+    # @param min_x [double] ViewBox minX setting for this Company's logo.
+    # @param min_y [double] ViewBox minY setting for this Company's logo.
+    # @param width [double] ViewBox width setting for this Company's logo.
+    # @param height [double] ViewBox height setting for this Company's logo.
     # @param filename [File] The full path of a file to upload to the API
-    def set_company_logo(id:, filename:)
+    def set_company_logo(id:, min_x:, min_y:, width:, height:, filename:)
         path = "/api/v1/Companies/#{id}/logo"
-        @connection.request(:post, path, nil, nil)
+        params = {:min_x => min_x, :min_y => min_y, :width => width, :height => height}
+        @connection.request(:post, path, nil, params)
+    end
+
+    ##
+    # Update view box meta data for the given Company id.
+    #
+    # @param id [uuid] The unique Lockstep Platform ID number of this Company; NOT the customer's ERP key
+    # @param body [ViewBoxSettingsModel] The `ViewBoxSettingsModel` containing meta data value updates
+    def update_logo_view_box_settings(id:, body:)
+        path = "/api/v1/Companies/#{id}/logo-settings"
+        @connection.request(:patch, path, body, nil)
     end
 end

@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -86,8 +86,8 @@ class AppEnrollmentsClient
     ##
     # Updates the settings associated with this App Enrollment
     #
-    # @param id [uuid] The unique ID number of the App Enrollment to reconnect
-    # @param body [AppEnrollmentReconnectRequest] Information to reconnect the App Enrollment
+    # @param id [uuid] The id for the app enrollment
+    # @param body [AppEnrollmentReconnectInfo] Information to reconnect the App Enrollment
     def reconnect_app_enrollment(id:, body:)
         path = "/api/v1/AppEnrollments/#{id}/reconnect"
         @connection.request(:post, path, body, nil)
@@ -105,7 +105,7 @@ class AppEnrollmentsClient
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param include_param [string] To fetch additional data on this object, specify the list of elements to retrieve. Available collections: App, CustomFields, LastSync, LastSuccessfulSync
     # @param order [string] The sort order for this query. See See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
-    # @param page_size [int32] The page size for results (default 200). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
+    # @param page_size [int32] The page size for results (default 250, maximum of 500). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param page_number [int32] The page number for results (default 0). See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     def query_app_enrollments(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/AppEnrollments/query"

@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -38,6 +38,7 @@ module LockstepSdk
             @modified_user_id = params.dig(:modified_user_id)
             @cron_settings = params.dig(:cron_settings)
             @sync_schedule_is_active = params.dig(:sync_schedule_is_active)
+            @is_deleted = params.dig(:is_deleted)
             @app = params.dig(:app)
             @custom_field_definitions = params.dig(:custom_field_definitions)
             @custom_field_values = params.dig(:custom_field_values)
@@ -87,6 +88,10 @@ module LockstepSdk
         attr_accessor :sync_schedule_is_active
 
         ##
+        # @return [Boolean] Flag indicating if the App Enrollment is currently being deleted from the Platform.
+        attr_accessor :is_deleted
+
+        ##
         # @return [ApplicationModel] The Application to which this AppEnrollment belongs. Contains general name, description, logo, and other metadata about this application. To retrieve this object, specify `App` in the "Include" parameter for your query.
         attr_accessor :app
 
@@ -124,6 +129,7 @@ module LockstepSdk
                 'modifiedUserId' => @modified_user_id,
                 'cronSettings' => @cron_settings,
                 'syncScheduleIsActive' => @sync_schedule_is_active,
+                'isDeleted' => @is_deleted,
                 'app' => @app,
                 'customFieldDefinitions' => @custom_field_definitions,
                 'customFieldValues' => @custom_field_values,

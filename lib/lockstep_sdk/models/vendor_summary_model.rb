@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -30,17 +30,24 @@ module LockstepSdk
             @primary_contact_name = params.dig(:primary_contact_name)
             @primary_contact_id = params.dig(:primary_contact_id)
             @amount_paid_last30 = params.dig(:amount_paid_last30)
+            @amount_paid_past_thirty_days = params.dig(:amount_paid_past_thirty_days)
             @advance_pay_last30 = params.dig(:advance_pay_last30)
+            @advance_pay_past_thirty_days = params.dig(:advance_pay_past_thirty_days)
             @advance_pay_outstanding = params.dig(:advance_pay_outstanding)
             @amount_billed_last30 = params.dig(:amount_billed_last30)
+            @amount_billed_past_thirty_days = params.dig(:amount_billed_past_thirty_days)
             @amount_billed_outstanding_last30 = params.dig(:amount_billed_outstanding_last30)
+            @amount_billed_outstanding_past_thirty_days = params.dig(:amount_billed_outstanding_past_thirty_days)
             @amount_billed_outstanding = params.dig(:amount_billed_outstanding)
             @bill_count_last30 = params.dig(:bill_count_last30)
+            @bill_count_past_thirty_days = params.dig(:bill_count_past_thirty_days)
             @paid_bill_count_last30 = params.dig(:paid_bill_count_last30)
+            @paid_bill_count_past_thirty_days = params.dig(:paid_bill_count_past_thirty_days)
             @open_bill_count = params.dig(:open_bill_count)
             @paid_bill_count = params.dig(:paid_bill_count)
             @total_bill_count = params.dig(:total_bill_count)
             @dpo = params.dig(:dpo)
+            @modified = params.dig(:modified)
         end
 
         ##
@@ -72,8 +79,16 @@ module LockstepSdk
         attr_accessor :amount_paid_last30
 
         ##
+        # @return [Double] The amount paid to this Vendor in the last 30 days
+        attr_accessor :amount_paid_past_thirty_days
+
+        ##
         # @return [Double] The outstanding advance pay balance on payments in the last 30 days
         attr_accessor :advance_pay_last30
+
+        ##
+        # @return [Double] The outstanding advance pay balance on payments in the last 30 days
+        attr_accessor :advance_pay_past_thirty_days
 
         ##
         # @return [Double] The outstanding advance pay balance with this Vendor
@@ -84,8 +99,16 @@ module LockstepSdk
         attr_accessor :amount_billed_last30
 
         ##
+        # @return [Double] The amount billed from this Vendor in the last 30 days
+        attr_accessor :amount_billed_past_thirty_days
+
+        ##
         # @return [Double] The outstanding balance with this Vendor for bills in the last 30 days
         attr_accessor :amount_billed_outstanding_last30
+
+        ##
+        # @return [Double] The outstanding balance with this Vendor for bills in the last 30 days
+        attr_accessor :amount_billed_outstanding_past_thirty_days
 
         ##
         # @return [Double] The outstanding balance with this Vendor
@@ -96,8 +119,16 @@ module LockstepSdk
         attr_accessor :bill_count_last30
 
         ##
+        # @return [Int32] The number of bills received from this Vendor in the last 30 days
+        attr_accessor :bill_count_past_thirty_days
+
+        ##
         # @return [Int32] The number of bills from this Vendor that were paid in full in the last 30 days
         attr_accessor :paid_bill_count_last30
+
+        ##
+        # @return [Int32] The number of bills from this Vendor that were paid in full in the last 30 days
+        attr_accessor :paid_bill_count_past_thirty_days
 
         ##
         # @return [Int32] The number of open bills with this Vendor
@@ -116,6 +147,10 @@ module LockstepSdk
         attr_accessor :dpo
 
         ##
+        # @return [Date-time] The modified date of the Vendor
+        attr_accessor :modified
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -126,17 +161,24 @@ module LockstepSdk
                 'primaryContactName' => @primary_contact_name,
                 'primaryContactId' => @primary_contact_id,
                 'amountPaidLast30' => @amount_paid_last30,
+                'amountPaidPastThirtyDays' => @amount_paid_past_thirty_days,
                 'advancePayLast30' => @advance_pay_last30,
+                'advancePayPastThirtyDays' => @advance_pay_past_thirty_days,
                 'advancePayOutstanding' => @advance_pay_outstanding,
                 'amountBilledLast30' => @amount_billed_last30,
+                'amountBilledPastThirtyDays' => @amount_billed_past_thirty_days,
                 'amountBilledOutstandingLast30' => @amount_billed_outstanding_last30,
+                'amountBilledOutstandingPastThirtyDays' => @amount_billed_outstanding_past_thirty_days,
                 'amountBilledOutstanding' => @amount_billed_outstanding,
                 'billCountLast30' => @bill_count_last30,
+                'billCountPastThirtyDays' => @bill_count_past_thirty_days,
                 'paidBillCountLast30' => @paid_bill_count_last30,
+                'paidBillCountPastThirtyDays' => @paid_bill_count_past_thirty_days,
                 'openBillCount' => @open_bill_count,
                 'paidBillCount' => @paid_bill_count,
                 'totalBillCount' => @total_bill_count,
                 'dpo' => @dpo,
+                'modified' => @modified,
             }
         end
 

@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -30,8 +30,12 @@ module LockstepSdk
             @tender_type = params.dig(:tender_type)
             @payment_type = params.dig(:payment_type)
             @payment_date = params.dig(:payment_date)
+            @currency_code = params.dig(:currency_code)
             @payment_amount = params.dig(:payment_amount)
             @unapplied_amount = params.dig(:unapplied_amount)
+            @base_currency_code = params.dig(:base_currency_code)
+            @base_currency_payment_amount = params.dig(:base_currency_payment_amount)
+            @base_currency_unapplied_amount = params.dig(:base_currency_unapplied_amount)
             @is_open = params.dig(:is_open)
             @invoice_count = params.dig(:invoice_count)
             @total_payments_applied = params.dig(:total_payments_applied)
@@ -39,10 +43,12 @@ module LockstepSdk
             @invoice_id_list = params.dig(:invoice_id_list)
             @payment_company_id = params.dig(:payment_company_id)
             @payment_company_name = params.dig(:payment_company_name)
+            @supports_erp_pdf_retrieval = params.dig(:supports_erp_pdf_retrieval)
             @customer_ids = params.dig(:customer_ids)
             @customer_names = params.dig(:customer_names)
             @company_ids = params.dig(:company_ids)
             @company_names = params.dig(:company_names)
+            @modified = params.dig(:modified)
         end
 
         ##
@@ -74,12 +80,28 @@ module LockstepSdk
         attr_accessor :payment_date
 
         ##
+        # @return [String] The currency code of the payment.
+        attr_accessor :currency_code
+
+        ##
         # @return [Double] Total amount of this payment.
         attr_accessor :payment_amount
 
         ##
         # @return [Double] Unapplied balance of this payment.
         attr_accessor :unapplied_amount
+
+        ##
+        # @return [String] The base currency code of the group.
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [Double] The payment amount in the group's base currency.
+        attr_accessor :base_currency_payment_amount
+
+        ##
+        # @return [Double] The unapplied amount in the group's base currency.
+        attr_accessor :base_currency_unapplied_amount
 
         ##
         # @return [Boolean] True if this payment includes some unassigned amount that has not yet been applied to an invoice. If this value is true, the field `UnappliedAmount` will be nonzero.
@@ -110,6 +132,10 @@ module LockstepSdk
         attr_accessor :payment_company_name
 
         ##
+        # @return [Boolean] Specific payments have support for pdf retrieval from their respective erp. When this flag is true, an additional call to Payments/{id}/pdf can be made to retrieve a pdf directly from the erp.
+        attr_accessor :supports_erp_pdf_retrieval
+
+        ##
         # @return [Uuid] The ids of the customer for the associated invoices.
         attr_accessor :customer_ids
 
@@ -126,6 +152,10 @@ module LockstepSdk
         attr_accessor :company_names
 
         ##
+        # @return [Date-time] The modified date of the payment
+        attr_accessor :modified
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -136,8 +166,12 @@ module LockstepSdk
                 'tenderType' => @tender_type,
                 'paymentType' => @payment_type,
                 'paymentDate' => @payment_date,
+                'currencyCode' => @currency_code,
                 'paymentAmount' => @payment_amount,
                 'unappliedAmount' => @unapplied_amount,
+                'baseCurrencyCode' => @base_currency_code,
+                'baseCurrencyPaymentAmount' => @base_currency_payment_amount,
+                'baseCurrencyUnappliedAmount' => @base_currency_unapplied_amount,
                 'isOpen' => @is_open,
                 'invoiceCount' => @invoice_count,
                 'totalPaymentsApplied' => @total_payments_applied,
@@ -145,10 +179,12 @@ module LockstepSdk
                 'invoiceIdList' => @invoice_id_list,
                 'paymentCompanyId' => @payment_company_id,
                 'paymentCompanyName' => @payment_company_name,
+                'supportsErpPdfRetrieval' => @supports_erp_pdf_retrieval,
                 'customerIds' => @customer_ids,
                 'customerNames' => @customer_names,
                 'companyIds' => @company_ids,
                 'companyNames' => @company_names,
+                'modified' => @modified,
             }
         end
 

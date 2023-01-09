@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -24,6 +24,7 @@ module LockstepSdk
         # Initialize the PaymentDetailHeaderModel using the provided prototype
         def initialize(params = {})
             @group_key = params.dig(:group_key)
+            @base_currency_code = params.dig(:base_currency_code)
             @customer_count = params.dig(:customer_count)
             @amount_collected = params.dig(:amount_collected)
             @unapplied_amount = params.dig(:unapplied_amount)
@@ -36,15 +37,19 @@ module LockstepSdk
         attr_accessor :group_key
 
         ##
+        # @return [String] The base currency code of the group.
+        attr_accessor :base_currency_code
+
+        ##
         # @return [Int32] The total number of Customers.
         attr_accessor :customer_count
 
         ##
-        # @return [Double] The total amount collected.
+        # @return [Double] The total amount collected in the group's base currency.
         attr_accessor :amount_collected
 
         ##
-        # @return [Double] The total unapplied amount.
+        # @return [Double] The total unapplied amount in the group's base currency.
         attr_accessor :unapplied_amount
 
         ##
@@ -60,6 +65,7 @@ module LockstepSdk
         def as_json(options={})
             {
                 'groupKey' => @group_key,
+                'baseCurrencyCode' => @base_currency_code,
                 'customerCount' => @customer_count,
                 'amountCollected' => @amount_collected,
                 'unappliedAmount' => @unapplied_amount,

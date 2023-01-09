@@ -1,15 +1,15 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
 #             Manish Narayan B S <manish.n@lockstep.io>, Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
-# @version    2022.37.24
+# @copyright  2021-2023 Lockstep, Inc.
+# @version    2023.1.3
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -31,10 +31,6 @@ module lockstep_sdk
         ##
         # @return [String] The name or URL of the environment
         attr_accessor :env 
-
-        ##
-        # @return [ActivitiesClient] Client object for Activities endpoints
-        attr_accessor :activities
 
         ##
         # @return [ApiKeysClient] Client object for ApiKeys endpoints
@@ -65,8 +61,8 @@ module lockstep_sdk
         attr_accessor :contacts
 
         ##
-        # @return [CreditMemoAppliedClient] Client object for CreditMemoApplied endpoints
-        attr_accessor :credit_memo_applied
+        # @return [CreditMemosAppliedClient] Client object for CreditMemosApplied endpoints
+        attr_accessor :credit_memos_applied
 
         ##
         # @return [CurrenciesClient] Client object for Currencies endpoints
@@ -85,8 +81,8 @@ module lockstep_sdk
         attr_accessor :definitions
 
         ##
-        # @return [EmailsClient] Client object for Emails endpoints
-        attr_accessor :emails
+        # @return [FeatureFlagsClient] Client object for FeatureFlags endpoints
+        attr_accessor :feature_flags
 
         ##
         # @return [FinancialAccountClient] Client object for FinancialAccount endpoints
@@ -105,8 +101,16 @@ module lockstep_sdk
         attr_accessor :group_accounts
 
         ##
+        # @return [InvoiceAddressesClient] Client object for InvoiceAddresses endpoints
+        attr_accessor :invoice_addresses
+
+        ##
         # @return [InvoiceHistoryClient] Client object for InvoiceHistory endpoints
         attr_accessor :invoice_history
+
+        ##
+        # @return [InvoiceLinesClient] Client object for InvoiceLines endpoints
+        attr_accessor :invoice_lines
 
         ##
         # @return [InvoicesClient] Client object for Invoices endpoints
@@ -117,20 +121,32 @@ module lockstep_sdk
         attr_accessor :leads
 
         ##
-        # @return [NotesClient] Client object for Notes endpoints
-        attr_accessor :notes
+        # @return [MagicLinksClient] Client object for MagicLinks endpoints
+        attr_accessor :magic_links
 
         ##
-        # @return [PaymentApplicationsClient] Client object for PaymentApplications endpoints
-        attr_accessor :payment_applications
+        # @return [NotesClient] Client object for Notes endpoints
+        attr_accessor :notes
 
         ##
         # @return [PaymentsClient] Client object for Payments endpoints
         attr_accessor :payments
 
         ##
-        # @return [ProfilesClient] Client object for Profiles endpoints
-        attr_accessor :profiles
+        # @return [PaymentsAppliedClient] Client object for PaymentsApplied endpoints
+        attr_accessor :payments_applied
+
+        ##
+        # @return [ProfilesAccountingClient] Client object for ProfilesAccounting endpoints
+        attr_accessor :profiles_accounting
+
+        ##
+        # @return [ProfilesAccountingContactsClient] Client object for ProfilesAccountingContacts endpoints
+        attr_accessor :profiles_accounting_contacts
+
+        ##
+        # @return [ProfilesCompaniesClient] Client object for ProfilesCompanies endpoints
+        attr_accessor :profiles_companies
 
         ##
         # @return [ProvisioningClient] Client object for Provisioning endpoints
@@ -147,6 +163,14 @@ module lockstep_sdk
         ##
         # @return [SyncClient] Client object for Sync endpoints
         attr_accessor :sync
+
+        ##
+        # @return [TransactionsClient] Client object for Transactions endpoints
+        attr_accessor :transactions
+
+        ##
+        # @return [TranscriptionsClient] Client object for Transcriptions endpoints
+        attr_accessor :transcriptions
 
         ##
         # @return [UserAccountsClient] Client object for UserAccounts endpoints
@@ -170,7 +194,7 @@ module lockstep_sdk
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def initialize(env)
-            @version = "2022.37.24.0"
+            @version = "2023.1.3.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -181,7 +205,6 @@ module lockstep_sdk
                 end
                 
             # Construct all the clients
-            @activities = ActivitiesClient.new(self)
             @api_keys = ApiKeysClient.new(self)
             @app_enrollments = AppEnrollmentsClient.new(self)
             @applications = ApplicationsClient.new(self)
@@ -189,27 +212,34 @@ module lockstep_sdk
             @code_definitions = CodeDefinitionsClient.new(self)
             @companies = CompaniesClient.new(self)
             @contacts = ContactsClient.new(self)
-            @credit_memo_applied = CreditMemoAppliedClient.new(self)
+            @credit_memos_applied = CreditMemosAppliedClient.new(self)
             @currencies = CurrenciesClient.new(self)
             @custom_field_definitions = CustomFieldDefinitionsClient.new(self)
             @custom_field_values = CustomFieldValuesClient.new(self)
             @definitions = DefinitionsClient.new(self)
-            @emails = EmailsClient.new(self)
+            @feature_flags = FeatureFlagsClient.new(self)
             @financial_account = FinancialAccountClient.new(self)
             @financial_account_balance_history = FinancialAccountBalanceHistoryClient.new(self)
             @financial_year_settings = FinancialYearSettingsClient.new(self)
             @group_accounts = GroupAccountsClient.new(self)
+            @invoice_addresses = InvoiceAddressesClient.new(self)
             @invoice_history = InvoiceHistoryClient.new(self)
+            @invoice_lines = InvoiceLinesClient.new(self)
             @invoices = InvoicesClient.new(self)
             @leads = LeadsClient.new(self)
+            @magic_links = MagicLinksClient.new(self)
             @notes = NotesClient.new(self)
-            @payment_applications = PaymentApplicationsClient.new(self)
             @payments = PaymentsClient.new(self)
-            @profiles = ProfilesClient.new(self)
+            @payments_applied = PaymentsAppliedClient.new(self)
+            @profiles_accounting = ProfilesAccountingClient.new(self)
+            @profiles_accounting_contacts = ProfilesAccountingContactsClient.new(self)
+            @profiles_companies = ProfilesCompaniesClient.new(self)
             @provisioning = ProvisioningClient.new(self)
             @reports = ReportsClient.new(self)
             @status = StatusClient.new(self)
             @sync = SyncClient.new(self)
+            @transactions = TransactionsClient.new(self)
+            @transcriptions = TranscriptionsClient.new(self)
             @user_accounts = UserAccountsClient.new(self)
             @user_roles = UserRolesClient.new(self)
             @webhook_rules = WebhookRulesClient.new(self)
@@ -277,7 +307,7 @@ module lockstep_sdk
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
             request["SdkType"] = 'Ruby'
-            request["SdkVersion"] = '2022.37.24.0'
+            request["SdkVersion"] = '2023.1.3.0'
             request["MachineName"] = Socket.gethostname
             request.body = body
 

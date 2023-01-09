@@ -1,13 +1,13 @@
 #
 # Lockstep Platform SDK for Ruby
 #
-# (c) 2021-2022 Lockstep, Inc.
+# (c) 2021-2023 Lockstep, Inc.
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 #
 # @author     Lockstep Network <support@lockstep.io>
-# @copyright  2021-2022 Lockstep, Inc.
+# @copyright  2021-2023 Lockstep, Inc.
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -35,7 +35,6 @@ module LockstepSdk
             @erp_key = params.dig(:erp_key)
             @company_name = params.dig(:company_name)
             @company_type = params.dig(:company_type)
-            @company_status = params.dig(:company_status)
             @parent_company_erp_key = params.dig(:parent_company_erp_key)
             @is_active = params.dig(:is_active)
             @default_currency_code = params.dig(:default_currency_code)
@@ -76,10 +75,6 @@ module LockstepSdk
         ##
         # @return [String] This field indicates the type of company. It can be one of a limited number of values: `Company`, `Customer`, `Group`, `Vendor`, or `Third Party`. A company that represents both a customer and a vendor is identified as a `CustomerVendor`. When loading data into Lockstep, you should focus on the distinction between a company that is part of your own enterprise, or a company that is external to your enterprise. For a company that is within your enterprise, you should set this value to be `Company`. For a company that is external to your enterprise, you should set this value to either `Customer`, `Vendor`, `Third Party`, or `CustomerVendor`. If you don't know what value to choose, select `CustomerVendor`.
         attr_accessor :company_type
-
-        ##
-        # @return [String] An optional field including status codes. Defined status codes are `Active` and `Inactive`.
-        attr_accessor :company_status
 
         ##
         # @return [String] If this company has a parent company, identify the parent company's `ErpKey` value here. This value should be the original primary key or unique ID of the parent company to this company belongs. This value should match the original ErpKey field on the parent company. If this company is not a child company, leave this field null.
@@ -181,7 +176,6 @@ module LockstepSdk
                 'erpKey' => @erp_key,
                 'companyName' => @company_name,
                 'companyType' => @company_type,
-                'companyStatus' => @company_status,
                 'parentCompanyErpKey' => @parent_company_erp_key,
                 'isActive' => @is_active,
                 'defaultCurrencyCode' => @default_currency_code,
