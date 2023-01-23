@@ -65,6 +65,9 @@ module LockstepSdk
             @app_enrollment_id = params.dig(:app_enrollment_id)
             @email_address = params.dig(:email_address)
             @public_url_slug = params.dig(:public_url_slug)
+            @state_tax_id = params.dig(:state_tax_id)
+            @state_of_incorporation = params.dig(:state_of_incorporation)
+            @linked_in_url_slug = params.dig(:linked_in_url_slug)
             @view_box_settings = params.dig(:view_box_settings)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
@@ -228,6 +231,18 @@ module LockstepSdk
         attr_accessor :public_url_slug
 
         ##
+        # @return [String] State Tax ID
+        attr_accessor :state_tax_id
+
+        ##
+        # @return [String] The state where the company was registered.
+        attr_accessor :state_of_incorporation
+
+        ##
+        # @return [String] Linkedin Url
+        attr_accessor :linked_in_url_slug
+
+        ##
         # @return [ViewBoxSettingsModel] View box settings for the company logo.
         attr_accessor :view_box_settings
 
@@ -301,6 +316,9 @@ module LockstepSdk
                 'appEnrollmentId' => @app_enrollment_id,
                 'emailAddress' => @email_address,
                 'publicUrlSlug' => @public_url_slug,
+                'stateTaxId' => @state_tax_id,
+                'stateOfIncorporation' => @state_of_incorporation,
+                'linkedInUrlSlug' => @linked_in_url_slug,
                 'viewBoxSettings' => @view_box_settings,
                 'notes' => @notes,
                 'attachments' => @attachments,

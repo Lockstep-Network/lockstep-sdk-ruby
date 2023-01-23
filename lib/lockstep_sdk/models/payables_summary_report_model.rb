@@ -25,6 +25,7 @@ module LockstepSdk
         def initialize(params = {})
             @group_key = params.dig(:group_key)
             @timeframe = params.dig(:timeframe)
+            @base_currency_code = params.dig(:base_currency_code)
             @total_payments_amount = params.dig(:total_payments_amount)
             @total_payments_count = params.dig(:total_payments_count)
             @total_amount_billed = params.dig(:total_amount_billed)
@@ -40,7 +41,11 @@ module LockstepSdk
         attr_accessor :timeframe
 
         ##
-        # @return [Double] Amount of payments made based in the timeframe
+        # @return [String] The base currency code of the group.
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [Double] Amount of payments made based in the timeframe in the group's base currency.
         attr_accessor :total_payments_amount
 
         ##
@@ -48,7 +53,7 @@ module LockstepSdk
         attr_accessor :total_payments_count
 
         ##
-        # @return [Double] Amount of bills received based in the timeframe
+        # @return [Double] Amount of bills received based in the timeframe in the group's base currency.
         attr_accessor :total_amount_billed
 
         ##
@@ -61,6 +66,7 @@ module LockstepSdk
             {
                 'groupKey' => @group_key,
                 'timeframe' => @timeframe,
+                'baseCurrencyCode' => @base_currency_code,
                 'totalPaymentsAmount' => @total_payments_amount,
                 'totalPaymentsCount' => @total_payments_count,
                 'totalAmountBilled' => @total_amount_billed,

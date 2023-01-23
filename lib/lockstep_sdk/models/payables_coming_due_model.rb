@@ -29,6 +29,7 @@ module LockstepSdk
             @vendor_name = params.dig(:vendor_name)
             @primary_contact = params.dig(:primary_contact)
             @percentage_of_total = params.dig(:percentage_of_total)
+            @base_currency_code = params.dig(:base_currency_code)
             @total_amount_due = params.dig(:total_amount_due)
             @due_date = params.dig(:due_date)
         end
@@ -58,7 +59,11 @@ module LockstepSdk
         attr_accessor :percentage_of_total
 
         ##
-        # @return [Double] Total amount due for this time period
+        # @return [String] The base currency code of the group
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [Double] Total amount due for this time period at the group's base currency
         attr_accessor :total_amount_due
 
         ##
@@ -75,6 +80,7 @@ module LockstepSdk
                 'vendorName' => @vendor_name,
                 'primaryContact' => @primary_contact,
                 'percentageOfTotal' => @percentage_of_total,
+                'baseCurrencyCode' => @base_currency_code,
                 'totalAmountDue' => @total_amount_due,
                 'dueDate' => @due_date,
             }

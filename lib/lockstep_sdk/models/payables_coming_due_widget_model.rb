@@ -25,6 +25,7 @@ module LockstepSdk
         def initialize(params = {})
             @group_key = params.dig(:group_key)
             @date = params.dig(:date)
+            @base_currency_code = params.dig(:base_currency_code)
             @amount_due = params.dig(:amount_due)
         end
 
@@ -37,7 +38,11 @@ module LockstepSdk
         attr_accessor :date
 
         ##
-        # @return [Double] Total amount due for this time period
+        # @return [String] The group's base currency code.
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [Double] Total amount due for this time period at the group's base currency.
         attr_accessor :amount_due
 
         ##
@@ -46,6 +51,7 @@ module LockstepSdk
             {
                 'groupKey' => @group_key,
                 'date' => @date,
+                'baseCurrencyCode' => @base_currency_code,
                 'amountDue' => @amount_due,
             }
         end

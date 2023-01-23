@@ -27,6 +27,7 @@ module LockstepSdk
             @number_of_bills_due = params.dig(:number_of_bills_due)
             @number_of_vendors = params.dig(:number_of_vendors)
             @percentage_of_total = params.dig(:percentage_of_total)
+            @base_currency_code = params.dig(:base_currency_code)
             @total_amount_due = params.dig(:total_amount_due)
             @due_date = params.dig(:due_date)
         end
@@ -48,7 +49,11 @@ module LockstepSdk
         attr_accessor :percentage_of_total
 
         ##
-        # @return [Double] Total amount due for this time period
+        # @return [String] The group's base currency code.
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [Double] Total amount due for this time period in the group's base currency.
         attr_accessor :total_amount_due
 
         ##
@@ -63,6 +68,7 @@ module LockstepSdk
                 'numberOfBillsDue' => @number_of_bills_due,
                 'numberOfVendors' => @number_of_vendors,
                 'percentageOfTotal' => @percentage_of_total,
+                'baseCurrencyCode' => @base_currency_code,
                 'totalAmountDue' => @total_amount_due,
                 'dueDate' => @due_date,
             }

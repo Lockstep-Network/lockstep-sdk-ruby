@@ -18,10 +18,10 @@ module LockstepSdk
 
     ##
     # Represents a transcription validation request item to be validated.
-    class TranscriptionValidationRequestItem
+    class TranscriptionValidationRequestItemModel
 
         ##
-        # Initialize the TranscriptionValidationRequestItem using the provided prototype
+        # Initialize the TranscriptionValidationRequestItemModel using the provided prototype
         def initialize(params = {})
             @transcription_validation_request_item_id = params.dig(:transcription_validation_request_item_id)
             @transcription_validation_request_id = params.dig(:transcription_validation_request_id)

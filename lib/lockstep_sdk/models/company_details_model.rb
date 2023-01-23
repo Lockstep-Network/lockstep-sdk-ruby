@@ -40,6 +40,7 @@ module LockstepSdk
             @contact_name = params.dig(:contact_name)
             @contact_email = params.dig(:contact_email)
             @outstanding_invoices = params.dig(:outstanding_invoices)
+            @group_base_currency_code = params.dig(:group_base_currency_code)
             @outstanding_amount = params.dig(:outstanding_amount)
             @amount_past_due = params.dig(:amount_past_due)
             @payments = params.dig(:payments)
@@ -114,11 +115,15 @@ module LockstepSdk
         attr_accessor :outstanding_invoices
 
         ##
-        # @return [Double] Company total outstanding invoice amount
+        # @return [String] The group's base currency code.
+        attr_accessor :group_base_currency_code
+
+        ##
+        # @return [Double] Company total outstanding invoice amount in the group's base currency.
         attr_accessor :outstanding_amount
 
         ##
-        # @return [Double] Company total past due amount
+        # @return [Double] Company total past due amount in the group's base currency.
         attr_accessor :amount_past_due
 
         ##
@@ -146,6 +151,7 @@ module LockstepSdk
                 'contactName' => @contact_name,
                 'contactEmail' => @contact_email,
                 'outstandingInvoices' => @outstanding_invoices,
+                'groupBaseCurrencyCode' => @group_base_currency_code,
                 'outstandingAmount' => @outstanding_amount,
                 'amountPastDue' => @amount_past_due,
                 'payments' => @payments,
