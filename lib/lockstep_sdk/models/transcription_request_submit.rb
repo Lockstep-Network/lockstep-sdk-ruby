@@ -48,7 +48,7 @@ module LockstepSdk
         attr_accessor :file_name
 
         ##
-        # @return [String] The type of LockstepApi2.Models.TranscriptionRequestSubmit.InvoiceTypeCode requested to transcribe content to.
+        # @return [String] The type of TranscriptionRequestSubmit.InvoiceTypeCode requested to transcribe content to.
         attr_accessor :invoice_type_code
 
         ##

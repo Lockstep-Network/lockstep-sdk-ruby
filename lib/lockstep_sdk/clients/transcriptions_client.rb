@@ -90,54 +90,54 @@ class TranscriptionsClient
     end
 
     ##
-    # Retrieves the LockstepApi2.Models.TranscriptionValidationRequestItemModel specified by this unique identifier.
+    # Retrieves the TranscriptionValidationRequestItemModel specified by this unique identifier.
     #
-    # A LockstepApi2.Models.TranscriptionValidationRequestItemModel represents a file sent from the client to verify the file type using the machine learning platform Sage AI.
+    # A TranscriptionValidationRequestItemModel represents a file sent from the client to verify the file type using the machine learning platform Sage AI.
     #
-    # @param body [TranscriptionRequestSubmit] The LockstepApi2.Models.TranscriptionValidationRequestItemModels to add to an existing LockstepApi2.Models.TranscriptionValidationRequestItemModel
-    def creates_a_lockstepapi2.models.transcriptionvalidationrequestitemmodel(body:)
+    # @param body [TranscriptionRequestSubmit] The TranscriptionValidationRequestItemModels to add to an existing TranscriptionValidationRequestItemModel
+    def creates_a_transcriptionvalidationrequestitemmodel(body:)
         path = "/api/v1/Transcriptions/validation-items"
         @connection.request(:post, path, body, nil)
     end
 
     ##
-    # Retrieves the LockstepApi2.Models.TranscriptionValidationRequestItemModel specified by this unique identifier.
+    # Retrieves the TranscriptionValidationRequestItemModel specified by this unique identifier.
     #
-    # A LockstepApi2.Models.TranscriptionValidationRequestItemModel represents a file sent from the client to verify the file type using the machine learning platform Sage AI.
+    # A TranscriptionValidationRequestItemModel represents a file sent from the client to verify the file type using the machine learning platform Sage AI.
     #
-    # @param id [uuid] The unique Lockstep Platform ID number of the LockstepApi2.Models.TranscriptionValidationRequestItemModel
-    def retrieve_a_lockstepapi2.models.transcriptionvalidationrequestitemmodel(id:)
+    # @param id [uuid] The unique Lockstep Platform ID number of the TranscriptionValidationRequestItemModel
+    def retrieve_a_transcriptionvalidationrequestitemmodel(id:)
         path = "/api/v1/Transcriptions/validation-items/#{id}"
         @connection.request(:get, path, nil, nil)
     end
 
     ##
-    # Updates the LockstepApi2.Models.TranscriptionValidationRequestItemModel specified by this unique identifier.
+    # Updates the TranscriptionValidationRequestItemModel specified by this unique identifier.
     #
     # The PATCH method allows you to change specific values on the object while leaving other values alone.  As input you should supply a list of field names and new values.  If you do not provide the name of a field, that field will remain unchanged.  This allows you to ensure that you are only updating the specific fields desired.
     #
-    # A LockstepApi2.Models.TranscriptionValidationRequestItemModel represents a file sent from the client to verify the file type using the machine learning platform Sage AI.
+    # A TranscriptionValidationRequestItemModel represents a file sent from the client to verify the file type using the machine learning platform Sage AI.
     #
-    # @param id [uuid] The unique Lockstep Platform ID number of the LockstepApi2.Models.TranscriptionValidationRequestItemModel
-    # @param body [object] A list of changes to apply to this LockstepApi2.Models.TranscriptionValidationRequestItemModel
-    def update_a_lockstepapi2.models.transcriptionvalidationrequestitemmodel(id:, body:)
+    # @param id [uuid] The unique Lockstep Platform ID number of the TranscriptionValidationRequestItemModel
+    # @param body [object] A list of changes to apply to this TranscriptionValidationRequestItemModel
+    def update_a_transcriptionvalidationrequestitemmodel(id:, body:)
         path = "/api/v1/Transcriptions/validation-items/#{id}"
         @connection.request(:patch, path, body.to_camelback_keys.to_json, nil)
     end
 
     ##
-    # Deletes the LockstepApi2.Models.TranscriptionValidationRequestItemModel specified by this unique identifier.
+    # Deletes the TranscriptionValidationRequestItemModel specified by this unique identifier.
     #
-    # A LockstepApi2.Models.TranscriptionValidationRequestItemModel represents a file sent from the client to verify the file type using the machine learning platform Sage AI.
+    # A TranscriptionValidationRequestItemModel represents a file sent from the client to verify the file type using the machine learning platform Sage AI.
     #
-    # @param id [uuid] The unique Lockstep Platform ID number of the LockstepApi2.Models.TranscriptionValidationRequestItemModel
-    def delete_a_lockstepapi2.models.transcriptionvalidationrequestitemmodel(id:)
+    # @param id [uuid] The unique Lockstep Platform ID number of the TranscriptionValidationRequestItemModel
+    def delete_a_transcriptionvalidationrequestitemmodel(id:)
         path = "/api/v1/Transcriptions/validation-items/#{id}"
         @connection.request(:delete, path, nil, nil)
     end
 
     ##
-    # Queries LockstepApi2.Models.TranscriptionValidationRequestItemModels for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
+    # Queries TranscriptionValidationRequestItemModels for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
     #
     # More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.
     #
