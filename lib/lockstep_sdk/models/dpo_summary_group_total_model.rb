@@ -26,6 +26,7 @@ module LockstepSdk
             @group_key = params.dig(:group_key)
             @vendors = params.dig(:vendors)
             @bills = params.dig(:bills)
+            @base_currency_code = params.dig(:base_currency_code)
             @amount_outstanding = params.dig(:amount_outstanding)
             @dpo = params.dig(:dpo)
         end
@@ -43,7 +44,11 @@ module LockstepSdk
         attr_accessor :bills
 
         ##
-        # @return [Double] The total amount outstanding
+        # @return [String] The group's base currency code
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [Double] The total amount outstanding at the group's base currency.
         attr_accessor :amount_outstanding
 
         ##
@@ -57,6 +62,7 @@ module LockstepSdk
                 'groupKey' => @group_key,
                 'vendors' => @vendors,
                 'bills' => @bills,
+                'baseCurrencyCode' => @base_currency_code,
                 'amountOutstanding' => @amount_outstanding,
                 'dpo' => @dpo,
             }

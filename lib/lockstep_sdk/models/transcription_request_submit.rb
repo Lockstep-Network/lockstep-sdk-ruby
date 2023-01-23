@@ -28,6 +28,7 @@ module LockstepSdk
             @file_content_url = params.dig(:file_content_url)
             @file_name = params.dig(:file_name)
             @invoice_type_code = params.dig(:invoice_type_code)
+            @transcription_validation_request_id = params.dig(:transcription_validation_request_id)
         end
 
         ##
@@ -47,8 +48,12 @@ module LockstepSdk
         attr_accessor :file_name
 
         ##
-        # @return [String] The type of LockstepApi2.Models.TranscriptionRequestSubmit.InvoiceTypeCode requested to transcribe content to.
+        # @return [String] The type of TranscriptionRequestSubmit.InvoiceTypeCode requested to transcribe content to.
         attr_accessor :invoice_type_code
+
+        ##
+        # @return [Uuid] Group account transcription validation request item is associated with.
+        attr_accessor :transcription_validation_request_id
 
         ##
         # @return [object] This object as a JSON key-value structure
@@ -59,6 +64,7 @@ module LockstepSdk
                 'fileContentUrl' => @file_content_url,
                 'fileName' => @file_name,
                 'invoiceTypeCode' => @invoice_type_code,
+                'transcriptionValidationRequestId' => @transcription_validation_request_id,
             }
         end
 

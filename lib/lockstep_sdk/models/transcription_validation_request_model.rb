@@ -18,10 +18,10 @@ module LockstepSdk
 
     ##
     # Represents a transcription validation request that is used to validate if file is of a specific type.
-    class TranscriptionValidationRequest
+    class TranscriptionValidationRequestModel
 
         ##
-        # Initialize the TranscriptionValidationRequest using the provided prototype
+        # Initialize the TranscriptionValidationRequestModel using the provided prototype
         def initialize(params = {})
             @transcription_validation_request_id = params.dig(:transcription_validation_request_id)
             @group_key = params.dig(:group_key)
@@ -62,7 +62,7 @@ module LockstepSdk
         attr_accessor :modified_user_id
 
         ##
-        # @return [TranscriptionValidationRequestItem] All items attached to this transcription validation request. To retrieve this collection, specify `Items` in the "Include" parameter for your query.
+        # @return [TranscriptionValidationRequestItemModel] All items attached to this transcription validation request. To retrieve this collection, specify `Items` in the "Include" parameter for your query.
         attr_accessor :items
 
         ##

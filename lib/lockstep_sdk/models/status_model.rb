@@ -41,6 +41,8 @@ module LockstepSdk
             @magic_link_id = params.dig(:magic_link_id)
             @magic_link_company_id = params.dig(:magic_link_company_id)
             @magic_link = params.dig(:magic_link)
+            @support_access = params.dig(:support_access)
+            @is_impersonated = params.dig(:is_impersonated)
             @dependencies = params.dig(:dependencies)
             @user_groups = params.dig(:user_groups)
             @base_currency_code = params.dig(:base_currency_code)
@@ -119,6 +121,14 @@ module LockstepSdk
         attr_accessor :magic_link
 
         ##
+        # @return [SupportAccessModel] Information allowing Lockstep to offer direct support to the user
+        attr_accessor :support_access
+
+        ##
+        # @return [Boolean] True if the user is being impersonated by the Lockstep support team.
+        attr_accessor :is_impersonated
+
+        ##
         # @return [Object] Statuses for the dependencies of this api. OK if the dependency is working.
         attr_accessor :dependencies
 
@@ -152,6 +162,8 @@ module LockstepSdk
                 'magicLinkId' => @magic_link_id,
                 'magicLinkCompanyId' => @magic_link_company_id,
                 'magicLink' => @magic_link,
+                'supportAccess' => @support_access,
+                'isImpersonated' => @is_impersonated,
                 'dependencies' => @dependencies,
                 'userGroups' => @user_groups,
                 'baseCurrencyCode' => @base_currency_code,

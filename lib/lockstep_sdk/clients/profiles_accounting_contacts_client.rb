@@ -88,4 +88,15 @@ class ProfilesAccountingContactsClient
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
     end
+
+    ##
+    # Updates an accounting profile contact that matches the specified id with the primary contact attached to the accounting profile
+    #
+    # An Accounting Profile Contact has a link to a Contact that is associated with your company's Accounting Profile. These Contacts are secondary contacts to the primary that is on the profile.
+    #
+    # @param id [uuid] The unique Lockstep Platform ID number of the Accounting Profile Contact to update
+    def swap_secondary_and_primary_contact(id:)
+        path = "/api/v1/profiles/accounting/contacts/#{id}/primary"
+        @connection.request(:patch, path, nil, nil)
+    end
 end

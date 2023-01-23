@@ -42,6 +42,7 @@ module LockstepSdk
             @financial_year_settings = params.dig(:financial_year_settings)
             @financial_accounts = params.dig(:financial_accounts)
             @financial_account_balance_histories = params.dig(:financial_account_balance_histories)
+            @base_currencies = params.dig(:base_currencies)
         end
 
         ##
@@ -89,6 +90,10 @@ module LockstepSdk
         attr_accessor :financial_account_balance_histories
 
         ##
+        # @return [BaseCurrencySyncModel] A list of BaseCurrency records to merge with your Lockstep Platform data
+        attr_accessor :base_currencies
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -103,6 +108,7 @@ module LockstepSdk
                 'financialYearSettings' => @financial_year_settings,
                 'financialAccounts' => @financial_accounts,
                 'financialAccountBalanceHistories' => @financial_account_balance_histories,
+                'baseCurrencies' => @base_currencies,
             }
         end
 

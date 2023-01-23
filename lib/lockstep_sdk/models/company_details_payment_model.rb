@@ -30,8 +30,10 @@ module LockstepSdk
             @invoice_id = params.dig(:invoice_id)
             @invoice_type_code = params.dig(:invoice_type_code)
             @invoice_reference_code = params.dig(:invoice_reference_code)
+            @invoice_currency_code = params.dig(:invoice_currency_code)
             @invoice_total_amount = params.dig(:invoice_total_amount)
             @payment_date = params.dig(:payment_date)
+            @payment_currency_code = params.dig(:payment_currency_code)
             @payment_amount = params.dig(:payment_amount)
         end
 
@@ -64,12 +66,20 @@ module LockstepSdk
         attr_accessor :invoice_reference_code
 
         ##
+        # @return [String] The currency code of the invoice the payment is associated with.
+        attr_accessor :invoice_currency_code
+
+        ##
         # @return [Double] Invoice total amount payment is associated with
         attr_accessor :invoice_total_amount
 
         ##
         # @return [Date-time] Date payment placed
         attr_accessor :payment_date
+
+        ##
+        # @return [String] The currency code of the payment.
+        attr_accessor :payment_currency_code
 
         ##
         # @return [Double] Amount payment was made for
@@ -86,8 +96,10 @@ module LockstepSdk
                 'invoiceId' => @invoice_id,
                 'invoiceTypeCode' => @invoice_type_code,
                 'invoiceReferenceCode' => @invoice_reference_code,
+                'invoiceCurrencyCode' => @invoice_currency_code,
                 'invoiceTotalAmount' => @invoice_total_amount,
                 'paymentDate' => @payment_date,
+                'paymentCurrencyCode' => @payment_currency_code,
                 'paymentAmount' => @payment_amount,
             }
         end

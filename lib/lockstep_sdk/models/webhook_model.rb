@@ -86,7 +86,7 @@ module LockstepSdk
         attr_accessor :expiration_date
 
         ##
-        # @return [Int32] The amount of consecutive failed notifications, not including the current attempt, before marking the webhook as errored (i.e. if the value is set to 0, the webhook will be marked errored on the first failure, if the value is set to 1 the webhook will be marked errored on the second failure, and so on). Use -1 to never mark the webhook as errored due to failures.
+        # @return [Int32] The amount of consecutive failed notifications, not including the current attempt, before marking the webhook as errored (i.e. if the value is set to 0, the webhook will be marked errored on the first failure, if the value is set to 1 the webhook will be marked errored on the second failure, and so on). The maximum retry attempts is 5.
         attr_accessor :retry_count
 
         ##
