@@ -36,6 +36,7 @@ module LockstepSdk
             @operation_type_name = params.dig(:operation_type_name)
             @operation_type = params.dig(:operation_type)
             @process_result_message = params.dig(:process_result_message)
+            @failure_count = params.dig(:failure_count)
             @run_full_sync = params.dig(:run_full_sync)
             @app_enrollment_id = params.dig(:app_enrollment_id)
             @created = params.dig(:created)
@@ -67,6 +68,10 @@ module LockstepSdk
         ##
         # @return [String] Message containing information about the sync request results
         attr_accessor :process_result_message
+
+        ##
+        # @return [Int32] The number of times this Sync Request has failed
+        attr_accessor :failure_count
 
         ##
         # @return [String] A boolean indicating whether a sync from an ERP system should process all the data from the ERP as opposed to just the delta of changes since the previous sync run
@@ -102,6 +107,7 @@ module LockstepSdk
                 'operationTypeName' => @operation_type_name,
                 'operationType' => @operation_type,
                 'processResultMessage' => @process_result_message,
+                'failureCount' => @failure_count,
                 'runFullSync' => @run_full_sync,
                 'appEnrollmentId' => @app_enrollment_id,
                 'created' => @created,

@@ -22,10 +22,10 @@ module LockstepSdk
     # to work with trading partners, financial institutions, auditors, and others.
     # You can use Accounting Profiles to define an accounting function by what
     # the function does and how to interface with the function.
-    class AccountingProfileModel
+    class AccountingProfileRequest
 
         ##
-        # Initialize the AccountingProfileModel using the provided prototype
+        # Initialize the AccountingProfileRequest using the provided prototype
         def initialize(params = {})
             @accounting_profile_id = params.dig(:accounting_profile_id)
             @company_id = params.dig(:company_id)
@@ -49,6 +49,7 @@ module LockstepSdk
             @attachments = params.dig(:attachments)
             @custom_field_definitions = params.dig(:custom_field_definitions)
             @custom_field_values = params.dig(:custom_field_values)
+            @primary_contact_id = params.dig(:primary_contact_id)
         end
 
         ##
@@ -140,6 +141,10 @@ module LockstepSdk
         attr_accessor :custom_field_values
 
         ##
+        # @return [Uuid] The ID of the primary contact that is linked to this profile.
+        attr_accessor :primary_contact_id
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -165,6 +170,7 @@ module LockstepSdk
                 'attachments' => @attachments,
                 'customFieldDefinitions' => @custom_field_definitions,
                 'customFieldValues' => @custom_field_values,
+                'primaryContactId' => @primary_contact_id,
             }
         end
 

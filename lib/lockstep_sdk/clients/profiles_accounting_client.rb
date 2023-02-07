@@ -67,7 +67,7 @@ class ProfilesAccountingClient
     #
     # An Accounting Profile is a child of a Company Profile, and collectively, they comprise the identity and necessary information for an accounting  team to work with trading partners, financial institutions, auditors, and others. You can use Accounting Profiles to define an accounting function by what the function does and how to interface with the function.
     #
-    # @param body [AccountingProfileModel] The Accounting Profiles to create
+    # @param body [AccountingProfileRequest] The Accounting Profiles to create
     def create_accounting_profiles(body:)
         path = "/api/v1/profiles/accounting"
         @connection.request(:post, path, body, nil)
@@ -89,16 +89,5 @@ class ProfilesAccountingClient
         path = "/api/v1/profiles/accounting/query"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
-    end
-
-    ##
-    # Retrieves all the Contacts associated with the Accounting Profile by this unique identifier, optionally including nested data sets.
-    #
-    # A Contact has a link to a Contact that is associated with your company's Accounting Profile.
-    #
-    # @param id [uuid] The unique Lockstep Platform ID number of this Accounting Profile
-    def retrieve_all_accounting_profile_contacts(id:)
-        path = "/api/v1/profiles/accounting/#{id}/contacts/models"
-        @connection.request(:get, path, nil, nil)
     end
 end

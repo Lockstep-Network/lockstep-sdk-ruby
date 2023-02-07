@@ -51,6 +51,8 @@ module LockstepSdk
             @is_voided = params.dig(:is_voided)
             @in_dispute = params.dig(:in_dispute)
             @currency_rate = params.dig(:currency_rate)
+            @base_currency_payment_amount = params.dig(:base_currency_payment_amount)
+            @base_currency_unapplied_amount = params.dig(:base_currency_unapplied_amount)
             @applications = params.dig(:applications)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
@@ -99,11 +101,11 @@ module LockstepSdk
         attr_accessor :post_date
 
         ##
-        # @return [Double] Total amount of this payment.
+        # @return [Double] Total amount of this payment in it's received currency.
         attr_accessor :payment_amount
 
         ##
-        # @return [Double] Unapplied balance of this payment. If this amount is nonzero, the field `IsOpen` will be true.
+        # @return [Double] Unapplied balance of this payment in it's received currency. If this amount is nonzero, the field `IsOpen` will be true.
         attr_accessor :unapplied_amount
 
         ##
@@ -145,6 +147,14 @@ module LockstepSdk
         ##
         # @return [Double] The Currency Rate used to get from the account's base currency to the payment amount.
         attr_accessor :currency_rate
+
+        ##
+        # @return [Double] Total amount of this payment in the group's base currency.
+        attr_accessor :base_currency_payment_amount
+
+        ##
+        # @return [Double] Unapplied balance of this payment in the group's base currency. If this amount is nonzero, the field `IsOpen` will be true.
+        attr_accessor :base_currency_unapplied_amount
 
         ##
         # @return [PaymentAppliedModel] All applications this payment is associated with. To retrieve this collection, specify `Applications` in the "Include" parameter for your query.
@@ -192,6 +202,8 @@ module LockstepSdk
                 'isVoided' => @is_voided,
                 'inDispute' => @in_dispute,
                 'currencyRate' => @currency_rate,
+                'baseCurrencyPaymentAmount' => @base_currency_payment_amount,
+                'baseCurrencyUnappliedAmount' => @base_currency_unapplied_amount,
                 'applications' => @applications,
                 'notes' => @notes,
                 'attachments' => @attachments,

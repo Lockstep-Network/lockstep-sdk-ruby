@@ -48,6 +48,8 @@ module LockstepSdk
             @is_voided = params.dig(:is_voided)
             @in_dispute = params.dig(:in_dispute)
             @currency_rate = params.dig(:currency_rate)
+            @base_currency_payment_amount = params.dig(:base_currency_payment_amount)
+            @base_currency_unapplied_amount = params.dig(:base_currency_unapplied_amount)
         end
 
         ##
@@ -83,11 +85,11 @@ module LockstepSdk
         attr_accessor :post_date
 
         ##
-        # @return [Double] Total amount of this payment.
+        # @return [Double] Total amount of this payment in the payment's currency.
         attr_accessor :payment_amount
 
         ##
-        # @return [Double] Unapplied balance of this payment. If this amount is nonzero, the field `IsOpen` will be true.
+        # @return [Double] Unapplied balance of this payment in the payment's currency. If this amount is nonzero, the field `IsOpen` will be true.
         attr_accessor :unapplied_amount
 
         ##
@@ -119,6 +121,14 @@ module LockstepSdk
         attr_accessor :currency_rate
 
         ##
+        # @return [Double] Total amount of this payment in the erp's base currency.
+        attr_accessor :base_currency_payment_amount
+
+        ##
+        # @return [Double] Unapplied balance of this payment in the erp's base currency. If this amount is nonzero, the field `IsOpen` will be true.
+        attr_accessor :base_currency_unapplied_amount
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -139,6 +149,8 @@ module LockstepSdk
                 'isVoided' => @is_voided,
                 'inDispute' => @in_dispute,
                 'currencyRate' => @currency_rate,
+                'baseCurrencyPaymentAmount' => @base_currency_payment_amount,
+                'baseCurrencyUnappliedAmount' => @base_currency_unapplied_amount,
             }
         end
 

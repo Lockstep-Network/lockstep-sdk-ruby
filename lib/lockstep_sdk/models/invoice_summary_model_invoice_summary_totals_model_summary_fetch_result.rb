@@ -21,13 +21,17 @@ module LockstepSdk
         ##
         # Initialize the InvoiceSummaryModelInvoiceSummaryTotalsModelSummaryFetchResult using the provided prototype
         def initialize(params = {})
+            @records = params.dig(:records)
             @total_count = params.dig(:total_count)
             @page_size = params.dig(:page_size)
             @page_number = params.dig(:page_number)
-            @records = params.dig(:records)
             @summary = params.dig(:summary)
             @aging_summary = params.dig(:aging_summary)
         end
+
+        ##
+        # @return [InvoiceSummaryModel] 
+        attr_accessor :records
 
         ##
         # @return [Int32] 
@@ -42,10 +46,6 @@ module LockstepSdk
         attr_accessor :page_number
 
         ##
-        # @return [InvoiceSummaryModel] 
-        attr_accessor :records
-
-        ##
         # @return [InvoiceSummaryTotalsModel] The totals for an Invoice Summary
         attr_accessor :summary
 
@@ -57,10 +57,10 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
+                'records' => @records,
                 'totalCount' => @total_count,
                 'pageSize' => @page_size,
                 'pageNumber' => @page_number,
-                'records' => @records,
                 'summary' => @summary,
                 'agingSummary' => @aging_summary,
             }
