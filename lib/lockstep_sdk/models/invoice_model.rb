@@ -65,6 +65,10 @@ module LockstepSdk
             @exclude_from_aging = params.dig(:exclude_from_aging)
             @preferred_delivery_method = params.dig(:preferred_delivery_method)
             @currency_rate = params.dig(:currency_rate)
+            @base_currency_total_amount = params.dig(:base_currency_total_amount)
+            @base_currency_sales_tax_amount = params.dig(:base_currency_sales_tax_amount)
+            @base_currency_discount_amount = params.dig(:base_currency_discount_amount)
+            @base_currency_outstanding_balance_amount = params.dig(:base_currency_outstanding_balance_amount)
             @addresses = params.dig(:addresses)
             @lines = params.dig(:lines)
             @payments = params.dig(:payments)
@@ -135,19 +139,19 @@ module LockstepSdk
         attr_accessor :currency_code
 
         ##
-        # @return [Double] The total value of this invoice, inclusive of all taxes and line items.
+        # @return [Double] The total value of this invoice, inclusive of all taxes and line items in it's tendered currency.
         attr_accessor :total_amount
 
         ##
-        # @return [Double] The total sales (or transactional) tax calculated for this invoice.
+        # @return [Double] The total sales (or transactional) tax calculated for this invoice in it's tendered currency.
         attr_accessor :sales_tax_amount
 
         ##
-        # @return [Double] The total discounts given by the seller to the buyer on this invoice.
+        # @return [Double] The total discounts given by the seller to the buyer on this invoice in it's tendered currency.
         attr_accessor :discount_amount
 
         ##
-        # @return [Double] The remaining balance value of this invoice.
+        # @return [Double] The remaining balance value of this invoice in it's tendered currency.
         attr_accessor :outstanding_balance_amount
 
         ##
@@ -225,6 +229,22 @@ module LockstepSdk
         ##
         # @return [Double] The Currency Rate used to get from the account's base currency to the invoice amount.
         attr_accessor :currency_rate
+
+        ##
+        # @return [Double] The total value of this invoice, inclusive of all taxes and line items in the group's base currency.
+        attr_accessor :base_currency_total_amount
+
+        ##
+        # @return [Double] The total sales (or transactional) tax calculated for this invoice in the group's base currency.
+        attr_accessor :base_currency_sales_tax_amount
+
+        ##
+        # @return [Double] The total discounts given by the seller to the buyer on this invoice in the group's base currency.
+        attr_accessor :base_currency_discount_amount
+
+        ##
+        # @return [Double] The remaining balance value of this invoice in the group's base currency.
+        attr_accessor :base_currency_outstanding_balance_amount
 
         ##
         # @return [InvoiceAddressModel] All addresses connected to this invoice. To retrieve this collection, specify `Addresses` in the "Include" parameter for your query.
@@ -311,6 +331,10 @@ module LockstepSdk
                 'excludeFromAging' => @exclude_from_aging,
                 'preferredDeliveryMethod' => @preferred_delivery_method,
                 'currencyRate' => @currency_rate,
+                'baseCurrencyTotalAmount' => @base_currency_total_amount,
+                'baseCurrencySalesTaxAmount' => @base_currency_sales_tax_amount,
+                'baseCurrencyDiscountAmount' => @base_currency_discount_amount,
+                'baseCurrencyOutstandingBalanceAmount' => @base_currency_outstanding_balance_amount,
                 'addresses' => @addresses,
                 'lines' => @lines,
                 'payments' => @payments,

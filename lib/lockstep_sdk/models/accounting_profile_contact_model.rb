@@ -27,6 +27,7 @@ module LockstepSdk
             @accounting_profile_contact_id = params.dig(:accounting_profile_contact_id)
             @accounting_profile_id = params.dig(:accounting_profile_id)
             @contact_id = params.dig(:contact_id)
+            @is_primary = params.dig(:is_primary)
             @group_key = params.dig(:group_key)
             @created = params.dig(:created)
             @created_user_id = params.dig(:created_user_id)
@@ -45,6 +46,10 @@ module LockstepSdk
         ##
         # @return [Uuid] The ID of the contact that is linked to this profile.
         attr_accessor :contact_id
+
+        ##
+        # @return [Boolean] Determines whether the contact is primary or secondary.
+        attr_accessor :is_primary
 
         ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -73,6 +78,7 @@ module LockstepSdk
                 'accountingProfileContactId' => @accounting_profile_contact_id,
                 'accountingProfileId' => @accounting_profile_id,
                 'contactId' => @contact_id,
+                'isPrimary' => @is_primary,
                 'groupKey' => @group_key,
                 'created' => @created,
                 'createdUserId' => @created_user_id,

@@ -68,6 +68,8 @@ module LockstepSdk
             @state_tax_id = params.dig(:state_tax_id)
             @state_of_incorporation = params.dig(:state_of_incorporation)
             @linked_in_url_slug = params.dig(:linked_in_url_slug)
+            @is_verified = params.dig(:is_verified)
+            @last_verified_date = params.dig(:last_verified_date)
             @view_box_settings = params.dig(:view_box_settings)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
@@ -243,6 +245,14 @@ module LockstepSdk
         attr_accessor :linked_in_url_slug
 
         ##
+        # @return [Boolean] This flag indicates whether the company is verified.
+        attr_accessor :is_verified
+
+        ##
+        # @return [Date-time] The date this company was last verified.
+        attr_accessor :last_verified_date
+
+        ##
         # @return [ViewBoxSettingsModel] View box settings for the company logo.
         attr_accessor :view_box_settings
 
@@ -319,6 +329,8 @@ module LockstepSdk
                 'stateTaxId' => @state_tax_id,
                 'stateOfIncorporation' => @state_of_incorporation,
                 'linkedInUrlSlug' => @linked_in_url_slug,
+                'isVerified' => @is_verified,
+                'lastVerifiedDate' => @last_verified_date,
                 'viewBoxSettings' => @view_box_settings,
                 'notes' => @notes,
                 'attachments' => @attachments,

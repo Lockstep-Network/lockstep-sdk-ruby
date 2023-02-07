@@ -29,6 +29,7 @@ module LockstepSdk
             @realm_id = params.dig(:realm_id)
             @token_id = params.dig(:token_id)
             @token_secret = params.dig(:token_secret)
+            @redirect_uri = params.dig(:redirect_uri)
         end
 
         ##
@@ -36,7 +37,7 @@ module LockstepSdk
         attr_accessor :auth_code
 
         ##
-        # @return [String] The OAuth authentication code.
+        # @return [String] The username for the web services account with access permissions.
         attr_accessor :username
 
         ##
@@ -56,6 +57,10 @@ module LockstepSdk
         attr_accessor :token_secret
 
         ##
+        # @return [String] The OAuth redirect uri.
+        attr_accessor :redirect_uri
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -65,6 +70,7 @@ module LockstepSdk
                 'realmId' => @realm_id,
                 'tokenId' => @token_id,
                 'tokenSecret' => @token_secret,
+                'redirectUri' => @redirect_uri,
             }
         end
 
