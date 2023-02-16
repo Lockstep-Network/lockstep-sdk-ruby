@@ -71,6 +71,8 @@ module LockstepSdk
             @is_verified = params.dig(:is_verified)
             @last_verified_date = params.dig(:last_verified_date)
             @view_box_settings = params.dig(:view_box_settings)
+            @service_fabric_org_id = params.dig(:service_fabric_org_id)
+            @service_fabric_company_id = params.dig(:service_fabric_company_id)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
             @contacts = params.dig(:contacts)
@@ -257,6 +259,14 @@ module LockstepSdk
         attr_accessor :view_box_settings
 
         ##
+        # @return [Uuid] The unique ID of the Service Fabric organisation to which this record belongs.
+        attr_accessor :service_fabric_org_id
+
+        ##
+        # @return [Uuid] The unique ID of this record within Service Fabric.
+        attr_accessor :service_fabric_company_id
+
+        ##
         # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `Company` and the `ObjectKey` set to the `CompanyId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
@@ -332,6 +342,8 @@ module LockstepSdk
                 'isVerified' => @is_verified,
                 'lastVerifiedDate' => @last_verified_date,
                 'viewBoxSettings' => @view_box_settings,
+                'serviceFabricOrgId' => @service_fabric_org_id,
+                'serviceFabricCompanyId' => @service_fabric_company_id,
                 'notes' => @notes,
                 'attachments' => @attachments,
                 'contacts' => @contacts,

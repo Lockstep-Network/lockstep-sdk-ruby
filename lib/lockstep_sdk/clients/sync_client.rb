@@ -53,10 +53,13 @@ class SyncClient
     #
     # A Sync task represents an action performed by an Application for a particular account.  An Application can provide many different tasks as part of their capabilities.  Sync tasks are executed in the background and will continue running after they are created.  Use one of the creation APIs to request execution of a task. To check on the progress of the task, call GetSync or QuerySync.
     #
+    # @param app_enrollment_id [uuid] The optional existing app enrollment to associate with the data in the zip file.
+    # @param is_full_sync [boolean] True if this is a full sync, false if this is a partial sync. Defaults to false.
     # @param filename [File] The full path of a file to upload to the API
-    def upload_sync_file(filename:)
+    def upload_sync_file(app_enrollment_id:, is_full_sync:, filename:)
         path = "/api/v1/Sync/zip"
-        @connection.request(:post, path, nil, nil)
+        params = {:appEnrollmentId => app_enrollment_id, :isFullSync => is_full_sync}
+        @connection.request(:post, path, nil, params)
     end
 
     ##

@@ -62,7 +62,7 @@ module LockstepSdk
         attr_accessor :operation_type_name
 
         ##
-        # @return [Int32] The name of the OperationType for this SyncRequest
+        # @return [SyncOperationType] Possible operation types for a SyncRequest
         attr_accessor :operation_type
 
         ##
@@ -74,7 +74,7 @@ module LockstepSdk
         attr_accessor :failure_count
 
         ##
-        # @return [String] A boolean indicating whether a sync from an ERP system should process all the data from the ERP as opposed to just the delta of changes since the previous sync run
+        # @return [Boolean] A boolean indicating whether a sync from an ERP system should process all the data from the ERP as opposed to just the delta of changes since the previous sync run
         attr_accessor :run_full_sync
 
         ##

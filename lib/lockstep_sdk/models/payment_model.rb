@@ -53,6 +53,7 @@ module LockstepSdk
             @currency_rate = params.dig(:currency_rate)
             @base_currency_payment_amount = params.dig(:base_currency_payment_amount)
             @base_currency_unapplied_amount = params.dig(:base_currency_unapplied_amount)
+            @service_fabric_status = params.dig(:service_fabric_status)
             @applications = params.dig(:applications)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
@@ -157,6 +158,10 @@ module LockstepSdk
         attr_accessor :base_currency_unapplied_amount
 
         ##
+        # @return [String] The status of this payment within Service Fabric. "UNAUTHORISED" "PENDING" "PAID" "PAID_OFFLINE" "FAILED" "CANCELLED" "REJECTED" "REFUNDED" "PARTIALLY" "PARTIALLY_REFUNDED"
+        attr_accessor :service_fabric_status
+
+        ##
         # @return [PaymentAppliedModel] All applications this payment is associated with. To retrieve this collection, specify `Applications` in the "Include" parameter for your query.
         attr_accessor :applications
 
@@ -204,6 +209,7 @@ module LockstepSdk
                 'currencyRate' => @currency_rate,
                 'baseCurrencyPaymentAmount' => @base_currency_payment_amount,
                 'baseCurrencyUnappliedAmount' => @base_currency_unapplied_amount,
+                'serviceFabricStatus' => @service_fabric_status,
                 'applications' => @applications,
                 'notes' => @notes,
                 'attachments' => @attachments,
