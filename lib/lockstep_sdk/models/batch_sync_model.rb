@@ -31,6 +31,8 @@ module LockstepSdk
         ##
         # Initialize the BatchSyncModel using the provided prototype
         def initialize(params = {})
+            @app_enrollment_id = params.dig(:app_enrollment_id)
+            @is_full_sync = params.dig(:is_full_sync)
             @companies = params.dig(:companies)
             @contacts = params.dig(:contacts)
             @credit_memo_applications = params.dig(:credit_memo_applications)
@@ -44,6 +46,14 @@ module LockstepSdk
             @financial_account_balance_histories = params.dig(:financial_account_balance_histories)
             @base_currencies = params.dig(:base_currencies)
         end
+
+        ##
+        # @return [Uuid] The optional existing app enrollment to associate with the data in this batch.
+        attr_accessor :app_enrollment_id
+
+        ##
+        # @return [Boolean] True if this is a full sync, false if this is a partial sync. Defaults to false.
+        attr_accessor :is_full_sync
 
         ##
         # @return [CompanySyncModel] A list of Company records to merge with your Lockstep Platform data
@@ -97,6 +107,8 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
+                'appEnrollmentId' => @app_enrollment_id,
+                'isFullSync' => @is_full_sync,
                 'companies' => @companies,
                 'contacts' => @contacts,
                 'creditMemoApplications' => @credit_memo_applications,

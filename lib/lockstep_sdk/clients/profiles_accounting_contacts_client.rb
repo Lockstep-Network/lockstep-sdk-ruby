@@ -58,20 +58,6 @@ class ProfilesAccountingContactsClient
     end
 
     ##
-    # Updates an accounting profile contact that matches the specified id with the requested information.
-    #
-    # The PATCH method allows you to change specific values on the object while leaving other values alone.  As input you should supply a list of field names and new values.  If you do not provide the name of a field, that field will remain unchanged.  This allows you to ensure that you are only updating the specific fields desired.
-    #
-    # An Accounting Profile Contact has a link to a Contact that is associated with your company's Accounting Profile. A profile has one primary contact and any number of secondary contacts.
-    #
-    # @param id [uuid] The unique Lockstep Platform ID number of the Accounting Profile Contact to update
-    # @param contact_id [uuid] The ID of the contact to link to this Accounting Profile Contact
-    def update_accounting_profile_contact(id:, contact_id:)
-        path = "/api/v1/profiles/accounting/contacts/#{id}/#{contactId}"
-        @connection.request(:patch, path, nil, nil)
-    end
-
-    ##
     # Queries Accounting Profile Contacts for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
     #
     # More information on querying can be found on the [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight) page on the Lockstep Developer website.
@@ -110,11 +96,11 @@ class ProfilesAccountingContactsClient
     end
 
     ##
-    # Updates an accounting profile contact that matches the specified id with the primary contact attached to the accounting profile
+    # Reverses the isPrimary fields on the primary and secondary contact to reflect a swap and returns the new primary accounting profile contact model.
     #
     # An Accounting Profile Contact has a link to a Contact that is associated with your company's Accounting Profile. A profile has one primary contact and any number of secondary contacts.
     #
-    # @param id [uuid] The unique Lockstep Platform ID number of the Accounting Profile Contact to update
+    # @param id [uuid] The unique Lockstep Platform ID number of the Accounting Profile Contact to set as primary
     def set_secondary_contact_as_primary(id:)
         path = "/api/v1/profiles/accounting/contacts/#{id}/primary"
         @connection.request(:patch, path, nil, nil)

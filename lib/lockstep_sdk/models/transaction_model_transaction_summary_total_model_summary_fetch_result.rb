@@ -21,17 +21,13 @@ module LockstepSdk
         ##
         # Initialize the TransactionModelTransactionSummaryTotalModelSummaryFetchResult using the provided prototype
         def initialize(params = {})
-            @records = params.dig(:records)
             @total_count = params.dig(:total_count)
             @page_size = params.dig(:page_size)
             @page_number = params.dig(:page_number)
+            @records = params.dig(:records)
             @summary = params.dig(:summary)
             @aging_summary = params.dig(:aging_summary)
         end
-
-        ##
-        # @return [TransactionModel] 
-        attr_accessor :records
 
         ##
         # @return [Int32] 
@@ -46,6 +42,10 @@ module LockstepSdk
         attr_accessor :page_number
 
         ##
+        # @return [TransactionModel] 
+        attr_accessor :records
+
+        ##
         # @return [TransactionSummaryTotalModel] Represents transaction summary information based on the query request within the group account.
         attr_accessor :summary
 
@@ -57,10 +57,10 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
-                'records' => @records,
                 'totalCount' => @total_count,
                 'pageSize' => @page_size,
                 'pageNumber' => @page_number,
+                'records' => @records,
                 'summary' => @summary,
                 'agingSummary' => @aging_summary,
             }
