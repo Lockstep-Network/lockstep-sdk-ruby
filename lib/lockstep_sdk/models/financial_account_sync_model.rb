@@ -31,6 +31,7 @@ module LockstepSdk
         ##
         # Initialize the FinancialAccountSyncModel using the provided prototype
         def initialize(params = {})
+            @on_match_action = params.dig(:on_match_action)
             @code = params.dig(:code)
             @erp_key = params.dig(:erp_key)
             @name = params.dig(:name)
@@ -41,6 +42,10 @@ module LockstepSdk
             @category = params.dig(:category)
             @subcategory = params.dig(:subcategory)
         end
+
+        ##
+        # @return [MatchAction] Indicates what action to take when an existing object has been found during the sync process.
+        attr_accessor :on_match_action
 
         ##
         # @return [String] The code for the Financial Account. Can either be a general ledger or an account code.
@@ -82,6 +87,7 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
+                'onMatchAction' => @on_match_action,
                 'code' => @code,
                 'erpKey' => @erp_key,
                 'name' => @name,

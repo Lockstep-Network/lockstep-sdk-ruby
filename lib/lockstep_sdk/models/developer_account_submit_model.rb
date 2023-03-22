@@ -23,16 +23,11 @@ module LockstepSdk
         ##
         # Initialize the DeveloperAccountSubmitModel using the provided prototype
         def initialize(params = {})
-            @name = params.dig(:name)
             @first_name = params.dig(:first_name)
             @last_name = params.dig(:last_name)
             @email = params.dig(:email)
             @company_name = params.dig(:company_name)
         end
-
-        ##
-        # @return [String] The name of the developer.
-        attr_accessor :name
 
         ##
         # @return [String] The first name of the person requesting the developer account.
@@ -54,7 +49,6 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
-                'name' => @name,
                 'firstName' => @first_name,
                 'lastName' => @last_name,
                 'email' => @email,

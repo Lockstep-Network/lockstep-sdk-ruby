@@ -34,11 +34,7 @@ module LockstepSdk
             @object_key = params.dig(:object_key)
             @file_name = params.dig(:file_name)
             @file_ext = params.dig(:file_ext)
-            @attachment_type_id = params.dig(:attachment_type_id)
             @is_archived = params.dig(:is_archived)
-            @origin_attachment_id = params.dig(:origin_attachment_id)
-            @view_internal = params.dig(:view_internal)
-            @view_external = params.dig(:view_external)
             @erp_key = params.dig(:erp_key)
             @app_enrollment_id = params.dig(:app_enrollment_id)
             @created = params.dig(:created)
@@ -71,24 +67,8 @@ module LockstepSdk
         attr_accessor :file_ext
 
         ##
-        # @return [Uuid] DEPRECATED: This field is replaced by `AttachmentType`.
-        attr_accessor :attachment_type_id
-
-        ##
         # @return [Boolean] A flag indicating whether this Attachment is archived (also known as hidden or deleted). When you call [ArchiveAttachment](https://developer.lockstep.io/reference/delete_api-v1-attachments-id) this field will be set to true. You should avoid displaying Attachments with the IsArchived field set to true in your user interface.
         attr_accessor :is_archived
-
-        ##
-        # @return [Uuid] DEPRECATED - Do not use
-        attr_accessor :origin_attachment_id
-
-        ##
-        # @return [Boolean] Flag for if LS clients can see this file
-        attr_accessor :view_internal
-
-        ##
-        # @return [Boolean] Flag for if Vendors and customers can see this file
-        attr_accessor :view_external
 
         ##
         # @return [String] The unique ID of this record as it was known in its originating financial system. If this company record was imported from a financial system, it will have the value `ErpKey` set to the original primary key number of the record as it was known in the originating financial system. If this record was not imported from a financial system, this value will be `null`. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
@@ -120,11 +100,7 @@ module LockstepSdk
                 'objectKey' => @object_key,
                 'fileName' => @file_name,
                 'fileExt' => @file_ext,
-                'attachmentTypeId' => @attachment_type_id,
                 'isArchived' => @is_archived,
-                'originAttachmentId' => @origin_attachment_id,
-                'viewInternal' => @view_internal,
-                'viewExternal' => @view_external,
                 'erpKey' => @erp_key,
                 'appEnrollmentId' => @app_enrollment_id,
                 'created' => @created,

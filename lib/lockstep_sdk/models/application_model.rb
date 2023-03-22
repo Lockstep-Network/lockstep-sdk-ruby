@@ -38,13 +38,11 @@ module LockstepSdk
             @owner_id = params.dig(:owner_id)
             @project_url = params.dig(:project_url)
             @icon_url = params.dig(:icon_url)
-            @price_terms = params.dig(:price_terms)
             @created_user_id = params.dig(:created_user_id)
             @modified_user_id = params.dig(:modified_user_id)
             @created = params.dig(:created)
             @modified = params.dig(:modified)
             @is_active = params.dig(:is_active)
-            @wiki_url = params.dig(:wiki_url)
             @group_key = params.dig(:group_key)
             @b2_cclient_id = params.dig(:b2_cclient_id)
             @notes = params.dig(:notes)
@@ -74,16 +72,12 @@ module LockstepSdk
         attr_accessor :owner_id
 
         ##
-        # @return [Uri] The URL to visit for more information about this application
+        # @return [String] The URL to visit for more information about this application
         attr_accessor :project_url
 
         ##
-        # @return [Uri] The URL for the icon for this application
+        # @return [String] The URL for the icon for this application
         attr_accessor :icon_url
-
-        ##
-        # @return [String] The description of the price for this application
-        attr_accessor :price_terms
 
         ##
         # @return [Uuid] The ID of the user who created this application
@@ -104,10 +98,6 @@ module LockstepSdk
         ##
         # @return [Boolean] Flag indicating if the application is active.
         attr_accessor :is_active
-
-        ##
-        # @return [Uri] URL to the Wiki for the Application
-        attr_accessor :wiki_url
 
         ##
         # @return [Uuid] The GroupKey uniquely identifies a single Lockstep Platform account. All records for this account will share the same GroupKey value. GroupKey values cannot be changed once created. For more information, see [Accounts and GroupKeys](https://developer.lockstep.io/docs/accounts-and-groupkeys).
@@ -144,13 +134,11 @@ module LockstepSdk
                 'ownerId' => @owner_id,
                 'projectUrl' => @project_url,
                 'iconUrl' => @icon_url,
-                'priceTerms' => @price_terms,
                 'createdUserId' => @created_user_id,
                 'modifiedUserId' => @modified_user_id,
                 'created' => @created,
                 'modified' => @modified,
                 'isActive' => @is_active,
-                'wikiURL' => @wiki_url,
                 'groupKey' => @group_key,
                 'b2CClientId' => @b2_cclient_id,
                 'notes' => @notes,

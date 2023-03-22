@@ -35,6 +35,7 @@ module LockstepSdk
         ##
         # Initialize the CustomFieldSyncModel using the provided prototype
         def initialize(params = {})
+            @on_match_action = params.dig(:on_match_action)
             @erp_key = params.dig(:erp_key)
             @table_key = params.dig(:table_key)
             @custom_field_label = params.dig(:custom_field_label)
@@ -44,6 +45,10 @@ module LockstepSdk
             @created = params.dig(:created)
             @modified = params.dig(:modified)
         end
+
+        ##
+        # @return [MatchAction] Indicates what action to take when an existing object has been found during the sync process.
+        attr_accessor :on_match_action
 
         ##
         # @return [String] This is the primary key of the record to which you will attach this custom field. You should provide the identifying number as it is stored in the originating financial system. Search for a unique, non-changing number within the originating financial system for this record. Custom Fields are identified by the `TableKey` and `ErpKey` values together. Example: You have an invoice whose ID number is 100047878, and you wish to store a custom field on that invoice named "ApprovalStatusCode". For the `ErpKey` field, specify the value `100047878`. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
@@ -81,6 +86,7 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
+                'onMatchAction' => @on_match_action,
                 'erpKey' => @erp_key,
                 'tableKey' => @table_key,
                 'customFieldLabel' => @custom_field_label,

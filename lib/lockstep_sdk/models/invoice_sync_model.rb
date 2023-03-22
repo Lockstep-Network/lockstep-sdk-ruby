@@ -31,6 +31,7 @@ module LockstepSdk
         ##
         # Initialize the InvoiceSyncModel using the provided prototype
         def initialize(params = {})
+            @on_match_action = params.dig(:on_match_action)
             @erp_key = params.dig(:erp_key)
             @company_erp_key = params.dig(:company_erp_key)
             @customer_erp_key = params.dig(:customer_erp_key)
@@ -91,6 +92,10 @@ module LockstepSdk
             @base_currency_discount_amount = params.dig(:base_currency_discount_amount)
             @base_currency_outstanding_balance_amount = params.dig(:base_currency_outstanding_balance_amount)
         end
+
+        ##
+        # @return [MatchAction] Indicates what action to take when an existing object has been found during the sync process.
+        attr_accessor :on_match_action
 
         ##
         # @return [String] This is the primary key of the Invoice record. For this field, you should use whatever the invoice's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your invoice records in a database, whatever the primary key for the invoice table is in the database should be the "ErpKey". For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
@@ -332,6 +337,7 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
+                'onMatchAction' => @on_match_action,
                 'erpKey' => @erp_key,
                 'companyErpKey' => @company_erp_key,
                 'customerErpKey' => @customer_erp_key,
