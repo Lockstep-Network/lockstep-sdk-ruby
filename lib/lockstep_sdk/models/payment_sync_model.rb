@@ -31,6 +31,7 @@ module LockstepSdk
         ##
         # Initialize the PaymentSyncModel using the provided prototype
         def initialize(params = {})
+            @on_match_action = params.dig(:on_match_action)
             @erp_key = params.dig(:erp_key)
             @company_erp_key = params.dig(:company_erp_key)
             @payment_type = params.dig(:payment_type)
@@ -51,6 +52,10 @@ module LockstepSdk
             @base_currency_payment_amount = params.dig(:base_currency_payment_amount)
             @base_currency_unapplied_amount = params.dig(:base_currency_unapplied_amount)
         end
+
+        ##
+        # @return [MatchAction] Indicates what action to take when an existing object has been found during the sync process.
+        attr_accessor :on_match_action
 
         ##
         # @return [String] This is the primary key of the Payment record. For this field, you should use whatever the payment's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your payment records in a database, whatever the primary key for the payment table is in the database should be the "ErpKey". For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
@@ -132,6 +137,7 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
+                'onMatchAction' => @on_match_action,
                 'erpKey' => @erp_key,
                 'companyErpKey' => @company_erp_key,
                 'paymentType' => @payment_type,

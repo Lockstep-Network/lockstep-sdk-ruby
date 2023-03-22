@@ -73,6 +73,7 @@ module LockstepSdk
             @view_box_settings = params.dig(:view_box_settings)
             @service_fabric_org_id = params.dig(:service_fabric_org_id)
             @service_fabric_company_id = params.dig(:service_fabric_company_id)
+            @company_registration_number = params.dig(:company_registration_number)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
             @contacts = params.dig(:contacts)
@@ -267,6 +268,10 @@ module LockstepSdk
         attr_accessor :service_fabric_company_id
 
         ##
+        # @return [String] A unique identification number assigned to the company by the national registration office.
+        attr_accessor :company_registration_number
+
+        ##
         # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `Company` and the `ObjectKey` set to the `CompanyId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
@@ -344,6 +349,7 @@ module LockstepSdk
                 'viewBoxSettings' => @view_box_settings,
                 'serviceFabricOrgId' => @service_fabric_org_id,
                 'serviceFabricCompanyId' => @service_fabric_company_id,
+                'companyRegistrationNumber' => @company_registration_number,
                 'notes' => @notes,
                 'attachments' => @attachments,
                 'contacts' => @contacts,

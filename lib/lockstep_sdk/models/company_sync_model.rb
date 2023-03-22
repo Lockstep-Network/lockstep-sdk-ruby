@@ -58,10 +58,11 @@ module LockstepSdk
             @preferred_delivery_method = params.dig(:preferred_delivery_method)
             @email_address = params.dig(:email_address)
             @external_reference = params.dig(:external_reference)
+            @company_registration_number = params.dig(:company_registration_number)
         end
 
         ##
-        # @return [UpdateAction] Indicates what action to take when a sync model has been found during the sync process.
+        # @return [MatchAction] Indicates what action to take when an existing object has been found during the sync process.
         attr_accessor :on_match_action
 
         ##
@@ -169,6 +170,10 @@ module LockstepSdk
         attr_accessor :external_reference
 
         ##
+        # @return [String] A unique identification number assigned to the company by the national registration office.
+        attr_accessor :company_registration_number
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -199,6 +204,7 @@ module LockstepSdk
                 'preferredDeliveryMethod' => @preferred_delivery_method,
                 'emailAddress' => @email_address,
                 'externalReference' => @external_reference,
+                'companyRegistrationNumber' => @company_registration_number,
             }
         end
 

@@ -31,6 +31,7 @@ module LockstepSdk
         ##
         # Initialize the ContactSyncModel using the provided prototype
         def initialize(params = {})
+            @on_match_action = params.dig(:on_match_action)
             @erp_key = params.dig(:erp_key)
             @company_erp_key = params.dig(:company_erp_key)
             @contact_name = params.dig(:contact_name)
@@ -53,6 +54,10 @@ module LockstepSdk
             @created = params.dig(:created)
             @modified = params.dig(:modified)
         end
+
+        ##
+        # @return [MatchAction] Indicates what action to take when an existing object has been found during the sync process.
+        attr_accessor :on_match_action
 
         ##
         # @return [String] This is the primary key of the Contact record. For this field, you should use whatever the contact's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your contact records in a database, whatever the primary key for the contact table is in the database should be the "ErpKey". As some ERP systems don't maintain a unique key for Contacts, we also support syncing Contacts with ERP keys of the form {prefix}|{index}, for example ContactPrefix|1, ContactPrefix|2 and so on. For this reason, please ensure that your Contact ERP keys don't otherwise contain the '|' symbol or that it is replaced by an alternate symbol if they do. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
@@ -142,6 +147,7 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
+                'onMatchAction' => @on_match_action,
                 'erpKey' => @erp_key,
                 'companyErpKey' => @company_erp_key,
                 'contactName' => @contact_name,

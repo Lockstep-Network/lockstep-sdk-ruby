@@ -31,6 +31,7 @@ module LockstepSdk
         ##
         # Initialize the CreditMemoAppliedSyncModel using the provided prototype
         def initialize(params = {})
+            @on_match_action = params.dig(:on_match_action)
             @erp_key = params.dig(:erp_key)
             @invoice_erp_key = params.dig(:invoice_erp_key)
             @credit_memo_invoice_erp_key = params.dig(:credit_memo_invoice_erp_key)
@@ -40,6 +41,10 @@ module LockstepSdk
             @created = params.dig(:created)
             @modified = params.dig(:modified)
         end
+
+        ##
+        # @return [MatchAction] Indicates what action to take when an existing object has been found during the sync process.
+        attr_accessor :on_match_action
 
         ##
         # @return [String] This is the primary key of the Credit Memo Application record. For this field, you should use whatever this transaction's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Since Credit Memo Applications are often considered transactions, a typical value to look for will be the transaction ID number, the payment confirmation number, or some other record of this payment. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
@@ -77,6 +82,7 @@ module LockstepSdk
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
+                'onMatchAction' => @on_match_action,
                 'erpKey' => @erp_key,
                 'invoiceErpKey' => @invoice_erp_key,
                 'creditMemoInvoiceErpKey' => @credit_memo_invoice_erp_key,

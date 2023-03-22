@@ -38,14 +38,15 @@ module LockstepSdk
             @environment = params.dig(:environment)
             @version = params.dig(:version)
             @onboarding_scheduled = params.dig(:onboarding_scheduled)
+            @base_currency_code = params.dig(:base_currency_code)
+            @country_code = params.dig(:country_code)
             @magic_link_id = params.dig(:magic_link_id)
             @magic_link_company_id = params.dig(:magic_link_company_id)
             @magic_link = params.dig(:magic_link)
             @support_access = params.dig(:support_access)
             @is_impersonated = params.dig(:is_impersonated)
-            @dependencies = params.dig(:dependencies)
             @user_groups = params.dig(:user_groups)
-            @base_currency_code = params.dig(:base_currency_code)
+            @dependencies = params.dig(:dependencies)
         end
 
         ##
@@ -109,6 +110,14 @@ module LockstepSdk
         attr_accessor :onboarding_scheduled
 
         ##
+        # @return [String] Base Currency of the group
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [String] Country code of the group
+        attr_accessor :country_code
+
+        ##
         # @return [Uuid] The id of the Magic link used to authenticate.
         attr_accessor :magic_link_id
 
@@ -129,16 +138,12 @@ module LockstepSdk
         attr_accessor :is_impersonated
 
         ##
-        # @return [Object] Statuses for the dependencies of this api. OK if the dependency is working.
-        attr_accessor :dependencies
-
-        ##
         # @return [UserGroupModel] The set of Groups that the user has access to. You can use the /api/v1/useraccounts/change-group endpoint to change your active group.
         attr_accessor :user_groups
 
         ##
-        # @return [String] Base Currency of the group
-        attr_accessor :base_currency_code
+        # @return [Object] Statuses for the dependencies of this api. OK if the dependency is working.
+        attr_accessor :dependencies
 
         ##
         # @return [object] This object as a JSON key-value structure
@@ -159,14 +164,15 @@ module LockstepSdk
                 'environment' => @environment,
                 'version' => @version,
                 'onboardingScheduled' => @onboarding_scheduled,
+                'baseCurrencyCode' => @base_currency_code,
+                'countryCode' => @country_code,
                 'magicLinkId' => @magic_link_id,
                 'magicLinkCompanyId' => @magic_link_company_id,
                 'magicLink' => @magic_link,
                 'supportAccess' => @support_access,
                 'isImpersonated' => @is_impersonated,
-                'dependencies' => @dependencies,
                 'userGroups' => @user_groups,
-                'baseCurrencyCode' => @base_currency_code,
+                'dependencies' => @dependencies,
             }
         end
 
