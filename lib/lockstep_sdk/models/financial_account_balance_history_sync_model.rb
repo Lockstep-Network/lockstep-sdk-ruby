@@ -42,6 +42,7 @@ module LockstepSdk
             @period_end_date = params.dig(:period_end_date)
             @status = params.dig(:status)
             @balance = params.dig(:balance)
+            @balance_type = params.dig(:balance_type)
         end
 
         ##
@@ -77,6 +78,10 @@ module LockstepSdk
         attr_accessor :balance
 
         ##
+        # @return [FinancialAccountBalanceType] The balance type of this period. If left null, the balance type will be determined by the balance.
+        attr_accessor :balance_type
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -88,6 +93,7 @@ module LockstepSdk
                 'periodEndDate' => @period_end_date,
                 'status' => @status,
                 'balance' => @balance,
+                'balanceType' => @balance_type,
             }
         end
 

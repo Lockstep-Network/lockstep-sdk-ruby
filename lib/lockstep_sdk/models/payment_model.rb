@@ -33,6 +33,8 @@ module LockstepSdk
             @payment_id = params.dig(:payment_id)
             @company_id = params.dig(:company_id)
             @erp_key = params.dig(:erp_key)
+            @erp_write_status = params.dig(:erp_write_status)
+            @erp_write_status_name = params.dig(:erp_write_status_name)
             @payment_type = params.dig(:payment_type)
             @tender_type = params.dig(:tender_type)
             @is_open = params.dig(:is_open)
@@ -54,6 +56,7 @@ module LockstepSdk
             @base_currency_payment_amount = params.dig(:base_currency_payment_amount)
             @base_currency_unapplied_amount = params.dig(:base_currency_unapplied_amount)
             @service_fabric_status = params.dig(:service_fabric_status)
+            @source_modified_date = params.dig(:source_modified_date)
             @applications = params.dig(:applications)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
@@ -76,6 +79,14 @@ module LockstepSdk
         ##
         # @return [String] The unique ID of this record as it was known in its originating financial system. If this company record was imported from a financial system, it will have the value `ErpKey` set to the original primary key number of the record as it was known in the originating financial system. If this record was not imported, this value will be `null`. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
+
+        ##
+        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
+        attr_accessor :erp_write_status
+
+        ##
+        # @return [String] The name of the ErpWriteStatus for this Payment
+        attr_accessor :erp_write_status_name
 
         ##
         # @return [String] The type of payment, AR Payment or AP Payment. Recognized PaymentType values are: * `AR Payment` - A payment made by a Customer to the Company * `AP Payment` - A payment made by the Company to a Vendor
@@ -162,6 +173,10 @@ module LockstepSdk
         attr_accessor :service_fabric_status
 
         ##
+        # @return [Date-time] The date on which this record was last modified in source ERP.
+        attr_accessor :source_modified_date
+
+        ##
         # @return [PaymentAppliedModel] All applications this payment is associated with. To retrieve this collection, specify `Applications` in the "Include" parameter for your query.
         attr_accessor :applications
 
@@ -189,6 +204,8 @@ module LockstepSdk
                 'paymentId' => @payment_id,
                 'companyId' => @company_id,
                 'erpKey' => @erp_key,
+                'erpWriteStatus' => @erp_write_status,
+                'erpWriteStatusName' => @erp_write_status_name,
                 'paymentType' => @payment_type,
                 'tenderType' => @tender_type,
                 'isOpen' => @is_open,
@@ -210,6 +227,7 @@ module LockstepSdk
                 'baseCurrencyPaymentAmount' => @base_currency_payment_amount,
                 'baseCurrencyUnappliedAmount' => @base_currency_unapplied_amount,
                 'serviceFabricStatus' => @service_fabric_status,
+                'sourceModifiedDate' => @source_modified_date,
                 'applications' => @applications,
                 'notes' => @notes,
                 'attachments' => @attachments,

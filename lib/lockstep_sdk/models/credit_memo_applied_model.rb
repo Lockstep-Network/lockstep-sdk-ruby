@@ -32,6 +32,8 @@ module LockstepSdk
             @invoice_id = params.dig(:invoice_id)
             @credit_memo_invoice_id = params.dig(:credit_memo_invoice_id)
             @erp_key = params.dig(:erp_key)
+            @erp_write_status = params.dig(:erp_write_status)
+            @erp_write_status_name = params.dig(:erp_write_status_name)
             @entry_number = params.dig(:entry_number)
             @apply_to_invoice_date = params.dig(:apply_to_invoice_date)
             @credit_memo_applied_amount = params.dig(:credit_memo_applied_amount)
@@ -40,6 +42,7 @@ module LockstepSdk
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
             @app_enrollment_id = params.dig(:app_enrollment_id)
+            @source_modified_date = params.dig(:source_modified_date)
             @attachments = params.dig(:attachments)
             @notes = params.dig(:notes)
             @custom_field_definitions = params.dig(:custom_field_definitions)
@@ -67,6 +70,14 @@ module LockstepSdk
         ##
         # @return [String] The unique ID of this record as it was known in its originating financial system. If this company record was imported from a financial system, it will have the value `ErpKey` set to the original primary key number of the record as it was known in the originating financial system. If this record was not imported, this value will be `null`. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
+
+        ##
+        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
+        attr_accessor :erp_write_status
+
+        ##
+        # @return [String] The name of the ErpWriteStatus for this credit memo application
+        attr_accessor :erp_write_status_name
 
         ##
         # @return [Int32] Reference number for the applied credit memo.
@@ -101,6 +112,10 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
 
         ##
+        # @return [Date-time] The date on which this record was last modified in source ERP.
+        attr_accessor :source_modified_date
+
+        ##
         # @return [AttachmentModel] A collection of attachments linked to this record. To retrieve this collection, specify `Attachments` in the `include` parameter when retrieving data. To create an attachment, use the [Upload Attachment](https://developer.lockstep.io/reference/post_api-v1-attachments) endpoint with the `TableKey` to `CreditMemoApplied` and the `ObjectKey` set to the `CreditMemoAppliedId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :attachments
 
@@ -133,6 +148,8 @@ module LockstepSdk
                 'invoiceId' => @invoice_id,
                 'creditMemoInvoiceId' => @credit_memo_invoice_id,
                 'erpKey' => @erp_key,
+                'erpWriteStatus' => @erp_write_status,
+                'erpWriteStatusName' => @erp_write_status_name,
                 'entryNumber' => @entry_number,
                 'applyToInvoiceDate' => @apply_to_invoice_date,
                 'creditMemoAppliedAmount' => @credit_memo_applied_amount,
@@ -141,6 +158,7 @@ module LockstepSdk
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
                 'appEnrollmentId' => @app_enrollment_id,
+                'sourceModifiedDate' => @source_modified_date,
                 'attachments' => @attachments,
                 'notes' => @notes,
                 'customFieldDefinitions' => @custom_field_definitions,

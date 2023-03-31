@@ -33,6 +33,8 @@ module LockstepSdk
             @period_end_date = params.dig(:period_end_date)
             @status = params.dig(:status)
             @balance = params.dig(:balance)
+            @balance_type = params.dig(:balance_type)
+            @balance_type_name = params.dig(:balance_type_name)
             @created = params.dig(:created)
             @created_user_id = params.dig(:created_user_id)
             @modified = params.dig(:modified)
@@ -80,6 +82,14 @@ module LockstepSdk
         attr_accessor :balance
 
         ##
+        # @return [FinancialAccountBalanceType] Financial Account Balance Types
+        attr_accessor :balance_type
+
+        ##
+        # @return [String] The name of the BalanceType for this record.
+        attr_accessor :balance_type_name
+
+        ##
         # @return [Date-time] The date on which this financial account balance history record was created.
         attr_accessor :created
 
@@ -109,6 +119,8 @@ module LockstepSdk
                 'periodEndDate' => @period_end_date,
                 'status' => @status,
                 'balance' => @balance,
+                'balanceType' => @balance_type,
+                'balanceTypeName' => @balance_type_name,
                 'created' => @created,
                 'createdUserId' => @created_user_id,
                 'modified' => @modified,
