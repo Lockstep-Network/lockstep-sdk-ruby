@@ -29,6 +29,7 @@ module LockstepSdk
             @skip_count = params.dig(:skip_count)
             @error_count = params.dig(:error_count)
             @errors = params.dig(:errors)
+            @skips = params.dig(:skips)
         end
 
         ##
@@ -56,6 +57,10 @@ module LockstepSdk
         attr_accessor :errors
 
         ##
+        # @return [Object] The records that were skipped during sync keyed by ERP key
+        attr_accessor :skips
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -65,6 +70,7 @@ module LockstepSdk
                 'skipCount' => @skip_count,
                 'errorCount' => @error_count,
                 'errors' => @errors,
+                'skips' => @skips,
             }
         end
 

@@ -31,6 +31,8 @@ module LockstepSdk
             @invoice_id = params.dig(:invoice_id)
             @payment_id = params.dig(:payment_id)
             @erp_key = params.dig(:erp_key)
+            @erp_write_status = params.dig(:erp_write_status)
+            @erp_write_status_name = params.dig(:erp_write_status_name)
             @entry_number = params.dig(:entry_number)
             @apply_to_invoice_date = params.dig(:apply_to_invoice_date)
             @payment_applied_amount = params.dig(:payment_applied_amount)
@@ -39,6 +41,7 @@ module LockstepSdk
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
             @app_enrollment_id = params.dig(:app_enrollment_id)
+            @source_modified_date = params.dig(:source_modified_date)
             @payment = params.dig(:payment)
             @invoice = params.dig(:invoice)
         end
@@ -62,6 +65,14 @@ module LockstepSdk
         ##
         # @return [String] The unique ID of this record as it was known in its originating financial system. If this company record was imported from a financial system, it will have the value `ErpKey` set to the original primary key number of the record as it was known in the originating financial system. If this record was not imported, this value will be `null`. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
+
+        ##
+        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
+        attr_accessor :erp_write_status
+
+        ##
+        # @return [String] The name of the ErpWriteStatus for this payment application
+        attr_accessor :erp_write_status_name
 
         ##
         # @return [Int32] The entry number of this payment application. This is often a journal entry number, confirmation code, or other identifying field for this payment application.
@@ -96,6 +107,10 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
 
         ##
+        # @return [Date-time] The date on which this record was last modified in source ERP.
+        attr_accessor :source_modified_date
+
+        ##
         # @return [PaymentModel] The payment associated with this applied payment
         attr_accessor :payment
 
@@ -112,6 +127,8 @@ module LockstepSdk
                 'invoiceId' => @invoice_id,
                 'paymentId' => @payment_id,
                 'erpKey' => @erp_key,
+                'erpWriteStatus' => @erp_write_status,
+                'erpWriteStatusName' => @erp_write_status_name,
                 'entryNumber' => @entry_number,
                 'applyToInvoiceDate' => @apply_to_invoice_date,
                 'paymentAppliedAmount' => @payment_applied_amount,
@@ -120,6 +137,7 @@ module LockstepSdk
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
                 'appEnrollmentId' => @app_enrollment_id,
+                'sourceModifiedDate' => @source_modified_date,
                 'payment' => @payment,
                 'invoice' => @invoice,
             }

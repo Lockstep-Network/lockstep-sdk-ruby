@@ -151,4 +151,15 @@ class TranscriptionsClient
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
     end
+
+    ##
+    # Retrieves the Email Reply Generator Response containing a list of email reply suggestions
+    #
+    # An Email Reply Generator Request represents an email to be sent for a list of email reply suggestions.
+    #
+    # @param body [EmailReplyGeneratorRequest] The Email Reply Generator Request to be sent
+    def retrieve_an_emailreplygeneratorresponse(body:)
+        path = "/api/v1/Transcriptions/email-reply-suggestions"
+        @connection.request(:post, path, body, nil)
+    end
 end

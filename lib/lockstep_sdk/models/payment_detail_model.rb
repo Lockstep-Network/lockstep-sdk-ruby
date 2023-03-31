@@ -31,6 +31,8 @@ module LockstepSdk
             @reference_code = params.dig(:reference_code)
             @primary_contact = params.dig(:primary_contact)
             @email = params.dig(:email)
+            @erp_write_status = params.dig(:erp_write_status)
+            @erp_write_status_name = params.dig(:erp_write_status_name)
             @currency_code = params.dig(:currency_code)
             @payment_amount = params.dig(:payment_amount)
             @unapplied_amount = params.dig(:unapplied_amount)
@@ -83,6 +85,14 @@ module LockstepSdk
         ##
         # @return [String] The Email address of the Customer.
         attr_accessor :email
+
+        ##
+        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
+        attr_accessor :erp_write_status
+
+        ##
+        # @return [String] The name of the ErpWriteStatus for this payment
+        attr_accessor :erp_write_status_name
 
         ##
         # @return [String] The currency code of the payment.
@@ -172,6 +182,8 @@ module LockstepSdk
                 'referenceCode' => @reference_code,
                 'primaryContact' => @primary_contact,
                 'email' => @email,
+                'erpWriteStatus' => @erp_write_status,
+                'erpWriteStatusName' => @erp_write_status_name,
                 'currencyCode' => @currency_code,
                 'paymentAmount' => @payment_amount,
                 'unappliedAmount' => @unapplied_amount,
