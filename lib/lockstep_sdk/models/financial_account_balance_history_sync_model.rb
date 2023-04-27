@@ -50,7 +50,7 @@ module LockstepSdk
         attr_accessor :financial_account_code
 
         ##
-        # @return [String] This is the primary key of the FinancialAccount record. For this field, you should use whatever the company's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your company records in a database, whatever the primary key for the company table is in the database should be the ErpKey. Example: If you use a financial system such as Quickbooks or Xero, look for the primary ID number of the company record within that financial system.
+        # @return [String] This is the primary key of the FinancialAccount record. For this field, you should use whatever the company's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your company records in a database, whatever the primary key for the company table is in the database should be the ErpKey. Example: If you use a financial system such as QuickBooks or Xero, look for the primary ID number of the company record within that financial system.
         attr_accessor :financial_account_erp_key
 
         ##

@@ -24,6 +24,7 @@ module LockstepSdk
         # Initialize the CashflowReportModel using the provided prototype
         def initialize(params = {})
             @timeframe = params.dig(:timeframe)
+            @base_currency_code = params.dig(:base_currency_code)
             @payments_collected = params.dig(:payments_collected)
             @payments_collected_count = params.dig(:payments_collected_count)
             @invoices_billed = params.dig(:invoices_billed)
@@ -35,7 +36,11 @@ module LockstepSdk
         attr_accessor :timeframe
 
         ##
-        # @return [Double] Amount of payments collected based in the timeframe
+        # @return [String] The base currency code of the group.
+        attr_accessor :base_currency_code
+
+        ##
+        # @return [Double] Amount of payments collected based in the timeframe in the group's base currency
         attr_accessor :payments_collected
 
         ##
@@ -43,7 +48,7 @@ module LockstepSdk
         attr_accessor :payments_collected_count
 
         ##
-        # @return [Double] Amount of invoices billed based in the timeframe
+        # @return [Double] Amount of invoices billed based in the timeframe in the group's base currency
         attr_accessor :invoices_billed
 
         ##
@@ -55,6 +60,7 @@ module LockstepSdk
         def as_json(options={})
             {
                 'timeframe' => @timeframe,
+                'baseCurrencyCode' => @base_currency_code,
                 'paymentsCollected' => @payments_collected,
                 'paymentsCollectedCount' => @payments_collected_count,
                 'invoicesBilled' => @invoices_billed,

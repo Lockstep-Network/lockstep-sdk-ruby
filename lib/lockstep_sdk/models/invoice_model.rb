@@ -69,6 +69,9 @@ module LockstepSdk
             @base_currency_sales_tax_amount = params.dig(:base_currency_sales_tax_amount)
             @base_currency_discount_amount = params.dig(:base_currency_discount_amount)
             @base_currency_outstanding_balance_amount = params.dig(:base_currency_outstanding_balance_amount)
+            @erp_write_status = params.dig(:erp_write_status)
+            @erp_write_status_name = params.dig(:erp_write_status_name)
+            @source_modified_date = params.dig(:source_modified_date)
             @addresses = params.dig(:addresses)
             @lines = params.dig(:lines)
             @payments = params.dig(:payments)
@@ -247,6 +250,18 @@ module LockstepSdk
         attr_accessor :base_currency_outstanding_balance_amount
 
         ##
+        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
+        attr_accessor :erp_write_status
+
+        ##
+        # @return [String] The name of the ErpWriteStatus for this Invoice
+        attr_accessor :erp_write_status_name
+
+        ##
+        # @return [Date-time] The date on which this record was last modified in source ERP.
+        attr_accessor :source_modified_date
+
+        ##
         # @return [InvoiceAddressModel] All addresses connected to this invoice. To retrieve this collection, specify `Addresses` in the "Include" parameter for your query.
         attr_accessor :addresses
 
@@ -335,6 +350,9 @@ module LockstepSdk
                 'baseCurrencySalesTaxAmount' => @base_currency_sales_tax_amount,
                 'baseCurrencyDiscountAmount' => @base_currency_discount_amount,
                 'baseCurrencyOutstandingBalanceAmount' => @base_currency_outstanding_balance_amount,
+                'erpWriteStatus' => @erp_write_status,
+                'erpWriteStatusName' => @erp_write_status_name,
+                'sourceModifiedDate' => @source_modified_date,
                 'addresses' => @addresses,
                 'lines' => @lines,
                 'payments' => @payments,
