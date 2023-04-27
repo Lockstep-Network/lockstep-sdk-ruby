@@ -94,7 +94,7 @@ class PaymentsClient
     ##
     # Retrieves a PDF file for this payment if it has been synced using an app enrollment to one of the supported apps.
     #
-    # Quickbooks Online supports AR Payments.
+    # QuickBooks Online supports AR Payments.
     #
     # @param id [uuid] The unique Lockstep Platform ID number of this payment; NOT the customer's ERP key
     def retrieve_payment_pdf(id:)

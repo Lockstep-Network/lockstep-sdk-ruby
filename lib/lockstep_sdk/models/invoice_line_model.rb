@@ -46,6 +46,9 @@ module LockstepSdk
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
             @app_enrollment_id = params.dig(:app_enrollment_id)
+            @erp_write_status = params.dig(:erp_write_status)
+            @erp_write_status_name = params.dig(:erp_write_status_name)
+            @source_modified_date = params.dig(:source_modified_date)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
         end
@@ -143,6 +146,18 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
 
         ##
+        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
+        attr_accessor :erp_write_status
+
+        ##
+        # @return [String] The name of the ErpWriteStatus for this Invoice
+        attr_accessor :erp_write_status_name
+
+        ##
+        # @return [Date-time] The date on which this record was last modified in source ERP.
+        attr_accessor :source_modified_date
+
+        ##
         # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `InvoiceLine` and the `ObjectKey` set to the `InvoiceLineId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
@@ -177,6 +192,9 @@ module LockstepSdk
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
                 'appEnrollmentId' => @app_enrollment_id,
+                'erpWriteStatus' => @erp_write_status,
+                'erpWriteStatusName' => @erp_write_status_name,
+                'sourceModifiedDate' => @source_modified_date,
                 'notes' => @notes,
                 'attachments' => @attachments,
             }
