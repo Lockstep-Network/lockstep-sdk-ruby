@@ -51,6 +51,7 @@ module LockstepSdk
             @currency_rate = params.dig(:currency_rate)
             @base_currency_payment_amount = params.dig(:base_currency_payment_amount)
             @base_currency_unapplied_amount = params.dig(:base_currency_unapplied_amount)
+            @bank_account_id = params.dig(:bank_account_id)
         end
 
         ##
@@ -134,6 +135,10 @@ module LockstepSdk
         attr_accessor :base_currency_unapplied_amount
 
         ##
+        # @return [String] Bank account id for the payment.
+        attr_accessor :bank_account_id
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -157,6 +162,7 @@ module LockstepSdk
                 'currencyRate' => @currency_rate,
                 'baseCurrencyPaymentAmount' => @base_currency_payment_amount,
                 'baseCurrencyUnappliedAmount' => @base_currency_unapplied_amount,
+                'bankAccountId' => @bank_account_id,
             }
         end
 

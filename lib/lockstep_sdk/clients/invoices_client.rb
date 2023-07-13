@@ -109,6 +109,8 @@ class InvoicesClient
     #
     # Xero supports AR Invoices, AP Invoices, AR Credit Memos, and AP Credit Memos.
     #
+    # Sage 50 supports AR Invoices and AR Credit Memos.
+    #
     # @param id [uuid] The unique Lockstep Platform ID number of this invoice; NOT the customer's ERP key
     def retrieve_invoice_pdf(id:)
         path = "/api/v1/Invoices/#{id}/pdf"

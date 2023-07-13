@@ -9,7 +9,7 @@
 # @author     Lockstep Network <support@lockstep.io>
 #             Manish Narayan B S <manish.n@lockstep.io>, Rishi Rajkumar Jawahar <rjawahar@lockstep.io>
 # @copyright  2021-2023 Lockstep, Inc.
-# @version    2023.17.21
+# @version    2023.28.10
 # @link       https://github.com/Lockstep-Network/lockstep-sdk-ruby
 #
 
@@ -95,6 +95,10 @@ module lockstep_sdk
         ##
         # @return [FinancialAccountBalanceHistoryClient] Client object for FinancialAccountBalanceHistory endpoints
         attr_accessor :financial_account_balance_history
+
+        ##
+        # @return [FinancialInstitutionAccountsClient] Client object for FinancialInstitutionAccounts endpoints
+        attr_accessor :financial_institution_accounts
 
         ##
         # @return [FinancialYearSettingsClient] Client object for FinancialYearSettings endpoints
@@ -194,7 +198,7 @@ module lockstep_sdk
         #
         # @param env [string] Either "sbx", "prd", or the URI of the server, ending in a slash (/)
         def initialize(env)
-            @version = "2023.17.21.0"
+            @version = "2023.28.10.0"
             @env = case env
                 when "sbx"
                     "https://api.sbx.lockstep.io/"
@@ -221,6 +225,7 @@ module lockstep_sdk
             @feature_flags = FeatureFlagsClient.new(self)
             @financial_account = FinancialAccountClient.new(self)
             @financial_account_balance_history = FinancialAccountBalanceHistoryClient.new(self)
+            @financial_institution_accounts = FinancialInstitutionAccountsClient.new(self)
             @financial_year_settings = FinancialYearSettingsClient.new(self)
             @group_accounts = GroupAccountsClient.new(self)
             @invoice_addresses = InvoiceAddressesClient.new(self)
@@ -307,7 +312,7 @@ module lockstep_sdk
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/*+json'
             request["SdkType"] = 'Ruby'
-            request["SdkVersion"] = '2023.17.21.0'
+            request["SdkVersion"] = '2023.28.10.0'
             request["MachineName"] = Socket.gethostname
             request.body = body
 

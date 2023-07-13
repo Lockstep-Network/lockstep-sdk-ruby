@@ -56,6 +56,7 @@ module LockstepSdk
             @description = params.dig(:description)
             @b2_clast_logged_in = params.dig(:b2_clast_logged_in)
             @default_currency_code = params.dig(:default_currency_code)
+            @locale = params.dig(:locale)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
             @custom_field_values = params.dig(:custom_field_values)
@@ -179,6 +180,10 @@ module LockstepSdk
         attr_accessor :default_currency_code
 
         ##
+        # @return [String] The IETF language tag for the user's preferred locale.
+        attr_accessor :locale
+
+        ##
         # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `UserAccount` and the `ObjectKey` set to the `UserId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
@@ -227,6 +232,7 @@ module LockstepSdk
                 'description' => @description,
                 'b2CLastLoggedIn' => @b2_clast_logged_in,
                 'defaultCurrencyCode' => @default_currency_code,
+                'locale' => @locale,
                 'notes' => @notes,
                 'attachments' => @attachments,
                 'customFieldValues' => @custom_field_values,

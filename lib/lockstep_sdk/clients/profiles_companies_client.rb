@@ -28,7 +28,6 @@ class ProfilesCompaniesClient
     # Retrieves the Public Company Profile specified by the public url slug.
     #
     # A Public Company Profile makes available the following information: <ul><li>Company Name</li><li>Company Logo Url</li><li>Description</li><li>Website</li></ul>
-    #
     # @param url_slug [string] 
     def retrieve_public_company_profile(url_slug:)
         path = "/api/v1/profiles/companies/#{urlSlug}"
@@ -43,7 +42,6 @@ class ProfilesCompaniesClient
     # A Public Company Profile makes available the following information:
     #
     # <ul><li>Company Name</li><li>Company Logo Url</li><li>Description</li><li>Website</li></ul>
-    #
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
     # @param order [string] The sort order for the results, in the [Searchlight order syntax](https://github.com/tspence/csharp-searchlight).
     # @param page_size [int32] The page size for results (default 250, maximum of 500)
