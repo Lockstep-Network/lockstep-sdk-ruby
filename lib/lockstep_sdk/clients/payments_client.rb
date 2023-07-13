@@ -143,4 +143,15 @@ class PaymentsClient
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
     end
+
+    ##
+    # **This API endpoint is under maintenance and may not function properly.**  Schedule an ERP post request for payments.
+    #
+    # The payments must be associated with an active app enrollment and have a valid `AppEnrollmentId`.
+    #
+    # @param body [InsertPaymentRequestModelErpWriteSyncSubmitModel] The payments to submit to the connected ERP
+    def write_payments_to_connected_erp(body:)
+        path = "/api/v1/Payments/erp-write"
+        @connection.request(:post, path, body, nil)
+    end
 end

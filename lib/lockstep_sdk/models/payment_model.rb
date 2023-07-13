@@ -44,6 +44,7 @@ module LockstepSdk
             @payment_amount = params.dig(:payment_amount)
             @unapplied_amount = params.dig(:unapplied_amount)
             @currency_code = params.dig(:currency_code)
+            @bank_account_id = params.dig(:bank_account_id)
             @reference_code = params.dig(:reference_code)
             @created = params.dig(:created)
             @created_user_id = params.dig(:created_user_id)
@@ -123,6 +124,10 @@ module LockstepSdk
         ##
         # @return [String] The ISO 4217 currency code for this payment. For a list of ISO 4217 currency codes, see [Query Currencies](https://developer.lockstep.io/reference/get_api-v1-definitions-currencies).
         attr_accessor :currency_code
+
+        ##
+        # @return [String] The Bank account id for the company to which this payment belongs.
+        attr_accessor :bank_account_id
 
         ##
         # @return [String] Reference code for the payment for the given Erp system.
@@ -215,6 +220,7 @@ module LockstepSdk
                 'paymentAmount' => @payment_amount,
                 'unappliedAmount' => @unapplied_amount,
                 'currencyCode' => @currency_code,
+                'bankAccountId' => @bank_account_id,
                 'referenceCode' => @reference_code,
                 'created' => @created,
                 'createdUserId' => @created_user_id,

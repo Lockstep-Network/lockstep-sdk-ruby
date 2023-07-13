@@ -72,7 +72,7 @@ module LockstepSdk
         attr_accessor :description
 
         ##
-        # @return [String] The classification for the Financial Account. Possible values are Asset, Equity, Expense, Liability or Income.
+        # @return [String] The classification for the Financial Account. Possible values are Asset, Equity, Expense, Liability, Income, CreditCard, Checking, or Savings.
         attr_accessor :classification
 
         ##
