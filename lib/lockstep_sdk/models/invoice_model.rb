@@ -39,6 +39,8 @@ module LockstepSdk
             @salesperson_name = params.dig(:salesperson_name)
             @invoice_type_code = params.dig(:invoice_type_code)
             @invoice_status_code = params.dig(:invoice_status_code)
+            @workflow_status_id = params.dig(:workflow_status_id)
+            @workflow_status_notes = params.dig(:workflow_status_notes)
             @terms_code = params.dig(:terms_code)
             @special_terms = params.dig(:special_terms)
             @currency_code = params.dig(:currency_code)
@@ -69,9 +71,10 @@ module LockstepSdk
             @base_currency_sales_tax_amount = params.dig(:base_currency_sales_tax_amount)
             @base_currency_discount_amount = params.dig(:base_currency_discount_amount)
             @base_currency_outstanding_balance_amount = params.dig(:base_currency_outstanding_balance_amount)
-            @erp_write_status = params.dig(:erp_write_status)
-            @erp_write_status_name = params.dig(:erp_write_status_name)
+            @erp_update_status = params.dig(:erp_update_status)
+            @erp_update_action = params.dig(:erp_update_action)
             @source_modified_date = params.dig(:source_modified_date)
+            @workflow_statuses = params.dig(:workflow_statuses)
             @addresses = params.dig(:addresses)
             @lines = params.dig(:lines)
             @payments = params.dig(:payments)
@@ -83,6 +86,7 @@ module LockstepSdk
             @credit_memos = params.dig(:credit_memos)
             @custom_field_values = params.dig(:custom_field_values)
             @custom_field_definitions = params.dig(:custom_field_definitions)
+            @is_einvoice = params.dig(:is_einvoice)
         end
 
         ##
@@ -128,6 +132,14 @@ module LockstepSdk
         ##
         # @return [String] A code identifying the status of this invoice. Recognized Invoice status codes are: * `Open` - Represents an invoice that is considered open and needs more work to complete * `Closed` - Represents an invoice that is considered closed and resolved
         attr_accessor :invoice_status_code
+
+        ##
+        # @return [Uuid] The id of the work flow status associated with this invoice.
+        attr_accessor :workflow_status_id
+
+        ##
+        # @return [String] A description of the current workflow status of this invoice.
+        attr_accessor :workflow_status_notes
 
         ##
         # @return [String] A code identifying the terms given to the purchaser. This field is imported directly from the originating financial system and does not follow a specified format.
@@ -250,16 +262,20 @@ module LockstepSdk
         attr_accessor :base_currency_outstanding_balance_amount
 
         ##
-        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
-        attr_accessor :erp_write_status
+        # @return [ErpUpdateStatus] Possible statuses for a record that supports ERP Update.
+        attr_accessor :erp_update_status
 
         ##
-        # @return [String] The name of the ErpWriteStatus for this Invoice
-        attr_accessor :erp_write_status_name
+        # @return [ErpUpdateAction] Possible actions for a record that supports ERP Update.
+        attr_accessor :erp_update_action
 
         ##
         # @return [Date-time] The date on which this record was last modified in source ERP.
         attr_accessor :source_modified_date
+
+        ##
+        # @return [InvoiceWorkflowStatusHistoryModel] All workflow status histories connected to this invoice. To retrieve this collection, specify `WorkflowStatuses` in the "Include" parameter for your query.
+        attr_accessor :workflow_statuses
 
         ##
         # @return [InvoiceAddressModel] All addresses connected to this invoice. To retrieve this collection, specify `Addresses` in the "Include" parameter for your query.
@@ -306,6 +322,10 @@ module LockstepSdk
         attr_accessor :custom_field_definitions
 
         ##
+        # @return [Boolean] Indicates if the invoice an E-Invoice or not
+        attr_accessor :is_einvoice
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -320,6 +340,8 @@ module LockstepSdk
                 'salespersonName' => @salesperson_name,
                 'invoiceTypeCode' => @invoice_type_code,
                 'invoiceStatusCode' => @invoice_status_code,
+                'workflowStatusId' => @workflow_status_id,
+                'workflowStatusNotes' => @workflow_status_notes,
                 'termsCode' => @terms_code,
                 'specialTerms' => @special_terms,
                 'currencyCode' => @currency_code,
@@ -350,9 +372,10 @@ module LockstepSdk
                 'baseCurrencySalesTaxAmount' => @base_currency_sales_tax_amount,
                 'baseCurrencyDiscountAmount' => @base_currency_discount_amount,
                 'baseCurrencyOutstandingBalanceAmount' => @base_currency_outstanding_balance_amount,
-                'erpWriteStatus' => @erp_write_status,
-                'erpWriteStatusName' => @erp_write_status_name,
+                'erpUpdateStatus' => @erp_update_status,
+                'erpUpdateAction' => @erp_update_action,
                 'sourceModifiedDate' => @source_modified_date,
+                'workflowStatuses' => @workflow_statuses,
                 'addresses' => @addresses,
                 'lines' => @lines,
                 'payments' => @payments,
@@ -364,6 +387,7 @@ module LockstepSdk
                 'creditMemos' => @credit_memos,
                 'customFieldValues' => @custom_field_values,
                 'customFieldDefinitions' => @custom_field_definitions,
+                'isEInvoice' => @is_einvoice,
             }
         end
 

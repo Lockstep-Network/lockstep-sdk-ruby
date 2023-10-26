@@ -33,8 +33,8 @@ module LockstepSdk
             @payment_id = params.dig(:payment_id)
             @company_id = params.dig(:company_id)
             @erp_key = params.dig(:erp_key)
-            @erp_write_status = params.dig(:erp_write_status)
-            @erp_write_status_name = params.dig(:erp_write_status_name)
+            @erp_update_status = params.dig(:erp_update_status)
+            @erp_update_action = params.dig(:erp_update_action)
             @payment_type = params.dig(:payment_type)
             @tender_type = params.dig(:tender_type)
             @is_open = params.dig(:is_open)
@@ -82,12 +82,12 @@ module LockstepSdk
         attr_accessor :erp_key
 
         ##
-        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
-        attr_accessor :erp_write_status
+        # @return [ErpUpdateStatus] Possible statuses for a record that supports ERP Update.
+        attr_accessor :erp_update_status
 
         ##
-        # @return [String] The name of the ErpWriteStatus for this Payment
-        attr_accessor :erp_write_status_name
+        # @return [ErpUpdateAction] Possible actions for a record that supports ERP Update.
+        attr_accessor :erp_update_action
 
         ##
         # @return [String] The type of payment, AR Payment or AP Payment. Recognized PaymentType values are: * `AR Payment` - A payment made by a Customer to the Company * `AP Payment` - A payment made by the Company to a Vendor
@@ -209,8 +209,8 @@ module LockstepSdk
                 'paymentId' => @payment_id,
                 'companyId' => @company_id,
                 'erpKey' => @erp_key,
-                'erpWriteStatus' => @erp_write_status,
-                'erpWriteStatusName' => @erp_write_status_name,
+                'erpUpdateStatus' => @erp_update_status,
+                'erpUpdateAction' => @erp_update_action,
                 'paymentType' => @payment_type,
                 'tenderType' => @tender_type,
                 'isOpen' => @is_open,

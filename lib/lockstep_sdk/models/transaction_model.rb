@@ -41,6 +41,7 @@ module LockstepSdk
             @base_currency_outstanding_amount = params.dig(:base_currency_outstanding_amount)
             @transaction_detail_count = params.dig(:transaction_detail_count)
             @supports_erp_pdf_retrieval = params.dig(:supports_erp_pdf_retrieval)
+            @transaction_customer_id = params.dig(:transaction_customer_id)
         end
 
         ##
@@ -112,6 +113,10 @@ module LockstepSdk
         attr_accessor :supports_erp_pdf_retrieval
 
         ##
+        # @return [Uuid] The customer associated with this transaction
+        attr_accessor :transaction_customer_id
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -132,6 +137,7 @@ module LockstepSdk
                 'baseCurrencyOutstandingAmount' => @base_currency_outstanding_amount,
                 'transactionDetailCount' => @transaction_detail_count,
                 'supportsErpPdfRetrieval' => @supports_erp_pdf_retrieval,
+                'transactionCustomerId' => @transaction_customer_id,
             }
         end
 

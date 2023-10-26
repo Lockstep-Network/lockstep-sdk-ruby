@@ -40,6 +40,20 @@ class NotesClient
     end
 
     ##
+    # Updates the Note with the unique ID specified.
+    #
+    # A note is a customizable text string that can be attached to various account attributes within Lockstep. You can use notes for internal communication, correspondence with clients, or personal reminders. The Note Model represents a note and a number of different metadata attributes related to the creation, storage, and ownership of the note.
+    #
+    # See [Extensibility](https://developer.lockstep.io/docs/extensibility) for more information.
+    #
+    # @param id [uuid] Note id to be updated
+    # @param body [object] A list of changes to apply to this Note
+    def update_note(id:, body:)
+        path = "/api/v1/Notes/#{id}"
+        @connection.request(:patch, path, body.to_camelback_keys.to_json, nil)
+    end
+
+    ##
     # Archives the Note with the unique ID specified.
     #
     # A note is a customizable text string that can be attached to various account attributes within Lockstep. You can use notes for internal communication, correspondence with clients, or personal reminders. The Note Model represents a note and a number of different metadata attributes related to the creation, storage, and ownership of the note.

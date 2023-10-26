@@ -32,8 +32,10 @@ module LockstepSdk
         # Initialize the PaymentSyncModel using the provided prototype
         def initialize(params = {})
             @on_match_action = params.dig(:on_match_action)
+            @network_id = params.dig(:network_id)
             @erp_key = params.dig(:erp_key)
             @company_erp_key = params.dig(:company_erp_key)
+            @company_network_id = params.dig(:company_network_id)
             @payment_type = params.dig(:payment_type)
             @tender_type = params.dig(:tender_type)
             @is_open = params.dig(:is_open)
@@ -59,12 +61,20 @@ module LockstepSdk
         attr_accessor :on_match_action
 
         ##
+        # @return [Uuid] The unique identifier of this object in the Sage Network platform.
+        attr_accessor :network_id
+
+        ##
         # @return [String] This is the primary key of the Payment record. For this field, you should use whatever the payment's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your payment records in a database, whatever the primary key for the payment table is in the database should be the "ErpKey". For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
 
         ##
         # @return [String] The original primary key or unique ID of the company to which this payment belongs. This value should match the [Company ErpKey](https://developer.lockstep.io/docs/importing-companies#erpkey) field on the [CompanySyncModel](https://developer.lockstep.io/docs/importing-companies).
         attr_accessor :company_erp_key
+
+        ##
+        # @return [Uuid] The network id of the related Company.
+        attr_accessor :company_network_id
 
         ##
         # @return [String] The type of payment, AR Payment or AP Payment. Recognized PaymentType values are: * `AR Payment` - A payment made by a Customer to the Company * `AP Payment` - A payment made by the Company to a Vendor
@@ -143,8 +153,10 @@ module LockstepSdk
         def as_json(options={})
             {
                 'onMatchAction' => @on_match_action,
+                'networkId' => @network_id,
                 'erpKey' => @erp_key,
                 'companyErpKey' => @company_erp_key,
+                'companyNetworkId' => @company_network_id,
                 'paymentType' => @payment_type,
                 'tenderType' => @tender_type,
                 'isOpen' => @is_open,

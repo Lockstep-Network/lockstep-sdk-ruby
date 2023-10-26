@@ -47,6 +47,17 @@ class MagicLinksClient
     end
 
     ##
+    # Revokes the bounced magic link with the specified id so it cannot be used to call the API.
+    #
+    # Revocation will be received by all servers within five minutes of revocation. API calls made using this magic link after the revocation will fail. A revoked magic link cannot be un-revoked.
+    #
+    # @param id [uuid] The unique Lockstep Platform ID number of this magic link
+    def revoke_bounced_magic_link(id:)
+        path = "/api/v1/useraccounts/magic-links/#{id}/bounced"
+        @connection.request(:delete, path, nil, nil)
+    end
+
+    ##
     # Queries Magic Links for this account using the specified filtering, sorting, nested fetch, and pagination rules requested.
     #
     # @param filter [string] The filter for this query. See [Searchlight Query Language](https://developer.lockstep.io/docs/querying-with-searchlight)
@@ -57,6 +68,17 @@ class MagicLinksClient
     def query_magic_links(filter:, include_param:, order:, page_size:, page_number:)
         path = "/api/v1/useraccounts/magic-links/query"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
+        @connection.request(:get, path, nil, params)
+    end
+
+    ##
+    # Gets a summary of all magic links created during the specified date range, returns no content if there are no magic links for the specified date range
+    #
+    # @param from [date-time] The date that the summary starts from (default one year ago from today)
+    # @param to [date-time] The date that the summary ends at (default today)
+    def magic_link_summary(from:, to:)
+        path = "/api/v1/useraccounts/magic-links/summary"
+        params = {:from => from, :to => to}
         @connection.request(:get, path, nil, params)
     end
 end

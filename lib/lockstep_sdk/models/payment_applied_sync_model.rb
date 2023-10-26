@@ -32,9 +32,12 @@ module LockstepSdk
         # Initialize the PaymentAppliedSyncModel using the provided prototype
         def initialize(params = {})
             @on_match_action = params.dig(:on_match_action)
+            @network_id = params.dig(:network_id)
             @erp_key = params.dig(:erp_key)
             @invoice_erp_key = params.dig(:invoice_erp_key)
+            @invoice_network_id = params.dig(:invoice_network_id)
             @payment_erp_key = params.dig(:payment_erp_key)
+            @payment_network_id = params.dig(:payment_network_id)
             @entry_number = params.dig(:entry_number)
             @apply_to_invoice_date = params.dig(:apply_to_invoice_date)
             @payment_applied_amount = params.dig(:payment_applied_amount)
@@ -47,6 +50,10 @@ module LockstepSdk
         attr_accessor :on_match_action
 
         ##
+        # @return [Uuid] The unique identifier of this object in the Sage Network platform.
+        attr_accessor :network_id
+
+        ##
         # @return [String] This is the primary key of the Payment Application record. For this field, you should use whatever this transaction's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Since Payment Applications are often considered transactions, a typical value to look for will be the transaction ID number, the payment confirmation number, or some other record of this payment. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
 
@@ -55,8 +62,16 @@ module LockstepSdk
         attr_accessor :invoice_erp_key
 
         ##
+        # @return [Uuid] The network id of the related Invoice.
+        attr_accessor :invoice_network_id
+
+        ##
         # @return [String] This field indicates which Payment was used to provide the funds for this payment application. In this field, identify the original primary key or unique ID of the Payment that was used for this payment application. This information lets you track how an invoice was paid. You can identify what proportion of an payment's balance was paid by which methods by joining this field to the Payment. This value should match the [Payment ErpKey](https://developer.lockstep.io/docs/importing-payments#erpkey) field on the [PaymentSyncModel](https://developer.lockstep.io/docs/importing-payments).
         attr_accessor :payment_erp_key
+
+        ##
+        # @return [Uuid] The network id of the related Payment.
+        attr_accessor :payment_network_id
 
         ##
         # @return [Int32] The entry number of this payment application. This is often a journal entry number, confirmation code, or other identifying field for this payment application.
@@ -83,9 +98,12 @@ module LockstepSdk
         def as_json(options={})
             {
                 'onMatchAction' => @on_match_action,
+                'networkId' => @network_id,
                 'erpKey' => @erp_key,
                 'invoiceErpKey' => @invoice_erp_key,
+                'invoiceNetworkId' => @invoice_network_id,
                 'paymentErpKey' => @payment_erp_key,
+                'paymentNetworkId' => @payment_network_id,
                 'entryNumber' => @entry_number,
                 'applyToInvoiceDate' => @apply_to_invoice_date,
                 'paymentAppliedAmount' => @payment_applied_amount,

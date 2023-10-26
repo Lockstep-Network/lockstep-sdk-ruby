@@ -32,8 +32,10 @@ module LockstepSdk
         # Initialize the ContactSyncModel using the provided prototype
         def initialize(params = {})
             @on_match_action = params.dig(:on_match_action)
+            @network_id = params.dig(:network_id)
             @erp_key = params.dig(:erp_key)
             @company_erp_key = params.dig(:company_erp_key)
+            @company_network_id = params.dig(:company_network_id)
             @contact_name = params.dig(:contact_name)
             @contact_code = params.dig(:contact_code)
             @title = params.dig(:title)
@@ -60,12 +62,20 @@ module LockstepSdk
         attr_accessor :on_match_action
 
         ##
+        # @return [Uuid] The unique identifier of this object in the Sage Network platform.
+        attr_accessor :network_id
+
+        ##
         # @return [String] This is the primary key of the Contact record. For this field, you should use whatever the contact's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your contact records in a database, whatever the primary key for the contact table is in the database should be the "ErpKey". As some ERP systems don't maintain a unique key for Contacts, we also support syncing Contacts with ERP keys of the form {prefix}|{index}, for example ContactPrefix|1, ContactPrefix|2 and so on. For this reason, please ensure that your Contact ERP keys don't otherwise contain the '|' symbol or that it is replaced by an alternate symbol if they do. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
 
         ##
         # @return [String] The original primary key or unique ID of the company to which this contact belongs. This value should match the [Company ErpKey](https://developer.lockstep.io/docs/importing-companies#erpkey) field on the [CompanySyncModel](https://developer.lockstep.io/docs/importing-companies).
         attr_accessor :company_erp_key
+
+        ##
+        # @return [Uuid] The network id of the related Company.
+        attr_accessor :company_network_id
 
         ##
         # @return [String] The name of the contact.
@@ -148,8 +158,10 @@ module LockstepSdk
         def as_json(options={})
             {
                 'onMatchAction' => @on_match_action,
+                'networkId' => @network_id,
                 'erpKey' => @erp_key,
                 'companyErpKey' => @company_erp_key,
+                'companyNetworkId' => @company_network_id,
                 'contactName' => @contact_name,
                 'contactCode' => @contact_code,
                 'title' => @title,

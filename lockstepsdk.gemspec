@@ -2,8 +2,8 @@ require_relative "lib/lockstep_sdk/version"
 
 Gem::Specification.new do |s|
     s.name = 'lockstep_sdk'
-    s.version = '2023.28.10.0'
-    s.date = '2023-07-13'
+    s.version = '2023.40.72.0'
+    s.date = '2023-10-26'
     s.summary = 'API Client to use the Lockstep Platform API'
     s.description = 'Allows you to work with the Lockstep Platform API for financial systems automation.  The SDK provides rich, 
                      context sensitive help and documentation for all methods and objects.'

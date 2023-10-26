@@ -54,7 +54,7 @@ module LockstepSdk
         attr_accessor :group_key
 
         ##
-        # @return [String] The status of processing for this SyncRequest. When a SyncRequest is created, it is flagged as `Ready`. When it is picked up for execution, its status moves to `In Progress`. When it is complete, its status will move to `Success` or `Failed`. If another API call cancels the SyncRequest, its status will move to `Cancelled`. * Ready * In Progress * Cancelled * Failed * Success
+        # @return [String] The status of processing for this SyncRequest. When a SyncRequest is created, it is flagged as `Ready`. While it is in queue waiting to be picked up, its status moves to `Connector`. When it is picked up for execution, its status moves to `In Progress`. When it is complete, its status will move to `Success` or `Failed`. If another API call cancels the SyncRequest, its status will move to `Cancelled`. * Ready * Connector * In Progress * Cancelled * Failed * Success
         attr_accessor :status_code
 
         ##

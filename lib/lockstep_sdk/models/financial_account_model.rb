@@ -66,7 +66,7 @@ module LockstepSdk
         attr_accessor :name
 
         ##
-        # @return [String] The status of the Financial Account. Possible values are active, inactive, deleted or archived.
+        # @return [String] The status of the Financial Account. Possible values are Active, Inactive, Deleted or Archived.
         attr_accessor :status
 
         ##

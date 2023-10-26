@@ -32,9 +32,12 @@ module LockstepSdk
         # Initialize the InvoiceSyncModel using the provided prototype
         def initialize(params = {})
             @on_match_action = params.dig(:on_match_action)
+            @network_id = params.dig(:network_id)
             @erp_key = params.dig(:erp_key)
             @company_erp_key = params.dig(:company_erp_key)
+            @company_network_id = params.dig(:company_network_id)
             @customer_erp_key = params.dig(:customer_erp_key)
+            @customer_network_id = params.dig(:customer_network_id)
             @salesperson_name = params.dig(:salesperson_name)
             @purchase_order_code = params.dig(:purchase_order_code)
             @reference_code = params.dig(:reference_code)
@@ -91,11 +94,17 @@ module LockstepSdk
             @base_currency_sales_tax_amount = params.dig(:base_currency_sales_tax_amount)
             @base_currency_discount_amount = params.dig(:base_currency_discount_amount)
             @base_currency_outstanding_balance_amount = params.dig(:base_currency_outstanding_balance_amount)
+            @is_einvoice = params.dig(:is_einvoice)
+            @send_immediately = params.dig(:send_immediately)
         end
 
         ##
         # @return [MatchAction] Indicates what action to take when an existing object has been found during the sync process.
         attr_accessor :on_match_action
+
+        ##
+        # @return [Uuid] The unique identifier of this object in the Sage Network platform.
+        attr_accessor :network_id
 
         ##
         # @return [String] This is the primary key of the Invoice record. For this field, you should use whatever the invoice's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your invoice records in a database, whatever the primary key for the invoice table is in the database should be the "ErpKey". For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
@@ -106,8 +115,16 @@ module LockstepSdk
         attr_accessor :company_erp_key
 
         ##
+        # @return [Uuid] The network id of the related Company.
+        attr_accessor :company_network_id
+
+        ##
         # @return [String] The original primary key or unique ID of the company to which this invoice was sent. This value should match the [Company ErpKey](https://developer.lockstep.io/docs/importing-companies#erpkey) field on the [CompanySyncModel](https://developer.lockstep.io/docs/importing-companies). An Invoice has two relationships: The Company and the Customer. The field `CompanyErpKey` identifies the company that created the invoice, and the field `CustomerErpKey` is the customer to whom the invoice was sent.
         attr_accessor :customer_erp_key
+
+        ##
+        # @return [Uuid] The network id of the related Customer.
+        attr_accessor :customer_network_id
 
         ##
         # @return [String] The name of the salesperson that wrote this invoice. This is just text, it is not a reference to the "Contacts" table. You will not receive an error if this field does not match a known contact person.
@@ -334,13 +351,24 @@ module LockstepSdk
         attr_accessor :base_currency_outstanding_balance_amount
 
         ##
+        # @return [Boolean] True if the invoice is an E-Invoice
+        attr_accessor :is_einvoice
+
+        ##
+        # @return [Boolean] True if the E-Invoice should be sent to gov/other recipients immediately
+        attr_accessor :send_immediately
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
                 'onMatchAction' => @on_match_action,
+                'networkId' => @network_id,
                 'erpKey' => @erp_key,
                 'companyErpKey' => @company_erp_key,
+                'companyNetworkId' => @company_network_id,
                 'customerErpKey' => @customer_erp_key,
+                'customerNetworkId' => @customer_network_id,
                 'salespersonName' => @salesperson_name,
                 'purchaseOrderCode' => @purchase_order_code,
                 'referenceCode' => @reference_code,
@@ -397,6 +425,8 @@ module LockstepSdk
                 'baseCurrencySalesTaxAmount' => @base_currency_sales_tax_amount,
                 'baseCurrencyDiscountAmount' => @base_currency_discount_amount,
                 'baseCurrencyOutstandingBalanceAmount' => @base_currency_outstanding_balance_amount,
+                'isEInvoice' => @is_einvoice,
+                'sendImmediately' => @send_immediately,
             }
         end
 

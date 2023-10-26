@@ -32,14 +32,17 @@ module LockstepSdk
         # Initialize the CompanySyncModel using the provided prototype
         def initialize(params = {})
             @on_match_action = params.dig(:on_match_action)
+            @network_id = params.dig(:network_id)
             @erp_key = params.dig(:erp_key)
             @company_name = params.dig(:company_name)
             @company_type = params.dig(:company_type)
             @parent_company_erp_key = params.dig(:parent_company_erp_key)
+            @parent_company_network_id = params.dig(:parent_company_network_id)
             @is_active = params.dig(:is_active)
             @default_currency_code = params.dig(:default_currency_code)
             @company_logo_url = params.dig(:company_logo_url)
             @primary_contact_erp_key = params.dig(:primary_contact_erp_key)
+            @primary_contact_network_id = params.dig(:primary_contact_network_id)
             @address1 = params.dig(:address1)
             @address2 = params.dig(:address2)
             @address3 = params.dig(:address3)
@@ -66,6 +69,10 @@ module LockstepSdk
         attr_accessor :on_match_action
 
         ##
+        # @return [Uuid] The unique identifier of this object in the Sage Network platform.
+        attr_accessor :network_id
+
+        ##
         # @return [String] This is the primary key of the Company record. For this field, you should use whatever the company's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your company records in a database, whatever the primary key for the company table is in the database should be the `ErpKey`. Example: If you use a financial system such as QuickBooks or Xero, look for the primary ID number of the company record within that financial system. For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
 
@@ -82,6 +89,10 @@ module LockstepSdk
         attr_accessor :parent_company_erp_key
 
         ##
+        # @return [Uuid] The network id of the parent Company.
+        attr_accessor :parent_company_network_id
+
+        ##
         # @return [Boolean] This flag indicates whether the company is currently active. An inactive company will be hidden from the user interface but will still be available for querying.
         attr_accessor :is_active
 
@@ -96,6 +107,10 @@ module LockstepSdk
         ##
         # @return [String] The `ErpKey` of the primary contact for this company. This value should match the `ErpKey` value of the [Importing Contacts](https://developer.lockstep.io/docs/importing-contacts) record for the contact table.
         attr_accessor :primary_contact_erp_key
+
+        ##
+        # @return [Uuid] The network id of the primary Contact.
+        attr_accessor :primary_contact_network_id
 
         ##
         # @return [String] The company's primary mailing address information
@@ -178,14 +193,17 @@ module LockstepSdk
         def as_json(options={})
             {
                 'onMatchAction' => @on_match_action,
+                'networkId' => @network_id,
                 'erpKey' => @erp_key,
                 'companyName' => @company_name,
                 'companyType' => @company_type,
                 'parentCompanyErpKey' => @parent_company_erp_key,
+                'parentCompanyNetworkId' => @parent_company_network_id,
                 'isActive' => @is_active,
                 'defaultCurrencyCode' => @default_currency_code,
                 'companyLogoUrl' => @company_logo_url,
                 'primaryContactErpKey' => @primary_contact_erp_key,
+                'primaryContactNetworkId' => @primary_contact_network_id,
                 'address1' => @address1,
                 'address2' => @address2,
                 'address3' => @address3,

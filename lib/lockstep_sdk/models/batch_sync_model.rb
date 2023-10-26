@@ -45,6 +45,8 @@ module LockstepSdk
             @financial_accounts = params.dig(:financial_accounts)
             @financial_account_balance_histories = params.dig(:financial_account_balance_histories)
             @base_currencies = params.dig(:base_currencies)
+            @journal_entries = params.dig(:journal_entries)
+            @journal_entry_lines = params.dig(:journal_entry_lines)
         end
 
         ##
@@ -104,6 +106,14 @@ module LockstepSdk
         attr_accessor :base_currencies
 
         ##
+        # @return [JournalEntrySyncModel] A list of JournalEntry records to merge with your Lockstep Platform data
+        attr_accessor :journal_entries
+
+        ##
+        # @return [JournalEntryLineSyncModel] A list of JournalEntryLine records to merge with your Lockstep Platform data
+        attr_accessor :journal_entry_lines
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -121,6 +131,8 @@ module LockstepSdk
                 'financialAccounts' => @financial_accounts,
                 'financialAccountBalanceHistories' => @financial_account_balance_histories,
                 'baseCurrencies' => @base_currencies,
+                'journalEntries' => @journal_entries,
+                'journalEntryLines' => @journal_entry_lines,
             }
         end
 

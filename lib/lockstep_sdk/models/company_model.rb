@@ -74,6 +74,7 @@ module LockstepSdk
             @service_fabric_org_id = params.dig(:service_fabric_org_id)
             @service_fabric_company_id = params.dig(:service_fabric_company_id)
             @company_registration_number = params.dig(:company_registration_number)
+            @profile_reference_id = params.dig(:profile_reference_id)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
             @contacts = params.dig(:contacts)
@@ -96,7 +97,7 @@ module LockstepSdk
         attr_accessor :erp_key
 
         ##
-        # @return [String] This field indicates the type of company. It can be one of a limited number of values: Company, Customer, Group, Vendor, or Third Party. A company that represents both a customer and a vendor is identified as a CustomerVendor. * `Company` - This record represents a company that is part of the organization of the account holder. * `Customer` - This record represents a business entity that purchases things from the account holder. * `Group` - Only one record of type `GROUP` exists in each account. Contains your account profile. * `Vendor` - This record represents a business entity that sells things to the account holder. * `Third Party` - This record represents a business entity that is neither a customer nor vendor. * `CustomerVendor` - Both a customer and a vendor.
+        # @return [String] This field indicates the type of company. It can be one of a limited number of values: Company, Customer, Group, Vendor, or Third Party. A company that represents both a customer and a vendor is identified as a CustomerVendor. * `Company` - This record represents a company that is part of the organization of the account holder. * `Customer` - This record represents a business entity that purchases things from the account holder. * `Group` - Only one record of type `GROUP` exists in each account. Contains your account profile. * `Vendor` - This record represents a business entity that sells things to the account holder. * `Third Party` - This record represents a business entity that is neither a customer nor vendor. * `CustomerVendor` - Both a customer and a vendor. * `CompanyProfile` - Profile for a Company, each Company should have at most 1 profile, used only for Profile Management.
         attr_accessor :company_type
 
         ##
@@ -272,6 +273,10 @@ module LockstepSdk
         attr_accessor :company_registration_number
 
         ##
+        # @return [Uuid] An optional reference to a real company, making this a profile.
+        attr_accessor :profile_reference_id
+
+        ##
         # @return [NoteModel] A collection of notes linked to this record. To retrieve this collection, specify `Notes` in the `include` parameter when retrieving data. To create a note, use the [Create Note](https://developer.lockstep.io/reference/post_api-v1-notes) endpoint with the `TableKey` to `Company` and the `ObjectKey` set to the `CompanyId` for this record. For more information on extensibility, see [linking extensible metadata to objects](https://developer.lockstep.io/docs/custom-fields#linking-metadata-to-an-object).
         attr_accessor :notes
 
@@ -350,6 +355,7 @@ module LockstepSdk
                 'serviceFabricOrgId' => @service_fabric_org_id,
                 'serviceFabricCompanyId' => @service_fabric_company_id,
                 'companyRegistrationNumber' => @company_registration_number,
+                'profileReferenceId' => @profile_reference_id,
                 'notes' => @notes,
                 'attachments' => @attachments,
                 'contacts' => @contacts,

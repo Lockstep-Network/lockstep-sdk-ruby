@@ -96,10 +96,25 @@ class PaymentsClient
     #
     # QuickBooks Online supports AR Payments.
     #
+    # For other ERPs, the supported types will depend on the synced data.
+    #
     # @param id [uuid] The unique Lockstep Platform ID number of this payment; NOT the customer's ERP key
     def retrieve_payment_pdf(id:)
         path = "/api/v1/Payments/#{id}/pdf"
         @connection.request(:get, path, nil, nil)
+    end
+
+    ##
+    # Checks for whether a PDF file for this payment exists if it has been synced using an app enrollment to one of the supported apps.
+    #
+    # QuickBooks Online supports AR Payments.
+    #
+    # For other ERPs, the supported types will depend on the synced data.
+    #
+    # @param id [uuid] The unique Lockstep Platform ID number of this payment; NOT the customer's ERP key
+    def check_payment_pdf(id:)
+        path = "/api/v1/Payments/#{id}/pdf"
+        @connection.request(:head, path, nil, nil)
     end
 
     ##
@@ -142,16 +157,5 @@ class PaymentsClient
         path = "/api/v1/Payments/views/detail"
         params = {:filter => filter, :include => include_param, :order => order, :pageSize => page_size, :pageNumber => page_number}
         @connection.request(:get, path, nil, params)
-    end
-
-    ##
-    # **This API endpoint is under maintenance and may not function properly.**  Schedule an ERP post request for payments.
-    #
-    # The payments must be associated with an active app enrollment and have a valid `AppEnrollmentId`.
-    #
-    # @param body [InsertPaymentRequestModelErpWriteSyncSubmitModel] The payments to submit to the connected ERP
-    def write_payments_to_connected_erp(body:)
-        path = "/api/v1/Payments/erp-write"
-        @connection.request(:post, path, body, nil)
     end
 end

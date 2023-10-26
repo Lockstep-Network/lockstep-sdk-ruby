@@ -46,8 +46,8 @@ module LockstepSdk
             @modified = params.dig(:modified)
             @modified_user_id = params.dig(:modified_user_id)
             @app_enrollment_id = params.dig(:app_enrollment_id)
-            @erp_write_status = params.dig(:erp_write_status)
-            @erp_write_status_name = params.dig(:erp_write_status_name)
+            @erp_update_status = params.dig(:erp_update_status)
+            @erp_update_action = params.dig(:erp_update_action)
             @source_modified_date = params.dig(:source_modified_date)
             @notes = params.dig(:notes)
             @attachments = params.dig(:attachments)
@@ -146,12 +146,12 @@ module LockstepSdk
         attr_accessor :app_enrollment_id
 
         ##
-        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
-        attr_accessor :erp_write_status
+        # @return [ErpUpdateStatus] Possible statuses for a record that supports ERP Update.
+        attr_accessor :erp_update_status
 
         ##
-        # @return [String] The name of the ErpWriteStatus for this Invoice
-        attr_accessor :erp_write_status_name
+        # @return [ErpUpdateAction] Possible actions for a record that supports ERP Update.
+        attr_accessor :erp_update_action
 
         ##
         # @return [Date-time] The date on which this record was last modified in source ERP.
@@ -192,8 +192,8 @@ module LockstepSdk
                 'modified' => @modified,
                 'modifiedUserId' => @modified_user_id,
                 'appEnrollmentId' => @app_enrollment_id,
-                'erpWriteStatus' => @erp_write_status,
-                'erpWriteStatusName' => @erp_write_status_name,
+                'erpUpdateStatus' => @erp_update_status,
+                'erpUpdateAction' => @erp_update_action,
                 'sourceModifiedDate' => @source_modified_date,
                 'notes' => @notes,
                 'attachments' => @attachments,

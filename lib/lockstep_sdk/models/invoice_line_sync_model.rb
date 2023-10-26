@@ -32,8 +32,10 @@ module LockstepSdk
         # Initialize the InvoiceLineSyncModel using the provided prototype
         def initialize(params = {})
             @on_match_action = params.dig(:on_match_action)
+            @network_id = params.dig(:network_id)
             @erp_key = params.dig(:erp_key)
             @invoice_erp_key = params.dig(:invoice_erp_key)
+            @invoice_network_id = params.dig(:invoice_network_id)
             @line_number = params.dig(:line_number)
             @product_code = params.dig(:product_code)
             @description = params.dig(:description)
@@ -81,12 +83,20 @@ module LockstepSdk
         attr_accessor :on_match_action
 
         ##
+        # @return [Uuid] The unique identifier of this object in the Sage Network platform.
+        attr_accessor :network_id
+
+        ##
         # @return [String] This is the primary key of the Invoice Line record. For this field, you should use whatever the contact's unique identifying number is in the originating system. Search for a unique, non-changing number within the originating financial system for this record. Example: If you store your invoice line records in a database, whatever the primary key for the invoice line table is in the database should be the "ErpKey". For more information, see [Identity Columns](https://developer.lockstep.io/docs/identity-columns).
         attr_accessor :erp_key
 
         ##
         # @return [String] The original primary key or unique ID of the invoice to which this line belongs. This value should match the [Invoice ErpKey](https://developer.lockstep.io/docs/importing-invoices#erpkey) field on the [InvoiceSyncModel](https://developer.lockstep.io/docs/importing-invoices).
         attr_accessor :invoice_erp_key
+
+        ##
+        # @return [Uuid] The network id of the parent Invoice.
+        attr_accessor :invoice_network_id
 
         ##
         # @return [String] The line number of this line, as defined in the originating ERP or accounting system. You can sort on this number to get the original view of lines within the invoice.
@@ -253,8 +263,10 @@ module LockstepSdk
         def as_json(options={})
             {
                 'onMatchAction' => @on_match_action,
+                'networkId' => @network_id,
                 'erpKey' => @erp_key,
                 'invoiceErpKey' => @invoice_erp_key,
+                'invoiceNetworkId' => @invoice_network_id,
                 'lineNumber' => @line_number,
                 'productCode' => @product_code,
                 'description' => @description,

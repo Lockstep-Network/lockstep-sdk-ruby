@@ -38,6 +38,8 @@ module LockstepSdk
             @accounting_profile_id = params.dig(:accounting_profile_id)
             @magic_link_url = params.dig(:magic_link_url)
             @user = params.dig(:user)
+            @visits = params.dig(:visits)
+            @status = params.dig(:status)
         end
 
         ##
@@ -101,6 +103,14 @@ module LockstepSdk
         attr_accessor :user
 
         ##
+        # @return [Int32] The number of visits to this Magic Link
+        attr_accessor :visits
+
+        ##
+        # @return [MagicLinkStatus] Possible statuses for a Magic Link.
+        attr_accessor :status
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -119,6 +129,8 @@ module LockstepSdk
                 'accountingProfileId' => @accounting_profile_id,
                 'magicLinkUrl' => @magic_link_url,
                 'user' => @user,
+                'visits' => @visits,
+                'status' => @status,
             }
         end
 

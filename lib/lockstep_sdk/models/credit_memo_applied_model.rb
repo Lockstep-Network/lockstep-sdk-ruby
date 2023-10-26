@@ -32,8 +32,8 @@ module LockstepSdk
             @invoice_id = params.dig(:invoice_id)
             @credit_memo_invoice_id = params.dig(:credit_memo_invoice_id)
             @erp_key = params.dig(:erp_key)
-            @erp_write_status = params.dig(:erp_write_status)
-            @erp_write_status_name = params.dig(:erp_write_status_name)
+            @erp_update_status = params.dig(:erp_update_status)
+            @erp_update_action = params.dig(:erp_update_action)
             @entry_number = params.dig(:entry_number)
             @apply_to_invoice_date = params.dig(:apply_to_invoice_date)
             @credit_memo_applied_amount = params.dig(:credit_memo_applied_amount)
@@ -72,12 +72,12 @@ module LockstepSdk
         attr_accessor :erp_key
 
         ##
-        # @return [ErpWriteStatuses] Possible statuses for a record that supports ERP write.
-        attr_accessor :erp_write_status
+        # @return [ErpUpdateStatus] Possible statuses for a record that supports ERP Update.
+        attr_accessor :erp_update_status
 
         ##
-        # @return [String] The name of the ErpWriteStatus for this credit memo application
-        attr_accessor :erp_write_status_name
+        # @return [ErpUpdateAction] Possible actions for a record that supports ERP Update.
+        attr_accessor :erp_update_action
 
         ##
         # @return [Int32] Reference number for the applied credit memo.
@@ -148,8 +148,8 @@ module LockstepSdk
                 'invoiceId' => @invoice_id,
                 'creditMemoInvoiceId' => @credit_memo_invoice_id,
                 'erpKey' => @erp_key,
-                'erpWriteStatus' => @erp_write_status,
-                'erpWriteStatusName' => @erp_write_status_name,
+                'erpUpdateStatus' => @erp_update_status,
+                'erpUpdateAction' => @erp_update_action,
                 'entryNumber' => @entry_number,
                 'applyToInvoiceDate' => @apply_to_invoice_date,
                 'creditMemoAppliedAmount' => @credit_memo_applied_amount,

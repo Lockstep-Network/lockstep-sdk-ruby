@@ -37,6 +37,8 @@ module LockstepSdk
             @is_archived = params.dig(:is_archived)
             @created = params.dig(:created)
             @created_user_id = params.dig(:created_user_id)
+            @modified = params.dig(:modified)
+            @modified_user_id = params.dig(:modified_user_id)
             @created_user_name = params.dig(:created_user_name)
             @app_enrollment_id = params.dig(:app_enrollment_id)
             @recipient_name = params.dig(:recipient_name)
@@ -79,6 +81,14 @@ module LockstepSdk
         attr_accessor :created_user_id
 
         ##
+        # @return [Date-time] The date this note was last modified
+        attr_accessor :modified
+
+        ##
+        # @return [Uuid] The ID of the user who last modified this note
+        attr_accessor :modified_user_id
+
+        ##
         # @return [String] The name of the user who created the note
         attr_accessor :created_user_name
 
@@ -103,6 +113,8 @@ module LockstepSdk
                 'isArchived' => @is_archived,
                 'created' => @created,
                 'createdUserId' => @created_user_id,
+                'modified' => @modified,
+                'modifiedUserId' => @modified_user_id,
                 'createdUserName' => @created_user_name,
                 'appEnrollmentId' => @app_enrollment_id,
                 'recipientName' => @recipient_name,

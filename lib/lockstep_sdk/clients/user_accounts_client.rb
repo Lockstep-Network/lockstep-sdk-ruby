@@ -38,7 +38,9 @@ class UserAccountsClient
     end
 
     ##
-    # Updates a User that matches the specified id with the requested information.
+    # Updates a User that matches the specified id with the requested information. The following limitations are applied when updating a user:
+    #
+    # <list type="bullet"><item>Only Group Owners and Admins can change other users.</item><item>When updating another user, only the role and status can be updated.</item><item>A user can only change their own status when their current status is Onboarding.</item><item>A user can never change their own role.</item><item>Nobody can change the owner's role or status. See the "/transfer-owner" route for changing the owner.</item><item>A user can change their own personal information.</item></list>
     #
     # The PATCH method allows you to change specific values on the object while leaving other values alone.  As input you should supply a list of field names and new values.  If you do not provide the name of a field, that field will remain unchanged.  This allows you to ensure that you are only updating the specific fields desired.
     #
@@ -77,6 +79,7 @@ class UserAccountsClient
     # Retrieves invite information for the specified invite token.
     #
     # A User represents a person who has the ability to authenticate against the Lockstep Platform and use services such as Lockstep Inbox.  A User is uniquely identified by an Azure identity, and each user must have an email address defined within their account.  All Users must validate their email to make use of Lockstep platform services.  Users may have different privileges and access control rights within the Lockstep Platform.
+    #
     # @param code [uuid] The code of the invite
     def retrieve_invite_data(code:)
         path = "/api/v1/UserAccounts/invite"

@@ -49,6 +49,7 @@ module LockstepSdk
             @attachments = params.dig(:attachments)
             @custom_field_definitions = params.dig(:custom_field_definitions)
             @custom_field_values = params.dig(:custom_field_values)
+            @enrollments = params.dig(:enrollments)
         end
 
         ##
@@ -124,6 +125,10 @@ module LockstepSdk
         attr_accessor :custom_field_values
 
         ##
+        # @return [AppEnrollmentModel] A collection of app enrollments linked to this record. To retrieve this collection, specify `Enrollments` in the `include` parameter when retrieving data. To create an app enrollment, use the [Create App Enrollment](https://developer.lockstep.io/reference/v1_appenrollments_createappenrollments) endpoint with the `AppId` set to the `ApplicationId` for this record and associated auth connection info for the record. For more information on extensibility, see [Applications and Enrollments](https://developer.lockstep.io/docs/applications-and-enrollments).
+        attr_accessor :enrollments
+
+        ##
         # @return [object] This object as a JSON key-value structure
         def as_json(options={})
             {
@@ -145,6 +150,7 @@ module LockstepSdk
                 'attachments' => @attachments,
                 'customFieldDefinitions' => @custom_field_definitions,
                 'customFieldValues' => @custom_field_values,
+                'enrollments' => @enrollments,
             }
         end
 
